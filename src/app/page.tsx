@@ -23,7 +23,7 @@ export default function Home() {
             >
               Shop now
             </a>
-            and taste the goodness.
+            and taste the goodness of freshness.
           </p>
         </div>
       </div>
