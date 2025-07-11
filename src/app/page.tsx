@@ -3,6 +3,8 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { products } from "../../products";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 export default function Home() {
   return (
@@ -23,7 +25,7 @@ export default function Home() {
             >
               Shop now
             </a>
-            and taste the goodness of freshness.
+            and taste the freshness.
           </p>
         </div>
       </div>
@@ -62,9 +64,9 @@ function NavBar() {
               icon={faCartPlus}
               className="text-[1.4rem] sm:text-[1.6rem] md:text-3xl "
             />
-            <p className="absolute -top-3 left-5 sm:left-7 bg-orange-400 h-5 w-5 px-1 py-1 flex justify-center items-center text-[0.6rem] sm:text-[0.8rem] text-white rounded-full">
-              {/* {{ totalCartItem }} */} 0
-            </p>
+            <Badge className="h-5 min-w-5 rounded-full px-1 font-sans tabular-nums absolute -top-3 left-5 sm:left-7 text-[0.6rem] sm:text-[0.8rem] text-white bg-orange-400 ">
+              0{/* {{ totalCartItem }} */}
+            </Badge>
             <p className="font-medium text-[0.85rem] sm:text-[1rem] md:text-lg">
               Cart
             </p>
@@ -104,10 +106,11 @@ async function Catalogue() {
               {item.description}
             </p>
 
-            <div className="rating flex mt-2">
+            <div className="rating flex mt-2 flex-col">
               <p className="font-semibold text-[0.7rem] sm:text-[0.9rem] md:text-[1rem] mr-1">
                 Rating:
               </p>
+
               {/* <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
           <mat-icon
             *ngIf="product.rating !== undefined"
@@ -119,7 +122,7 @@ async function Catalogue() {
           </mat-icon>
         </ng-container> */}
             </div>
-
+            <CartButton />
             {/* <app-cart-button [productItem]="product"></app-cart-button> */}
           </div>
         </div>
@@ -131,6 +134,9 @@ async function Catalogue() {
 function CartButton() {
   return (
     <div className="mt-2 flex gap-2">
+      <Button className="bg-green-700 hover:bg-green-800 font-medium text-[0.6rem] sm:text-[0.75rem] md:text-[0.8rem]  lg:text-[0.9rem] py-[2vh] sm:py-[2.5vh] px-[2.5vw] sm:px-[2vw] lg:px-[1vw]  h-0">
+        Add to Cart
+      </Button>
       {/* <button
     *ngIf="displayAddToCartBtn"
     mat-flat-button
@@ -161,4 +167,3 @@ function CartButton() {
     </div>
   );
 }
-// bg-[url('/hero-image.jpg')] bg-no-repeat bg-center bg-cover
