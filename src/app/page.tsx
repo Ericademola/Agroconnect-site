@@ -3,20 +3,21 @@
 
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import { faCircleNotch, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { products } from "../../products";
 import { Button } from "@/components/ui/button";
+import { Minus, Plus } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { MdStar, MdStarBorder } from "react-icons/md";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div>
       <NavBar />
       <div className="relative bg-gradient-overlay  w-full flex justify-center items-center h-[150px] sm:h-[240px] md:h-[270px] lg:h-[350px] mt-12 sm:mt-14 md:mt-16 lg:mt-20 font-sans shadow-lg z-0">
-        <div className=""></div>
-        <div className="text-yellow-200 absolute bottom-6 text-right right-4 sm:right-8 md:right-12 lg:right-20 w-[240px] sm:w-[320px] md:w-[350px] lg:w-[450px] z-50">
+        <div className="text-gray-950 absolute bottom-6 text-right right-4 sm:right-8 md:right-12 lg:right-20 w-[240px] sm:w-[320px] md:w-[350px] lg:w-[450px] z-50">
           <span className="font-bold text-[0.9rem] sm:text-[1.2rem] md:text-[1.5rem] lg:text-[1.8rem]">
             <h3>New Arrival!!</h3>
           </span>
@@ -97,16 +98,18 @@ function Catalogue() {
           key={item.id}
           className="shadow-lg shadow-gray-400 border-2 w-[42vw] sm:w-[40vw] md:w-[28vw] lg:w-[20vw] h-fit border-green-800 rounded-2xl"
         >
-          <div
-            // [routerLink]="['/product', product.slug]"
-            className="relative w-full h-40 sm:h-52 flex justify-center bg-white rounded-t-2xl cursor-pointer pt-1"
-          >
-            <img
-              src={item.image}
-              alt={item.name}
-              className="object-contain rounded-t-2xl py-2"
-            />
-          </div>
+          <Link href={`/products/${item.id}`}>
+            <div
+              // [routerLink]="['/product', product.slug]"
+              className="relative w-full h-40 sm:h-52 flex justify-center bg-white rounded-t-2xl cursor-pointer pt-1"
+            >
+              <img
+                src={item.image}
+                alt={item.name}
+                className="object-contain rounded-t-2xl py-2"
+              />
+            </div>
+          </Link>
           <div className="text-gray-700 flex flex-col px-2 bg-green-200 rounded-b-2xl py-2">
             <h3 className="font-bold text-[0.9rem] sm:text-[1rem] md:text-[1.2rem] line-clamp-1 text-gray-800">
               {item.name}
@@ -133,38 +136,62 @@ function Catalogue() {
 }
 
 function CartButton() {
+  const [loading, setLoading] = useState(false);
+  const [showQtyButtons, setShowQtyButtons] = useState(false);
+  const [quantity, setQuantity] = useState(0);
+
+  const handleAddToCartClick = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setShowQtyButtons(true);
+      setQuantity(1);
+    }, 900);
+  };
+
+  const handleIncrement = () => setQuantity(quantity + 1);
+  const handleDecrement = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    } else {
+      setShowQtyButtons(false);
+      setQuantity(0);
+    }
+  };
+
   return (
     <div className="mt-2 flex gap-2">
-      <Button className="bg-green-700 hover:bg-green-800 font-medium text-[0.6rem] sm:text-[0.75rem] md:text-[0.8rem]  lg:text-[0.9rem] py-[2vh] sm:py-[2.5vh] px-[2.5vw] sm:px-[2vw] lg:px-[1vw]  h-0">
-        Add to Cart
-      </Button>
-      {/* <button
-    *ngIf="displayAddToCartBtn"
-    mat-flat-button
-    class="custom-button"
-    (click)="openDisplayIncrementDecrementBtn()"
-  >
-    <p *ngIf="!displayLoadSpinner">Add to Cart</p>
-    <i
-      *ngIf="displayLoadSpinner"
-      class="fas fa-circle-notch fa-spin text-xl text-white"
-    ></i>
-  </button> */}
-      {/* <span *ngIf="displayIncrementDecrementBtn" class="flex gap-3 items-center">
-    <button (click)="remove()" mat-mini-fab color="warn" class="add-btn">
-      <mat-icon class="add-btn-icon">remove</mat-icon>
-    </button>
-
-    <p
-      *ngIf="displayNumberOfItemSelected"
-      class="font-medium font-mono text-sm md:text-lg"
-    >
-      {{ displayNumberOfItemSelected }}
-    </p>
-    <button (click)="add()" mat-mini-fab color="warn" class="add-btn">
-      <mat-icon class="add-btn-icon">add</mat-icon>
-    </button>
-  </span> */}
+      {!showQtyButtons && (
+        <Button
+          onClick={handleAddToCartClick}
+          className="bg-green-700 hover:bg-green-800 font-medium text-[0.6rem] sm:text-[0.75rem] md:text-[0.8rem]  lg:text-[0.9rem] py-[2vh] sm:py-[2.5vh] px-[2.5vw] sm:px-[2vw] lg:px-[1vw]  h-0"
+        >
+          {loading ? (
+            <FontAwesomeIcon icon={faCircleNotch} spin className="text-white" />
+          ) : (
+            "Add to Cart"
+          )}
+        </Button>
+      )}
+      {showQtyButtons && (
+        <div className="flex items-center gap-2">
+          <Button
+            onClick={handleDecrement}
+            size="sm"
+            className="bg-green-700 hover:bg-green-800 py-[2vh] sm:py-[2.5vh] px-[2vw] sm:px-[2vw] lg:px-[1vw]  h-0"
+          >
+            <Minus className="w-2 sm:w-3 h-3" />
+          </Button>
+          <p className="text-sm font-bold">{quantity}</p>
+          <Button
+            onClick={handleIncrement}
+            size="sm"
+            className="bg-green-700 hover:bg-green-800 py-[2vh] sm:py-[2.5vh] px-[2vw] sm:px-[2vw] lg:px-[1vw]  h-0"
+          >
+            <Plus className="w-2 sm:w-3 h-3" />
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
