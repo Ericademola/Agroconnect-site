@@ -46,9 +46,9 @@ export default function Home() {
 
 function NavBar() {
   return (
-    <div>
-      <div className="relative">
-        <nav className="fixed top-0 right-0 left-0 h-14 sm:px-6 md:px-8 lg:h-20 md:h-16 px-4 items-center flex justify-between z-50 bg-green-200 shadow-md">
+    <div className="relative">
+      <nav className="fixed top-0 right-0 left-0 h-14 sm:px-6 md:px-8 lg:h-20 md:h-16 px-4 items-center flex justify-between z-50 bg-green-200 shadow-md">
+        <Link href={`/`}>
           <div className="flex items-end cursor-pointer">
             <img
               src="assets/image/logo.png"
@@ -60,24 +60,23 @@ function NavBar() {
               AgroConnect
             </p>
           </div>
-
-          <div
-            // routerLink="/cart"
-            className="relative flex gap-2 items-end text-green-600 hover:text-green-800 cursor-pointer"
-          >
-            <FontAwesomeIcon
-              icon={faCartPlus}
-              className="text-[1.4rem] sm:text-[1.6rem] md:text-3xl "
-            />
-            <Badge className="h-5 min-w-5 rounded-full px-1 font-sans tabular-nums absolute -top-3 left-5 sm:left-7 text-[0.6rem] sm:text-[0.8rem] text-white bg-orange-400 ">
-              0{/* {{ totalCartItem }} */}
-            </Badge>
-            <p className="font-medium text-[0.85rem] sm:text-[1rem] md:text-lg">
-              Cart
-            </p>
-          </div>
-        </nav>
-      </div>
+        </Link>
+        <div
+          // routerLink="/cart"
+          className="relative flex gap-2 items-end text-green-600 hover:text-green-800 cursor-pointer"
+        >
+          <FontAwesomeIcon
+            icon={faCartPlus}
+            className="text-[1.4rem] sm:text-[1.6rem] md:text-3xl "
+          />
+          <Badge className="h-5 min-w-5 rounded-full px-1 font-sans tabular-nums absolute -top-3 left-5 sm:left-7 text-[0.6rem] sm:text-[0.8rem] text-white bg-orange-400 ">
+            {/* 0{quantity} */}0
+          </Badge>
+          <p className="font-medium text-[0.85rem] sm:text-[1rem] md:text-lg">
+            Cart
+          </p>
+        </div>
+      </nav>
     </div>
   );
 }
@@ -99,10 +98,7 @@ function Catalogue() {
           className="shadow-lg shadow-gray-400 border-2 w-[42vw] sm:w-[40vw] md:w-[28vw] lg:w-[20vw] h-fit border-green-800 rounded-2xl"
         >
           <Link href={`/products/${item.id}`}>
-            <div
-              // [routerLink]="['/product', product.slug]"
-              className="relative w-full h-40 sm:h-52 flex justify-center bg-white rounded-t-2xl cursor-pointer pt-1"
-            >
+            <div className="relative w-full h-40 sm:h-52 flex justify-center bg-white rounded-t-2xl cursor-pointer pt-1">
               <img
                 src={item.image}
                 alt={item.name}

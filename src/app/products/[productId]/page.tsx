@@ -1,28 +1,44 @@
+"use client";
 import { products } from "../../../../products";
 import { notFound } from "next/navigation";
-import CartButton from "../../page";
-import Rating from "../../page";
-import NavBar from "../../page";
+import { use } from "react";
+import { useRouter } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
 type ProductParams = {
-  params: {
+  params: Promise<{
     productId: string;
-  };
+  }>;
 };
 
-{
-  /* <NavBar />; */
-}
+export default function ProductDetails({ params }: ProductParams) {
+  const resolvedParams = use(params); // unwrap the Promise
+  const productId = resolvedParams.productId;
 
-export default function productDetails({ params }: ProductParams) {
   const productDetail = products.find(
-    (item) => item.id === parseInt(params.productId)
+    (item) => item.id === parseInt(productId)
   );
-
   if (!productDetail) return notFound();
+
+  const router = useRouter();
+  const goBack = () => {
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      router.push("/");
+    }
+  };
 
   return (
     <div className="flex flex-col gap-1 mt-20 md:mt-24 lg:mt-28 pb-20 px-10 sm:px-12 md:px-8 lg:px-24">
+      <button
+        onClick={goBack}
+        className="text-black text-[1rem] font-medium py-1 mb-2 w-20 bg-gray-200 hover:text-gray-700 cursor-pointer rounded-lg"
+      >
+        <FontAwesomeIcon icon={faAngleLeft}></FontAwesomeIcon>
+        Back
+      </button>
       <div className="sm:flex border-green-600 border-2 rounded-xl bg-blue-200">
         <div className="relative w-full lg:w-[30%] bg-white flex justify-center rounded-tl-xl sm:rounded-bl-xl rounded-tr-xl sm:rounded-tr-none mx-auto pt-1">
           <img
@@ -47,10 +63,7 @@ export default function productDetails({ params }: ProductParams) {
             {productDetail.brandName}
           </p>
 
-          <span className="mt-10 sm:mt-auto">
-            {/* <Rating />
-            <CartButton /> */}
-          </span>
+          <span className="mt-10 sm:mt-auto"></span>
         </div>
       </div>
     </div>
