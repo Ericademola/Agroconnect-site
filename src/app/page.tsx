@@ -1,103 +1,164 @@
-import Image from "next/image";
+// import "@FontAwesomeIcon";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import { products } from "../../products";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div>
+      <NavBar />
+      <div className="relative bg-gradient-overlay  w-full flex justify-center items-center h-[150px] sm:h-[240px] md:h-[270px] lg:h-[350px] mt-12 sm:mt-14 md:mt-16 lg:mt-20 font-sans shadow-lg z-0">
+        <div className=""></div>
+        <div className="text-yellow-200 absolute bottom-6 text-right right-4 sm:right-8 md:right-12 lg:right-20 w-[240px] sm:w-[320px] md:w-[350px] lg:w-[450px] z-50">
+          <span className="font-bold text-[0.9rem] sm:text-[1.2rem] md:text-[1.5rem] lg:text-[1.8rem]">
+            <h3>New Arrival!!</h3>
+          </span>
+          <p className="font-medium text-[0.5rem] sm:text-[0.7rem] md:text-[0.9rem] lg:text-[1.1rem]">
+            Pure Organic, Fresh and Chemical free.
+            <br />
+            <a
+              href="#catalogue"
+              className="font-bold text-[0.55rem] sm:text-[0.6rem] md:text-[0.8rem] lg:text-[1.15rem] underline underline-offset-2 cursor-pointer hover:text-blue-900"
+            >
+              Shop now
+            </a>
+            and taste the goodness.
+          </p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+      <div id="catalogue" className="pt-14 md:pt-16 lg:pt-20">
+        <p className="bg-green-300 text-center py-1.5 md:py-3 mb-6 md:mb-10 font-extrabold text-xl md:text-2xl lg:text-3xl text-gray-800">
+          Shop now
+        </p>
+        <Catalogue />
+      </div>
     </div>
   );
 }
+
+function NavBar() {
+  return (
+    <div>
+      <div className="relative">
+        <nav className="fixed top-0 right-0 left-0 h-14 sm:px-6 md:px-8 lg:h-20 md:h-16 px-4 items-center flex justify-between z-50 bg-green-200 shadow-md">
+          <div className="flex items-end cursor-pointer">
+            <img
+              src="assets/image/logo.png"
+              alt=""
+              className="w-8 sm:w-10 md:w-12 object-cover"
+            />
+
+            <p className="font-bold text-[1rem] sd:text-xl md:text-2xl text-green-800">
+              AgroConnect
+            </p>
+          </div>
+
+          <div
+            // routerLink="/cart"
+            className="relative flex gap-2 items-end text-green-600 hover:text-green-800 cursor-pointer"
+          >
+            <FontAwesomeIcon
+              icon={faCartPlus}
+              className="text-[1.4rem] sm:text-[1.6rem] md:text-3xl "
+            />
+            <p className="absolute -top-3 left-5 sm:left-7 bg-orange-400 h-5 w-5 px-1 py-1 flex justify-center items-center text-[0.6rem] sm:text-[0.8rem] text-white rounded-full">
+              {/* {{ totalCartItem }} */} 0
+            </p>
+            <p className="font-medium text-[0.85rem] sm:text-[1rem] md:text-lg">
+              Cart
+            </p>
+          </div>
+        </nav>
+      </div>
+    </div>
+  );
+}
+
+async function Catalogue() {
+  return (
+    <div className="font-sans flex gap-4 px-0 sm:gap-6 md:gap-8 lg:px-10 pb-20 flex-wrap justify-center">
+      {products.map((item: any) => (
+        <div
+          key={item.id}
+          className="shadow-lg shadow-gray-400 border-2 w-[42vw] sm:w-[40vw] md:w-[28vw] lg:w-[20vw] h-fit border-green-800 rounded-2xl"
+        >
+          <div
+            // [routerLink]="['/product', product.slug]"
+            className="relative w-full h-40 sm:h-52 flex justify-center bg-white rounded-t-2xl cursor-pointer pt-1"
+          >
+            <img
+              src={item.image}
+              alt={item.name}
+              className="object-contain rounded-t-2xl py-2"
+            />
+          </div>
+          <div className="text-gray-700 flex flex-col px-2 bg-green-200 rounded-b-2xl py-2">
+            <h3 className="font-bold text-[0.9rem] sm:text-[1rem] md:text-[1.2rem] line-clamp-1 text-gray-800">
+              {item.name}
+            </h3>
+            <p className="font-medium text-[0.8rem] sm:text-[0.9rem] md:text-[1rem]">
+              ₦{item.price}
+            </p>
+            <p className="text-[0.7rem] sm:text-[0.9rem] mt-1 line-clamp-1">
+              {item.description}
+            </p>
+
+            <div className="rating flex mt-2">
+              <p className="font-semibold text-[0.7rem] sm:text-[0.9rem] md:text-[1rem] mr-1">
+                Rating:
+              </p>
+              {/* <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+          <mat-icon
+            *ngIf="product.rating !== undefined"
+            color=""
+            (click)="updateRating(product, i + 1)"
+            className="cursor-pointer text-[0.8rem] star"
+          >
+            {{ i < product.rating ? "star" : "star_border" }}
+          </mat-icon>
+        </ng-container> */}
+            </div>
+
+            {/* <app-cart-button [productItem]="product"></app-cart-button> */}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function CartButton() {
+  return (
+    <div className="mt-2 flex gap-2">
+      {/* <button
+    *ngIf="displayAddToCartBtn"
+    mat-flat-button
+    class="custom-button"
+    (click)="openDisplayIncrementDecrementBtn()"
+  >
+    <p *ngIf="!displayLoadSpinner">Add to Cart</p>
+    <i
+      *ngIf="displayLoadSpinner"
+      class="fas fa-circle-notch fa-spin text-xl text-white"
+    ></i>
+  </button> */}
+      {/* <span *ngIf="displayIncrementDecrementBtn" class="flex gap-3 items-center">
+    <button (click)="remove()" mat-mini-fab color="warn" class="add-btn">
+      <mat-icon class="add-btn-icon">remove</mat-icon>
+    </button>
+
+    <p
+      *ngIf="displayNumberOfItemSelected"
+      class="font-medium font-mono text-sm md:text-lg"
+    >
+      {{ displayNumberOfItemSelected }}
+    </p>
+    <button (click)="add()" mat-mini-fab color="warn" class="add-btn">
+      <mat-icon class="add-btn-icon">add</mat-icon>
+    </button>
+  </span> */}
+    </div>
+  );
+}
+// bg-[url('/hero-image.jpg')] bg-no-repeat bg-center bg-cover
