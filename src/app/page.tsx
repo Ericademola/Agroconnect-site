@@ -1,10 +1,14 @@
 // import "@FontAwesomeIcon";
+"use client";
+
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { products } from "../../products";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useState } from "react";
+import { MdStar, MdStarBorder } from "react-icons/md";
 
 export default function Home() {
   return (
@@ -77,10 +81,18 @@ function NavBar() {
   );
 }
 
-async function Catalogue() {
+function Catalogue() {
+  const [productList, setProductList] = useState(products);
+
+  const handleRatingChange = (index: number, newRating: number) => {
+    const updated = [...productList];
+    updated[index].rating = newRating;
+    setProductList(updated);
+  };
+
   return (
     <div className="font-sans flex gap-4 px-0 sm:gap-6 md:gap-8 lg:px-10 pb-20 flex-wrap justify-center">
-      {products.map((item: any) => (
+      {productList.map((item: any, index: number) => (
         <div
           key={item.id}
           className="shadow-lg shadow-gray-400 border-2 w-[42vw] sm:w-[40vw] md:w-[28vw] lg:w-[20vw] h-fit border-green-800 rounded-2xl"
@@ -106,22 +118,11 @@ async function Catalogue() {
               {item.description}
             </p>
 
-            <div className="rating flex mt-2 flex-col">
-              <p className="font-semibold text-[0.7rem] sm:text-[0.9rem] md:text-[1rem] mr-1">
-                Rating:
-              </p>
+            <Rating
+              initialRating={item.rating}
+              onRate={(newRating) => handleRatingChange(index, newRating)}
+            />
 
-              {/* <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
-          <mat-icon
-            *ngIf="product.rating !== undefined"
-            color=""
-            (click)="updateRating(product, i + 1)"
-            className="cursor-pointer text-[0.8rem] star"
-          >
-            {{ i < product.rating ? "star" : "star_border" }}
-          </mat-icon>
-        </ng-container> */}
-            </div>
             <CartButton />
             {/* <app-cart-button [productItem]="product"></app-cart-button> */}
           </div>
@@ -164,6 +165,37 @@ function CartButton() {
       <mat-icon class="add-btn-icon">add</mat-icon>
     </button>
   </span> */}
+    </div>
+  );
+}
+
+type RatingProps = {
+  initialRating?: number;
+  onRate?: (rating: number) => void;
+};
+
+function Rating({ initialRating = 0, onRate }: RatingProps) {
+  const [rating, setRating] = useState(initialRating);
+
+  const updateRating = (newRating: number) => {
+    setRating(newRating);
+    onRate?.(newRating);
+  };
+
+  return (
+    <div className="flex items-center">
+      <p className="font-semibold text-[0.7rem] sm:text-[0.9rem] md:text-[1rem] mr-1">
+        Rating:
+      </p>
+      {[1, 2, 3, 4, 5].map((star, index) => (
+        <span
+          key={index}
+          className="cursor-pointer text-yellow-600 text-[0.8rem] md:text-[1.1rem]"
+          onClick={() => updateRating(star)}
+        >
+          {index < rating ? <MdStar /> : <MdStarBorder />}
+        </span>
+      ))}
     </div>
   );
 }
