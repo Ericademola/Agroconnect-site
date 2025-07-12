@@ -3,7 +3,7 @@
 
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleNotch, faCartPlus } from "@fortawesome/free-solid-svg-icons";
+// import { faCircleNotch, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { products } from "../../products";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus } from "lucide-react";
@@ -11,6 +11,9 @@ import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { MdStar, MdStarBorder } from "react-icons/md";
 import Link from "next/link";
+import Image from "next/image";
+import { faCircleNotch } from "@fortawesome/free-solid-svg-icons/faCircleNotch";
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons/faCartPlus";
 
 export default function Home() {
   return (
@@ -50,8 +53,10 @@ function NavBar() {
       <nav className="fixed top-0 right-0 left-0 h-14 sm:px-6 md:px-8 lg:h-20 md:h-16 px-4 items-center flex justify-between z-50 bg-green-200 shadow-md">
         <Link href={`/`}>
           <div className="flex items-end cursor-pointer">
-            <img
-              src="assets/image/logo.png"
+            <Image
+              width={100}
+              height={100}
+              src="/assets/image/logo.png"
               alt=""
               className="w-8 sm:w-10 md:w-12 object-cover"
             />
@@ -60,23 +65,24 @@ function NavBar() {
               AgroConnect
             </p>
           </div>
-        </Link>
-        <div
-          // routerLink="/cart"
-          className="relative flex gap-2 items-end text-green-600 hover:text-green-800 cursor-pointer"
-        >
-          <FontAwesomeIcon
-            icon={faCartPlus}
-            className="text-[1.4rem] sm:text-[1.6rem] md:text-3xl "
-          />
-          <Badge className="h-5 min-w-5 rounded-full px-1 font-sans tabular-nums absolute -top-3 left-5 sm:left-7 text-[0.6rem] sm:text-[0.8rem] text-white bg-orange-400 ">
-            {/* 0{quantity} */}0
-          </Badge>
-          <p className="font-medium text-[0.85rem] sm:text-[1rem] md:text-lg">
-            Cart
-          </p>
-        </div>
-      </nav>
+
+          <div
+            // routerLink="/cart"
+            className="relative flex gap-2 items-end text-green-600 hover:text-green-800 cursor-pointer"
+          >
+            <FontAwesomeIcon
+              icon={faCartPlus}
+              className="text-[1.4rem] sm:text-[1.6rem] md:text-3xl "
+            />
+            <Badge className="h-5 min-w-5 rounded-full px-1 font-sans tabular-nums absolute -top-3 left-5 sm:left-7 text-[0.6rem] sm:text-[0.8rem] text-white bg-orange-400 ">
+              0{/* {{ totalCartItem }} */}
+            </Badge>
+            <p className="font-medium text-[0.85rem] sm:text-[1rem] md:text-lg">
+              Basket
+            </p>
+          </div>
+        </nav>
+      </div>
     </div>
   );
 }
@@ -98,10 +104,15 @@ function Catalogue() {
           className="shadow-lg shadow-gray-400 border-2 w-[42vw] sm:w-[40vw] md:w-[28vw] lg:w-[20vw] h-fit border-green-800 rounded-2xl"
         >
           <Link href={`/products/${item.id}`}>
-            <div className="relative w-full h-40 sm:h-52 flex justify-center bg-white rounded-t-2xl cursor-pointer pt-1">
-              <img
+            <div
+              // [routerLink]="['/product', product.slug]"
+              className="relative w-full h-40 sm:h-52 flex justify-center bg-white rounded-t-2xl cursor-pointer pt-1"
+            >
+              <Image
                 src={item.image}
                 alt={item.name}
+                width={400}
+                height={400}
                 className="object-contain rounded-t-2xl py-2"
               />
             </div>
