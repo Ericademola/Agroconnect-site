@@ -1,7 +1,7 @@
 export const products = [
   {
     id: 1,
-    image: "assets/image/sc1.jpg",
+    image: "/assets/image/sc1.jpg",
     slug: "CeraVe Cleanser",
     name: "CeraVe Cleanser",
     price: 10030.5,
@@ -12,7 +12,7 @@ export const products = [
   },
   {
     id: 2,
-    image: "assets/image/sc2.jpg",
+    image: "/assets/image/sc2.jpg",
     slug: "Wash Gel",
     name: "Wash Gel",
     price: 13000,
@@ -23,7 +23,7 @@ export const products = [
   },
   {
     id: 3,
-    image: "assets/image/sc3.jpg",
+    image: "/assets/image/sc3.jpg",
     slug: "Olay",
     name: "Olay",
     price: 7099,
@@ -34,7 +34,7 @@ export const products = [
   },
   {
     id: 4,
-    image: "assets/image/sc4.jpg",
+    image: "/assets/image/sc4.jpg",
     slug: "Clear",
     name: "Clear",
     price: 8750.8,
@@ -45,7 +45,7 @@ export const products = [
   },
   {
     id: 5,
-    image: "assets/image/sc5.jpg",
+    image: "/assets/image/sc5.jpg",
     slug: "Tru Skin",
     name: "Tru Skin",
     price: 7000,
@@ -56,7 +56,7 @@ export const products = [
   },
   {
     id: 6,
-    image: "assets/image/sc6.jpg",
+    image: "/assets/image/sc6.jpg",
     slug: "Facial Brush",
     name: "Facial Brush",
     price: 13099.9,
@@ -67,7 +67,7 @@ export const products = [
   },
   {
     id: 7,
-    image: "assets/image/sc7.jpg",
+    image: "/assets/image/sc7.jpg",
     slug: "Pilgrim",
     name: "Pilgrim",
     price: 7080,
@@ -78,7 +78,7 @@ export const products = [
   },
   {
     id: 8,
-    image: "assets/image/sc8.jpg",
+    image: "/assets/image/sc8.jpg",
     slug: "Haitian Oil",
     name: "Haitian Oil",
     price: 9600,
@@ -89,7 +89,7 @@ export const products = [
   },
   {
     id: 9,
-    image: "assets/image/sc9.jpg",
+    image: "/assets/image/sc9.jpg",
     slug: "Cicapair",
     name: "Cicapair",
     price: 10000,
@@ -100,7 +100,7 @@ export const products = [
   },
   {
     id: 10,
-    image: "assets/image/sc10.jpg",
+    image: "/assets/image/sc10.jpg",
     slug: "Hydro Boost",
     name: "Hydro Boost",
     price: 13000,
@@ -111,7 +111,7 @@ export const products = [
   },
   {
     id: 11,
-    image: "assets/image/sc11.jpg",
+    image: "/assets/image/sc11.jpg",
     slug: "GlamCare",
     name: "GlamCare",
     price: 7000,
@@ -122,7 +122,7 @@ export const products = [
   },
   {
     id: 12,
-    image: "assets/image/sc12.jpg",
+    image: "/assets/image/sc12.jpg",
     slug: "Face Mask",
     name: "Face Mask",
     price: 8600,
@@ -133,7 +133,7 @@ export const products = [
   },
   {
     id: 13,
-    image: "assets/image/sc13.jpg",
+    image: "/assets/image/sc13.jpg",
     slug: "Deep Cleanser",
     name: "Deep Cleanser",
     price: 7000,
@@ -144,7 +144,7 @@ export const products = [
   },
   {
     id: 14,
-    image: "assets/image/sc14.jpg",
+    image: "/assets/image/sc14.jpg",
     slug: "Ravion",
     name: "Ravion",
     price: 13000,
@@ -155,7 +155,7 @@ export const products = [
   },
   {
     id: 15,
-    image: "assets/image/sc15.jpg",
+    image: "/assets/image/sc15.jpg",
     slug: "Vaseline Tonner",
     name: "Vaseline Tonner",
     price: 7000,
@@ -166,7 +166,7 @@ export const products = [
   },
   {
     id: 16,
-    image: "assets/image/sc16.jpg",
+    image: "/assets/image/sc16.jpg",
     slug: "lip Balm",
     name: "lip Balm",
     price: 8600,
@@ -177,7 +177,7 @@ export const products = [
   },
   {
     id: 17,
-    image: "assets/image/sc17.jpg",
+    image: "/assets/image/sc17.jpg",
     slug: "Nivea Toner",
     name: "Nivea Toner",
     price: 8600,
@@ -188,7 +188,7 @@ export const products = [
   },
   {
     id: 18,
-    image: "assets/image/sc18.jpg",
+    image: "/assets/image/sc18.jpg",
     slug: "Nivea Body Spray",
     name: "Nivea Body Spray",
     price: 8600,
@@ -199,7 +199,7 @@ export const products = [
   },
   {
     id: 19,
-    image: "assets/image/sc19.jpg",
+    image: "/assets/image/sc19.jpg",
     slug: "Body Lotion",
     name: "Body Lotion",
     price: 8600,
@@ -210,7 +210,7 @@ export const products = [
   },
   {
     id: 20,
-    image: "assets/image/sc20.jpg",
+    image: "/assets/image/sc20.jpg",
     slug: "Coca Glow",
     name: "Coca Glow",
     price: 8600,
@@ -221,7 +221,7 @@ export const products = [
   },
   {
     id: 21,
-    image: "assets/image/sc21.jpg",
+    image: "/assets/image/sc21.jpg",
     slug: "Vaseline Body Lotion",
     name: "Vaseline Body Lotion",
     price: 8600,
