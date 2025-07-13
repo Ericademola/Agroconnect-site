@@ -1,14 +1,58 @@
 "use client";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Minus, Plus } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons/faCircleNotch";
+import { CartItem, IProducts } from "@/types";
+import {
+  getBasketItems,
+  getItemQuantity,
+  setBasketItems,
+  setItemQuantity,
+} from "@/hooks/getProducts";
+import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 
-export default function CartButton() {
+interface CartButtonProps {
+  item: IProducts;
+  onQuantityChange?: (items: CartItem[]) => void;
+}
+
+export default function CartButton({
+  item,
+  onQuantityChange,
+}: CartButtonProps) {
   const [loading, setLoading] = useState(false);
   const [showQtyButtons, setShowQtyButtons] = useState(false);
   const [quantity, setQuantity] = useState(0);
+
+  useEffect(() => {
+    const storedQty = getItemQuantity(item.id);
+    if (storedQty > 0) {
+      setQuantity(storedQty);
+      setShowQtyButtons(true);
+    }
+  }, [item.id]);
+
+  const updateCart = (newQty: number) => {
+    setItemQuantity(item.id, newQty);
+
+    const items = getBasketItems();
+    const index = items.findIndex((i) => i.id === item.id);
+
+    if (index >= 0) {
+      items[index].quantity = newQty;
+    } else {
+      items.push({ ...item, quantity: newQty });
+    }
+
+    const filteredItems = items.filter((i) => i.quantity > 0);
+    setBasketItems(filteredItems);
+
+    if (typeof onQuantityChange === "function") {
+      onQuantityChange(filteredItems);
+    }
+  };
 
   const handleAddToCartClick = () => {
     setLoading(true);
@@ -16,16 +60,25 @@ export default function CartButton() {
       setLoading(false);
       setShowQtyButtons(true);
       setQuantity(1);
+      updateCart(1);
     }, 900);
   };
 
-  const handleIncrement = () => setQuantity(quantity + 1);
+  const handleIncrement = () => {
+    const newQty = quantity + 1;
+    setQuantity(newQty);
+    updateCart(newQty);
+  };
+
   const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    } else {
+    const newQty = quantity - 1;
+    if (newQty <= 0) {
       setShowQtyButtons(false);
       setQuantity(0);
+      updateCart(0);
+    } else {
+      setQuantity(newQty);
+      updateCart(newQty);
     }
   };
 
@@ -34,10 +87,10 @@ export default function CartButton() {
       {!showQtyButtons && (
         <Button
           onClick={handleAddToCartClick}
-          className="bg-green-700 hover:bg-green-800 font-medium text-[0.6rem] sm:text-[0.75rem] md:text-[0.8rem]  lg:text-[0.9rem] py-[2vh] sm:py-[2.5vh] px-[2.5vw] sm:px-[2vw] lg:px-[1vw]  h-0"
+          className="bg-green-700 hover:bg-green-800 text-white text-[0.7rem] sm:text-[0.9rem]  h-0 py-[2vh] sm:py-[2.5vh] px-[1.5vw] lg:px-[0.8vw]"
         >
           {loading ? (
-            <FontAwesomeIcon icon={faCircleNotch} spin className="text-white" />
+            <FontAwesomeIcon icon={faCircleNotch} spin />
           ) : (
             "Add to Cart"
           )}
@@ -47,18 +100,22 @@ export default function CartButton() {
         <div className="flex items-center gap-2">
           <Button
             onClick={handleDecrement}
-            size="sm"
-            className="bg-green-700 hover:bg-green-800 py-[2vh] sm:py-[2.5vh] px-[2vw] sm:px-[2vw] lg:px-[1vw]  h-0"
+            className=" text-white bg-green-700  hover:bg-green-800 py-[1.7vh] sm:py-[2vh] px-[1vw] h-0"
           >
-            <Minus className="w-2 sm:w-3 h-3" />
+            <FontAwesomeIcon
+              icon={faMinus}
+              className="text-[0.8rem] sm:text-[1rem]"
+            />
           </Button>
           <p className="text-sm font-bold">{quantity}</p>
           <Button
             onClick={handleIncrement}
-            size="sm"
-            className="bg-green-700 hover:bg-green-800 py-[2vh] sm:py-[2.5vh] px-[2vw] sm:px-[2vw] lg:px-[1vw]  h-0"
+            className="text-white bg-green-700 hover:bg-green-800 py-[1.7vh] sm:py-[2vh] px-[1vw] h-0"
           >
-            <Plus className="w-2 sm:w-3 h-3" />
+            <FontAwesomeIcon
+              icon={faPlus}
+              className="text-[0.8rem] sm:text-[1rem]"
+            />
           </Button>
         </div>
       )}

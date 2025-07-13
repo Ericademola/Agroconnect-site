@@ -7,4 +7,6 @@ export interface IProducts {
   description: string;
   rating: number;
   brandName: string;
+  quantity?: number;
 }
+export type CartItem = IProducts & { quantity: number };

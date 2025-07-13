@@ -8,12 +8,20 @@ import { useEffect, useState } from "react";
 import { IProducts } from "@/types";
 import { loadProducts } from "@/hooks/getProducts";
 
-export default function Catalogue() {
+interface CatalogueProps {
+  excludeId?: number;
+}
+
+export default function Catalogue({ excludeId }: CatalogueProps) {
   const [productList, setProductList] = useState<IProducts[]>();
 
   useEffect(() => {
-    setProductList(loadProducts());
-  }, []);
+    const loadedProducts = loadProducts();
+    const filtered = excludeId
+      ? loadedProducts.filter((p) => p.id !== excludeId)
+      : loadedProducts;
+    setProductList(filtered);
+  }, [excludeId]);
 
   return (
     <div className="font-sans flex gap-4 px-0 sm:gap-6 md:gap-8 lg:px-10 pb-20 flex-wrap justify-center">
@@ -51,8 +59,7 @@ export default function Catalogue() {
                 productList={productList}
               />
 
-              <CartButton />
-              {/* <app-cart-button [productItem]="product"></app-cart-button> */}
+              <CartButton item={item} />
             </div>
           </div>
         ))}

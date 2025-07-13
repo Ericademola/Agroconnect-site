@@ -1,10 +1,21 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { faShoppingBasket } from "@fortawesome/free-solid-svg-icons/faShoppingBasket";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
+import { getTotalBasketCount } from "@/hooks/getProducts";
 
 export default function NavBar() {
+  const [basketCount, setBasketCount] = useState(0);
+
+  useEffect(() => {
+    const counts = getTotalBasketCount();
+    setBasketCount(counts);
+  }),
+    [];
+
   return (
     <div className="relative">
       <nav className="fixed top-0 right-0 left-0 h-14 sm:px-6 md:px-8 lg:h-20 md:h-16 px-4 items-center flex justify-between z-50 bg-green-200 shadow-md">
@@ -29,21 +40,20 @@ export default function NavBar() {
           <Link href="/about">About</Link>
         </div>
 
-        <div
-          // routerLink="/cart"
-          className="relative flex gap-3 items-end text-green-600 hover:text-green-800 cursor-pointer"
-        >
-          <FontAwesomeIcon
-            icon={faShoppingBasket}
-            className="text-[1.4rem] sm:text-[1.6rem] md:text-3xl "
-          />
-          <Badge className="h-5 min-w-5 rounded-full px-1 font-sans tabular-nums absolute -top-2 left-5 sm:left-6 text-[0.6rem] sm:text-[0.8rem] text-white bg-orange-400 ">
-            0{/* {{ totalCartItem }} */}
-          </Badge>
-          <p className="font-medium text-[0.85rem] sm:text-[1rem] md:text-lg">
-            Basket
-          </p>
-        </div>
+        <Link href={"/cart"}>
+          <div className="relative flex gap-3 items-end text-green-600 hover:text-green-800 cursor-pointer">
+            <FontAwesomeIcon
+              icon={faShoppingBasket}
+              className="text-[1.4rem] sm:text-[1.6rem] md:text-3xl "
+            />
+            <Badge className="h-5 min-w-5 rounded-full px-1 font-sans tabular-nums absolute -top-2 left-5 sm:left-6 text-[0.6rem] sm:text-[0.8rem] text-white bg-orange-400 ">
+              {basketCount}
+            </Badge>
+            <p className="font-medium text-[0.85rem] sm:text-[1rem] md:text-lg">
+              Basket
+            </p>
+          </div>
+        </Link>
       </nav>
     </div>
   );

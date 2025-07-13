@@ -89,13 +89,13 @@ export default function ProductDetails({ params }: ProductParams) {
                   id={itemDetails.id}
                   productList={products}
                 />
-                <CartButton />
+                <CartButton item={itemDetails} />
               </span>
             </div>
           </div>
         )}
       </div>
-      <Catalogue />
+      {itemDetails && <Catalogue excludeId={itemDetails.id} />}
     </div>
   );
 }
