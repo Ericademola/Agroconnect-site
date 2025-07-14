@@ -14,11 +14,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons/faCircleNotch";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons/faCartPlus";
+import Header from "@/components/Header/Header";
 
 export default function Home() {
   return (
     <div>
       <NavBar />
+      <Header />
       <div className="relative bg-gradient-overlay  w-full flex justify-center items-center h-[150px] sm:h-[240px] md:h-[270px] lg:h-[350px] mt-12 sm:mt-14 md:mt-16 lg:mt-20 font-sans shadow-lg z-0">
         <div className="text-gray-950 absolute bottom-6 text-right right-4 sm:right-8 md:right-12 lg:right-20 w-[240px] sm:w-[320px] md:w-[350px] lg:w-[450px] z-50">
           <span className="font-bold text-[0.9rem] sm:text-[1.2rem] md:text-[1.5rem] lg:text-[1.8rem]">
