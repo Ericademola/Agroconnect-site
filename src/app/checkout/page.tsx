@@ -148,7 +148,7 @@ export default function CheckoutPage() {
 
             <div className="flex flex-col items-center justify-center gap-3 mt-auto">
               <p className="font-medium text-center text-lg text-gray-800">
-                Your cart <FontAwesomeIcon icon={faCartPlus} className="ml-1" />{" "}
+                Your cart <FontAwesomeIcon icon={faCartPlus} /> {""}
                 is empty
               </p>
               <button
