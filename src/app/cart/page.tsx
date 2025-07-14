@@ -72,7 +72,7 @@ export default function CartPage() {
               <FontAwesomeIcon icon={faAngleLeft} className="h-[1rem]" /> Back
             </button>
 
-            <div className="w-[85vw] md:w-[70vw] pt-4 flex flex-col overflow-hidden h-[calc(100dvh-7.5rem)] sm:h-[calc(100dvh-7.5rem)] md:h-[calc(100dvh-8.5rem)] lg:h-[calc(100dvh-9.5rem)] shadow-md bg-white rounded-t-xl">
+            <div className="w-[85vw] md:w-[70vw] pt-4 flex flex-col overflow-hidden h-[calc(100dvh-7.5rem)]  md:h-[calc(100dvh-8.5rem)] lg:h-[calc(100dvh-9.5rem)] shadow-md bg-white rounded-t-xl">
               <div className="mx-4 h-[calc(100dvh-7.5rem)] overflow-y-auto hide-scrollbar">
                 {basketItems.map((item) => (
                   <div
@@ -125,12 +125,12 @@ export default function CartPage() {
                     ₦{Math.round(totalPrice).toLocaleString()}
                   </p>
                 </div>
-                <button
-                  onClick={() => router.push("/checkout")}
-                  className="w-full bg-green-700 text-white py-2  text-sm  md:text-[1rem] lg:text-lg hover:bg-green-800"
-                >
-                  Check Out
-                </button>
+
+                <Link href={"/checkout"}>
+                  <button className="w-full bg-green-700 text-white py-2  text-sm  md:text-[1rem] lg:text-lg hover:bg-green-800">
+                    Check Out
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

@@ -87,7 +87,7 @@ export default function CartButton({
       {!showQtyButtons && (
         <Button
           onClick={handleAddToCartClick}
-          className="bg-green-700 hover:bg-green-800 text-white text-[0.7rem] sm:text-[0.9rem]  h-0 py-[2vh] sm:py-[2.5vh] px-[1.5vw] lg:px-[0.8vw]"
+          className="bg-green-700 hover:bg-green-800 text-white font-medium text-[0.6rem] sm:text-[0.8rem] md:text-[0.8rem] h-6 sm:h-7 md:h-8 w-16 sm:w-20 md:w-[5.5rem] lg:w-24 flex items-center justify-center"
         >
           {loading ? (
             <FontAwesomeIcon icon={faCircleNotch} spin />
@@ -100,21 +100,21 @@ export default function CartButton({
         <div className="flex items-center gap-2">
           <Button
             onClick={handleDecrement}
-            className=" text-white bg-green-700  hover:bg-green-800 py-[1.7vh] sm:py-[2vh] px-[1vw] h-0"
+            className=" bg-green-700 hover:bg-green-800 text-white font-medium text-[0.6rem] sm:text-[0.8rem] md:text-[0.8rem] h-6 sm:h-7 md:h-8 w-6 sm:w-8 md:w-[2.2rem] lg:w-10 flex items-center justify-center"
           >
             <FontAwesomeIcon
               icon={faMinus}
-              className="text-[0.8rem] sm:text-[1rem]"
+              className="text-[0.8rem] sm:text-[1rem] lg:text-[1.2rem]"
             />
           </Button>
           <p className="text-sm font-bold">{quantity}</p>
           <Button
             onClick={handleIncrement}
-            className="text-white bg-green-700 hover:bg-green-800 py-[1.7vh] sm:py-[2vh] px-[1vw] h-0"
+            className=" bg-green-700 hover:bg-green-800 text-white font-medium text-[0.6rem] sm:text-[0.8rem] md:text-[0.8rem] h-6 sm:h-7 md:h-8 w-6 sm:w-8 md:w-[2.2rem] lg:w-10 flex items-center justify-center"
           >
             <FontAwesomeIcon
               icon={faPlus}
-              className="text-[0.8rem] sm:text-[1rem]"
+              className="text-[0.8rem] sm:text-[1rem] lg:text-[1.2rem]"
             />
           </Button>
         </div>
