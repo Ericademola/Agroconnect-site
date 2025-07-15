@@ -66,3 +66,9 @@ export const getTotalBasketCount = (): number => {
   const items = getBasketItems();
   return items.reduce((sum, item) => sum + (item.quantity || 1), 0);
 };
+
+export const clearLocalStorage = (): void => {
+  localStorage.removeItem(BASKET_ITEMS_KEY);
+  localStorage.removeItem(BASKET_QUANTITY_MAP_KEY);
+  getTotalBasketCount();
+};
