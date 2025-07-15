@@ -219,7 +219,7 @@ import { Card, CardContent } from "@/components/ui/card" */}
                         <Link href={`/Trendings/${trend.label}`} >
 
                             <div 
-                            // className="h-[60px] w-auto text-center items-end text-[#717171] hover:text-[#15803d] border-b-2 border-white hover:border-[#15803d] mx-[15px] pb-[8px]"
+                            className="h-[60px] w-fit text-center items-end text-[#717171] hover:text-[#15803d] border-b-2 border-white hover:border-[#15803d] mx-[15px] pb-[8px]"
                             >
 
                                 <div className='pt-[8px] text-[24px] w-fit m-auto'>
