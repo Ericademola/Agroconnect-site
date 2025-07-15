@@ -2,8 +2,8 @@
 "use client";
 
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import NavBar from "@/components/navbar/page";
-import Catalogue from "@/components/catalogue/page";
+import NavBar from "@/components/NavBar/NavBar";
+import Catalogue from "@/components/Catalogue/Catalogue";
 import Header from "@/components/Header/Header";
 
 export default function Home() {
