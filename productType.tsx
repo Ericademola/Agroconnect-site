@@ -83,7 +83,31 @@ const productType: Icon[] = [
         icon: <GiCornerFlag />,
         label: "Beef"
     },
-
+    {
+        id: 16,
+        icon: <TbCamper />,
+        label: "Chicken"
+    },
+    {
+        id: 17,
+        icon: <TbSailboat />,
+        label: "Pork"
+    },
+    {
+        id: 18,
+        icon: <IoIosSnow />,
+        label: "Chickpeas"
+    },
+    {
+        id: 19,
+        icon: <GiWindmill />,
+        label: "Lentils"
+    },
+    {
+        id: 20,
+        icon: <MdSportsGolf />,
+        label: "Rice"
+    },
 ]
 
 export default productType;
