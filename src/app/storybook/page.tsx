@@ -1,19 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import email from "public/assets/images/email 1.png";
-import { useState } from "react";
-
-import { Button } from "@/components/ui/button";
-
 import * as icons from "@/Icons";
 import { Input } from "@/components/ui/input";
 import NavBar from "@/components/NavBar/NavBar";
 
 export default function StoryBook() {
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [isReelsOpen, setIsReelsOpen] = useState(false);
-  const [_searchText, setSearchText] = useState("");
   const sections = [
     {
       name: "Icons",
@@ -137,57 +128,3 @@ export default function StoryBook() {
     </div>
   );
 }
-
-const boxItems = [
-  {
-    amount: "N30000",
-    purpose: "Debt",
-  },
-  {
-    amount: "N30000",
-    purpose: "Service Rendered",
-  },
-  {
-    amount: "N30000",
-    purpose: "Additional Services",
-  },
-  {
-    amount: "N30000",
-    purpose: "Maintance",
-  },
-];
-
-const requests = [
-  {
-    image: "/assets/images/avatars/image 30.png",
-    name: "John Osagie",
-    address: "Pearls Unit 206",
-    message:
-      "I’ve noticed that the water pressure in unit 206 bathroom has stopped working, can you...",
-  },
-  {
-    image: "/assets/images/avatars/image 30.png",
-    name: "John Osagie",
-    address: "Pearls Unit 206",
-    message:
-      "I’ve noticed that the water pressure in unit 206 bathroom has stopped working, can you...",
-  },
-];
-
-const followers = [
-  {
-    country: "Nigeria",
-    number: 456753,
-    progress: 60,
-  },
-  {
-    country: "United States of America",
-    number: 6753,
-    progress: 40,
-  },
-  {
-    country: "Togo",
-    number: 753,
-    progress: 29,
-  },
-];

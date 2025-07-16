@@ -175,10 +175,15 @@ function CarouselPrevious({
   className,
   variant = "outline",
   size = "icon",
+  previousButton,
+  previousIcon,
   ...props
-}: React.ComponentProps<typeof Button>) {
+}: React.ComponentProps<typeof Button> & {
+  previousButton?: boolean;
+  previousIcon?: React.ReactNode;
+}) {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel()
-
+  if (!previousButton) return null;
   return (
     <Button
       data-slot="carousel-previous"
@@ -195,19 +200,62 @@ function CarouselPrevious({
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft />
+      {previousIcon ?? <ArrowLeft />}
       <span className="sr-only">Previous slide</span>
     </Button>
   )
 }
 
+// function CarouselNext({
+//   className,
+//   variant = "outline",
+//   size = "icon",
+//   nextButton,
+//   nextIcon
+//   ...props
+// }: React.ComponentProps<typeof Button> && { nextButton?: boolean; nextIcon?: React.ReactNode }) {
+//   const { orientation, scrollNext, canScrollNext } = useCarousel()
+
+//   return (
+//     {nextButton && (
+//       <Button
+//         data-slot="carousel-next"
+//         variant={variant}
+//         size={size}
+//         className={cn(
+//           "absolute size-8 rounded-full",
+//           orientation === "horizontal"
+//             ? "top-1/2 -right-12 -translate-y-1/2"
+//             : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
+//           className
+//         )}
+//         disabled={!canScrollNext}
+//         onClick={scrollNext}
+//         {...props}
+//       >
+//         {nextIcon ? nextIcon : <ArrowRight />}
+//         <span className="sr-only">Next slide</span>
+//       </Button>
+//     )}
+//   )
+// }
+
+
+
 function CarouselNext({
   className,
   variant = "outline",
   size = "icon",
+  nextButton,
+  nextIcon,
   ...props
-}: React.ComponentProps<typeof Button>) {
-  const { orientation, scrollNext, canScrollNext } = useCarousel()
+}: React.ComponentProps<typeof Button> & {
+  nextButton?: boolean;
+  nextIcon?: React.ReactNode;
+}) {
+  const { orientation, scrollNext, canScrollNext } = useCarousel();
+
+  if (!nextButton) return null;
 
   return (
     <Button
@@ -225,10 +273,10 @@ function CarouselNext({
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight />
+      {nextIcon ?? <ArrowRight />}
       <span className="sr-only">Next slide</span>
     </Button>
-  )
+  );
 }
 
 export {
