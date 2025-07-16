@@ -4,7 +4,7 @@
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import NavBar from "@/components/navbar/page";
 import Catalogue from "@/components/catalogue/page";
-import Header from "@/components/Header/Header";
+import Header from "@/components/Header/DynamicProductTypesCarousel";
 
 export default function Home() {
   return (
