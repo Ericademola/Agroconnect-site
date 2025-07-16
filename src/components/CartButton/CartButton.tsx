@@ -87,35 +87,27 @@ export default function CartButton({
       {!showQtyButtons && (
         <Button
           onClick={handleAddToCartClick}
-          className="bg-green-700 hover:bg-green-800 text-white font-medium text-[0.6rem] sm:text-[0.8rem] md:text-[0.8rem] h-6 sm:h-7 md:h-8 w-16 sm:w-20 md:w-[5.5rem] lg:w-24 flex items-center justify-center"
+          className="w-16 sm:w-20 md:w-[5.5rem] lg:w-24 flex items-center justify-center"
+          loading={loading}
+          disabled={loading}
         >
-          {loading ? (
-            <FontAwesomeIcon icon={faCircleNotch} spin />
-          ) : (
-            "Add to Cart"
-          )}
+          {loading ? "Loading..." : "Add to Cart"}
         </Button>
       )}
       {showQtyButtons && (
         <div className="flex items-center gap-2">
           <Button
             onClick={handleDecrement}
-            className=" bg-green-700 hover:bg-green-800 text-white font-medium text-[0.6rem] sm:text-[0.8rem] md:text-[0.8rem] h-6 sm:h-7 md:h-8 w-6 sm:w-8 md:w-[2.2rem] lg:w-10 flex items-center justify-center"
+            className="w-6 sm:w-8 md:w-[2.2rem] lg:w-10 flex items-center justify-center"
           >
-            <FontAwesomeIcon
-              icon={faMinus}
-              className="text-[0.8rem] sm:text-[1rem] lg:text-[1.2rem]"
-            />
+            <FontAwesomeIcon icon={faMinus} />
           </Button>
           <p className="text-sm font-bold">{quantity}</p>
           <Button
             onClick={handleIncrement}
-            className=" bg-green-700 hover:bg-green-800 text-white font-medium text-[0.6rem] sm:text-[0.8rem] md:text-[0.8rem] h-6 sm:h-7 md:h-8 w-6 sm:w-8 md:w-[2.2rem] lg:w-10 flex items-center justify-center"
+            className="w-6 sm:w-8 md:w-[2.2rem] lg:w-10 flex items-center justify-center"
           >
-            <FontAwesomeIcon
-              icon={faPlus}
-              className="text-[0.8rem] sm:text-[1rem] lg:text-[1.2rem]"
-            />
+            <FontAwesomeIcon icon={faPlus} />
           </Button>
         </div>
       )}

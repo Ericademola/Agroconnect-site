@@ -3,6 +3,7 @@
 import * as icons from "@/Icons";
 import { Input } from "@/components/ui/input";
 import NavBar from "@/components/NavBar/NavBar";
+import { Button } from "@/components/ui/button";
 
 export default function StoryBook() {
   const sections = [
