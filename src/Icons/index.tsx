@@ -121,6 +121,89 @@ export const FilterIcon = ({ width, height, className }: IProps) => (
   </svg>
 );
 
+export const SearchIcon = ({ width, height, className }: IProps) => (
+  <svg
+    className={className}
+    width={width || DEFAULT_SIZE}
+    height={height || DEFAULT_SIZE}
+    viewBox="0 0 30 30"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M23.125 13.125C23.125 18.6478 18.6478 23.125 13.125 23.125C7.60215 23.125 3.125 18.6478 3.125 13.125C3.125 7.60215 7.60215 3.125 13.125 3.125C18.6478 3.125 23.125 7.60215 23.125 13.125Z"
+      stroke="#3B4657"
+      strokeWidth="1.25"
+    />
+
+    <path
+      d="M20 20L26.875 26.875"
+      stroke="#3B4657"
+      strokeWidth="1.25"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
+export const HideEyeIcon = ({ className, height, width }: IProps) => (
+  <svg
+    viewBox="0 0 20 20"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+    width={width || DEFAULT_SIZE}
+    height={height || DEFAULT_SIZE}
+    fill="none"
+  >
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+      d="m12.108 7.892-4.216 4.216a2.98 2.98 0 1 1 4.217-4.217Z"
+    />
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+      d="M14.85 4.808c-1.458-1.1-3.125-1.7-4.85-1.7-2.942 0-5.683 1.734-7.592 4.734-.75 1.175-.75 3.15 0 4.325a11.938 11.938 0 0 0 2.259 2.641M7.017 16.275c.95.4 1.958.617 2.983.617 2.942 0 5.683-1.734 7.592-4.734.75-1.175.75-3.15 0-4.325a13.523 13.523 0 0 0-.884-1.225"
+    />
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+      d="M12.925 10.584a2.97 2.97 0 0 1-2.35 2.35M7.892 12.108l-6.225 6.225M18.333 1.667 12.108 7.89"
+    />
+  </svg>
+);
+
+export const ShowEyeIcon = ({ width, height, className }: IProps) => (
+  <svg
+    viewBox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    width={width || DEFAULT_SIZE}
+    height={height || DEFAULT_SIZE}
+    fill="none"
+  >
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+      d="M12.983 10A2.98 2.98 0 0 1 10 12.983 2.98 2.98 0 0 1 7.017 10 2.98 2.98 0 0 1 10 7.017 2.98 2.98 0 0 1 12.983 10Z"
+    />
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+      d="M10 16.892c2.942 0 5.683-1.734 7.592-4.734.75-1.175.75-3.15 0-4.325-1.909-3-4.65-4.733-7.592-4.733-2.942 0-5.683 1.733-7.592 4.733-.75 1.175-.75 3.15 0 4.325 1.909 3 4.65 4.734 7.592 4.734Z"
+    />
+  </svg>
+);
+
 
 
 
@@ -2257,32 +2340,6 @@ export const AdduserIcon = ({ width, height, className }: IProps) => (
   </svg>
 );
 
-export const ShowEyeIcon = ({ width, height, className }: IProps) => (
-  <svg
-    viewBox="0 0 20 20"
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-    width={width || DEFAULT_SIZE}
-    height={height || DEFAULT_SIZE}
-    fill="none"
-  >
-    <path
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={1.5}
-      d="M12.983 10A2.98 2.98 0 0 1 10 12.983 2.98 2.98 0 0 1 7.017 10 2.98 2.98 0 0 1 10 7.017 2.98 2.98 0 0 1 12.983 10Z"
-    />
-    <path
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={1.5}
-      d="M10 16.892c2.942 0 5.683-1.734 7.592-4.734.75-1.175.75-3.15 0-4.325-1.909-3-4.65-4.733-7.592-4.733-2.942 0-5.683 1.733-7.592 4.733-.75 1.175-.75 3.15 0 4.325 1.909 3 4.65 4.734 7.592 4.734Z"
-    />
-  </svg>
-);
-
 export const CancelIcon = ({ className, height, width }: IProps) => (
   <svg
     viewBox="0 0 32 32"
@@ -2344,39 +2401,6 @@ export const UploadIcon = ({ className }: IProps) => (
       strokeLinejoin="round"
       strokeWidth={1.5}
       d="M11.652 6.507h.015c1.656 0 3 1.346 3 3.006A3.004 3.004 0 0 1 12 12.5m-.348-5.993A3.67 3.67 0 0 0 8 2.5a3.67 3.67 0 0 0-3.653 3.355m7.305.652a3.66 3.66 0 0 1-.823 2.004M4.346 5.855a3.338 3.338 0 0 0-3.014 3.324A3.339 3.339 0 0 0 4 12.45m.347-6.596a3.315 3.315 0 0 1 2.32.653M8 9.166V14.5m0-5.334c-.467 0-1.34 1.33-1.667 1.667M8 9.166c.467 0 1.339 1.33 1.667 1.667"
-    />
-  </svg>
-);
-
-export const HideEyeIcon = ({ className, height, width }: IProps) => (
-  <svg
-    viewBox="0 0 20 20"
-    className={className}
-    xmlns="http://www.w3.org/2000/svg"
-    width={width || DEFAULT_SIZE}
-    height={height || DEFAULT_SIZE}
-    fill="none"
-  >
-    <path
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={1.5}
-      d="m12.108 7.892-4.216 4.216a2.98 2.98 0 1 1 4.217-4.217Z"
-    />
-    <path
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={1.5}
-      d="M14.85 4.808c-1.458-1.1-3.125-1.7-4.85-1.7-2.942 0-5.683 1.734-7.592 4.734-.75 1.175-.75 3.15 0 4.325a11.938 11.938 0 0 0 2.259 2.641M7.017 16.275c.95.4 1.958.617 2.983.617 2.942 0 5.683-1.734 7.592-4.734.75-1.175.75-3.15 0-4.325a13.523 13.523 0 0 0-.884-1.225"
-    />
-    <path
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={1.5}
-      d="M12.925 10.584a2.97 2.97 0 0 1-2.35 2.35M7.892 12.108l-6.225 6.225M18.333 1.667 12.108 7.89"
     />
   </svg>
 );
@@ -4921,30 +4945,6 @@ export const MoneyBagIcon = ({ width, height, className }: IProps) => (
       d="M3.23173 2.09102C3.11138 1.91586 2.93694 1.6781 3.29728 1.62388C3.66765 1.56815 4.05224 1.82168 4.42869 1.81647C4.76925 1.81176 4.94275 1.66071 5.1289 1.44505C5.32491 1.21795 5.62841 0.666016 5.9987 0.666016C6.36898 0.666016 6.67249 1.21795 6.8685 1.44505C7.05465 1.66071 7.22815 1.81176 7.56871 1.81647C7.94516 1.82168 8.32975 1.56815 8.70012 1.62388C9.06045 1.6781 8.88601 1.91586 8.76567 2.09102L8.22152 2.88306C7.98874 3.22187 7.87235 3.39127 7.62879 3.48698C7.38523 3.58268 7.07048 3.58268 6.44098 3.58268H5.55642C4.92692 3.58268 4.61217 3.58268 4.36861 3.48698C4.12504 3.39127 4.00865 3.22187 3.77588 2.88306L3.23173 2.09102Z"
       stroke="#5755FF"
       strokeWidth="1.1"
-    />
-  </svg>
-);
-
-export const SearchIcon = ({ width, height, className }: IProps) => (
-  <svg
-    className={className}
-    width={width || DEFAULT_SIZE}
-    height={height || DEFAULT_SIZE}
-    viewBox="0 0 30 30"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M23.125 13.125C23.125 18.6478 18.6478 23.125 13.125 23.125C7.60215 23.125 3.125 18.6478 3.125 13.125C3.125 7.60215 7.60215 3.125 13.125 3.125C18.6478 3.125 23.125 7.60215 23.125 13.125Z"
-      stroke="#3B4657"
-      strokeWidth="1.25"
-    />
-
-    <path
-      d="M20 20L26.875 26.875"
-      stroke="#3B4657"
-      strokeWidth="1.25"
-      strokeLinecap="round"
     />
   </svg>
 );

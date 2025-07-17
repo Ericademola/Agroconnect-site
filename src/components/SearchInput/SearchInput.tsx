@@ -36,10 +36,10 @@ export default function SearchInput({
         "h-fit border border-[#c4c4c433] has-[:focus]:ring-[#5755FF] rounded-[100px] md:rounded-[10px] bg-[#F8F8F8] placeholder:text-[#828994] text-[#000000]",
         className
       )}
-      // inputClassName="bg-[#F8F8F8]"
-      // leftIcon={<SearchIcon width={20} height={20} />}
-      // placeholder={placeholder}
-      // rightIcon={loading ? <Loader className="h-6 w-6 animate-spin" /> : undefined}
+      inputClassName="bg-[#F8F8F8]"
+      leftIcon={<SearchIcon width={20} height={20} />}
+      placeholder={placeholder}
+      rightIcon={loading ? <Loader className="h-6 w-6 animate-spin" /> : undefined}
     />
   );
 }

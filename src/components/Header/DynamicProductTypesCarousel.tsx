@@ -21,6 +21,8 @@ export default function DynamicProductTypesCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, align: "start", containScroll: "trimSnaps" });
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
+    const [pageScrolled, setPageScrolled] = useState(false);
+
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
@@ -35,10 +37,25 @@ export default function DynamicProductTypesCarousel() {
     emblaApi.on("reInit", onSelect);
   }, [emblaApi, onSelect]);
 
-  return (
-    <div className="relative w-full">
+    useEffect(() => {
+        const handleScroll = () => {
+        const offset = window.scrollY;
+        if (offset > 50) {
+            setPageScrolled(true);
+        } else {
+            setPageScrolled(false);
+        }
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+        window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
-           {canScrollPrev &&
+  return (
+    <div className={`relative w-full py-2 bg-white ${pageScrolled && "border-b border-gray-200 shadow-lg"}`}>
+
+        {canScrollPrev &&
             <div className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-[25px_0_10px_rgb(255,255,255)] px-2 py-1">
                 <Button
                     className="w-10 h-10 bg-white rounded-full shadow hover:shadow-md"
@@ -48,7 +65,8 @@ export default function DynamicProductTypesCarousel() {
                 >
                     <BackIcon className="w-6 h-6" strokeWidth={3.5} />
                 </Button>
-            </div>}
+            </div>
+        }
 
         <div className="absolute right-0 top-1/2 -translate-y-1/2 z-20 flex gap-2 items-center bg-white pl-2 pr-4 py-1 rounded-md shadow-lg">
             <Button
@@ -64,13 +82,21 @@ export default function DynamicProductTypesCarousel() {
                 <DropdownMenuTrigger className="flex items-center gap-2 border border-[#ddd] bg-white px-3 py-2 rounded-md text-[16px] hover:shadow-md">
                 <FilterIcon className="w-4 h-4 text-[#717171]" /> Filter
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Billing</DropdownMenuItem>
-                <DropdownMenuItem>Team</DropdownMenuItem>
-                <DropdownMenuItem>Subscription</DropdownMenuItem>
+                <DropdownMenuContent className='h-[300px] overflow-auto'>
+                    <DropdownMenuLabel>Products</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    {
+                        productTypes.map((product, index) => (
+                            <DropdownMenuItem key={index}>
+                                {
+                                    product.icon
+                                }
+                                {
+                                    product.label
+                                }
+                            </DropdownMenuItem>
+                        ))
+                    }
                 </DropdownMenuContent>
             </DropdownMenu>
         </div>
