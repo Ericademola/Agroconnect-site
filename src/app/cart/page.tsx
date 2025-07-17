@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import NavBar from "@/components/navbar/page";
-import CartButton from "@/components/cartbutton/page";
+import NavBar from "@/components/NavBar/NavBar";
+import CartButton from "@/components/CartButton/CartButton";
 import { CartItem } from "@/types";
 import {
   faAngleLeft,

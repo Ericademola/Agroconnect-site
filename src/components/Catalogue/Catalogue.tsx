@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import CartButton from "../cartbutton/page";
-import Rating from "../rating/page";
+import CartButton from "../CartButton/CartButton";
+import Rating from "../Rating/Rating";
 import { useEffect, useState } from "react";
 import { IProducts } from "@/types";
 import { loadProducts } from "@/hooks/getProducts";
