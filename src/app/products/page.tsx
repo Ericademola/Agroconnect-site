@@ -1,8 +1,8 @@
-import Catalogue from "@/components/catalogue/page"
+import Catalogue from "@/components/Catalogue/Catalogue"
 
 const products = () => {
   return (
-    <div>
+    <div className="mt-4">
         <Catalogue />
     </div>
   )

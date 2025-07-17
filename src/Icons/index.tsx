@@ -6,21 +6,12 @@ interface IProps {
   fill?: string;
   isLoved?: boolean;
   stroke?: string;
+  strokeWidth?: number;
 }
 
 const DEFAULT_SIZE = "100%";
 
-export const BackIcon = ({
-  className,
-  width,
-  height,
-  strokeWidth,
-}: {
-  className?: string;
-  width?: string | number;
-  height?: string | number;
-  strokeWidth?: number;
-}) => (
+export const BackIcon = ({ className, width, height, strokeWidth }: IProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -34,7 +25,7 @@ export const BackIcon = ({
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeMiterlimit={10}
-      strokeWidth={strokeWidth || 2.042}
+      strokeWidth={strokeWidth ?? 2.042}
       d="M16.166 21.537 9.14 14.51a2.14 2.14 0 0 1 0-3.018l7.027-7.027"
     />
   </svg>
@@ -204,20 +195,32 @@ export const ShowEyeIcon = ({ width, height, className }: IProps) => (
   </svg>
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 export const ShortletIcon = ({ className, stroke = "#FAFAFA" }: IProps) => (
   <svg
@@ -316,8 +319,6 @@ export const HotelIcon = ({ className, stroke = "#626C7A" }: IProps) => (
     />
   </svg>
 );
-
-
 
 export const CloseIcon3 = ({ className }: IProps) => (
   <svg
@@ -5983,7 +5984,7 @@ export const LikePostIcon = ({ width, height, className }: IProps) => (
   </svg>
 );
 
-export const AwardIcon = ({className }: IProps) => (
+export const AwardIcon = ({ className }: IProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 16 16"
@@ -6000,14 +6001,26 @@ export const AwardIcon = ({className }: IProps) => (
   </svg>
 );
 
-export const UserIcon = ({width, height, className }: IProps) => (
-  <svg 
-  width={width || DEFAULT_SIZE}
-  height={height || DEFAULT_SIZE}
-  className={className}
-  viewBox="0 0 9 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M6.125 2.70898C6.125 3.60645 5.17264 4.60482 4.5 4.60482C3.82736 4.60482 2.875 3.60645 2.875 2.70898C2.875 1.81152 3.60254 1.08398 4.5 1.08398C5.39746 1.08398 6.125 1.81152 6.125 2.70898Z" stroke="currentColor" strokeWidth="0.78"/>
-    <path d="M6.68913 4.875C7.51408 5.59829 8.04863 6.8233 7.56859 7.9653C7.46517 8.21135 7.22788 8.37088 6.96532 8.37088C6.69835 8.37088 6.25985 8.28531 6.17465 8.63278L5.5803 11.0567C5.45637 11.5621 5.01097 11.9167 4.5 11.9167C3.98902 11.9167 3.54362 11.5621 3.41969 11.0567L2.82534 8.63278C2.74014 8.28531 2.30164 8.37088 2.03467 8.37088C1.77211 8.37088 1.53482 8.21135 1.43139 7.9653C0.95136 6.8233 1.48594 5.59829 2.31089 4.875" stroke="currentColor" strokeWidth="0.78" strokeLinecap="round"/>
+export const UserIcon = ({ width, height, className }: IProps) => (
+  <svg
+    width={width || DEFAULT_SIZE}
+    height={height || DEFAULT_SIZE}
+    className={className}
+    viewBox="0 0 9 13"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M6.125 2.70898C6.125 3.60645 5.17264 4.60482 4.5 4.60482C3.82736 4.60482 2.875 3.60645 2.875 2.70898C2.875 1.81152 3.60254 1.08398 4.5 1.08398C5.39746 1.08398 6.125 1.81152 6.125 2.70898Z"
+      stroke="currentColor"
+      strokeWidth="0.78"
+    />
+    <path
+      d="M6.68913 4.875C7.51408 5.59829 8.04863 6.8233 7.56859 7.9653C7.46517 8.21135 7.22788 8.37088 6.96532 8.37088C6.69835 8.37088 6.25985 8.28531 6.17465 8.63278L5.5803 11.0567C5.45637 11.5621 5.01097 11.9167 4.5 11.9167C3.98902 11.9167 3.54362 11.5621 3.41969 11.0567L2.82534 8.63278C2.74014 8.28531 2.30164 8.37088 2.03467 8.37088C1.77211 8.37088 1.53482 8.21135 1.43139 7.9653C0.95136 6.8233 1.48594 5.59829 2.31089 4.875"
+      stroke="currentColor"
+      strokeWidth="0.78"
+      strokeLinecap="round"
+    />
   </svg>
 );
 

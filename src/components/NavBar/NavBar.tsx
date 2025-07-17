@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { getTotalBasketCount } from "@/hooks/getProducts";
 import SearchInput from "../SearchInput/SearchInput";
+import DynamicProductTypesCarousel from "../Header/DynamicProductTypesCarousel";
 
 export default function NavBar() {
   const [basketCount, setBasketCount] = useState(0);
@@ -69,6 +70,7 @@ export default function NavBar() {
 
         </div>
       </nav>
+      <DynamicProductTypesCarousel />
     </div>
   );
 }

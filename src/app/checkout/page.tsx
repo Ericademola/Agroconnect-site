@@ -1,5 +1,5 @@
 "use client";
-import NavBar from "@/components/navbar/page";
+import NavBar from "@/components/NavBar/NavBar";
 import { clearLocalStorage, getItemQuantity } from "@/hooks/getProducts";
 import { CartItem } from "@/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

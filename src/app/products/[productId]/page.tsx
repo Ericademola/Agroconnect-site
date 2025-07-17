@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
-import NavBar from "@/components/navbar/page";
-import CartButton from "@/components/cartbutton/page";
-import Rating from "@/components/rating/page";
+import NavBar from "@/components/NavBar/NavBar";
+import CartButton from "@/components/CartButton/CartButton";
+import Rating from "@/components/Rating/Rating";
 import Image from "next/image";
-import Catalogue from "@/components/catalogue/page";
+import Catalogue from "@/components/Catalogue/Catalogue";
 import { getProductById } from "@/hooks/getProducts";
 import { products } from "../../../../products";
 import { IProducts } from "@/types";
@@ -49,7 +49,6 @@ export default function ProductDetails({ params }: ProductParams) {
 
   return (
     <div>
-      <NavBar />
       <div className="flex flex-col gap-1 mt-20 md:mt-24 lg:mt-28 pb-20 px-10 sm:px-12 md:px-8 lg:px-24">
         <button
           onClick={goBack}

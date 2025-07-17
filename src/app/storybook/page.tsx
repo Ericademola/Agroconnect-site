@@ -1,13 +1,11 @@
 "use client";
 
-
 import * as icons from "@/Icons";
 import { Input } from "@/components/ui/input";
-import NavBar from "@/components/navbar/page";
+import NavBar from "@/components/NavBar/NavBar";
 import { Button } from "@/components/ui/button";
 
 export default function StoryBook() {
-
   const sections = [
     {
       name: "Icons",
@@ -36,8 +34,9 @@ export default function StoryBook() {
           <Button variant="secondary">Secondary</Button>
           <Button variant="ghost">Ghost</Button>
           <Button variant="outline">Outline</Button>
-          <Button variant="default" 
-        //   loading
+          <Button
+            variant="default"
+            //   loading
           >
             Default with loader
           </Button>
@@ -53,29 +52,29 @@ export default function StoryBook() {
             <Input placeholder="Password" type="password" />
             <Input
               className="text-[#828994]"
-            //   leftIcon={icons.MessageIcon({
-            //     className: "w-6 h-6",
-            //   })}
+              //   leftIcon={icons.MessageIcon({
+              //     className: "w-6 h-6",
+              //   })}
               placeholder="Left icon"
             />
             <Input
               className="text-[#828994]"
-            //   rightIcon={icons.DeleteIcon({ className: "w-6 h-6" })}
+              //   rightIcon={icons.DeleteIcon({ className: "w-6 h-6" })}
               placeholder="Right icon"
             />
             <Input
               type="password"
               className="text-[#828994]"
-            //   leftIcon={icons.MessageIcon({
-            //     className: "w-6 h-6",
-            //   })}
+              //   leftIcon={icons.MessageIcon({
+              //     className: "w-6 h-6",
+              //   })}
               placeholder="Left and right icons"
             />
             <Input placeholder="Disabled" disabled />
             <Input
               placeholder="With error"
-            //   subtext="An error occurred"
-            //   hasError
+              //   subtext="An error occurred"
+              //   hasError
             />
           </div>
           {/* <SearchInput
@@ -90,8 +89,6 @@ export default function StoryBook() {
       name: "NavBar",
       content: <NavBar />,
     },
-
-
   ];
   return (
     <div className="pb-20">
@@ -132,5 +129,3 @@ export default function StoryBook() {
     </div>
   );
 }
-
-
