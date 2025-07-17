@@ -1,21 +1,74 @@
-import * as React from "react"
+"use client";
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
-import { cn } from "@/lib/utils"
-
-function Input({ className, type, ...props }: React.ComponentProps<"input">) {
-  return (
-    <input
-      type={type}
-      data-slot="input"
-      className={cn(
-        "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-        "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-        className
-      )}
-      {...props}
-    />
-  )
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  inputClassName?: string;
+  hasError?: boolean;
+  subtext?: string;
+  clickAbleRightIcon?: boolean;
+  setShowState?: (value: boolean) => void;
+  externalClickAction?: () => void;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
+  inputClass?: string;
 }
 
-export { Input }
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      className,
+      inputClassName,
+      type = "text",
+      leftIcon,
+      rightIcon,
+      hasError,
+      subtext,
+      ...props
+    },
+    ref
+  ) => {
+
+    return (
+      <div className="w-full">
+        <div
+          className={cn(
+            "flex items-center border bg-background px-3 h-14 rounded-[48px] has-[:focus]:ring-1 has-[:placeholder-shown]:text-[#828994]",
+            hasError
+              ? "border-red-500 has-[:focus]:ring-red-500"
+              : "border-[#e0e2e4] has-[:focus]:ring-[#828994]",
+              props.disabled && "bg-[#f0f0f0]",
+            className
+          )}
+        >
+          {leftIcon}
+          <input
+            type={type}
+            className={cn(
+              "flex h-10 w-full rounded-md py-2 placeholder-shown:text-[#828994] file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+              rightIcon ? "pr-3" : "",
+              leftIcon ? "pl-3" : "",
+              inputClassName
+            )}
+            ref={ref}
+            {...props}
+          />
+          {rightIcon}
+        </div>
+        {(hasError || subtext) && (
+          <small
+            className={
+              hasError ? "text-sm text-red-500" : "text-sm text-[#626C7A]"
+            }
+          >
+            {subtext ?? (hasError ? "An error ocurred" : "")}
+          </small>
+        )}
+      </div>
+    );
+  }
+);
+Input.displayName = "Input";
+
+export { Input };

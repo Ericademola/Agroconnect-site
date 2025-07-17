@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { getTotalBasketCount } from "@/hooks/getProducts";
 import SearchInput from "../SearchInput/SearchInput";
+import DynamicProductTypesCarousel from "../Header/DynamicProductTypesCarousel";
 
 export default function NavBar() {
   const [basketCount, setBasketCount] = useState(0);
@@ -19,36 +20,38 @@ export default function NavBar() {
   },[]);
 
   return (
-    <div className="">
-      {/* relative */}
-      <nav className=" h-14 sm:px-6 md:px-8 lg:h-20 md:h-16 px-4 items-center flex justify-between z-50 bg-green-200 shadow-md">
-        {/* fixed top-0 right-0 left-0 */}
-        <Link href="/">
-          <div className="flex items-end cursor-pointer">
-            <Image
-              width={100}
-              height={100}
-              src="/assets/image/logo.png"
-              alt=""
-              className="w-8 sm:w-10 md:w-12 object-cover"
-            />
+    <div className="sticky top-0 z-999">
+      <nav className="h-14 sm:px-6 md:px-8 lg:h-20 md:h-16 px-4 items-center flex justify-between z-50 bg-green-200 shadow-md">
+        <div>
+          <Link href="/">
+            <div className="flex items-end cursor-pointer">
+              <Image
+                width={100}
+                height={100}
+                src="/assets/image/logo.png"
+                alt=""
+                className="w-8 sm:w-10 md:w-12 object-cover"
+              />
 
-            <p className="font-bold text-[1rem] sd:text-xl md:text-2xl text-green-800">
-              AgroConnect
-            </p>
-          </div>
-        </Link>
+              <p className="leadeing-none font-bold text-[1rem] sd:text-xl md:text-2xl text-green-800">
+                AgroConnect
+              </p>
+            </div>
+          </Link>
+        </div>
 
-        <div className="flex gap-4 font-medium text-xl">
-          <Link href="/">Home</Link>
-          <Link href="/about">About</Link>
+        <div>
+          <SearchInput
+            setSearchText={setSearchText}
+            className="hidden md:flex h-[40px] w-[450px]"
+          />
         </div>
 
         <div className="flex items-center gap-4">
-          <SearchInput
-            setSearchText={setSearchText}
-            // className="hidden md:flex h-[50px] w-full"
-          />
+
+          <Link href="/" className="font-bold  text-white">
+            Sign In/Log In
+          </Link>
        
           <Link href={"/cart"}>
             <div className="relative flex gap-3 items-end text-green-600 hover:text-green-800 cursor-pointer">
@@ -67,6 +70,7 @@ export default function NavBar() {
 
         </div>
       </nav>
+      <DynamicProductTypesCarousel />
     </div>
   );
 }

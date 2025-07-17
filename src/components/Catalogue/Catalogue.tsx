@@ -26,7 +26,7 @@ export default function Catalogue({ excludeId }: CatalogueProps) {
   return (
     <div className="font-sans flex gap-4 px-0 sm:gap-6 md:gap-8 lg:px-10 pb-20 flex-wrap justify-center">
       {productList &&
-        productList.map((item: IProducts, index: number) => (
+        productList.map((item: IProducts) => (
           <div
             key={item.id}
             className="shadow-lg shadow-gray-400 border-2 w-[42vw] sm:w-[40vw] md:w-[28vw] lg:w-[20vw] h-fit border-green-800 rounded-2xl"

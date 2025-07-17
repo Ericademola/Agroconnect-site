@@ -1,13 +1,18 @@
-import { GiCornerFlag, GiWindmill, GiFamilyHouse, GiMountainCave, GiBarn, GiPalmTree } from 'react-icons/gi';
+import { GiCornerFlag, GiWindmill, GiFamilyHouse, GiBarn, GiPalmTree } from 'react-icons/gi';
 import { MdOutlineMapsHomeWork, MdCabin, MdSportsGolf, MdOutlineBedroomParent } from 'react-icons/md';
 import { PiSwimmingPool, PiFire,PiCastleTurret, PiKeyLight } from 'react-icons/pi';
 import { TbSailboat, TbChefHat, TbBeach, TbCamper } from 'react-icons/tb';
 import { AiOutlineCoffee } from 'react-icons/ai';
 import { IoIosSnow } from 'react-icons/io';
 import { TbBuildingSkyscraper } from 'react-icons/tb';
-import { Icon } from '@/components/Header/Header';
 
-const productType: Icon[] = [
+export interface IProductTypeItem {
+    id?: number;
+    icon?: React.ReactNode;
+    label?:  string;
+}
+
+const productTypes: IProductTypeItem[] = [
     {
         id: 1,
         icon: <MdOutlineBedroomParent />,
@@ -108,6 +113,56 @@ const productType: Icon[] = [
         icon: <MdSportsGolf />,
         label: "Rice"
     },
+    {
+        id: 21,
+        icon: <MdSportsGolf />,
+        label: "Rice"
+    },
+    {
+        id: 22,
+        icon: <MdSportsGolf />,
+        label: "Rice"
+    },
+    {
+        id: 23,
+        icon: <MdSportsGolf />,
+        label: "Rice"
+    },
+    {
+        id: 24,
+        icon: <MdSportsGolf />,
+        label: "Rice"
+    },
+    {
+        id: 25,
+        icon: <MdSportsGolf />,
+        label: "Rice"
+    },
+    {
+        id: 26,
+        icon: <MdSportsGolf />,
+        label: "Rice"
+    },
+    {
+        id: 27,
+        icon: <MdSportsGolf />,
+        label: "Rice"
+    },
+    {
+        id: 28,
+        icon: <MdSportsGolf />,
+        label: "Rice"
+    },
+    {
+        id: 29,
+        icon: <MdSportsGolf />,
+        label: "Rice"
+    },
+    {
+        id: 30,
+        icon: <GiPalmTree />,
+        label: "Tomatoes"
+    },
 ]
 
-export default productType;
+export default productTypes;

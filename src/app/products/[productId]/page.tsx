@@ -49,7 +49,6 @@ export default function ProductDetails({ params }: ProductParams) {
 
   return (
     <div>
-      <NavBar />
       <div className="flex flex-col gap-1 mt-20 md:mt-24 lg:mt-28 pb-20 px-10 sm:px-12 md:px-8 lg:px-24">
         <button
           onClick={goBack}
