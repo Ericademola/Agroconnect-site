@@ -40,7 +40,7 @@ export const setBasketItems = (items: IProducts[]): void => {
 export const getBasketItems = (): CartItem[] => {
   const stored = localStorage.getItem(BASKET_ITEMS_KEY);
   const parsed = stored ? JSON.parse(stored) : [];
-  return parsed.map((item: any) => ({
+  return parsed.map((item: IProducts) => ({
     ...item,
     quantity: item.quantity ?? 1,
   }));
