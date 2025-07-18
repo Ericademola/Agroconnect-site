@@ -430,11 +430,11 @@ export const DeleteIcon2 = ({ className }: IProps) => (
   </svg>
 );
 
-export const DecisionIcon = ({ height, width, className, color }: IProps) => (
+export const DecisionIcon = ({ height, width, className }: IProps) => (
   <svg
-    // width="150"
-    // height="150"
-    className="w-[108px] h-[108px] md:w-[150px] md:h-[150px]"
+    width={width || DEFAULT_SIZE}
+    height={height || DEFAULT_SIZE}
+    className={className}
     viewBox="0 0 150 150"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -516,10 +516,11 @@ export const MobileUploadIcon = ({ className }: IProps) => (
   </svg>
 );
 
-export const MobilePlayIcon = ({ height, width, className, color }: IProps) => (
+export const MobilePlayIcon = ({ height, width, className }: IProps) => (
   <svg
-    width="35"
-    height="34"
+    className={className}
+    width={width || DEFAULT_SIZE}
+    height={height || DEFAULT_SIZE}
     viewBox="0 0 35 34"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -1065,7 +1066,7 @@ export const TagMediaIcon = ({ height, width, className }: IProps) => (
   </svg>
 );
 
-export const TagIcon = ({ height, width, className, color }: IProps) => (
+export const TagIcon = ({ height, width, className }: IProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -1235,7 +1236,7 @@ export const DurationIcon = ({ height, width, className }: IProps) => (
   </svg>
 );
 
-export const PlayVideoIcon = ({ height, width, className, color }: IProps) => (
+export const PlayVideoIcon = ({ height, width, className }: IProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -1416,7 +1417,6 @@ export const ExternalLinkIcon = ({
   height,
   width,
   className,
-  color,
 }: IProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -1497,10 +1497,11 @@ export const ArrowUp = ({ className }: IProps) => (
   </svg>
 );
 
-export const Sound = ({ className }: IProps) => (
+export const Sound = ({ width, height, className }: IProps) => (
   <svg
-    width="24"
-    height="24"
+    width={width || DEFAULT_SIZE}
+    height={height || DEFAULT_SIZE}
+    className={className}
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -1528,10 +1529,11 @@ export const Sound = ({ className }: IProps) => (
   </svg>
 );
 
-export const Promotion = ({ className }: IProps) => (
+export const Promotion = ({ className, height, width }: IProps) => (
   <svg
-    width="24"
-    height="24"
+    width={width || DEFAULT_SIZE}
+    height={height || DEFAULT_SIZE}
+    className={className}
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -3320,7 +3322,7 @@ export const DownloadIcon = ({ className, width, height }: IProps) => (
   </svg>
 );
 
-export const BackArrowIcon = ({ className, width, height, color }: IProps) => (
+export const BackArrowIcon = ({ className, width, height }: IProps) => (
   <svg
     viewBox="0 0 40 40"
     className={className}
@@ -5689,7 +5691,7 @@ export const ProfileTickIcon = ({ width, height, className }: IProps) => (
   </svg>
 );
 
-export const RedYoutubeIcon = ({ width, height, className, color }: IProps) => (
+export const RedYoutubeIcon = ({ width, height, className }: IProps) => (
   <svg
     width={width || DEFAULT_SIZE}
     height={height || DEFAULT_SIZE}
@@ -6401,6 +6403,8 @@ export const WhatsAppIcon = ({ width, height, className }: IProps) => (
     fill="none"
     viewBox="0 0 24 24"
     className={className}
+    width={width || DEFAULT_SIZE}
+    height={height || DEFAULT_SIZE}
   >
     <path
       stroke="currentColor"
@@ -6439,6 +6443,7 @@ export const DropArrowUpIcon = ({ width, height, className }: IProps) => (
   <svg
     width={width || DEFAULT_SIZE}
     height={height || DEFAULT_SIZE}
+    className={className}
     viewBox="0 0 10 11"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -7546,7 +7551,7 @@ export const AddSquareIcon = ({ width, height, color, className }: IProps) => (
   </svg>
 );
 
-export const GalleryAddIcon = ({ width, height, color, className }: IProps) => (
+export const GalleryAddIcon = ({ width, height, className }: IProps) => (
   <svg
     width={width || DEFAULT_SIZE}
     height={height || DEFAULT_SIZE}
@@ -10068,6 +10073,7 @@ export const SixPackIcon = ({ width, height, className }: IProps) => (
   <svg
     className={className}
     width={width || DEFAULT_SIZE}
+    height={height || DEFAULT_SIZE}
     viewBox="0 0 22 22"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -10500,6 +10506,7 @@ export const SynagogueIcon = ({ width, height, className }: IProps) => (
   <svg
     className={className}
     width={width || DEFAULT_SIZE}
+    height={height || DEFAULT_SIZE}
     viewBox="0 0 20 21"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -10899,6 +10906,7 @@ export const MedicineBottleIcon = ({ width, height, className }: IProps) => (
   <svg
     className={className}
     width={width || DEFAULT_SIZE}
+    height={height || DEFAULT_SIZE}
     viewBox="0 0 18 22"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -11523,7 +11531,7 @@ export const Stars = () => {
   );
 };
 
-export const TagMultipleIcon = ({ className }: any) => (
+export const TagMultipleIcon = ({ className }: IProps) => (
   <svg
     width="12"
     height="12"

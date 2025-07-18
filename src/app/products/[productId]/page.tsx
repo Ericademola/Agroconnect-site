@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
-import NavBar from "@/components/NavBar/NavBar";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import CartButton from "@/components/CartButton/CartButton";
 import Rating from "@/components/Rating/Rating";
 import Image from "next/image";
@@ -12,6 +11,7 @@ import Catalogue from "@/components/Catalogue/Catalogue";
 import { getProductById } from "@/hooks/getProducts";
 import { products } from "../../../../products";
 import { IProducts } from "@/types";
+import { BackIcon } from "@/Icons";
 
 type ProductParams = {
   params: Promise<{
@@ -54,7 +54,7 @@ export default function ProductDetails({ params }: ProductParams) {
           onClick={goBack}
           className="text-gray-800 text-[1rem] flex items-center font-medium py-1 px-3 mb-2 w-fit bg-green-200 hover:text-gray-600 cursor-pointer rounded-lg"
         >
-          <FontAwesomeIcon icon={faAngleLeft} className="h-[1rem]" /> Back
+          <BackIcon /> Back
         </button>
         {itemDetails && (
           <div className="sm:flex border-green-600 border-2 rounded-xl bg-blue-200">

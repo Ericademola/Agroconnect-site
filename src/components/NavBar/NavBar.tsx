@@ -11,7 +11,7 @@ import DynamicProductTypesCarousel from "../Header/DynamicProductTypesCarousel";
 
 export default function NavBar() {
   const [basketCount, setBasketCount] = useState(0);
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
@@ -59,6 +59,7 @@ export default function NavBar() {
                 icon={faShoppingBasket}
                 className="text-[1.4rem] sm:text-[1.6rem] md:text-3xl "
               />
+              
               <Badge className="h-5 min-w-5 rounded-full px-1 font-sans tabular-nums absolute -top-2 left-5 sm:left-6 text-[0.6rem] sm:text-[0.8rem] text-white bg-orange-400 ">
                 {basketCount}
               </Badge>

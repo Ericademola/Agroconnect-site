@@ -1,13 +1,14 @@
 "use client";
-import NavBar from "@/components/NavBar/NavBar";
+import { Button } from "@/components/ui/button";
 import { clearLocalStorage, getItemQuantity } from "@/hooks/getProducts";
+import { BackIcon } from "@/Icons";
 import { CartItem } from "@/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faAngleLeft,
+  // faAngleLeft,
   faCartPlus,
   faCheckCircle,
-  faCircleNotch,
+  // faCircleNotch,
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -60,7 +61,6 @@ export default function CheckoutPage() {
 
   return (
     <div>
-      <NavBar />
       <div className="bg-gray-200 h-screen font-sans flex flex-col items-center pt-20 md:pt-24 lg:pt-28">
         {summaryCart && basketItems.length > 0 ? (
           <div className=" flex flex-col">
@@ -68,7 +68,7 @@ export default function CheckoutPage() {
               onClick={goBack}
               className="text-black text-[1rem] font-medium py-1 mr-auto mb-1 w-20 bg-gray-200 hover:text-gray-700 rounded-lg"
             >
-              <FontAwesomeIcon icon={faAngleLeft} /> Back
+              <BackIcon /> Back
             </button>
 
             <div className="w-[80vw] sm:w-[70vw] lg:w-[75vw] h-[calc(100dvh-7.2rem)]  md:h-[calc(100dvh-8.2rem)] lg:h-[calc(100dvh-9.28rem)] overflow-hidden rounded-t-xl shadow-lg bg-white flex flex-col pt-4">
@@ -109,22 +109,23 @@ export default function CheckoutPage() {
                 </div>
 
                 {paymentBtn && (
-                  <button
+                  <Button
                     onClick={onCheckout}
                     className="payment-btn w-full  font-medium py-2 bg-green-600 hover:bg-green-700 text-white "
+                    loading={loading}
                   >
-                    {loading ? (
+                    {/* {loading ? (
                       <FontAwesomeIcon
                         icon={faCircleNotch}
                         spin
                         className="text-xl"
                       />
-                    ) : (
-                      `Make payment ( ₦${Math.round(
+                    ) : ( */}
+                      {`Make payment ( ₦${Math.round(
                         getTotalPrice()
-                      ).toLocaleString()})`
-                    )}
-                  </button>
+                      ).toLocaleString()})`}
+                    {/* )} */}
+                  </Button>
                 )}
               </div>
             </div>
