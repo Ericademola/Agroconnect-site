@@ -52,9 +52,13 @@ export default function ProductDetails({ params }: ProductParams) {
       <div className="flex flex-col gap-1 mt-20 md:mt-24 lg:mt-28 pb-20 px-10 sm:px-12 md:px-8 lg:px-24">
         <button
           onClick={goBack}
-          className="text-gray-800 text-[1rem] flex items-center font-medium py-1 px-3 mb-2 w-fit bg-green-200 hover:text-gray-600 cursor-pointer rounded-lg"
+          className="text-gray-800 text-[0.8rem] md:text-[1rem] flex items-center font-medium py-1 px-3 mb-2 w-fit bg-green-200 hover:text-gray-600 cursor-pointer rounded-lg"
         >
-          <BackIcon /> Back
+          <BackIcon
+            className="w-[0.8rem] md:w-4 h-[0.8rem] md:h-4"
+            strokeWidth={2.5}
+          />{" "}
+          Back
         </button>
         {itemDetails && (
           <div className="sm:flex border-green-600 border-2 rounded-xl bg-blue-200">
