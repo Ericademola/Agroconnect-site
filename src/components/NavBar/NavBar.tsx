@@ -17,7 +17,7 @@ export default function NavBar() {
   useEffect(() => {
     const counts = getTotalBasketCount();
     setBasketCount(counts);
-  },[]);
+  }, []);
 
   return (
     <div className="sticky top-0 z-999">
@@ -43,23 +43,22 @@ export default function NavBar() {
         <div>
           <SearchInput
             setSearchText={setSearchText}
-            className="hidden md:flex h-[40px] w-[450px]"
+            className="hidden md:flex h-[30px] md:h-[35px] lg:h-[40px] w-[320px] md:w-[250px]  lg:w-[450px]"
           />
         </div>
 
         <div className="flex items-center gap-4">
-
           <Link href="/" className="font-bold  text-white">
             Sign In/Log In
           </Link>
-       
+
           <Link href={"/cart"}>
             <div className="relative flex gap-3 items-end text-green-600 hover:text-green-800 cursor-pointer">
               <FontAwesomeIcon
                 icon={faShoppingBasket}
                 className="text-[1.4rem] sm:text-[1.6rem] md:text-3xl "
               />
-              
+
               <Badge className="h-5 min-w-5 rounded-full px-1 font-sans tabular-nums absolute -top-2 left-5 sm:left-6 text-[0.6rem] sm:text-[0.8rem] text-white bg-orange-400 ">
                 {basketCount}
               </Badge>
@@ -68,7 +67,6 @@ export default function NavBar() {
               </p>
             </div>
           </Link>
-
         </div>
       </nav>
       <DynamicProductTypesCarousel />

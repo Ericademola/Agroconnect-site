@@ -1,6 +1,5 @@
 import { ChangeEvent, useState } from "react";
 
-
 import { Loader, SearchIcon } from "@/Icons";
 import { cn } from "@/lib/utils";
 import { Input } from "../ui/input";
@@ -39,7 +38,9 @@ export default function SearchInput({
       inputClassName="bg-[#F8F8F8]"
       leftIcon={<SearchIcon width={20} height={20} />}
       placeholder={placeholder}
-      rightIcon={loading ? <Loader className="h-6 w-6 animate-spin" /> : undefined}
+      rightIcon={
+        loading ? <Loader className="h-6 w-6 animate-spin" /> : undefined
+      }
     />
   );
 }
