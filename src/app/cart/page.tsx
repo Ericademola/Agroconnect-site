@@ -45,7 +45,6 @@ export default function CartPage() {
 
   return (
     <div>
-      <NavBar />
       <div className="bg-gray-200 h-screen flex flex-col items-center pt-20 md:pt-24 lg:pt-28">
         {basketItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center gap-5 h-[calc(100dvh-5rem)]">

@@ -60,7 +60,6 @@ export default function CheckoutPage() {
 
   return (
     <div>
-      <NavBar />
       <div className="bg-gray-200 h-screen font-sans flex flex-col items-center pt-20 md:pt-24 lg:pt-28">
         {summaryCart && basketItems.length > 0 ? (
           <div className=" flex flex-col">
