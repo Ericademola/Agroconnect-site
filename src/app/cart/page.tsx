@@ -4,14 +4,14 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import NavBar from "@/components/NavBar/NavBar";
 import CartButton from "@/components/CartButton/CartButton";
 import { CartItem } from "@/types";
 import {
-  faAngleLeft,
+  // faAngleLeft,
   faShoppingBasket,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { BackIcon } from "@/Icons";
 
 export default function CartPage() {
   const [basketItems, setBasketItems] = useState<CartItem[]>([]);
@@ -68,7 +68,7 @@ export default function CartPage() {
               onClick={goBack}
               className="text-gray-800 text-[1rem] flex items-center font-medium py-1 px-3 mb-2 w-fit bg-green-200 hover:text-gray-600 cursor-pointer rounded-lg"
             >
-              <FontAwesomeIcon icon={faAngleLeft} className="h-[1rem]" /> Back
+              <BackIcon /> Back
             </button>
 
             <div className="w-[85vw] md:w-[70vw] pt-4 flex flex-col overflow-hidden h-[calc(100dvh-7.5rem)]  md:h-[calc(100dvh-8.5rem)] lg:h-[calc(100dvh-9.5rem)] shadow-md bg-white rounded-t-xl">
