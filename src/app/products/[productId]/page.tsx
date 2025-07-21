@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { useParams, useRouter } from "next/navigation";
 import CartButton from "@/components/CartButton/CartButton";
 import Rating from "@/components/Rating/Rating";
 import Image from "next/image";
@@ -13,31 +11,21 @@ import { products } from "../../../../products";
 import { IProducts } from "@/types";
 import { BackIcon } from "@/Icons";
 
-type ProductParams = {
-  params: Promise<{
-    productId: string;
-  }>;
-};
-
-export default function ProductDetails({ params }: ProductParams) {
-  const [itemDetails, setItemDetails] = useState<IProducts | null>(null);
+export default function ProductDetails() {
+  const { productId } = useParams();
   const router = useRouter();
+  const [itemDetails, setItemDetails] = useState<IProducts | null>(null);
 
   useEffect(() => {
-    const fetchItemDetails = async () => {
-      const resolvedParams = await params;
-      const productId = parseInt(resolvedParams.productId);
-      const product = getProductById(productId);
+    const id = parseInt(productId as string);
+    const product = getProductById(id);
 
-      if (!product) {
-        router.push("/not-found");
-      } else {
-        setItemDetails(product);
-      }
-    };
-
-    fetchItemDetails();
-  }, [params, router]);
+    if (!product) {
+      router.push("/not-found");
+    } else {
+      setItemDetails(product);
+    }
+  }, [productId, router]);
 
   const goBack = () => {
     if (window.history.length > 1) {
