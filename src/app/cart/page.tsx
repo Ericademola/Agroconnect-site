@@ -88,6 +88,7 @@ export default function CartPage() {
                         src={item.image}
                         alt={item.name}
                         fill
+                        sizes="w-16 sm:w-20 md:w-36 lg:w-40"
                         className="object-contain"
                       />
                     </div>
