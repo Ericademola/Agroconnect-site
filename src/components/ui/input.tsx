@@ -45,7 +45,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <input
             type={type}
             className={cn(
-              "flex h-[30px] md:h-[35px] lg:h-[40px] w-full rounded-md py-2 placeholder-shown:text-[#828994] file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+              "flex h-[30px] md:h-[35px] lg:h-[40px] w-full placeholder-shown:text-[#828994] file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
               rightIcon ? "pr-3" : "",
               leftIcon ? "pl-3" : "",
               inputClassName
