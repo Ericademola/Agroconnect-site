@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { useParams, useRouter } from "next/navigation";
 import CartButton from "@/components/CartButton/CartButton";
 import Rating from "@/components/Rating/Rating";
 import Image from "next/image";
@@ -13,31 +11,21 @@ import { products } from "../../../../products";
 import { IProducts } from "@/types";
 import { BackIcon } from "@/Icons";
 
-type ProductParams = {
-  params: Promise<{
-    productId: string;
-  }>;
-};
-
-export default function ProductDetails({ params }: ProductParams) {
-  const [itemDetails, setItemDetails] = useState<IProducts | null>(null);
+export default function ProductDetails() {
+  const { productId } = useParams();
   const router = useRouter();
+  const [itemDetails, setItemDetails] = useState<IProducts | null>(null);
 
   useEffect(() => {
-    const fetchItemDetails = async () => {
-      const resolvedParams = await params;
-      const productId = parseInt(resolvedParams.productId);
-      const product = getProductById(productId);
+    const id = parseInt(productId as string);
+    const product = getProductById(id);
 
-      if (!product) {
-        router.push("/not-found");
-      } else {
-        setItemDetails(product);
-      }
-    };
-
-    fetchItemDetails();
-  }, [params, router]);
+    if (!product) {
+      router.push("/not-found");
+    } else {
+      setItemDetails(product);
+    }
+  }, [productId, router]);
 
   const goBack = () => {
     if (window.history.length > 1) {
@@ -49,12 +37,16 @@ export default function ProductDetails({ params }: ProductParams) {
 
   return (
     <div>
-      <div className="flex flex-col gap-1 mt-20 md:mt-24 lg:mt-28 pb-20 px-10 sm:px-12 md:px-8 lg:px-24">
+      <div className="flex flex-col gap-1 mt-5 pb-20 px-10 sm:px-12 md:px-8 lg:px-24">
         <button
           onClick={goBack}
-          className="text-gray-800 text-[1rem] flex items-center font-medium py-1 px-3 mb-2 w-fit bg-green-200 hover:text-gray-600 cursor-pointer rounded-lg"
+          className="text-gray-800 text-[0.8rem] md:text-[1rem] flex items-center font-medium py-1 px-3 mb-2 w-fit bg-green-200 hover:text-gray-600 cursor-pointer rounded-lg"
         >
-          <BackIcon /> Back
+          <BackIcon
+            className="w-[0.8rem] md:w-4 h-[0.8rem] md:h-4"
+            strokeWidth={2.5}
+          />{" "}
+          Back
         </button>
         {itemDetails && (
           <div className="sm:flex border-green-600 border-2 rounded-xl bg-blue-200">

@@ -1413,11 +1413,7 @@ export const PromotionIcon = ({ height, width, className }: IProps) => (
   </svg>
 );
 
-export const ExternalLinkIcon = ({
-  height,
-  width,
-  className,
-}: IProps) => (
+export const ExternalLinkIcon = ({ height, width, className }: IProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"

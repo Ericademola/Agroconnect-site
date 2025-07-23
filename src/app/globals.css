@@ -59,6 +59,32 @@
 body {
   background: #fff;
   color: #000;
+  overflow-y: scroll;
+}
+
+/* scrollBar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #b9f8cf;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: radial-gradient(
+    circle at -65% -65%,
+    oklch(62.7% 0.194 149.214),
+    #0eb44b
+  );
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #237e2a;
 }
 
 :root {

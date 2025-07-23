@@ -61,21 +61,25 @@ export default function CheckoutPage() {
 
   return (
     <div>
-      <div className="bg-gray-200 h-screen font-sans flex flex-col items-center pt-20 md:pt-24 lg:pt-28">
+      <div className="bg-gray-200 h-full font-sans flex flex-col items-center pt-5">
         {summaryCart && basketItems.length > 0 ? (
           <div className=" flex flex-col">
             <button
               onClick={goBack}
-              className="text-black text-[1rem] font-medium py-1 mr-auto mb-1 w-20 bg-gray-200 hover:text-gray-700 rounded-lg"
+              className="text-gray-800 text-[0.8rem] md:text-[1rem] flex items-center font-medium py-1 px-3 mb-2 w-fit bg-green-200 hover:text-gray-600 cursor-pointer rounded-lg"
             >
-              <BackIcon /> Back
+              <BackIcon
+                className="w-[0.8rem] md:w-4 h-[0.8rem] md:h-4"
+                strokeWidth={2.5}
+              />{" "}
+              Back
             </button>
 
-            <div className="w-[80vw] sm:w-[70vw] lg:w-[75vw] h-[calc(100dvh-7.2rem)]  md:h-[calc(100dvh-8.2rem)] lg:h-[calc(100dvh-9.28rem)] overflow-hidden rounded-t-xl shadow-lg bg-white flex flex-col pt-4">
+            <div className="w-[80vw] sm:w-[70vw] lg:w-[75vw]  h-[calc(100dvh-11.68rem)] md:h-[calc(100dvh-12.5rem)] lg:h-[calc(100dvh-13.5rem)]  flex-grow overflow-hidden rounded-t-xl shadow-lg bg-white flex flex-col pt-4">
               <h3 className="font-medium mx-4 text-center text-gray-700 text-[1rem] border-b-2 border-gray-400">
                 CART SUMMARY
               </h3>
-              <div className="overflow-auto max-h-full hide-scrollbar mx-4 pr-1">
+              <div className="overflow-y-auto flex-1 hide-scrollbar mx-4 pr-1">
                 <table className="w-full text-gray-700 text-[1rem] border-collapse">
                   <thead className="sticky top-0 z-10 bg-white">
                     <tr>
@@ -98,7 +102,7 @@ export default function CheckoutPage() {
                 </table>
               </div>
 
-              <div className="mt-auto shadow-inner shadow-gray-200">
+              <div className="sticky bottom-0 mt-auto shadow-inner shadow-gray-200">
                 <div className="flex justify-between mt-4 pb-2 px-4 border-gray-400">
                   <p className="text-gray-800 font-semibold text-[1rem]">
                     Total Price
@@ -111,27 +115,19 @@ export default function CheckoutPage() {
                 {paymentBtn && (
                   <Button
                     onClick={onCheckout}
-                    className="payment-btn w-full  font-medium py-2 bg-green-600 hover:bg-green-700 text-white "
+                    className="w-full text-white py-6 rounded-none text-sm sm:text-[1rem]  md:text-[1.1rem] lg:text-lg"
                     loading={loading}
                   >
-                    {/* {loading ? (
-                      <FontAwesomeIcon
-                        icon={faCircleNotch}
-                        spin
-                        className="text-xl"
-                      />
-                    ) : ( */}
-                      {`Make payment ( ₦${Math.round(
-                        getTotalPrice()
-                      ).toLocaleString()})`}
-                    {/* )} */}
+                    {`Make payment ( ₦${Math.round(
+                      getTotalPrice()
+                    ).toLocaleString()})`}
                   </Button>
                 )}
               </div>
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center px-4 py-10 w-full h-full">
+          <div className="flex flex-col items-center px-4 py-10 w-full h-[calc(100dvh-9.5rem)] md:h-[calc(100dvh-10rem)] lg:h-[calc(100dvh-11rem)]">
             {successfulPayment && (
               <div className="text-gray-700 mb-4 text-center">
                 <p className="text-lg">

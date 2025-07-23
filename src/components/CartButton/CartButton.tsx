@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faCircleNotch } from "@fortawesome/free-solid-svg-icons/faCircleNotch";
 import { CartItem, IProducts } from "@/types";
 import {
   getBasketItems,
@@ -11,8 +9,8 @@ import {
   setBasketItems,
   setItemQuantity,
 } from "@/hooks/getProducts";
-import { AddIcon, MinusIcon } from "@/Icons";
-// import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface CartButtonProps {
   item: IProducts;
@@ -101,14 +99,20 @@ export default function CartButton({
             onClick={handleDecrement}
             className="w-6 sm:w-8 md:w-[2.2rem] lg:w-10 flex items-center justify-center"
           >
-            <MinusIcon />
+            <FontAwesomeIcon
+              icon={faMinus}
+              className="text-[0.8rem] sm:text-[1rem] lg:text-[1.2rem]"
+            />
           </Button>
           <p className="text-sm font-bold">{quantity}</p>
           <Button
             onClick={handleIncrement}
             className="w-6 sm:w-8 md:w-[2.2rem] lg:w-10 flex items-center justify-center"
           >
-            <AddIcon />
+            <FontAwesomeIcon
+              icon={faPlus}
+              className="text-[0.8rem] sm:text-[1rem] lg:text-[1.2rem]"
+            />
           </Button>
         </div>
       )}
