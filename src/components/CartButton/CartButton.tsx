@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faCircleNotch } from "@fortawesome/free-solid-svg-icons/faCircleNotch";
 import { CartItem, IProducts } from "@/types";
 import {
   getBasketItems,
@@ -11,10 +9,8 @@ import {
   setBasketItems,
   setItemQuantity,
 } from "@/hooks/getProducts";
-import { AddIcon, MinusIcon } from "@/Icons";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 interface CartButtonProps {
   item: IProducts;
