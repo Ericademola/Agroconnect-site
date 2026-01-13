@@ -1,12 +1,42 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@font-face {
+  font-family: "Geologica";
+  src: url("/public/assets/fonts/Geologica/Geologica-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/public/assets/fonts/Poppins/Poppins-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Prompt";
+  src: url("/public/assets/fonts/Prompt/Prompt-Regular.ttf");
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Custom Fonts */
+  --font-geologica: "Geologica", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-prompt: "Prompt", sans-serif;
+
+  /*  CUSTOM BREAKPOINTS  */
+  --breakpoint-xs: 400px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-ml: 1024px;
+  --breakpoint-lg: 1180px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -44,16 +74,16 @@
 }
 
 @layer utilities {
-  .bg-gradient-overlay {
+  /* .bg-gradient-overlay {
     background-image: linear-gradient(
         rgba(75, 75, 75, 0.3),
         rgba(189, 255, 224, 0.4)
       ),
-      url("/hero-image.jpg");
+      url("/heroBg.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-  }
+  } */
 }
 
 body {
@@ -89,7 +119,7 @@ body {
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: #ffffff;
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
