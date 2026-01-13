@@ -9,7 +9,7 @@ import Catalogue from "@/components/Catalogue/Catalogue";
 import { getProductById } from "@/hooks/getProducts";
 import { products } from "../../../../products";
 import { IProducts } from "@/types";
-import { BackIcon } from "@/Icons";
+import { LeftArrowIcon } from "@/Icons";
 
 export default function ProductDetails() {
   const { productId } = useParams();
@@ -42,7 +42,7 @@ export default function ProductDetails() {
           onClick={goBack}
           className="text-gray-800 text-[0.8rem] md:text-[1rem] flex items-center font-medium py-1 px-3 mb-2 w-fit bg-green-200 hover:text-gray-600 cursor-pointer rounded-lg"
         >
-          <BackIcon
+          <LeftArrowIcon
             className="w-[0.8rem] md:w-4 h-[0.8rem] md:h-4"
             strokeWidth={2.5}
           />{" "}
