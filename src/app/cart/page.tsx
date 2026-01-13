@@ -46,7 +46,7 @@ export default function CartPage() {
 
   return (
     <div>
-      <div className="bg-gray-200 h-full flex flex-col items-center pt-5">
+      <div className=" h-full flex flex-col items-center pt-5">
         {basketItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center gap-5 h-[calc(100dvh-9.5rem)] md:h-[calc(100dvh-10rem)] lg:h-[calc(100dvh-11rem)]">
             <p className="font-medium text-center text-lg text-gray-800">
@@ -64,7 +64,7 @@ export default function CartPage() {
             </Link>
           </div>
         ) : (
-          <div className="font-sans flex flex-col">
+          <div className=" flex flex-col">
             <button
               onClick={goBack}
               className="text-gray-800 text-[0.8rem] md:text-[1rem] flex items-center font-medium py-1 px-3 mb-2 w-fit bg-green-200 hover:text-gray-600 cursor-pointer rounded-lg"

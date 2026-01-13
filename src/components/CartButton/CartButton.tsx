@@ -89,6 +89,7 @@ export default function CartButton({
           className="w-16 sm:w-20 md:w-[5.5rem] lg:w-24 flex items-center justify-center"
           loading={loading}
           disabled={loading}
+          variant="default"
         >
           {loading ? "Loading..." : "Add to Cart"}
         </Button>

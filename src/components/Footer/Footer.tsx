@@ -1,4 +1,4 @@
-import { XIcon, FacebookIcon, InstagramIcon, TikTokIcon } from "@/Icons";
+// import { XIcon, FacebookIcon, InstagramIcon, TikTokIcon } from "@/Icons";
 import Link from "next/link";
 
 export default function Footer() {
@@ -162,7 +162,7 @@ export default function Footer() {
           <h3 className="text-[1rem] font-bold text-[#f0fdf4] hover:text-[#7bf1a8]  cursor-default">
             JOIN US
           </h3>
-          <div className="text-[0.8rem] inline-flex  gap-2 mt-2">
+          {/* <div className="text-[0.8rem] inline-flex  gap-2 mt-2">
             <Link href={"#"} className="">
               <FacebookIcon className="w-5 h-5 text-[#b9f8cf] hover:text-[#7bf1a8] " />
             </Link>
@@ -175,7 +175,7 @@ export default function Footer() {
             <Link href={"#"} className="">
               <TikTokIcon className="w-5 h-5 text-[#b9f8cf] hover:text-[#7bf1a8] " />
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
       <p className="text-[1rem] mt-15 border-t border-[#f0fdf4] pt-4 text-[#f0fdf4] text-center">

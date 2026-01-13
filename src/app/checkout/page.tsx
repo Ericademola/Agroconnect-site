@@ -61,7 +61,7 @@ export default function CheckoutPage() {
 
   return (
     <div>
-      <div className="bg-gray-200 h-full font-sans flex flex-col items-center pt-5">
+      <div className=" h-full  flex flex-col items-center pt-5">
         {summaryCart && basketItems.length > 0 ? (
           <div className=" flex flex-col">
             <button
