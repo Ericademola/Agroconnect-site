@@ -63,7 +63,9 @@ export default function NavBar() {
 const TopNavBar = () => {
   return (
     <>
-      <nav className="bg-fuchsia-400 sm:bg-emerald-400 md:bg-cyan-400 ml:bg-red-400 lg:bg-blue-400 xl:bg-indigo-800 h-[40px] sm-[50px] md:h-[60px] ml:h-[80px] flex items-center justify-center md:justify-between text-white px-4 sm:px-5 md:px-6 ml:px-8 lg:px-12">
+      {/* bg-fuchsia-400 sm:bg-emerald-400 md:bg-cyan-400 ml:bg-red-400
+      lg:bg-blue-400 xl:bg-indigo-800 */}
+      <nav className="bg-[#03601A] h-[40px] sm-[50px] md:h-[60px] ml:h-[80px] flex items-center justify-center md:justify-between text-white px-4 sm:px-5 md:px-6 ml:px-8 lg:px-12">
         <div className="hidden md:flex items-center gap-4 text-[clamp(14px,1.5vw,20px)] font-poppins font-medium">
           <Link href="/" className="flex items-center gap-1">
             <HomeIcon className="w-6 h-6 lg:w-7 lg:h-7" />
