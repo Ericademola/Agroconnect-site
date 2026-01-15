@@ -15,7 +15,7 @@ const MobileMenu = ({ close }: { close: (value: boolean) => void }) => {
             <Image
               width={100}
               height={100}
-              src="/assets/image/logo.png"
+              src="/assets/images/logo.png"
               alt=""
               className="w-[46px] md:w-[50px] h-auto object-cover"
             />

@@ -34,7 +34,7 @@ export default function CartPage() {
   };
 
   const removeItem = (id: number) => {
-    const newItems = basketItems.filter((item) => item.id !== id);
+    const newItems = basketItems.filter((item) => item.productId !== id);
     localStorage.setItem("BasketItems", JSON.stringify(newItems));
     setBasketItems(newItems);
   };
@@ -80,13 +80,13 @@ export default function CartPage() {
               <div className="mx-4 flex-1 overflow-y-auto hide-scrollbar">
                 {basketItems.map((item) => (
                   <div
-                    key={item.id}
+                    key={item.productId}
                     className="flex items-center gap-3 border-b-2 border-gray-300 "
                   >
                     <div className="relative w-16 sm:w-20 md:w-36 lg:w-40 h-12 sm:h-14 md:h-16 lg:h-20 bg-white">
                       <Image
-                        src={item.image}
-                        alt={item.name}
+                        src={item.productImage}
+                        alt={item.productName}
                         fill
                         sizes="w-16 sm:w-20 md:w-36 lg:w-40"
                         className="object-contain"
@@ -96,12 +96,12 @@ export default function CartPage() {
                     <div className="flex justify-between w-full text-gray-700 py-2">
                       <div className="flex flex-col items-start">
                         <h3 className="font-bold text-[0.9rem]  md:text-[1rem] lg:text-[1.1rem] text-gray-700">
-                          {item.name}
+                          {item.productName}
                         </h3>
                         <p className="text-sm">Quantity: {item.quantity}</p>
 
                         <button
-                          onClick={() => removeItem(item.id)}
+                          onClick={() => removeItem(item.productId)}
                           className="text-red-600 hover:underline mt-auto text-[0.7rem] md:text-[0.8rem] cursor-pointer"
                         >
                           Remove

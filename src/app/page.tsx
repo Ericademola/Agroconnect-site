@@ -2,6 +2,7 @@
 
 import Categories from "@/components/Categories/Categories";
 import CategoriesCarousel from "@/components/CategoriesCarousel/CategoriesCarousel";
+import ProductList from "@/components/ProductList/ProductList";
 import { Button } from "@/components/ui/button";
 import { ShopBagIcon } from "@/Icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -29,6 +30,7 @@ export default function Home() {
         </div>
       </div>
       <CategoriesCarousel />
+      <ProductList />
     </div>
   );
 }

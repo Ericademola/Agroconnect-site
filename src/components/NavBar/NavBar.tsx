@@ -1,6 +1,9 @@
 "use client";
 
-import { getTotalBasketCount } from "@/hooks/getProducts";
+import {
+  getTotalBasketCount,
+  getTotalWishlistCount,
+} from "@/hooks/getProducts";
 import {
   AppleIcon,
   CartIcon,
@@ -19,6 +22,7 @@ import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import FullScreenModal from "../FullScreenModal/FullScreenModal";
 import MobileMenu from "../MobileMenu/MobileMenu";
+import { CART_UPDATED_EVENT, WISHLIST_UPDATED_EVENT } from "@/lib/events";
 
 export default function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -71,7 +75,7 @@ const TopNavBar = () => {
             <HomeIcon className="w-6 h-6 lg:w-7 lg:h-7" />
             <p>Home</p>
           </Link>
-          <Link href="/" className="flex items-center gap-1">
+          <Link href="/shop" className="flex items-center gap-1">
             <ShopIcon className="w-6 h-6 lg:w-7 lg:h-7" />
             <p>Shop</p>
           </Link>
@@ -102,6 +106,7 @@ const TopNavBar = () => {
 
 export function MainNavBar() {
   const [basketCount, setBasketCount] = useState(0);
+  const [wishListCount, setWishListCount] = useState(0);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchText, setSearchText] = useState("");
   const [open, setOpen] = useState(false);
@@ -110,9 +115,31 @@ export function MainNavBar() {
     setOpen(value);
   };
 
+  const updateCounts = () => {
+    const countsForBasket = getTotalBasketCount();
+    const countsForWishList = getTotalWishlistCount();
+    setBasketCount(countsForBasket);
+    setWishListCount(countsForWishList);
+  };
+
   useEffect(() => {
-    const counts = getTotalBasketCount();
-    setBasketCount(counts);
+    updateCounts();
+
+    const handleCartUpdate = () => {
+      setBasketCount(getTotalBasketCount());
+    };
+
+    const handleWishlistUpdate = () => {
+      setWishListCount(getTotalWishlistCount());
+    };
+
+    window.addEventListener(CART_UPDATED_EVENT, handleCartUpdate);
+    window.addEventListener(WISHLIST_UPDATED_EVENT, handleWishlistUpdate);
+
+    return () => {
+      window.removeEventListener(CART_UPDATED_EVENT, handleCartUpdate);
+      window.removeEventListener(WISHLIST_UPDATED_EVENT, handleWishlistUpdate);
+    };
   }, []);
 
   return (
@@ -130,7 +157,7 @@ export function MainNavBar() {
             <Image
               width={100}
               height={100}
-              src="/assets/image/logo.png"
+              src="/assets/images/logo.png"
               alt=""
               className="w-[30px] md:w-[50px] ml:w-[58px] lg:w-[67px] h-auto object-cover"
             />
@@ -148,36 +175,41 @@ export function MainNavBar() {
             className="md:w-[270px] lg:w-[380px] ml:h-[50px] lg:h-[63px] border-none pr-0"
           />
         </div>
+        <div className="flex items-center gap-5">
+          <div className="flex items-center gap-4">
+            <Link
+              href={"/wishList"}
+              className="bg-white rounded-[8px] md:rounded-[10px] lg:rounded-md flex items-center justify-center w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] md:w-[45px] md:h-[45px] lg:w-[48px] lg:h-[48px] relative"
+            >
+              <HeartIcon className="w-6 h-6 md:w-7 md:h-7" />
+              <Badge className="w-4 h-4 md:w-5 md:h-5 rounded-full px-0 md:px-1 tabular-nums absolute top-[4px] right-[3px] md:right-[4px] lg:right-[5px] text-[8px] md:text-[9px] lg:text-[10px] text-white bg-[#C09706] ">
+                {wishListCount}
+              </Badge>
+            </Link>
 
-        <div className="flex items-center gap-4">
-          <Link
-            href={"/wishList"}
-            className="bg-white rounded-[8px] md:rounded-[15px] flex items-center justify-center w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] md:w-[50px] md:h-[50px] ml:w-[55px] ml:h-[55px] lg:w-[60px] lg:h-[60px] relative"
-          >
-            <HeartIcon className="w-6 h-6 md:w-7 md:h-7 ml:w-8 ml:h-8" />
-            <Badge className="w-4 h-4 md:w-5 md:h-5 rounded-full px-0 md:px-1  tabular-nums absolute top-[2px] left-[15px] sm:top-[3px] sm:left-[20px] md:top-[5px] md:left-[25px] ml:top-[6px] ml:left-[28px] lg:top-[8px] lg:left-[31px] text-[7px] md:text-[8px] ml:text-[10px] text-white bg-[#C09706]">
-              {basketCount}
-            </Badge>
-          </Link>
-
-          <Link
-            href={"/cart"}
-            className="bg-white rounded-[8px] md:rounded-[15px] flex items-center justify-center w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] md:w-[50px] md:h-[50px] ml:w-[55px] ml:h-[55px] lg:w-[60px] lg:h-[60px] relative"
-          >
-            <CartIcon className="w-5 h-5 md:w-6 md:h-6 ml:w-7 ml:h-7" />
-            <Badge className="w-4 h-4 md:w-5 md:h-5 rounded-full px-0 md:px-1  tabular-nums absolute top-[2px] left-[10px] sm:left-[12px] md:top-[3px] md:left-[15px] ml:top-[4px] ml:left-[18px] lg:left-[20px] text-[7px] md:text-[8px] ml:text-[10px] text-white bg-[#C09706] ">
-              {basketCount}
-            </Badge>
-          </Link>
-        </div>
-
-        <div className="hidden md:flex items-center gap-4">
-          <Button href="/" variant="default" size="lg">
-            Register
-          </Button>
-          <Button href="/" variant="secondary" size="lg">
-            Login
-          </Button>
+            <Link
+              href={"/cart"}
+              className="bg-white rounded-[8px] md:rounded-[10px] lg:rounded-md flex items-center justify-center w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] md:w-[45px] md:h-[45px] lg:w-[48px] lg:h-[48px] relative"
+            >
+              <CartIcon className="w-5 h-5 md:w-6 md:h-6" />
+              <Badge className="w-4 h-4 md:w-5 md:h-5 rounded-full px-0 md:px-1 tabular-nums absolute top-[4px] right-[3px] md:right-[4px] lg:right-[5px] text-[8px] md:text-[9px] lg:text-[10px] text-white bg-[#C09706] ">
+                {basketCount}
+              </Badge>
+            </Link>
+          </div>
+          <div className="hidden md:flex items-center gap-4">
+            <Button
+              href="/"
+              variant="default"
+              size="lg"
+              className="h-[45px] lg:h-[48px] text"
+            >
+              Register
+            </Button>
+            <Button href="/" variant="secondary" size="lg">
+              Login
+            </Button>
+          </div>
         </div>
       </header>
       <div className="flex ml:hidden mt-3 md:mt-4">

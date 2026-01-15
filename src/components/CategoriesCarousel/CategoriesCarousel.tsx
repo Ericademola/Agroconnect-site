@@ -28,20 +28,21 @@ const CategoriesCarousel = () => {
         you can shop with ease and confidence
       </h2>
 
-      <div className="grid grid-cols-3 space-y-4 gap-3 md:hidden">
+      {/* Mobile View */}
+      <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 md:hidden">
         {CarouselItems.map((item) => (
           <Link
             href={item.route}
             key={item.label}
             className="flex flex-col items-center gap-[14px]"
           >
-            <div className="w-[105px] h-[100px] flex items-center justify-center">
+            <div className="w-full flex items-center justify-center">
               <Image
                 width={220}
                 height={215}
                 src={`/assets/avatars/${item.avatar}.svg`}
                 alt=""
-                className="max-w-full max-h-full object-contain"
+                className="w-full h-full object-contain"
               />
             </div>
 
@@ -51,7 +52,7 @@ const CategoriesCarousel = () => {
           </Link>
         ))}
       </div>
-
+      {/* Desktop View */}
       <div className="hidden md:grid grid-cols-[auto_1fr_auto] items-center">
         {/* Left Arrow */}
         <span
@@ -132,12 +133,12 @@ const CarouselItems = [
   {
     label: "Seafood",
     route: "/",
-    avatar: "seafood",
+    avatar: "cseafood",
   },
   {
     label: "Poultry",
     route: "/",
-    avatar: "poultry",
+    avatar: "cpoultry",
   },
   {
     label: "Beans & Nuts",
@@ -147,6 +148,6 @@ const CarouselItems = [
   {
     label: "Meat",
     route: "/",
-    avatar: "meat",
+    avatar: "cmeat",
   },
 ];

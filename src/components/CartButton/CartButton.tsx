@@ -9,8 +9,7 @@ import {
   setBasketItems,
   setItemQuantity,
 } from "@/hooks/getProducts";
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { CartIcon, MinusIcon, PlusIcon } from "@/Icons";
 
 interface CartButtonProps {
   item: IProducts;
@@ -26,18 +25,18 @@ export default function CartButton({
   const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
-    const storedQty = getItemQuantity(item.id);
+    const storedQty = getItemQuantity(item.productId);
     if (storedQty > 0) {
       setQuantity(storedQty);
       setShowQtyButtons(true);
     }
-  }, [item.id]);
+  }, [item.productId]);
 
   const updateCart = (newQty: number) => {
-    setItemQuantity(item.id, newQty);
+    setItemQuantity(item.productId, newQty);
 
     const items = getBasketItems();
-    const index = items.findIndex((i) => i.id === item.id);
+    const index = items.findIndex((i) => i.productId === item.productId);
 
     if (index >= 0) {
       items[index].quantity = newQty;
@@ -82,38 +81,40 @@ export default function CartButton({
   };
 
   return (
-    <div className="mt-2 flex gap-2">
+    <div className="mt-2 flex gap-2 w-full">
       {!showQtyButtons && (
         <Button
+          variant="default"
+          size="lg"
           onClick={handleAddToCartClick}
-          className="w-16 sm:w-20 md:w-[5.5rem] lg:w-24 flex items-center justify-center"
+          className="flex items-center gap-2 w-full px-0 sm:px-auto h-[40px] lg:h-[50px] text-xs sm:text-sm md:text-base"
           loading={loading}
           disabled={loading}
-          variant="default"
         >
-          {loading ? "Loading..." : "Add to Cart"}
+          <CartIcon className="w-4 h-4 sm:w-5 sm:h-5" fill="#fff" />
+          {loading ? loading : "Add to Cart"}
         </Button>
       )}
       {showQtyButtons && (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between gap-2 border border-[#0000001A] rounded-md w-full">
           <Button
             onClick={handleDecrement}
-            className="w-6 sm:w-8 md:w-[2.2rem] lg:w-10 flex items-center justify-center"
+            variant="secondary"
+            size="lg"
+            className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] px-0"
           >
-            <FontAwesomeIcon
-              icon={faMinus}
-              className="text-[0.8rem] sm:text-[1rem] lg:text-[1.2rem]"
-            />
+            <MinusIcon className="w-5 h-5 " />
           </Button>
-          <p className="text-sm font-bold">{quantity}</p>
+          <p className="text-sm md:text-base lg:text-xl font-poppins">
+            {quantity}
+          </p>
           <Button
             onClick={handleIncrement}
-            className="w-6 sm:w-8 md:w-[2.2rem] lg:w-10 flex items-center justify-center"
+            variant="secondary"
+            size="lg"
+            className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] px-0"
           >
-            <FontAwesomeIcon
-              icon={faPlus}
-              className="text-[0.8rem] sm:text-[1rem] lg:text-[1.2rem]"
-            />
+            <PlusIcon className="w-5 h-5 " />
           </Button>
         </div>
       )}

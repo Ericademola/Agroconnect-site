@@ -91,9 +91,9 @@ export default function CheckoutPage() {
                   <tbody>
                     {basketItems.map((item, i) => (
                       <tr key={i}>
-                        <td className="pb-1">{item.name}</td>
+                        <td className="pb-1">{item.productName}</td>
                         <td className="text-center pb-1">
-                          {getQuantity(item.id)}
+                          {getQuantity(item.productId)}
                         </td>
                         <td className="text-right pb-1">₦{item.price}</td>
                       </tr>

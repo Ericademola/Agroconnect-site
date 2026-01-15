@@ -3,66 +3,113 @@
 import Link from "next/link";
 import Image from "next/image";
 import CartButton from "../CartButton/CartButton";
-import Rating from "../Rating/Rating";
 import { useEffect, useState } from "react";
 import { IProducts } from "@/types";
-import { loadProducts } from "@/hooks/getProducts";
+import {
+  loadProducts,
+  loadFreshPickedProducts,
+  loadBestDealsProducts,
+} from "@/hooks/getProducts";
+import { Button } from "../ui/button";
+import WishListButton from "../WishListButton/WishListButton";
+import { cn } from "@/lib/utils";
+
+type ProductCategory = "all" | "fresh" | "deals";
 
 interface CatalogueProps {
   excludeId?: number;
+  category?: ProductCategory;
+  sliceLimit?: number;
+  className?: string;
 }
 
-export default function Catalogue({ excludeId }: CatalogueProps) {
-  const [productList, setProductList] = useState<IProducts[]>();
+export default function Catalogue({
+  excludeId,
+  category = "all",
+  sliceLimit,
+  className,
+}: CatalogueProps) {
+  const [productList, setProductList] = useState<IProducts[]>([]);
 
   useEffect(() => {
-    const loadedProducts = loadProducts();
+    let loadedProducts: IProducts[] = [];
+
+    // Load products based on category
+    switch (category) {
+      case "fresh":
+        loadedProducts = loadFreshPickedProducts();
+        break;
+      case "deals":
+        loadedProducts = loadBestDealsProducts();
+        break;
+      case "all":
+      default:
+        loadedProducts = loadProducts();
+        break;
+    }
+
+    // Filter out excluded product if needed
     const filtered = excludeId
-      ? loadedProducts.filter((p) => p.id !== excludeId)
+      ? loadedProducts.filter((p) => p.productId !== excludeId)
       : loadedProducts;
+
     setProductList(filtered);
-  }, [excludeId]);
+  }, [excludeId, category]);
+
+  const productsToRender = sliceLimit
+    ? productList.slice(0, sliceLimit)
+    : productList;
 
   return (
-    <div className=" flex gap-4 px-0 sm:gap-6 md:gap-8 lg:px-10 pb-20 flex-wrap justify-center">
-      {productList &&
-        productList.map((item: IProducts) => (
-          <div
-            key={item.id}
-            className="shadow-lg shadow-gray-400 border-2 w-[42vw] sm:w-[40vw] md:w-[28vw] lg:w-[20vw] h-fit border-green-800 rounded-2xl"
-          >
-            <Link href={`/products/${item.id}`}>
-              <div className="relative w-full h-40 sm:h-52 flex justify-center bg-white rounded-t-2xl cursor-pointer pt-1">
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  width={400}
-                  height={400}
-                  className="object-contain rounded-t-2xl py-2"
-                />
-              </div>
-            </Link>
-            <div className="text-gray-700 flex flex-col px-2 bg-green-200 rounded-b-2xl py-2">
-              <h3 className="font-bold text-[0.9rem] sm:text-[1rem] md:text-[1.2rem] line-clamp-1 text-gray-800">
-                {item.name}
-              </h3>
-              <p className="font-medium text-[0.8rem] sm:text-[0.9rem] md:text-[1rem]">
-                ₦{item.price}
-              </p>
-              <p className="text-[0.7rem] sm:text-[0.9rem] mt-1 line-clamp-1">
-                {item.description}
-              </p>
-
-              <Rating
-                initialRating={item.rating}
-                id={item.id}
-                productList={productList}
+    <div
+      className={cn(
+        "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-7",
+        className
+      )}
+    >
+      {productsToRender.map((item: IProducts) => (
+        <div key={item.productId} className="flex flex-col gap-3 h-full">
+          <Link href={`/products/${item.productName}`}>
+            <div className="bg-[#F3F3F3] rounded-[15px] flex flex-col w-full h-full items-center pb-2">
+              <Button
+                size="sm"
+                className="bg-[#8B5E3C] hover:bg-[#8B5E3C]/90 rounded-none rounded-tr-[15px] rounded-bl-[15px] text-[10px] sm:text-xs md:text-sm w-fit ml-auto px-2 md:px-4 py-3 md:py-5"
+              >
+                {item.tagText}
+              </Button>
+              <Image
+                src={item.productImage}
+                alt={item.productName}
+                width={100}
+                height={100}
+                className="w-[200px] h-[170px] md:w-[270px] md:h-[250px] object-contain"
               />
+            </div>
+          </Link>
+          <div className="flex flex-col gap-[8px] font-poppins flex-1">
+            <div className="flex flex-col gap-[4px]">
+              <span className="flex flex-wrap items-center text-[#000000CC] text-sm sm:text-base md:text-lg font-medium">
+                <h3>{item.productName}</h3>
+                <p className="text-nowrap">({item.unit})</p>
+              </span>
 
+              <p className="text-[#000000CC] text-[11px] sm:text-xs ml:text-sm">
+                By Farmer {item.famersDetails.farmerName.split(" ")[0]},{" "}
+                {item.famersDetails.farmerState} State.
+              </p>
+            </div>
+
+            <p className="font-semibold text-[#1E1E1E] text-sm sm:text-base md:text-lg mt-auto">
+              ₦{item.price}
+            </p>
+
+            <div className="mt-auto grid grid-cols-[1fr_auto] items-end gap-3 md:gap-[23px] w-full">
               <CartButton item={item} />
+              <WishListButton item={item} />
             </div>
           </div>
-        ))}
+        </div>
+      ))}
     </div>
   );
 }

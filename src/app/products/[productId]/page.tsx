@@ -3,11 +3,10 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import CartButton from "@/components/CartButton/CartButton";
-import Rating from "@/components/Rating/Rating";
+// import Rating from "@/components/Rating/Rating";
 import Image from "next/image";
 import Catalogue from "@/components/Catalogue/Catalogue";
 import { getProductById } from "@/hooks/getProducts";
-import { products } from "../../../../products";
 import { IProducts } from "@/types";
 import { LeftArrowIcon } from "@/Icons";
 
@@ -52,8 +51,8 @@ export default function ProductDetails() {
           <div className="sm:flex border-green-600 border-2 rounded-xl bg-blue-200">
             <div className="relative w-full h-64 sm:h-72 md:h-80 lg:h-80 lg:w-[30%] bg-white flex justify-center rounded-tl-xl sm:rounded-bl-xl rounded-tr-xl sm:rounded-tr-none mx-auto pt-1">
               <Image
-                src={itemDetails.image}
-                alt={itemDetails.name}
+                src={itemDetails.productImage}
+                alt={itemDetails.productName}
                 fill
                 className="object-contain rounded-tl-xl sm:rounded-bl-xl sm:rounded-tr-none rounded-tr-xl py-2 px-3"
               />
@@ -61,7 +60,7 @@ export default function ProductDetails() {
 
             <div className="text-gray-700 flex flex-col px-4 py-4 lg:w-[70%]">
               <h3 className="font-bold text-[1.2rem] md:text-[1.5rem] text-gray-800">
-                {itemDetails.name}
+                {itemDetails.productName}
               </h3>
               <p className="text-[0.8rem] md:text-[1rem] text-justify">
                 {itemDetails.description}
@@ -69,24 +68,24 @@ export default function ProductDetails() {
               <p className="font-medium text-gray-950 text-[1.1rem] md:text-[1.3rem] pt-2">
                 ₦{itemDetails.price}
               </p>
-              <p className="text-md">
+              {/* <p className="text-md">
                 <span className="font-medium">Brand:</span>{" "}
                 {itemDetails.brandName}
-              </p>
+              </p> */}
 
               <span className="mt-10 sm:mt-auto flex flex-col gap-1 ">
-                <Rating
+                {/* <Rating
                   initialRating={itemDetails.rating}
                   id={itemDetails.id}
                   productList={products}
-                />
+                /> */}
                 <CartButton item={itemDetails} />
               </span>
             </div>
           </div>
         )}
       </div>
-      {itemDetails && <Catalogue excludeId={itemDetails.id} />}
+      {itemDetails && <Catalogue excludeId={itemDetails.productId} />}
     </div>
   );
 }
