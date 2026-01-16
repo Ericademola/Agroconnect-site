@@ -2,6 +2,8 @@
 
 import Categories from "@/components/Categories/Categories";
 import CategoriesCarousel from "@/components/CategoriesCarousel/CategoriesCarousel";
+import HowItWorks from "@/components/HowItWorks/HowItWorks";
+import NewArrivals from "@/components/NewArrivals/NewArrivals";
 import ProductList from "@/components/ProductList/ProductList";
 import { Button } from "@/components/ui/button";
 import { ShopBagIcon } from "@/Icons";
@@ -22,7 +24,7 @@ export default function Home() {
               Connecting you to farmers for fair trade, fresh food, and trusted
               quality
             </h1>
-            <Button variant="default" size="lg" className="mt-7">
+            <Button href="/shop" variant="default" size="lg" className="mt-7">
               <ShopBagIcon className="w-5 h-5" />
               Shop Now
             </Button>
@@ -31,6 +33,8 @@ export default function Home() {
       </div>
       <CategoriesCarousel />
       <ProductList />
+      <HowItWorks />
+      <NewArrivals />
     </div>
   );
 }

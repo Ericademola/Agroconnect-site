@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@font-face {
+/* @font-face {
   font-family: "Geologica";
   src: url("/public/assets/fonts/Geologica/Geologica-Regular.ttf");
 }
@@ -14,7 +14,7 @@
 @font-face {
   font-family: "Prompt";
   src: url("/public/assets/fonts/Prompt/Prompt-Regular.ttf");
-}
+} */
 
 @custom-variant dark (&:is(.dark *));
 

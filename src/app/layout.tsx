@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
-import {
-  Geist,
-  Geist_Mono,
-  Geologica,
-  Prompt,
-  Poppins,
-} from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
+
 import "./globals.css";
 import ContentWrapper from "@/components/ContentWrapper";
 
@@ -19,21 +15,29 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const geologica = Geologica({
+const geologica = localFont({
+  src: "./assets/fonts/Geologica/Geologica-Regular.ttf",
   variable: "--font-geologica",
-  subsets: ["latin"],
 });
 
-const poppins = Poppins({
+const poppins = localFont({
+  src: [
+    { path: "./assets/fonts/Poppins/Poppins-Regular.ttf", weight: "400" },
+    { path: "./assets/fonts/Poppins/Poppins-Medium.ttf", weight: "500" },
+    { path: "./assets/fonts/Poppins/Poppins-SemiBold.ttf", weight: "600" },
+    { path: "./assets/fonts/Poppins/Poppins-Bold.ttf", weight: "700" },
+  ],
   variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
 });
 
-const prompt = Prompt({
+const prompt = localFont({
+  src: [
+    { path: "./assets/fonts/Prompt/Prompt-Regular.ttf", weight: "400" },
+    { path: "./assets/fonts/Prompt/Prompt-Medium.ttf", weight: "500" },
+    { path: "./assets/fonts/Prompt/Prompt-SemiBold.ttf", weight: "600" },
+    { path: "./assets/fonts/Prompt/Prompt-Bold.ttf", weight: "700" },
+  ],
   variable: "--font-prompt",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
