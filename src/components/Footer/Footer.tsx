@@ -1,186 +1,211 @@
-// import { XIcon, FacebookIcon, InstagramIcon, TikTokIcon } from "@/Icons";
+import {
+  TwitterIcon,
+  FacebookIcon,
+  InstagramIcon,
+  AppleIcon,
+  PlayStoreIcon,
+} from "@/Icons";
 import Link from "next/link";
+import Image from "next/image";
+import { Button } from "../ui/button";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#15803D] py-6 mt-12 flex flex-col px-10 w-full">
-      <div className="flex flex-col sm:flex-row  items-start gap-6 sm:gap-10">
-        <div className="">
-          <h3 className="text-[1rem] font-bold text-[#f0fdf4] hover:text-[#7bf1a8]  cursor-default">
-            ABOUT AGROCONNECT
-          </h3>
-          <div className="text-[0.8rem] inline-flex flex-col gap-1 mt-2">
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              Contact Us
+    <footer className="mt-4 sm:mt-10 md:mt-20 flex flex-col w-full gap-4 sm:gap-10 md:gap-20">
+      <div className="px-4 sm:px-5 md:px-6 ml:px-8 lg:px-12 grid grid-cols-1 sm:grid-cols-2 ml:grid-cols-[1fr_1fr_auto] items-start gap-6 sm:gap-8 ml:gap-10 lg:gap-12">
+        <div className="flex flex-col gap-10">
+          <div className="flex flex-col gap-4 lg:gap-5">
+            <Link href="/">
+              <div className="flex items-center cursor-pointer gap-[5px]">
+                <Image
+                  width={100}
+                  height={100}
+                  src="/assets/images/logo.png"
+                  alt=""
+                  className="w-[50px] md:w-[58px] lg:w-[67px] h-auto object-cover"
+                />
+
+                <p className="font-prompt font-semibold text-[clamp(17px,1.9vw,24px)] text-[#03601A]">
+                  Agroconnect
+                </p>
+              </div>
             </Link>
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              About Us
-            </Link>
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              Career
-            </Link>
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              Our Blog
-            </Link>
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              Terms and Conditions
-            </Link>
+            <p className="text-[#00000099] text-[clamp(12.5px,1.2vw,14px)] font-poppins">
+              AgriConnect brings you closer to the farm by connecting farmers
+              and buyers in one seamless platform for fresh produce, fair trade,
+              and everyday nourishment
+            </p>
+          </div>
+          <div className="mt-auto flex flex-col gap-5">
+            <div className="font-poppins flex items-center gap-4 ">
+              {[
+                {
+                  buttonIcon: <AppleIcon className="w-5 h-5" fill="#333333" />,
+                  buttonText: " Apple Store",
+                },
+                {
+                  buttonIcon: <PlayStoreIcon className="w-5 h-5" />,
+                  buttonText: "Google Store",
+                },
+              ].map((item, index) => (
+                <Button
+                  key={index}
+                  variant="secondary"
+                  size="lg"
+                  className="flex items-center gap-2 px-3 md:px-6"
+                >
+                  {item.buttonIcon}
+                  <span className="flex flex-col">
+                    <p className="text-[#00000099] text-[10px]">
+                      Download on the
+                    </p>
+                    <h3 className="text-black text-xs font-medium">
+                      {item.buttonText}
+                    </h3>
+                  </span>
+                </Button>
+              ))}
+            </div>
+            <div className="flex items-center gap-5">
+              {[
+                {
+                  socialIcon: <TwitterIcon className="w-4 h-4 md:w-5 md:h-5" />,
+                  href: "/",
+                },
+                {
+                  socialIcon: (
+                    <FacebookIcon className="w-4 h-4 md:w-5 md:h-5" />
+                  ),
+                  href: "/",
+                },
+                {
+                  socialIcon: (
+                    <InstagramIcon className="w-4 h-4 md:w-5 md:h-5" />
+                  ),
+                  href: "/",
+                },
+              ].map((item, index) => (
+                <Link
+                  href={item.href}
+                  key={index}
+                  className="border-2 border-black w-[30px] h-[30px] md:w-[40px] md:h-[40px] rounded-full flex items-center justify-center"
+                >
+                  {item.socialIcon}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="">
-          <h3 className="text-[1rem] font-bold text-[#f0fdf4] hover:text-[#7bf1a8]  cursor-default">
-            PAYMENT
-          </h3>
-          <div className="text-[0.8rem] inline-flex flex-col gap-1 mt-2">
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              {" "}
-              Payment on Delivery
-            </Link>
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              Bank Transfer
-            </Link>
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              Master Card
-            </Link>
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              Verve
-            </Link>
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              Visa
-            </Link>
+        <div className="grid sm:grid-cols-2 gap-8">
+          <div className="flex flex-col gap-4 lg:gap-5">
+            <h3 className="text-black font-poppins font-medium text-[clamp(16px,1.6vw,20px)]">
+              Quicklinks
+            </h3>
+            <div className="flex flex-col gap-2">
+              {[
+                {
+                  text: "Home",
+                  href: "/",
+                },
+                {
+                  text: "Shop (Categories)",
+                  href: "/shop",
+                },
+                {
+                  text: "About Us",
+                  href: "/about",
+                },
+                {
+                  text: "How It Works",
+                  href: "/#howItWorks",
+                },
+                {
+                  text: "Contact us",
+                  href: "/contact",
+                },
+                {
+                  text: "Terms & Conditions",
+                  href: "/termsAndConditions",
+                },
+              ].map((item, index) => (
+                <Link
+                  href={item.href}
+                  key={index}
+                  className="font-poppins text-[clamp(12.5px,1.2vw,14px)] text-[#00000099]"
+                >
+                  {item.text}
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-col gap-4 lg:gap-5">
+            <h3 className="text-black font-poppins font-medium text-[clamp(16px,1.6vw,20px)]">
+              My Account
+            </h3>
+            <div className="flex flex-col gap-2">
+              {[
+                {
+                  text: "My Profile",
+                  href: "/profile",
+                },
+                {
+                  text: "Order History",
+                  href: "/orderHistory",
+                },
+                {
+                  text: "Shopping Cart",
+                  href: "/cart",
+                },
+                {
+                  text: "Wishlist",
+                  href: "/wishList",
+                },
+              ].map((item, index) => (
+                <Link
+                  href={item.href}
+                  key={index}
+                  className="font-poppins text-[clamp(12.5px,1.2vw,14px)] text-[#00000099]"
+                >
+                  {item.text}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="">
-          <h3 className="text-[1rem] font-bold text-[#f0fdf4] hover:text-[#7bf1a8]  cursor-default">
-            BUYING ON AGROCONNECT
+        <div className="w-full ml:w-[300px] h-full bg-[#03601A] rounded-[20px] px-5 py-8">
+          <h3 className="text-white text-base font-poppins font-medium">
+            Be the First to Know; Fresh Offers, New Products & More
           </h3>
-          <div className="text-[0.8rem] inline-flex flex-col gap-1 mt-2">
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              FAQs
-            </Link>
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              Delivery
-            </Link>
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              Track My Order
-            </Link>
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              Return Policy
-            </Link>
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              Privacy Policy
-            </Link>
-          </div>
-        </div>
-
-        <div className="">
-          <h3 className="text-[1rem] font-bold text-[#f0fdf4] hover:text-[#7bf1a8]  cursor-default">
-            NEED HELP?
-          </h3>
-          <div className="text-[0.8rem] inline-flex flex-col gap-1 mt-2">
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              Chat with us
-            </Link>
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              Contact Us
-            </Link>
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              Help Center
-            </Link>
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              Report a Problem
-            </Link>
-            <Link
-              href={"#"}
-              className="text-sm text-[#b9f8cf] hover:text-[#7bf1a8]"
-            >
-              Become a Seller
-            </Link>
-          </div>
-        </div>
-
-        <div className="">
-          <h3 className="text-[1rem] font-bold text-[#f0fdf4] hover:text-[#7bf1a8]  cursor-default">
-            JOIN US
-          </h3>
-          {/* <div className="text-[0.8rem] inline-flex  gap-2 mt-2">
-            <Link href={"#"} className="">
-              <FacebookIcon className="w-5 h-5 text-[#b9f8cf] hover:text-[#7bf1a8] " />
-            </Link>
-            <Link href={"#"} className="">
-              <InstagramIcon className="w-5 h-5 text-[#b9f8cf] hover:text-[#7bf1a8] " />
-            </Link>
-            <Link href={"#"} className="">
-              <XIcon className="w-5 h-5 text-[#b9f8cf] hover:text-[#7bf1a8] " />
-            </Link>
-            <Link href={"#"} className="">
-              <TikTokIcon className="w-5 h-5 text-[#b9f8cf] hover:text-[#7bf1a8] " />
-            </Link>
-          </div> */}
         </div>
       </div>
-      <p className="text-[1rem] mt-15 border-t border-[#f0fdf4] pt-4 text-[#f0fdf4] text-center">
-        &copy; {new Date().getFullYear()} Agroconnect. All rights reserved.
-      </p>
+
+      <div className="bg-[#F5F5F5] py-8 md:py-6 flex items-center justify-center gap-3 md:gap-8">
+        <p className="text-[#969696] text-[clamp(8px,1.2vw,14px)] font-poppins">
+          All payments are secured by
+        </p>
+        <div className="flex items-center gap-1 md:gap-5">
+          {[
+            "/assets/images/flutterWave.png",
+            "/assets/images/paystack.png",
+            "/assets/images/visa.png",
+            "/assets/images/mastercard.png",
+            "/assets/images/verve.png",
+            "/assets/images/visaElectron.png",
+            "/assets/images/americanExpress.png",
+          ].map((item, index) => (
+            <Image
+              width={100}
+              height={100}
+              src={item}
+              alt=""
+              key={index}
+              className="w-full h-[10px] md:h-[25px] object-contain"
+            />
+          ))}
+        </div>
+      </div>
     </footer>
   );
 }

@@ -5,6 +5,7 @@ import CategoriesCarousel from "@/components/CategoriesCarousel/CategoriesCarous
 import HowItWorks from "@/components/HowItWorks/HowItWorks";
 import NewArrivals from "@/components/NewArrivals/NewArrivals";
 import ProductList from "@/components/ProductList/ProductList";
+import Testimonial from "@/components/Testimonial/Testimonial";
 import { Button } from "@/components/ui/button";
 import { ShopBagIcon } from "@/Icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -35,6 +36,9 @@ export default function Home() {
       <ProductList />
       <HowItWorks />
       <NewArrivals />
+      <div className="mx-0 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12">
+        <Testimonial />
+      </div>
     </div>
   );
 }

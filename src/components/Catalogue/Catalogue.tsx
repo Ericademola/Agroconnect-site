@@ -64,12 +64,12 @@ export default function Catalogue({
     <div
       className={cn(
         "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-7",
-        className
+        className,
       )}
     >
       {productsToRender.map((item: IProducts) => (
         <div key={item.productId} className="flex flex-col gap-3 h-full">
-          <Link href={`/products/${item.productName}`}>
+          <Link href={`/shop/${item.productId}`}>
             <div className="bg-[#F3F3F3] rounded-[15px] flex flex-col w-full h-full items-center pb-2">
               <Button
                 size="sm"

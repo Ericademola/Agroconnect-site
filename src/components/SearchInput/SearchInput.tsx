@@ -9,7 +9,7 @@ export default function SearchInput({
   className,
   setSearchText,
   placeholder = "Search for products...",
-  leftIcon = <SearchIcon className="h-6 w-6" />,
+  leftIcon = <SearchIcon className="h-6 w-6" fill="#00000080" />,
   rightIcon = (
     <span className="bg-[#03601A] w-[45px] md:w-[63px] h-full rounded-r-[5px] md:rounded-r-[15px] flex items-center justify-center cursor-pointer">
       <SearchIcon className="w-5 h-5 md:w-6 md:h-6" />
@@ -41,7 +41,7 @@ export default function SearchInput({
         onChange={handleChange}
         className={cn(
           "h-fit w-full border border-[#c4c4c433] has-[:focus]:ring-0  text-[#333333] rounded-[15px] bg-[#FFF]",
-          className
+          className,
         )}
         inputClassName="bg-[#FFF] text-sm md:text-base placeholder:text-[#00000080]"
         leftIcon={leftIcon}

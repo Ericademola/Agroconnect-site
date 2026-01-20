@@ -68,17 +68,7 @@ export default function ProductDetails() {
               <p className="font-medium text-gray-950 text-[1.1rem] md:text-[1.3rem] pt-2">
                 ₦{itemDetails.price}
               </p>
-              {/* <p className="text-md">
-                <span className="font-medium">Brand:</span>{" "}
-                {itemDetails.brandName}
-              </p> */}
-
               <span className="mt-10 sm:mt-auto flex flex-col gap-1 ">
-                {/* <Rating
-                  initialRating={itemDetails.rating}
-                  id={itemDetails.id}
-                  productList={products}
-                /> */}
                 <CartButton item={itemDetails} />
               </span>
             </div>
@@ -88,4 +78,12 @@ export default function ProductDetails() {
       {itemDetails && <Catalogue excludeId={itemDetails.productId} />}
     </div>
   );
+}
+
+{
+  /* <Rating
+                  initialRating={itemDetails.rating}
+                  id={itemDetails.id}
+                  productList={products}
+                /> */
 }
