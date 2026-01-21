@@ -82,13 +82,13 @@ export default function Catalogue({
                 alt={item.productName}
                 width={100}
                 height={100}
-                className="w-[200px] h-[170px] md:w-[270px] md:h-[250px] object-contain"
+                className="w-[180px] h-[150px] md:w-[250px] md:h-[220px] object-contain"
               />
             </div>
           </Link>
           <div className="flex flex-col gap-[8px] font-poppins flex-1">
             <div className="flex flex-col gap-[4px]">
-              <span className="flex flex-wrap items-center text-[#000000CC] text-sm sm:text-base md:text-lg font-medium">
+              <span className="flex flex-wrap items-center gap-1 text-[#000000CC] text-sm sm:text-base md:text-lg font-medium">
                 <h3>{item.productName}</h3>
                 <p className="text-nowrap">({item.unit})</p>
               </span>

@@ -65,7 +65,7 @@ const MobileMenu = ({ close }: { close: (value: boolean) => void }) => {
         Categories
       </h2>
       <hr className="-mx-5" />
-      <div className="">
+      <div>
         <Categories
           className="bg-transparent rounded-none p-0"
           headerContent={false}

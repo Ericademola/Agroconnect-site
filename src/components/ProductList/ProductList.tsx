@@ -19,7 +19,7 @@ export const FreshPickedProducts = () => {
         <h2 className="text-[#000000CC] text-[clamp(16px,2.9vw,32px)] font-geologica font-semibold ">
           Fresh Picks; In Season & Selling Fast
         </h2>
-        <Button variant="secondary" size="lg" className="" href="/shop">
+        <Button variant="secondary" size="lg" href="/shop">
           See all
         </Button>
       </div>
@@ -35,7 +35,7 @@ export const BestDealsProducts = () => {
         <h2 className="text-[#000000CC] text-[clamp(16px,2.9vw,32px)] font-geologica font-semibold ">
           Today’s Best Deals;Quality Foods at Lower Prices
         </h2>
-        <Button variant="secondary" size="lg" className="" href="/shop">
+        <Button variant="secondary" size="lg" href="/shop">
           See all
         </Button>
       </div>

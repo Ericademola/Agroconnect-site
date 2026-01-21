@@ -2,7 +2,7 @@ import { QuoteIcon } from "@/Icons";
 import Image from "next/image";
 const Testimonial = () => {
   return (
-    <div className="">
+    <div>
       <div className="bg-[#F5F5F5] sm:rounded-[20px] grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-0 px-[16px] md:px-[24px] lg:px-[38px] py-[28px] md:py-[40px] lg:py-[50px]">
         <div className="flex flex-col items-center md:items-start justify-center gap-1 md:gap-[10px]">
           <h2 className="text-[#000000CC] text-[clamp(16px,2.2vw,28px)] font-geologica font-semibold">

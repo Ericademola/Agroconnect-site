@@ -10,15 +10,18 @@ import {
   setItemQuantity,
 } from "@/hooks/getProducts";
 import { CartIcon, MinusIcon, PlusIcon } from "@/Icons";
+import { cn } from "@/lib/utils";
 
 interface CartButtonProps {
   item: IProducts;
   onQuantityChange?: (items: CartItem[]) => void;
+  className?: string;
 }
 
 export default function CartButton({
   item,
   onQuantityChange,
+  className,
 }: CartButtonProps) {
   const [loading, setLoading] = useState(false);
   const [showQtyButtons, setShowQtyButtons] = useState(false);
@@ -81,7 +84,7 @@ export default function CartButton({
   };
 
   return (
-    <div className="mt-2 flex gap-2 w-full">
+    <div className={cn("mt-2 flex gap-2 w-full", className)}>
       {!showQtyButtons && (
         <Button
           variant="default"

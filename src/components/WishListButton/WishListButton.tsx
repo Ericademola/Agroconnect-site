@@ -7,16 +7,22 @@ import {
   isInWishlist,
   removeFromWishlist,
 } from "@/hooks/getProducts";
+import { cn } from "@/lib/utils";
 
 interface WishListButtonProps {
   item: IProducts;
+  variant?: "icon" | "text" | "icon-text";
+  className?: string;
 }
 
-const WishListButton = ({ item }: WishListButtonProps) => {
+const WishListButton = ({
+  item,
+  variant = "icon",
+  className,
+}: WishListButtonProps) => {
   const [isInList, setIsInList] = useState(false);
 
   useEffect(() => {
-    // Check if item is already in wishlist on mount
     setIsInList(isInWishlist(item.productId));
   }, [item.productId]);
 
@@ -30,19 +36,36 @@ const WishListButton = ({ item }: WishListButtonProps) => {
     }
   };
 
+  const label = isInList ? "Remove from wishlist" : "Add to wishlist";
+
   return (
     <div>
       <Button
         variant="secondary"
         size="lg"
-        className="w-[40px] lg:w-[50px] h-[40px] lg:h-[50px] px-0 rounded-[10px]"
         onClick={handleToggleWishlist}
-      >
-        {isInList ? (
-          <FilledHeartIcon className="w-5 h-5 lg:w-7 lg:h-7" />
-        ) : (
-          <HeartIcon className="w-5 h-5 lg:w-7 lg:h-7" fill="#333333" />
+        className={cn(
+          variant === "icon"
+            ? "w-[40px] lg:w-[50px] h-[40px] lg:h-[50px] px-0 rounded-[10px]"
+            : "gap-2 rounded-[10px]",
+          className,
         )}
+      >
+        {/* ICON */}
+        {(variant === "icon" || variant === "icon-text") &&
+          (isInList ? (
+            <FilledHeartIcon className="w-5 h-5 lg:w-7 lg:h-7" />
+          ) : (
+            <HeartIcon className="w-5 h-5 lg:w-7 lg:h-7" fill="#333333" />
+          ))}
+
+        {/* TEXT */}
+        {(variant === "text" || variant === "icon-text") && (
+          <span className="text-xs sm:text-sm md:text-base">{label}</span>
+        )}
+
+        {/* Accessibility */}
+        <span className="sr-only">{label}</span>
       </Button>
     </div>
   );

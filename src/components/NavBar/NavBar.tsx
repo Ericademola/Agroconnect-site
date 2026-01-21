@@ -215,13 +215,6 @@ const MainNavBar = () => {
           </div>
         </div>
       </header>
-      <div className="flex ml:hidden mt-3 md:mt-4">
-        <SearchInput
-          setSearchText={setSearchText}
-          leftIcon={false}
-          className="w-full h-[40px] md:h-[50px] border-[1.5px] border-[#0000001A] pr-0 rounded-[5px] md:rounded-[15px]"
-        />
-      </div>
       <div className="block md:hidden">
         <FullScreenModal isOpen={open}>
           <MobileMenu close={close} />

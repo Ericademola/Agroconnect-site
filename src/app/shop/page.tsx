@@ -105,7 +105,7 @@ const ShopPage = () => {
                   <Popover>
                     <PopoverTrigger>
                       <div className="border border-[#0000001A] rounded-[10px] flex items-center gap-5 h-[40px] ml:h-[50px] px-3">
-                        <p className="">{selectedFilter}</p>
+                        <p>{selectedFilter}</p>
                         <DownIcon className="w-3 h-3 cursor-pointer" />
                       </div>
                     </PopoverTrigger>
@@ -122,7 +122,7 @@ const ShopPage = () => {
                       <div className="border border-[#0000001A] rounded-[5px] flex items-center gap-4 h-[40px] ml:h-[50px] px-3">
                         <span className="flex items-center justify-between gap-2">
                           <FilterIcon className="w-4 h-4" />
-                          <p className="">Filter</p>
+                          <p>Filter</p>
                         </span>
                         <DownIcon className="w-[10px] h-[10px] cursor-pointer" />
                       </div>

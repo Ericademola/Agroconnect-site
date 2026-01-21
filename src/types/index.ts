@@ -7,11 +7,13 @@ export interface IProducts {
   price: number;
   description: string;
   isWatchList: boolean;
+  productDetailImages: string[];
   productDetails: string;
   bestUsedFor: string;
   storageTips: string;
   reviews: IReview[];
   famersDetails: IFarmerDetails;
+  productAverageRating: number;
   quantity?: number;
 }
 
@@ -21,19 +23,20 @@ export interface IReview {
   userName: string;
   reviewDate: string;
   reviewText: string;
-  totalRatings: number;
+  rate: number;
 }
 
 export interface IFarmerDetails {
   farmerId: number;
   farmerName: string;
+  farmerProfilePic: string;
   verificationStatus: string;
   description: string;
   farmerState: string;
   farmerCountry: string;
   yearJoined: number;
   totalReviews: number;
-  totalRating: number;
+  farmerAverageRating: number;
   totalOrders: number;
   satisfactionRate: number;
 }

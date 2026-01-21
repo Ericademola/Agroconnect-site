@@ -9,6 +9,11 @@ export const freshPickedProducts = [
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
     isWatchList: true,
+    productDetailImages: [
+      "/assets/images/tomatoeDetail1.png",
+      "/assets/images/tomatoeDetail2.png",
+      "/assets/images/tomatoeDetail1.png",
+    ],
     productDetails:
       "Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value. Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value.",
     bestUsedFor:
@@ -23,7 +28,7 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 2,
@@ -31,7 +36,7 @@ export const freshPickedProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 3,
@@ -39,7 +44,7 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 4,
@@ -47,7 +52,7 @@ export const freshPickedProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 5,
@@ -55,12 +60,13 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
     ],
     famersDetails: {
       farmerId: 1,
       farmerName: "Adewale Farms",
+      farmerProfilePic: "/assets/images/farmerProfilePic.png",
       verificationStatus: "Verified",
       description:
         "Award-winning organic farm specializing in fresh vegetables and fruits",
@@ -68,10 +74,11 @@ export const freshPickedProducts = [
       farmerCountry: "Nigeria",
       yearJoined: 2021,
       totalReviews: 128,
-      totalRating: 4.8,
+      farmerAverageRating: 4.8,
       totalOrders: 285,
       satisfactionRate: 98,
     },
+    productAverageRating: 3,
   },
   {
     productId: 2,
@@ -83,6 +90,11 @@ export const freshPickedProducts = [
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
     isWatchList: true,
+    productDetailImages: [
+      "/assets/images/tomatoeDetail1.png",
+      "/assets/images/tomatoeDetail2.png",
+      "/assets/images/tomatoeDetail1.png",
+    ],
     productDetails:
       "Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value. Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value.",
     bestUsedFor:
@@ -97,7 +109,7 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 2,
@@ -105,7 +117,7 @@ export const freshPickedProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 3,
@@ -113,7 +125,7 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 4,
@@ -121,7 +133,7 @@ export const freshPickedProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 5,
@@ -129,23 +141,25 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
     ],
     famersDetails: {
       farmerId: 1,
       farmerName: "Adewale Farms",
-      verificationStatus: "Verified",
+      farmerProfilePic: "/assets/images/farmerProfilePic.png",
+      verificationStatus: "Unverified",
       description:
         "Award-winning organic farm specializing in fresh vegetables and fruits",
       farmerState: "Lagos",
       farmerCountry: "Nigeria",
       yearJoined: 2021,
       totalReviews: 128,
-      totalRating: 4.8,
+      farmerAverageRating: 4.8,
       totalOrders: 285,
       satisfactionRate: 98,
     },
+    productAverageRating: 3,
   },
   {
     productId: 3,
@@ -157,6 +171,11 @@ export const freshPickedProducts = [
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
     isWatchList: true,
+    productDetailImages: [
+      "/assets/images/tomatoeDetail1.png",
+      "/assets/images/tomatoeDetail2.png",
+      "/assets/images/tomatoeDetail1.png",
+    ],
     productDetails:
       "Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value. Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value.",
     bestUsedFor:
@@ -171,7 +190,7 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 2,
@@ -179,7 +198,7 @@ export const freshPickedProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 3,
@@ -187,7 +206,7 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 4,
@@ -195,7 +214,7 @@ export const freshPickedProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 5,
@@ -203,12 +222,13 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
     ],
     famersDetails: {
       farmerId: 1,
       farmerName: "Adewale Farms",
+      farmerProfilePic: "/assets/images/farmerProfilePic.png",
       verificationStatus: "Verified",
       description:
         "Award-winning organic farm specializing in fresh vegetables and fruits",
@@ -216,10 +236,11 @@ export const freshPickedProducts = [
       farmerCountry: "Nigeria",
       yearJoined: 2021,
       totalReviews: 128,
-      totalRating: 4.8,
+      farmerAverageRating: 4.8,
       totalOrders: 285,
       satisfactionRate: 98,
     },
+    productAverageRating: 2,
   },
   {
     productId: 4,
@@ -231,6 +252,11 @@ export const freshPickedProducts = [
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
     isWatchList: true,
+    productDetailImages: [
+      "/assets/images/tomatoeDetail1.png",
+      "/assets/images/tomatoeDetail2.png",
+      "/assets/images/tomatoeDetail1.png",
+    ],
     productDetails:
       "Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value. Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value.",
     bestUsedFor:
@@ -245,7 +271,7 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 2,
@@ -253,7 +279,7 @@ export const freshPickedProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 3,
@@ -261,7 +287,7 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 4,
@@ -269,7 +295,7 @@ export const freshPickedProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 5,
@@ -277,23 +303,25 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
     ],
     famersDetails: {
       farmerId: 1,
       farmerName: "Adewale Farms",
-      verificationStatus: "Verified",
+      farmerProfilePic: "/assets/images/farmerProfilePic.png",
+      verificationStatus: "Unverified",
       description:
         "Award-winning organic farm specializing in fresh vegetables and fruits",
       farmerState: "Lagos",
       farmerCountry: "Nigeria",
       yearJoined: 2021,
       totalReviews: 128,
-      totalRating: 4.8,
+      farmerAverageRating: 4.8,
       totalOrders: 285,
       satisfactionRate: 98,
     },
+    productAverageRating: 4,
   },
   {
     productId: 10,
@@ -305,6 +333,11 @@ export const freshPickedProducts = [
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
     isWatchList: true,
+    productDetailImages: [
+      "/assets/images/tomatoeDetail1.png",
+      "/assets/images/tomatoeDetail2.png",
+      "/assets/images/tomatoeDetail1.png",
+    ],
     productDetails:
       "Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value. Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value.",
     bestUsedFor:
@@ -319,7 +352,7 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 2,
@@ -327,7 +360,7 @@ export const freshPickedProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 3,
@@ -335,7 +368,7 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 4,
@@ -343,7 +376,7 @@ export const freshPickedProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 5,
@@ -351,12 +384,13 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
     ],
     famersDetails: {
       farmerId: 1,
       farmerName: "Adewale Farms",
+      farmerProfilePic: "/assets/images/farmerProfilePic.png",
       verificationStatus: "Verified",
       description:
         "Award-winning organic farm specializing in fresh vegetables and fruits",
@@ -364,10 +398,11 @@ export const freshPickedProducts = [
       farmerCountry: "Nigeria",
       yearJoined: 2021,
       totalReviews: 128,
-      totalRating: 4.8,
+      farmerAverageRating: 4.8,
       totalOrders: 285,
       satisfactionRate: 98,
     },
+    productAverageRating: 1,
   },
   {
     productId: 11,
@@ -379,6 +414,11 @@ export const freshPickedProducts = [
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
     isWatchList: true,
+    productDetailImages: [
+      "/assets/images/tomatoeDetail1.png",
+      "/assets/images/tomatoeDetail2.png",
+      "/assets/images/tomatoeDetail1.png",
+    ],
     productDetails:
       "Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value. Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value.",
     bestUsedFor:
@@ -393,7 +433,7 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 2,
@@ -401,7 +441,7 @@ export const freshPickedProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 3,
@@ -409,7 +449,7 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 4,
@@ -417,7 +457,7 @@ export const freshPickedProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 5,
@@ -425,12 +465,13 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
     ],
     famersDetails: {
       farmerId: 1,
       farmerName: "Adewale Farms",
+      farmerProfilePic: "/assets/images/farmerProfilePic.png",
       verificationStatus: "Verified",
       description:
         "Award-winning organic farm specializing in fresh vegetables and fruits",
@@ -438,10 +479,11 @@ export const freshPickedProducts = [
       farmerCountry: "Nigeria",
       yearJoined: 2021,
       totalReviews: 128,
-      totalRating: 4.8,
+      farmerAverageRating: 4.8,
       totalOrders: 285,
       satisfactionRate: 98,
     },
+    productAverageRating: 4,
   },
   {
     productId: 12,
@@ -453,6 +495,11 @@ export const freshPickedProducts = [
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
     isWatchList: true,
+    productDetailImages: [
+      "/assets/images/tomatoeDetail1.png",
+      "/assets/images/tomatoeDetail2.png",
+      "/assets/images/tomatoeDetail1.png",
+    ],
     productDetails:
       "Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value. Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value.",
     bestUsedFor:
@@ -467,7 +514,7 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 2,
@@ -475,7 +522,7 @@ export const freshPickedProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 3,
@@ -483,7 +530,7 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 4,
@@ -491,7 +538,7 @@ export const freshPickedProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 5,
@@ -499,12 +546,13 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
     ],
     famersDetails: {
       farmerId: 1,
       farmerName: "Adewale Farms",
+      farmerProfilePic: "/assets/images/farmerProfilePic.png",
       verificationStatus: "Verified",
       description:
         "Award-winning organic farm specializing in fresh vegetables and fruits",
@@ -512,10 +560,11 @@ export const freshPickedProducts = [
       farmerCountry: "Nigeria",
       yearJoined: 2021,
       totalReviews: 128,
-      totalRating: 4.8,
+      farmerAverageRating: 4.8,
       totalOrders: 285,
       satisfactionRate: 98,
     },
+    productAverageRating: 3,
   },
   {
     productId: 13,
@@ -527,6 +576,11 @@ export const freshPickedProducts = [
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
     isWatchList: true,
+    productDetailImages: [
+      "/assets/images/tomatoeDetail1.png",
+      "/assets/images/tomatoeDetail2.png",
+      "/assets/images/tomatoeDetail1.png",
+    ],
     productDetails:
       "Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value. Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value.",
     bestUsedFor:
@@ -541,7 +595,7 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 2,
@@ -549,7 +603,7 @@ export const freshPickedProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 3,
@@ -557,7 +611,7 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 4,
@@ -565,7 +619,7 @@ export const freshPickedProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 5,
@@ -573,12 +627,13 @@ export const freshPickedProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
     ],
     famersDetails: {
       farmerId: 1,
       farmerName: "Adewale Farms",
+      farmerProfilePic: "/assets/images/farmerProfilePic.png",
       verificationStatus: "Verified",
       description:
         "Award-winning organic farm specializing in fresh vegetables and fruits",
@@ -586,10 +641,11 @@ export const freshPickedProducts = [
       farmerCountry: "Nigeria",
       yearJoined: 2021,
       totalReviews: 128,
-      totalRating: 4.8,
+      farmerAverageRating: 4.8,
       totalOrders: 285,
       satisfactionRate: 98,
     },
+    productAverageRating: 4,
   },
 ];
 
@@ -604,6 +660,11 @@ export const bestDealsProducts = [
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
     isWatchList: true,
+    productDetailImages: [
+      "/assets/images/tomatoeDetail1.png",
+      "/assets/images/tomatoeDetail2.png",
+      "/assets/images/tomatoeDetail1.png",
+    ],
     productDetails:
       "Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value. Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value.",
     bestUsedFor:
@@ -618,7 +679,7 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 2,
@@ -626,7 +687,7 @@ export const bestDealsProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 3,
@@ -634,7 +695,7 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 4,
@@ -642,7 +703,7 @@ export const bestDealsProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 5,
@@ -650,12 +711,13 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
     ],
     famersDetails: {
       farmerId: 1,
       farmerName: "Adewale Farms",
+      farmerProfilePic: "/assets/images/farmerProfilePic.png",
       verificationStatus: "Verified",
       description:
         "Award-winning organic farm specializing in fresh vegetables and fruits",
@@ -663,10 +725,11 @@ export const bestDealsProducts = [
       farmerCountry: "Nigeria",
       yearJoined: 2021,
       totalReviews: 128,
-      totalRating: 4.8,
+      farmerAverageRating: 4.8,
       totalOrders: 285,
       satisfactionRate: 98,
     },
+    productAverageRating: 4,
   },
   {
     productId: 6,
@@ -678,6 +741,11 @@ export const bestDealsProducts = [
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
     isWatchList: true,
+    productDetailImages: [
+      "/assets/images/tomatoeDetail1.png",
+      "/assets/images/tomatoeDetail2.png",
+      "/assets/images/tomatoeDetail1.png",
+    ],
     productDetails:
       "Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value. Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value.",
     bestUsedFor:
@@ -692,7 +760,7 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 2,
@@ -700,7 +768,7 @@ export const bestDealsProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 3,
@@ -708,7 +776,7 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 4,
@@ -716,7 +784,7 @@ export const bestDealsProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 5,
@@ -724,12 +792,13 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
     ],
     famersDetails: {
       farmerId: 1,
       farmerName: "Adewale Farms",
+      farmerProfilePic: "/assets/images/farmerProfilePic.png",
       verificationStatus: "Verified",
       description:
         "Award-winning organic farm specializing in fresh vegetables and fruits",
@@ -737,10 +806,11 @@ export const bestDealsProducts = [
       farmerCountry: "Nigeria",
       yearJoined: 2021,
       totalReviews: 128,
-      totalRating: 4.8,
+      farmerAverageRating: 4.8,
       totalOrders: 285,
       satisfactionRate: 98,
     },
+    productAverageRating: 3,
   },
   {
     productId: 7,
@@ -752,6 +822,11 @@ export const bestDealsProducts = [
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
     isWatchList: true,
+    productDetailImages: [
+      "/assets/images/tomatoeDetail1.png",
+      "/assets/images/tomatoeDetail2.png",
+      "/assets/images/tomatoeDetail1.png",
+    ],
     productDetails:
       "Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value. Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value.",
     bestUsedFor:
@@ -766,7 +841,7 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 2,
@@ -774,7 +849,7 @@ export const bestDealsProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 3,
@@ -782,7 +857,7 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 4,
@@ -790,7 +865,7 @@ export const bestDealsProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 5,
@@ -798,12 +873,13 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
     ],
     famersDetails: {
       farmerId: 1,
       farmerName: "Adewale Farms",
+      farmerProfilePic: "/assets/images/farmerProfilePic.png",
       verificationStatus: "Verified",
       description:
         "Award-winning organic farm specializing in fresh vegetables and fruits",
@@ -811,10 +887,11 @@ export const bestDealsProducts = [
       farmerCountry: "Nigeria",
       yearJoined: 2021,
       totalReviews: 128,
-      totalRating: 4.8,
+      farmerAverageRating: 4.8,
       totalOrders: 285,
       satisfactionRate: 98,
     },
+    productAverageRating: 4,
   },
   {
     productId: 8,
@@ -826,6 +903,11 @@ export const bestDealsProducts = [
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
     isWatchList: true,
+    productDetailImages: [
+      "/assets/images/tomatoeDetail1.png",
+      "/assets/images/tomatoeDetail2.png",
+      "/assets/images/tomatoeDetail1.png",
+    ],
     productDetails:
       "Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value. Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value.",
     bestUsedFor:
@@ -840,7 +922,7 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 2,
@@ -848,7 +930,7 @@ export const bestDealsProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 3,
@@ -856,7 +938,7 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 4,
@@ -864,7 +946,7 @@ export const bestDealsProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 5,
@@ -872,12 +954,13 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
     ],
     famersDetails: {
       farmerId: 1,
       farmerName: "Adewale Farms",
+      farmerProfilePic: "/assets/images/farmerProfilePic.png",
       verificationStatus: "Verified",
       description:
         "Award-winning organic farm specializing in fresh vegetables and fruits",
@@ -885,10 +968,11 @@ export const bestDealsProducts = [
       farmerCountry: "Nigeria",
       yearJoined: 2021,
       totalReviews: 128,
-      totalRating: 4.8,
+      farmerAverageRating: 4.8,
       totalOrders: 285,
       satisfactionRate: 98,
     },
+    productAverageRating: 2,
   },
   {
     productId: 9,
@@ -900,6 +984,11 @@ export const bestDealsProducts = [
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
     isWatchList: true,
+    productDetailImages: [
+      "/assets/images/tomatoeDetail1.png",
+      "/assets/images/tomatoeDetail2.png",
+      "/assets/images/tomatoeDetail1.png",
+    ],
     productDetails:
       "Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value. Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value.",
     bestUsedFor:
@@ -914,7 +1003,7 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 2,
@@ -922,7 +1011,7 @@ export const bestDealsProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 3,
@@ -930,7 +1019,7 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 4,
@@ -938,7 +1027,7 @@ export const bestDealsProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 5,
@@ -946,12 +1035,13 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
     ],
     famersDetails: {
       farmerId: 1,
       farmerName: "Adewale Farms",
+      farmerProfilePic: "/assets/images/farmerProfilePic.png",
       verificationStatus: "Verified",
       description:
         "Award-winning organic farm specializing in fresh vegetables and fruits",
@@ -959,10 +1049,11 @@ export const bestDealsProducts = [
       farmerCountry: "Nigeria",
       yearJoined: 2021,
       totalReviews: 128,
-      totalRating: 4.8,
+      farmerAverageRating: 4.8,
       totalOrders: 285,
       satisfactionRate: 98,
     },
+    productAverageRating: 4,
   },
   {
     productId: 14,
@@ -974,6 +1065,11 @@ export const bestDealsProducts = [
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
     isWatchList: true,
+    productDetailImages: [
+      "/assets/images/tomatoeDetail1.png",
+      "/assets/images/tomatoeDetail2.png",
+      "/assets/images/tomatoeDetail1.png",
+    ],
     productDetails:
       "Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value. Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value.",
     bestUsedFor:
@@ -988,7 +1084,7 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 2,
@@ -996,7 +1092,7 @@ export const bestDealsProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 3,
@@ -1004,7 +1100,7 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 4,
@@ -1012,7 +1108,7 @@ export const bestDealsProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 5,
@@ -1020,12 +1116,13 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
     ],
     famersDetails: {
       farmerId: 1,
       farmerName: "Adewale Farms",
+      farmerProfilePic: "/assets/images/farmerProfilePic.png",
       verificationStatus: "Verified",
       description:
         "Award-winning organic farm specializing in fresh vegetables and fruits",
@@ -1033,10 +1130,11 @@ export const bestDealsProducts = [
       farmerCountry: "Nigeria",
       yearJoined: 2021,
       totalReviews: 128,
-      totalRating: 4.8,
+      farmerAverageRating: 4.8,
       totalOrders: 285,
       satisfactionRate: 98,
     },
+    productAverageRating: 2,
   },
   {
     productId: 15,
@@ -1048,6 +1146,11 @@ export const bestDealsProducts = [
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
     isWatchList: true,
+    productDetailImages: [
+      "/assets/images/tomatoeDetail1.png",
+      "/assets/images/tomatoeDetail2.png",
+      "/assets/images/tomatoeDetail1.png",
+    ],
     productDetails:
       "Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value. Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value.",
     bestUsedFor:
@@ -1062,7 +1165,7 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 2,
@@ -1070,7 +1173,7 @@ export const bestDealsProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 3,
@@ -1078,7 +1181,7 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 4,
@@ -1086,7 +1189,7 @@ export const bestDealsProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 5,
@@ -1094,12 +1197,13 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
     ],
     famersDetails: {
       farmerId: 1,
       farmerName: "Adewale Farms",
+      farmerProfilePic: "/assets/images/farmerProfilePic.png",
       verificationStatus: "Verified",
       description:
         "Award-winning organic farm specializing in fresh vegetables and fruits",
@@ -1107,10 +1211,11 @@ export const bestDealsProducts = [
       farmerCountry: "Nigeria",
       yearJoined: 2021,
       totalReviews: 128,
-      totalRating: 4.8,
+      farmerAverageRating: 4.8,
       totalOrders: 285,
       satisfactionRate: 98,
     },
+    productAverageRating: 3,
   },
   {
     productId: 16,
@@ -1122,6 +1227,11 @@ export const bestDealsProducts = [
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
     isWatchList: true,
+    productDetailImages: [
+      "/assets/images/tomatoeDetail1.png",
+      "/assets/images/tomatoeDetail2.png",
+      "/assets/images/tomatoeDetail1.png",
+    ],
     productDetails:
       "Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value. Our Fresh Organic Tomatoes are carefully selected from trusted farms in Abeokuta, Ogun State. Each basket contains approximately 5kg of premium, vine-ripened tomatoes that are perfect for all your cooking needs. These tomatoes are grown using sustainable farming practices without harmful pesticides. They're harvested at peak ripeness to ensure maximum flavor and nutritional value.",
     bestUsedFor:
@@ -1136,7 +1246,7 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 2,
@@ -1144,7 +1254,7 @@ export const bestDealsProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 3,
@@ -1152,7 +1262,7 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
       {
         reviewId: 4,
@@ -1160,7 +1270,7 @@ export const bestDealsProducts = [
         userName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
-        totalRatings: 2,
+        rate: 2,
       },
       {
         reviewId: 5,
@@ -1168,12 +1278,13 @@ export const bestDealsProducts = [
         userName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
-        totalRatings: 4,
+        rate: 4,
       },
     ],
     famersDetails: {
       farmerId: 1,
       farmerName: "Adewale Farms",
+      farmerProfilePic: "/assets/images/farmerProfilePic.png",
       verificationStatus: "Verified",
       description:
         "Award-winning organic farm specializing in fresh vegetables and fruits",
@@ -1181,9 +1292,10 @@ export const bestDealsProducts = [
       farmerCountry: "Nigeria",
       yearJoined: 2021,
       totalReviews: 128,
-      totalRating: 4.8,
+      farmerAverageRating: 4.8,
       totalOrders: 285,
       satisfactionRate: 98,
     },
+    productAverageRating: 4,
   },
 ];
