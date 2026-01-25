@@ -15,38 +15,6 @@ const NewArrivals = () => {
           it’s gone`}
         </p>
       </span>
-      {/* <div className="relative bg-[url('/plantainBg.png')] bg-no-repeat bg-cover bg-center w-full min-h-[250px] sm:min-h-[320px] md:h-[420px] ml:h-[450px] rounded-[10px] md:rounded-[30px] z-0">
-        <div className="absolute top-1/2 left-5 sm:left-8 md:left-12 -translate-y-1/2 z-20 leading-tight w-[55%] md:w-[70%] ml:w-[65%] lg:w-[45%] text-white flex flex-col gap-3 md:gap-5">
-          <Button
-            size="lg"
-            className="bg-[#03A52B] rounded-full h-fit py-2 w-fit text-[clamp(10px,1.5vw,14px)]"
-          >
-            New
-          </Button>
-          <h1 className="font-geologica font-bold text-[clamp(18px,3vw,36px)] ">
-            Freshly Ripe Plantains Are Back in Stock
-          </h1>
-          <p className="text-[clamp(12px,2vw,16px)] font-poppins">
-            Get the best deals on this {`season's`} sweet plantains
-            <br />— available while it lasts.
-          </p>
-          <Button
-            href="/shop"
-            variant="default"
-            size="lg"
-            className="w-fit text-[clamp(14px,1.5vw,16px)]"
-          >
-            <ShopBagIcon className="w-5 h-5" />
-            Shop Now
-          </Button>
-        </div>
-        <div className="flex gap-2 items-center justify-center absolute bottom-2 md:bottom-6 left-1/2 -translate-x-1/2 ">
-          <span className="w-[12px] sm:w-[16px] md:w-[42px] h-[3px] sm:h-[5px] md:h-[10px] rounded-[5px] md:rounded-[20px] bg-[#C09706]"></span>
-          <span className="w-[2.75px] sm:w-[6px] md:w-[11px] h-[3px] sm:h-[5px] md:h-[10px] rounded-[5px] sm:rounded-[7px] md:rounded-[20px] bg-white"></span>
-          <span className="w-[2.75px] sm:w-[6px] md:w-[11px] h-[3px] sm:h-[5px] md:h-[10px] rounded-[5px] sm:rounded-[7px] md:rounded-[20px] bg-white"></span>
-          <span className="w-[2.75px] sm:w-[6px] md:w-[11px] h-[3px] sm:h-[5px] md:h-[10px] rounded-[5px] sm:rounded-[7px] md:rounded-[20px] bg-white"></span>
-        </div>
-      </div> */}
       <ArrivalCarousel />
     </div>
   );
@@ -145,7 +113,7 @@ export const ArrivalCarousel = () => {
     if (touchStartX.current - touchEndX.current < -50) {
       // Swiped right - go to previous slide
       setCurrentSlide(
-        (prev) => (prev - 1 + carouselData.length) % carouselData.length
+        (prev) => (prev - 1 + carouselData.length) % carouselData.length,
       );
       setIsAutoPlaying(false);
       setTimeout(() => setIsAutoPlaying(true), 10000);
@@ -173,7 +141,7 @@ export const ArrivalCarousel = () => {
 
     if (touchStartX.current - touchEndX.current < -50) {
       setCurrentSlide(
-        (prev) => (prev - 1 + carouselData.length) % carouselData.length
+        (prev) => (prev - 1 + carouselData.length) % carouselData.length,
       );
       setIsAutoPlaying(false);
       setTimeout(() => setIsAutoPlaying(true), 10000);

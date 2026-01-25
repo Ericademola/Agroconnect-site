@@ -46,7 +46,7 @@ const WishListButton = ({
         onClick={handleToggleWishlist}
         className={cn(
           variant === "icon"
-            ? "w-[40px] lg:w-[50px] h-[40px] lg:h-[50px] px-0 rounded-[10px]"
+            ? "w-[35px] lg:w-[50px] h-[35px] lg:h-[50px] px-0 rounded-[10px]"
             : "gap-2 rounded-[10px]",
           className,
         )}

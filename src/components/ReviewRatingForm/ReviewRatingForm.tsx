@@ -15,8 +15,6 @@ const reviewSchema = z.object({
     .number()
     .min(1, { message: "Please select a rating" })
     .max(5, { message: "Rating must be between 1 and 5" }),
-  name: z.string().nonempty({ message: "This field is required" }),
-  email: z.string().trim().email({ message: "Please enter a valid email" }),
   reviewText: z
     .string()
     .min(5, { message: "Review must be at least 5 characters" })
@@ -35,8 +33,6 @@ const ReviewRatingForm = () => {
     resolver: zodResolver(reviewSchema),
     defaultValues: {
       rating: 0,
-      name: "",
-      email: "",
       reviewText: "",
     },
     mode: "onChange",
@@ -55,8 +51,6 @@ const ReviewRatingForm = () => {
 
       form.reset({
         rating: 0,
-        name: "",
-        email: "",
         reviewText: "",
       });
       setSubmitStatus("success");
@@ -92,7 +86,7 @@ const ReviewRatingForm = () => {
                   onChange={(v) =>
                     setValue("rating", v, { shouldValidate: true })
                   }
-                  className="text-xl"
+                  className="md:text-xl"
                 />
                 {fieldState.error && (
                   <span className="flex items-center gap-1 pt-1 text-red-500 text-xs">
@@ -103,59 +97,6 @@ const ReviewRatingForm = () => {
               </div>
             )}
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field, fieldState }) => (
-                <div className="flex flex-col gap-2">
-                  <FormLabel className="text-[#000000CC] gap-1 text-[clamp(14px,1.4vw,16px)]  font-medium">
-                    Name <span className="text-[#FB3958]">*</span>
-                  </FormLabel>
-                  <Input
-                    hasError={fieldState.invalid}
-                    subtext={
-                      fieldState.error ? (
-                        <span className="flex items-center gap-1 pt-1 text-red-500 text-xs">
-                          <ErrorIcon />
-                          {fieldState.error.message}
-                        </span>
-                      ) : null
-                    }
-                    {...field}
-                    placeholder="Enter your name"
-                    type="text"
-                  />
-                </div>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field, fieldState }) => (
-                <div className="flex flex-col gap-2">
-                  <FormLabel className="text-[#000000CC] gap-1 text-[clamp(14px,1.4vw,16px)] font-medium">
-                    Email Address <span className="text-[#FB3958]">*</span>
-                  </FormLabel>
-                  <Input
-                    hasError={fieldState.invalid}
-                    subtext={
-                      fieldState.error ? (
-                        <span className="flex items-center gap-1 pt-1 text-red-500 text-xs">
-                          <ErrorIcon />
-                          {fieldState.error.message}
-                        </span>
-                      ) : null
-                    }
-                    {...field}
-                    placeholder="Enter your email"
-                    type="email"
-                  />
-                </div>
-              )}
-            />
-          </div>
-
           <FormField
             control={control}
             name="reviewText"
@@ -177,7 +118,7 @@ const ReviewRatingForm = () => {
                   {...field}
                   placeholder="Write your review here..."
                   className="border-[#D5D5D5] border text-[#000000CC] text-sm"
-                  textareaClassName="min-h-[60px]"
+                  textareaClassName="min-h-[100px]"
                   disabled={isSubmitting}
                 />
               </div>

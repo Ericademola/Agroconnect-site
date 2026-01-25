@@ -5,7 +5,7 @@ export const freshPickedProducts = [
     productName: "Fresh Tomatoes",
     unit: "Per Basket",
     tagText: "Limited Stock",
-    price: 2500,
+    price: 2500.54,
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
     isWatchList: true,
@@ -79,6 +79,10 @@ export const freshPickedProducts = [
       satisfactionRate: 98,
     },
     productAverageRating: 3,
+    addOns: [
+      { title: "Stem Removed", price: 400 },
+      { title: "Washed & Blended", price: 1000 },
+    ],
   },
   {
     productId: 2,
@@ -160,6 +164,10 @@ export const freshPickedProducts = [
       satisfactionRate: 98,
     },
     productAverageRating: 3,
+    addOns: [
+      { title: "Remove branches", price: 600 },
+      { title: "sliced and bagged", price: 1200 },
+    ],
   },
   {
     productId: 3,
@@ -241,6 +249,10 @@ export const freshPickedProducts = [
       satisfactionRate: 98,
     },
     productAverageRating: 2,
+    addOns: [
+      { title: "Stem Removed", price: 700 },
+      { title: "Washed & Blended", price: 900 },
+    ],
   },
   {
     productId: 4,
@@ -322,6 +334,10 @@ export const freshPickedProducts = [
       satisfactionRate: 98,
     },
     productAverageRating: 4,
+    addOns: [
+      { title: "Stem Removed", price: 400 },
+      { title: "Washed & Blended", price: 500 },
+    ],
   },
   {
     productId: 10,
@@ -403,6 +419,10 @@ export const freshPickedProducts = [
       satisfactionRate: 98,
     },
     productAverageRating: 1,
+    addOns: [
+      { title: "Stem Removed", price: 200 },
+      { title: "Washed & Blended", price: 300 },
+    ],
   },
   {
     productId: 11,
@@ -484,6 +504,10 @@ export const freshPickedProducts = [
       satisfactionRate: 98,
     },
     productAverageRating: 4,
+    addOns: [
+      { title: "Stem Removed", price: 400 },
+      { title: "Washed & Blended", price: 1000 },
+    ],
   },
   {
     productId: 12,
@@ -565,6 +589,10 @@ export const freshPickedProducts = [
       satisfactionRate: 98,
     },
     productAverageRating: 3,
+    addOns: [
+      { title: "Stem Removed", price: 500 },
+      { title: "Washed & Blended", price: 600 },
+    ],
   },
   {
     productId: 13,
@@ -646,6 +674,10 @@ export const freshPickedProducts = [
       satisfactionRate: 98,
     },
     productAverageRating: 4,
+    addOns: [
+      { title: "Stem Removed", price: 300 },
+      { title: "Washed & Blended", price: 800 },
+    ],
   },
 ];
 
@@ -730,6 +762,10 @@ export const bestDealsProducts = [
       satisfactionRate: 98,
     },
     productAverageRating: 4,
+    addOns: [
+      { title: "Stem Removed", price: 400 },
+      { title: "Washed & Blended", price: 1100 },
+    ],
   },
   {
     productId: 6,
@@ -811,6 +847,10 @@ export const bestDealsProducts = [
       satisfactionRate: 98,
     },
     productAverageRating: 3,
+    addOns: [
+      { title: "Stem Removed", price: 600 },
+      { title: "Washed & Blended", price: 200 },
+    ],
   },
   {
     productId: 7,
@@ -892,6 +932,10 @@ export const bestDealsProducts = [
       satisfactionRate: 98,
     },
     productAverageRating: 4,
+    addOns: [
+      { title: "Stem Removed", price: 400 },
+      { title: "Washed & Blended", price: 1000 },
+    ],
   },
   {
     productId: 8,
@@ -973,6 +1017,10 @@ export const bestDealsProducts = [
       satisfactionRate: 98,
     },
     productAverageRating: 2,
+    addOns: [
+      { title: "Stem Removed", price: 500 },
+      { title: "Washed & Blended", price: 1000 },
+    ],
   },
   {
     productId: 9,
@@ -1054,6 +1102,10 @@ export const bestDealsProducts = [
       satisfactionRate: 98,
     },
     productAverageRating: 4,
+    addOns: [
+      { title: "Stem Removed", price: 400 },
+      { title: "Washed & Blended", price: 1200 },
+    ],
   },
   {
     productId: 14,
@@ -1135,6 +1187,10 @@ export const bestDealsProducts = [
       satisfactionRate: 98,
     },
     productAverageRating: 2,
+    addOns: [
+      { title: "Stem Removed", price: 500 },
+      { title: "Washed & Blended", price: 200 },
+    ],
   },
   {
     productId: 15,
@@ -1216,6 +1272,10 @@ export const bestDealsProducts = [
       satisfactionRate: 98,
     },
     productAverageRating: 3,
+    addOns: [
+      { title: "Stem Removed", price: 780 },
+      { title: "Washed & Blended", price: 1050 },
+    ],
   },
   {
     productId: 16,
@@ -1297,5 +1357,9 @@ export const bestDealsProducts = [
       satisfactionRate: 98,
     },
     productAverageRating: 4,
+    addOns: [
+      { title: "Stem Removed", price: 400 },
+      { title: "Washed & Blended", price: 1000 },
+    ],
   },
 ];

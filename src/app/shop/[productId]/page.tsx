@@ -2,31 +2,54 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import CartButton from "@/components/CartButton/CartButton";
 import Image from "next/image";
 import Catalogue from "@/components/Catalogue/Catalogue";
-import { getProductById } from "@/hooks/getProducts";
-import { IProducts } from "@/types";
+import {
+  getBasketItems,
+  getItemQuantity,
+  getProductById,
+} from "@/hooks/getProducts";
+import { IAddOns, IProducts } from "@/types";
 import {
   CalendarIcon,
-  LeftArrowIcon,
   LocationIcon,
   OrderBoxIcon,
   SatisfactionIcon,
   StarIcon,
 } from "@/Icons";
 import { Button } from "@/components/ui/button";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
+// import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+// import { Label } from "@/components/ui/label";
 import WishListButton from "@/components/WishListButton/WishListButton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ReviewRatingForm from "@/components/ReviewRatingForm/ReviewRatingForm";
 import Rating from "@/components/Rating/Rating";
+import DecrementAndIncrementButton from "@/components/CartButton/DecrementAndIncrementButton";
+import AddToCartButton from "@/components/CartButton/AddToCartButton";
+import {
+  Field,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldSet,
+} from "@/components/ui/field";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 export default function ProductDetails() {
+  const [itemDetails, setItemDetails] = useState<IProducts | null>(null);
+  const [quantity, setQuantity] = useState(1);
+  const [selectedAddOns, setSelectedAddOns] = useState<IAddOns[]>([]);
+
   const { productId } = useParams();
   const router = useRouter();
-  const [itemDetails, setItemDetails] = useState<IProducts | null>(null);
 
   useEffect(() => {
     const id = parseInt(productId as string);
@@ -39,6 +62,22 @@ export default function ProductDetails() {
     }
   }, [productId, router]);
 
+  useEffect(() => {
+    if (!itemDetails) return;
+
+    const storedQty = getItemQuantity(itemDetails.productId);
+    setQuantity(storedQty > 0 ? storedQty : 1);
+
+    const basketItems = getBasketItems();
+    const cartItem = basketItems.find(
+      (item) => item.productId === itemDetails.productId,
+    );
+
+    if (cartItem && cartItem.addOns) {
+      setSelectedAddOns(cartItem.addOns);
+    }
+  }, [itemDetails]);
+
   const goBack = () => {
     if (window.history.length > 1) {
       window.history.back();
@@ -47,21 +86,47 @@ export default function ProductDetails() {
     }
   };
 
+  const handleAddOnToggle = (option: { title: string; price: number }) => {
+    setSelectedAddOns((prev) => {
+      const exists = prev.find((addOn) => addOn.title === option.title);
+
+      if (exists) {
+        return prev.filter((addOn) => addOn.title !== option.title);
+      }
+
+      return [...prev, { title: option.title, price: option.price }];
+    });
+  };
+
   return (
     <div>
       {itemDetails && (
         <div className="mx-4 sm:mx-8 md:mx-12 ml:mx-16 lg:mx-18 flex flex-col">
-          <Button
-            variant="ghost"
-            onClick={goBack}
-            className="h-fit w-fit p-0 hover:bg-transparent"
-          >
-            <LeftArrowIcon
-              className="w-[0.8rem] md:w-4 h-[0.8rem] md:h-4"
-              strokeWidth={3}
-            />
-          </Button>
-          <div className="grid grid-cols-1 md:grid-cols-[2fr_1.5fr] gap-5 md:gap-10">
+          <div className="mb-4">
+            <Breadcrumb>
+              <BreadcrumbList className="text-[#787878CC] text-sm md:text-lg font-poppins">
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Button
+                      variant="ghost"
+                      onClick={goBack}
+                      className="h-fit w-fit p-0 hover:bg-transparent"
+                    >
+                      Back
+                    </Button>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage className="text-[#2B2B2B]">
+                    Product Details
+                  </BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+
+          <div className="grid grid-cols-1  md:grid-cols-[2fr_1.8fr] lg:grid-cols-[2fr_1.5fr] gap-5 md:gap-7 lg:gap-10">
             <div className="flex flex-col gap-3">
               <div className="bg-[#F3F3F3] border borer-[#0000001A] rounded-[15px] flex items-center justify-center">
                 <Image
@@ -76,14 +141,14 @@ export default function ProductDetails() {
                 {itemDetails.productDetailImages.map((image, index) => (
                   <div
                     key={index}
-                    className="bg-[#F3F3F3] border borer-[#0000001A] rounded-[15px] px-4 md:px-[28px] py-2 md:py-[10px]"
+                    className="bg-[#F3F3F3] border borer-[#0000001A] rounded-[15px] md:px-5 px-4 lg:px-7 py-2 md:py-[10px]"
                   >
                     <Image
                       src={image}
                       alt={itemDetails.productName}
                       width={100}
                       height={100}
-                      className="object-contain w-[50px] h-[50px] md:w-[90px] md:h-[90px]"
+                      className="object-contain w-[50px] h-[50px] md:w-[70px] md:h-[70px] lg:w-[90px] lg:h-[90px]"
                     />
                   </div>
                 ))}
@@ -107,44 +172,46 @@ export default function ProductDetails() {
                 </div>
               </div>
               <div className="bg-[#F5F5F5] rounded-[15px] px-4 py-5 w-full sm:w-[90%] md:w-[80%] flex flex-col gap-4">
-                <h3 className="text-sm md:text-lg">Preparation Option</h3>
-                <RadioGroup defaultValue="stem-removed" className="gap-3">
-                  {[
-                    {
-                      value: "stem-removed",
-                      label: "Stem Removed (₦400)",
-                    },
-                    {
-                      value: "washed-blended",
-                      label: "Washed & Blended (₦1,000)",
-                    },
-                    {
-                      value: "both",
-                      label: "Both (₦1,400)",
-                    },
-                  ].map((option) => (
-                    <div
-                      key={option.value}
-                      className="flex items-center space-x-2"
-                    >
-                      <RadioGroupItem
-                        value={option.value}
-                        id={option.value}
-                        className="border-[#1D1B20]"
-                      />
-                      <Label
-                        htmlFor={option.value}
-                        className="text-xs md:text-sm text-[#000000CC] font-poppins"
-                      >
-                        {option.label}
-                      </Label>
-                    </div>
-                  ))}
-                </RadioGroup>
+                <FieldSet>
+                  <FieldLegend variant="label" className="text-sm md:text-lg">
+                    Preparation Option
+                  </FieldLegend>
+                  <FieldGroup className="gap-3">
+                    {itemDetails.addOns.map((option) => (
+                      <Field orientation="horizontal" key={option.title}>
+                        <Checkbox
+                          id={option.title}
+                          checked={selectedAddOns.some(
+                            (addOn) => addOn.title === option.title,
+                          )}
+                          onCheckedChange={() => handleAddOnToggle(option)}
+                        />
+
+                        <FieldLabel
+                          htmlFor={option.title}
+                          className="font-normal"
+                        >
+                          {option.title} (₦{option.price})
+                        </FieldLabel>
+                      </Field>
+                    ))}
+                  </FieldGroup>
+                </FieldSet>
               </div>
               <div className="flex flex-col gap-3">
                 <h3 className="text-[clamp(16px,1.4vw,18px)]">Quantity</h3>
-                <CartButton item={itemDetails} className="w-full" />
+                <DecrementAndIncrementButton
+                  quantity={quantity}
+                  onIncrement={() => setQuantity((q) => q + 1)}
+                  onDecrement={() => setQuantity((q) => Math.max(0, q - 1))}
+                  className="w-1/2"
+                />
+                <AddToCartButton
+                  item={itemDetails}
+                  quantity={quantity}
+                  addOns={selectedAddOns}
+                  className="w-full"
+                />
                 <WishListButton
                   item={itemDetails}
                   variant="text"
@@ -155,12 +222,14 @@ export default function ProductDetails() {
           </div>
         </div>
       )}
+
+      {/* TAB SECTION */}
       {itemDetails && (
-        <div className="mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12">
-          <div className="mt-8 md:mt-16 md:border-2 border-[#0000001A] rounded-[15px] pt-5">
+        <section className="mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12">
+          <div className="mt-8 md:mt-16 sm:border-2 border-[#0000001A] rounded-[15px] pt-5">
             <Tabs defaultValue="description" className="w-full gap-0">
-              <div>
-                <TabsList className="w-full flex justify-start gap-5 rounded-none font-poppins bg-white md:border-b-2 border-[#0000001A] px-4 sm:px-[200px] md:px-[300px] lg:px-[400px]">
+              <div className="sm:border-b-2 border-[#0000001A]">
+                <TabsList className="w-[90%] sm:w-[70%] md:w-[60%] ml:w-[50%] flex justify-center mx-auto gap-2 rounded-none font-poppins bg-white">
                   <TabsTrigger
                     value="description"
                     className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-[2px] data-[state=active]:border-[#006C2B] data-[state=active]:rounded-none text-[#75757A] data-[state=active]:text-[#006C2B] text-[clamp(12px,1.2vw,18px)] pb-2 md:pb-5"
@@ -181,7 +250,7 @@ export default function ProductDetails() {
                   </TabsTrigger>
                 </TabsList>
               </div>
-              <div className="py-5 md:py-[54px] sm:px-5 md:px-[45px]">
+              <div className="py-5 md:py-8 lg:py-[54px] sm:px-5 md:px-6 lg:px-[45px]">
                 <TabsContent value="description">
                   <div className="text-[#00000099] text-[clamp(12px,1.4vw,16px)] font-poppins">
                     <h2 className="text-[#000000CC] text-[clamp(16px,1.8vw,24px)] font-geologica font-medium mb-3 md:mb-5">
@@ -192,29 +261,29 @@ export default function ProductDetails() {
                       <p>
                         <span className="text-[#000000CC] font-medium">
                           Best Used For:
-                        </span>
+                        </span>{" "}
                         {itemDetails.bestUsedFor}
                       </p>
                       <p>
                         <span className="text-[#000000CC] font-medium">
                           Storage Tips:
-                        </span>
+                        </span>{" "}
                         {itemDetails.storageTips}
                       </p>
                     </div>
                   </div>
                 </TabsContent>
                 <TabsContent value="reviews">
-                  <div className="text-[#000000CC] font-poppins grid grid-cols-1 md:grid-cols-2 gap-12">
+                  <div className="text-[#000000CC] font-poppins grid grid-cols-1 md:grid-cols-2 gap-6 ml:gap-8 lg:gap-12">
                     <div>
                       <h3 className="text-[clamp(16px,1.8vw,24px)] font-geologica font-medium mb-3 md:mb-5">
                         Feedbacks from customers
                       </h3>
-                      <div className="flex flex-col gap-[10px] ">
+                      <div className="flex flex-col gap-[10px]">
                         {itemDetails.reviews.map((review) => (
                           <div
                             key={review.reviewId}
-                            className="px-5 py-4 border border-[#0000001A] rounded-[15px] flex flex-col gap-5"
+                            className="px-5 py-4 border border-[#0000001A] rounded-[15px] flex flex-col gap-3 md:gap-4 lg:gap-5"
                           >
                             <div className="flex items-start justify-between">
                               <div>
@@ -234,10 +303,10 @@ export default function ProductDetails() {
                         ))}
                       </div>
                     </div>
-                    <div className="flex flex-col gap-8">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                        <div className="bg-[#F5F5F5] rounded-[15px] px-5 py-4 text-[clamp(16px,1.8vw,24px)] flex flex-col gap-5 items-center justify-center">
-                          <h3 className="font-geologica font-medium">
+                    <div className="flex flex-col gap-4 md:gap-6 lg:gap-8">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ml:gap-8 lg:gap-12">
+                        <div className="bg-[#F5F5F5] rounded-[15px] px-4 lg:px-5 py-4 text-[clamp(16px,1.8vw,24px)] flex flex-col gap-5 items-center justify-center">
+                          <h3 className="font-geologica font-medium text-center">
                             Average Rating
                           </h3>
                           <p>({itemDetails.productAverageRating}/5)</p>
@@ -250,9 +319,9 @@ export default function ProductDetails() {
                             {itemDetails.reviews.length} reviews
                           </p>
                         </div>
-                        <div className="border border-[#0000001A] px-5 py-4 rounded-[15px]"></div>
+                        <div className="border border-[#0000001A] px-4 lg:px-5 py-4 rounded-[15px]"></div>
                       </div>
-                      <div className="border border-[#0000001A] px-5 py-4 rounded-[15px]">
+                      <div className="border border-[#0000001A] px-4 lg:px-5 py-4 rounded-[15px]">
                         <h3 className="text-[clamp(18px,1.8vw,24px)] font-geologica font-medium mb-3 md:mb-6">
                           Submit Your Review
                         </h3>
@@ -268,7 +337,7 @@ export default function ProductDetails() {
                       alt={itemDetails.famersDetails.farmerName}
                       width={100}
                       height={100}
-                      className="object-cover border-8 border-[#00000029] rounded-[50px] w-[260px] h-[260px]"
+                      className="object-cover border-8 border-[#00000029] rounded-[50px] w-[180px] h-[180px] sm:w-[200px] sm:h-[200px] md:w-[260px] md:h-[260px]"
                     />
                     <div className="flex flex-col items-center justify-center gap-4 md:gap-6">
                       <span className="flex items-center justify-center gap-2">
@@ -338,15 +407,17 @@ export default function ProductDetails() {
               </div>
             </Tabs>
           </div>
-        </div>
+        </section>
       )}
+
+      {/* RELATED PRODUCTS SECTION */}
       {itemDetails && (
-        <div className="mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 my-16 md:my-36 flex flex-col gap-6">
+        <section className="mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 my-16 md:my-36 flex flex-col gap-6">
           <h2 className="text-[#000000CC] text-[clamp(16px,2.8vw,30px)] font-geologica font-semibold text-start leading-tight w-full">
             Related Products
           </h2>
           <Catalogue excludeId={itemDetails.productId} sliceLimit={4} />
-        </div>
+        </section>
       )}
     </div>
   );

@@ -441,7 +441,7 @@ export const MinusIcon = ({ className, width, height }: IProps) => (
     <path
       d="M0.5 0.5H23.5"
       stroke="black"
-      strokeWidth="2"
+      strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
@@ -460,7 +460,7 @@ export const PlusIcon = ({ className, width, height }: IProps) => (
     <path
       d="M0.5 12H23.5M12 23.5V0.5"
       stroke="black"
-      strokeWidth="2"
+      strokeWidth="1.5"
       strokeMiterlimit="10"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -749,9 +749,25 @@ export const SatisfactionIcon = ({
     <path
       d="M14 8L11 11L10 10"
       stroke={fill ?? "#9B0485"}
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const DeleteIcon = ({ width, height, className, fill }: IProps) => (
+  <svg
+    className={className}
+    width={width ?? DEFAULT_SIZE}
+    height={height ?? DEFAULT_SIZE}
+    viewBox="0 0 14 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M11 6V16H3V6H11ZM9.5 0H4.5L3.5 1H0V3H14V1H10.5L9.5 0ZM13 4H1V16C1 17.1 1.9 18 3 18H11C12.1 18 13 17.1 13 16V4Z"
+      fill={fill ?? "#C09706"}
     />
   </svg>
 );

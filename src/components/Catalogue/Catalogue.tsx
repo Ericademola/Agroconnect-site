@@ -69,7 +69,10 @@ export default function Catalogue({
     >
       {productsToRender.map((item: IProducts) => (
         <div key={item.productId} className="flex flex-col gap-3 h-full">
-          <Link href={`/shop/${item.productId}`}>
+          <Link
+            href={`/shop/${item.productId}`}
+            className="flex flex-col gap-3"
+          >
             <div className="bg-[#F3F3F3] rounded-[15px] flex flex-col w-full h-full items-center pb-2">
               <Button
                 size="sm"
@@ -85,28 +88,29 @@ export default function Catalogue({
                 className="w-[180px] h-[150px] md:w-[250px] md:h-[220px] object-contain"
               />
             </div>
-          </Link>
-          <div className="flex flex-col gap-[8px] font-poppins flex-1">
-            <div className="flex flex-col gap-[4px]">
-              <span className="flex flex-wrap items-center gap-1 text-[#000000CC] text-sm sm:text-base md:text-lg font-medium">
-                <h3>{item.productName}</h3>
-                <p className="text-nowrap">({item.unit})</p>
-              </span>
+            <div className="flex flex-col gap-[8px] font-poppins">
+              <div className="flex flex-col gap-[4px]">
+                <span className="flex flex-wrap items-center gap-1 text-[#000000CC] text-sm sm:text-base md:text-lg font-medium">
+                  <h3>{item.productName}</h3>
+                  <p className="text-nowrap">({item.unit})</p>
+                </span>
 
-              <p className="text-[#000000CC] text-[11px] sm:text-xs ml:text-sm">
-                By Farmer {item.famersDetails.farmerName.split(" ")[0]},{" "}
-                {item.famersDetails.farmerState} State.
+                <p className="text-[#000000CC] text-[11px] sm:text-xs ml:text-sm">
+                  By Farmer {item.famersDetails.farmerName.split(" ")[0]},{" "}
+                  {item.famersDetails.farmerState} State.
+                </p>
+              </div>
+
+              <p className="font-semibold text-[#1E1E1E] text-sm sm:text-base md:text-lg mt-auto">
+                ₦ {""}
+                {item.price.toLocaleString()}
               </p>
             </div>
+          </Link>
 
-            <p className="font-semibold text-[#1E1E1E] text-sm sm:text-base md:text-lg mt-auto">
-              ₦{item.price}
-            </p>
-
-            <div className="mt-auto grid grid-cols-[1fr_auto] items-end gap-3 md:gap-[23px] w-full">
-              <CartButton item={item} />
-              <WishListButton item={item} />
-            </div>
+          <div className="mt-auto grid grid-cols-[1fr_auto] items-end gap-3 md:gap-[23px] w-full">
+            <CartButton item={item} />
+            <WishListButton item={item} />
           </div>
         </div>
       ))}

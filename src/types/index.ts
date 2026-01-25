@@ -14,6 +14,7 @@ export interface IProducts {
   reviews: IReview[];
   famersDetails: IFarmerDetails;
   productAverageRating: number;
+  addOns: IAddOns[];
   quantity?: number;
 }
 
@@ -39,6 +40,11 @@ export interface IFarmerDetails {
   farmerAverageRating: number;
   totalOrders: number;
   satisfactionRate: number;
+}
+
+export interface IAddOns {
+  title: string;
+  price: number;
 }
 
 export type CartItem = IProducts & { quantity: number };
