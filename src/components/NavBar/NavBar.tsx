@@ -36,7 +36,7 @@ export default function NavBar() {
   }, []);
 
   return (
-    <div className="sticky top-0 z-999 bg-white pb-2 md:pb-3 ml:pb-5">
+    <div className="sticky top-0 z-100 bg-white pb-2 md:pb-3 ml:pb-5">
       {/* Top Bar */}
       <div
         className={`
@@ -145,8 +145,8 @@ const MainNavBar = () => {
   return (
     <div className="mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12">
       <header
-        //bg-fuchsia-400 sm:bg-emerald-400 md:bg-cyan-400 ml:bg-red-400 lg:bg-blue-400 xl:bg-indigo-800
-        className="bg-gradient-to-r from-[#8FE6A2] via-[#E3BF0F4D] to-[#8FE6A2] rounded-[15px] px-2 py-3 md:p-[14px] lg:p-4 flex items-center justify-between"
+        //bg-gradient-to-r from-[#8FE6A2] via-[#E3BF0F4D] to-[#8FE6A2]
+        className="bg-fuchsia-400 sm:bg-emerald-400 md:bg-cyan-400 ml:bg-red-400 lg:bg-blue-400 xl:bg-indigo-800 rounded-[15px] px-2 py-3 md:p-[14px] lg:p-4 flex items-center justify-between"
       >
         <div
           className="bg-white rounded-[8px] md:rounded-[15px] md:hidden flex items-center justify-center w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] md:w-[50px] md:h-[50px] cursor-pointer"

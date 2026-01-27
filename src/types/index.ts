@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface IProducts {
   productId: number;
   productImage: string;
@@ -50,3 +52,21 @@ export interface IAddOns {
 export type CartItem = IProducts & { quantity: number };
 
 export type WishlistItem = IProducts & { quantity: number };
+
+export interface IPaymentMethod {
+  methodName: string;
+  description: string;
+  icon: ReactNode | string;
+  value: string;
+}
+
+export interface IuserData {
+  userId: number;
+  userName: string;
+  profilePicture: string;
+  email: string;
+  phoneNumber: string;
+  addresses: {
+    address: string;
+  }[];
+}

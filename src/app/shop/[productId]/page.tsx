@@ -18,11 +18,9 @@ import {
   StarIcon,
 } from "@/Icons";
 import { Button } from "@/components/ui/button";
-// import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-// import { Label } from "@/components/ui/label";
 import WishListButton from "@/components/WishListButton/WishListButton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ReviewRatingForm from "@/components/ReviewRatingForm/ReviewRatingForm";
+import ReviewRatingForm from "@/components/Forms/ReviewRatingForm";
 import Rating from "@/components/Rating/Rating";
 import DecrementAndIncrementButton from "@/components/CartButton/DecrementAndIncrementButton";
 import AddToCartButton from "@/components/CartButton/AddToCartButton";

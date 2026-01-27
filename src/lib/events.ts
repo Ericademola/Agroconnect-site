@@ -1,4 +1,3 @@
-// Create custom events for cart and wishlist updates
 export const CART_UPDATED_EVENT = "cartUpdated";
 export const WISHLIST_UPDATED_EVENT = "wishlistUpdated";
 

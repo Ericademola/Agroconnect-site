@@ -281,7 +281,14 @@ export default function CartPage() {
                               </Popover>
                             </td>
                             <td className="py-2 px-3 lg:px-4 font-medium">
-                              ₦{(item.price * item.quantity).toLocaleString()}
+                              ₦
+                              {(
+                                item.price * item.quantity +
+                                (item.addOns?.reduce(
+                                  (sum, addOn) => sum + addOn.price,
+                                  0,
+                                ) ?? 0)
+                              ).toLocaleString()}
                             </td>
                             <td className="py-2 px-3 lg:px-4 text-right">
                               <Button
@@ -303,7 +310,7 @@ export default function CartPage() {
                     {basketItems.map((item) => (
                       <div
                         key={item.productId}
-                        className="grid grid-cols-[auto_1fr] gap-3 font-poppins rounded-[12px] shadow-sm shadow-[#00000014] border border-[#00000014] px-3 py-4"
+                        className="grid grid-cols-[auto_1fr] gap-3 font-poppins rounded-[12px] shadow px-3 py-4"
                       >
                         <Link
                           href={`/shop/${item.productId}`}
@@ -328,7 +335,7 @@ export default function CartPage() {
                                 ₦{item.price.toLocaleString()}
                               </span>
                             </p>
-                            <p className="border-r-2 border-l-2 px-2">
+                            <div className="border-r-2 border-l-2 px-2 flex items-center gap-1 flex-wrap">
                               Add-on:{" "}
                               <span className="text-[#1E1E1E]">
                                 <Popover>
@@ -402,11 +409,18 @@ export default function CartPage() {
                                   </PopoverContent>
                                 </Popover>
                               </span>
-                            </p>
+                            </div>
                             <p className="pl-2">
                               Sub-total{" "}
                               <span className="text-[#1E1E1E]">
-                                ₦{(item.price * item.quantity).toLocaleString()}
+                                ₦
+                                {(
+                                  item.price * item.quantity +
+                                  (item.addOns?.reduce(
+                                    (sum, addOn) => sum + addOn.price,
+                                    0,
+                                  ) ?? 0)
+                                ).toLocaleString()}
                               </span>
                             </p>
                           </div>

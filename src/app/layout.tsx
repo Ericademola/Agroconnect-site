@@ -16,12 +16,19 @@ const geistMono = Geist_Mono({
 });
 
 const geologica = localFont({
-  src: "./assets/fonts/Geologica/Geologica-Regular.ttf",
+  src: [
+    { path: "./assets/fonts/Geologica/Geologica-Light.ttf", weight: "300" },
+    { path: "./assets/fonts/Geologica/Geologica-Regular.ttf", weight: "400" },
+    { path: "./assets/fonts/Geologica/Geologica-Medium.ttf", weight: "500" },
+    { path: "./assets/fonts/Geologica/Geologica-SemiBold.ttf", weight: "600" },
+    { path: "./assets/fonts/Geologica/Geologica-Bold.ttf", weight: "700" },
+  ],
   variable: "--font-geologica",
 });
 
 const poppins = localFont({
   src: [
+    { path: "./assets/fonts/Poppins/Poppins-Light.ttf", weight: "300" },
     { path: "./assets/fonts/Poppins/Poppins-Regular.ttf", weight: "400" },
     { path: "./assets/fonts/Poppins/Poppins-Medium.ttf", weight: "500" },
     { path: "./assets/fonts/Poppins/Poppins-SemiBold.ttf", weight: "600" },
@@ -32,12 +39,24 @@ const poppins = localFont({
 
 const prompt = localFont({
   src: [
+    { path: "./assets/fonts/Prompt/Prompt-Light.ttf", weight: "300" },
     { path: "./assets/fonts/Prompt/Prompt-Regular.ttf", weight: "400" },
     { path: "./assets/fonts/Prompt/Prompt-Medium.ttf", weight: "500" },
     { path: "./assets/fonts/Prompt/Prompt-SemiBold.ttf", weight: "600" },
     { path: "./assets/fonts/Prompt/Prompt-Bold.ttf", weight: "700" },
   ],
   variable: "--font-prompt",
+});
+
+const raleway = localFont({
+  src: [
+    { path: "./assets/fonts/Raleway/Raleway-light.ttf", weight: "300" },
+    { path: "./assets/fonts/Raleway/Raleway-Regular.ttf", weight: "400" },
+    { path: "./assets/fonts/Raleway/Raleway-Medium.ttf", weight: "500" },
+    { path: "./assets/fonts/Raleway/Raleway-SemiBold.ttf", weight: "600" },
+    { path: "./assets/fonts/Raleway/Raleway-Bold.ttf", weight: "700" },
+  ],
+  variable: "--font-raleway",
 });
 
 export const metadata: Metadata = {
@@ -53,7 +72,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${geologica.variable} ${poppins.variable} ${prompt.variable} antialiased`}
+        className={`${raleway.variable} ${geistSans.variable} ${geistMono.variable} ${geologica.variable} ${poppins.variable} ${prompt.variable} antialiased`}
       >
         <ContentWrapper>{children}</ContentWrapper>
       </body>

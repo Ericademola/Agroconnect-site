@@ -1,13 +1,13 @@
 import { CartItem, IProducts, WishlistItem } from "@/types";
 import { emitCartUpdate, emitWishlistUpdate } from "@/lib/events";
-import { bestDealsProducts, freshPickedProducts } from "../../products";
+import { bestDealsProducts, freshPickedProducts } from "../data/products";
 
 // LocalStorage Keys
 const LOCAL_PRODUCTS_KEY = "Products";
 const LOCAL_FRESH_PICKED_KEY = "FreshPickedProducts";
 const LOCAL_BEST_DEALS_KEY = "BestDealsProducts";
 const BASKET_ITEMS_KEY = "BasketItems";
-const BASKET_QUANTITY_MAP_KEY = "BasketItem"; // ID -> quantity
+const BASKET_QUANTITY_MAP_KEY = "BasketItem";
 const WISHLIST_ITEMS_KEY = "WishlistItems";
 
 // ============================================

@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Form, FormField, FormLabel } from "@/components/ui/form";
-import { ErrorIcon, Input } from "@/components/ui/input";
+import { ErrorIcon } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -24,9 +24,9 @@ const reviewSchema = z.object({
 type TypeReviewFormData = z.infer<typeof reviewSchema>;
 
 const ReviewRatingForm = () => {
-  const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "success" | "error"
-  >("idle");
+  // const [submitStatus, setSubmitStatus] = useState<
+  //   "idle" | "success" | "error"
+  // >("idle");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<TypeReviewFormData>({
@@ -43,7 +43,7 @@ const ReviewRatingForm = () => {
 
   const onSubmit = async (data: TypeReviewFormData) => {
     setIsSubmitting(true);
-    setSubmitStatus("idle");
+    // setSubmitStatus("idle");
 
     try {
       await new Promise((resolve) => setTimeout(resolve, 800));
@@ -53,10 +53,10 @@ const ReviewRatingForm = () => {
         rating: 0,
         reviewText: "",
       });
-      setSubmitStatus("success");
+      // setSubmitStatus("success");
     } catch (error) {
       console.error("Failed to submit review:", error);
-      setSubmitStatus("error");
+      // setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
     }

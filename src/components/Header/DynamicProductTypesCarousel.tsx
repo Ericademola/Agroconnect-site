@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import useEmblaCarousel from "embla-carousel-react";
-import productTypes, { IProductTypeItem } from "../../../productTypes";
+import productTypes, { IProductTypeItem } from "../../types/productTypes";
 
 export default function DynamicProductTypesCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -124,7 +124,7 @@ export default function DynamicProductTypesCarousel() {
                     </div>
                   </Link>
                 </div>
-              )
+              ),
             )}
           </div>
         </div>
