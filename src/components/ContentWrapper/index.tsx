@@ -7,7 +7,7 @@ interface Props {
 }
 const ContentWrapper = (props: Props) => {
   return (
-    <div className="w-full relative max-w-[1440px] mx-auto min-h-screen bg-[#fff]">
+    <div className="w-full relative max-w-[1440px] mx-auto min-h-screen bg-[#fff] text-black">
       <NavBar />
       {props.children}
       <Footer />

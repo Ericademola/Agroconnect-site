@@ -8,9 +8,11 @@ import {
   AppleIcon,
   CartIcon,
   CustormerSupportIcon,
+  DownIcon,
   HammburgerIcon,
   HeartIcon,
   HomeIcon,
+  PersonIcon,
   PlayStoreIcon,
   ShopIcon,
 } from "@/Icons";
@@ -23,6 +25,7 @@ import { Button } from "../ui/button";
 import FullScreenModal from "../FullScreenModal/FullScreenModal";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import { CART_UPDATED_EVENT, WISHLIST_UPDATED_EVENT } from "@/lib/events";
+import { getUserData } from "@/hooks/getUserData";
 
 export default function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -110,6 +113,12 @@ const MainNavBar = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchText, setSearchText] = useState("");
   const [open, setOpen] = useState(false);
+  const [userInfo, setUserInfo] = useState(getUserData());
+
+  useEffect(() => {
+    const data = getUserData();
+    setUserInfo(data);
+  }, []);
 
   const close = (value: boolean) => {
     setOpen(value);
@@ -200,18 +209,30 @@ const MainNavBar = () => {
               </Badge>
             </Link>
           </div>
-          <div className="hidden md:flex items-center gap-4">
-            <Button
-              href="/"
-              variant="default"
-              size="lg"
-              className="h-[45px] lg:h-[48px] text"
-            >
-              Register
-            </Button>
-            <Button href="/" variant="secondary" size="lg">
-              Login
-            </Button>
+          <div>
+            {userInfo.isLoggedIn ? (
+              <div className="flex items-center gap-2 bg-[#F5F5F5] rounded-[15px] p-3">
+                <PersonIcon className="w-5 h-5" />
+                <p className="text-[#333333] text-[clamp(16px,1.8vw,20px)]">
+                  Hi, <span>{userInfo.userName}</span>
+                </p>
+                <DownIcon className="w-3 h-3" />
+              </div>
+            ) : (
+              <div className="hidden md:flex items-center gap-4">
+                <Button
+                  href="/createAccount"
+                  variant="default"
+                  size="lg"
+                  className="h-[45px] lg:h-[48px]"
+                >
+                  Register
+                </Button>
+                <Button href="/" variant="secondary" size="lg">
+                  Login
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </header>

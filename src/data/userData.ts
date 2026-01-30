@@ -10,4 +10,5 @@ export const userData = {
       address: "4a okanlawon Street, Ketu Lagos Ketu-Alapere, Lagos, Nigeria",
     },
   ],
+  isLoggedIn: false,
 };

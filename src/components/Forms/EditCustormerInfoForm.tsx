@@ -22,7 +22,7 @@ const phoneSchema = z.string().refine(
 );
 
 const EditCustormerInfoSchema = z.object({
-  fName: z.string().nonempty({ message: "This field is required" }),
+  fullName: z.string().nonempty({ message: "This field is required" }),
   email: z.string().trim().email({ message: "Please enter a valid email" }),
   phoneNumber: phoneSchema,
 });
@@ -47,7 +47,7 @@ const EditCustormerInfoForm = ({
   const form = useForm<TypeEditCustormerInfoFormData>({
     resolver: zodResolver(EditCustormerInfoSchema),
     defaultValues: {
-      fName: initialData.name,
+      fullName: initialData.name,
       email: initialData.email,
       phoneNumber: initialData.phonenumber,
     },
@@ -59,7 +59,7 @@ const EditCustormerInfoForm = ({
 
   useEffect(() => {
     reset({
-      fName: initialData.name,
+      fullName: initialData.name,
       email: initialData.email,
       phoneNumber: initialData.phonenumber,
     });
@@ -90,7 +90,7 @@ const EditCustormerInfoForm = ({
           <div className="flex flex-col gap-4 text-[#525252] font-geologica">
             <FormField
               control={form.control}
-              name="fName"
+              name="fullName"
               render={({ field, fieldState }) => (
                 <div className="flex flex-col gap-2">
                   <FormLabel className="text-[clamp(13px,1.2vw,14px)]">

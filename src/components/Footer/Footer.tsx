@@ -15,20 +15,21 @@ export default function Footer() {
       <div className="px-4 sm:px-5 md:px-6 ml:px-8 lg:px-12 grid grid-cols-1 sm:grid-cols-2 ml:grid-cols-[1fr_1fr_auto] items-start gap-6 sm:gap-8 ml:gap-10 lg:gap-12">
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-4 lg:gap-5">
-            <Link href="/">
-              <div className="flex items-center cursor-pointer gap-[5px]">
-                <Image
-                  width={100}
-                  height={100}
-                  src="/assets/images/logo.png"
-                  alt=""
-                  className="w-[50px] md:w-[58px] lg:w-[67px] h-auto object-cover"
-                />
+            <Link
+              href="/"
+              className="flex items-center cursor-pointer gap-[5px]"
+            >
+              <Image
+                width={100}
+                height={100}
+                src="/assets/images/logo.png"
+                alt=""
+                className="w-[50px] md:w-[58px] lg:w-[67px] h-auto object-cover"
+              />
 
-                <p className="font-prompt font-semibold text-[clamp(17px,1.9vw,24px)] text-[#03601A]">
-                  Agroconnect
-                </p>
-              </div>
+              <p className="font-prompt font-semibold text-[clamp(17px,1.9vw,24px)] text-[#03601A]">
+                Agroconnect
+              </p>
             </Link>
             <p className="text-[#00000099] text-[clamp(12.5px,1.2vw,14px)] font-poppins">
               AgriConnect brings you closer to the farm by connecting farmers
@@ -196,8 +197,8 @@ export default function Footer() {
             "/assets/images/americanExpress.png",
           ].map((item, index) => (
             <Image
-              width={100}
-              height={100}
+              width={120}
+              height={25}
               src={item}
               alt=""
               key={index}

@@ -41,6 +41,7 @@ export function DrawerDialog({
   ),
   contentCSS,
   headerClassName,
+  scrollAreaClassName,
 }: {
   children: React.ReactNode;
   open: boolean;
@@ -67,6 +68,7 @@ export function DrawerDialog({
   closeButtonClassName?: string;
   closeIcon?: React.ReactNode;
   headerClassName?: string;
+  scrollAreaClassName?: string;
 }) {
   const isMobile = useMediaQuery({
     query: "(max-width: 768px)",
@@ -101,19 +103,24 @@ export function DrawerDialog({
       {isMobile ? (
         <Drawer open={open} onOpenChange={close}>
           <DrawerTrigger asChild />
-          <DrawerContent className="px-4">
-            <DrawerHeader
-              className={cn(
-                "border-b border-[#6E737C] mb-2 py-2",
-                headerClassName,
-              )}
-            >
-              <DrawerTitle className="font-aeonik font-bold text-lg">
-                {title}
-              </DrawerTitle>
+          <DrawerContent
+            className={cn(
+              "px-4 h-full w-full",
+
+              sizeClass,
+              contentCSS,
+            )}
+          >
+            <DrawerHeader className={cn("", headerClassName)}>
+              <DrawerTitle className={titleCSS}>{title}</DrawerTitle>
               <DrawerDescription>{subTitle}</DrawerDescription>
             </DrawerHeader>
-            <div className="overflow-y-auto hide-scrollbar max-h-[65vh] pb-14">
+            <div
+              className={cn(
+                "overflow-y-auto hide-scrollbar max-h-[65vh] pb-5",
+                scrollAreaClassName,
+              )}
+            >
               <ScrollArea>{children}</ScrollArea>
             </div>
           </DrawerContent>

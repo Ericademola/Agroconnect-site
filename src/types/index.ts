@@ -69,4 +69,5 @@ export interface IuserData {
   addresses: {
     address: string;
   }[];
+  isLoggedIn: boolean;
 }

@@ -56,9 +56,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         return (
           <button onClick={() => setShow(!show)} type="button">
             {show ? (
-              <ShowEyeIcon className="w-5 h-5 md:w-6 md:h-6 text-[#828994]" />
+              <ShowEyeIcon className="w-4 h-4 md:w-5 md:h-5 text-[#828994]" />
             ) : (
-              <HideEyeIcon className="w-5 h-5 md:w-6 md:h-6 text-[#828994]" />
+              <HideEyeIcon className="w-4 h-4 md:w-5 md:h-5 text-[#828994]" />
             )}
           </button>
         );

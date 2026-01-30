@@ -1,6 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+// import { clearLocalStorage, getItemQuantity } from "@/hooks/getProducts";
+// import { useRouter } from "next/navigation";
 import { CreditCardIcon } from "@/Icons";
 import { CartItem, IPaymentMethod } from "@/types";
 import { useEffect, useState } from "react";
@@ -22,6 +24,7 @@ import { DrawerDialog } from "@/components/DrawerDialog/DrawerDialog";
 import EditCustormerInfoForm from "@/components/Forms/EditCustormerInfoForm";
 import { getUserData, updateUserData } from "@/hooks/getUserData";
 import PaymentCard from "@/components/PaymentCard/PaymentCard";
+import { clearLocalStorage } from "@/hooks/getProducts";
 
 export default function CheckoutPage() {
   const [basketItems, setBasketItems] = useState<CartItem[]>([]);
@@ -31,6 +34,12 @@ export default function CheckoutPage() {
   const [userInfo, setUserInfo] = useState(getUserData());
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
   const [onConfirmOrder, setOnConfirmOrder] = useState(false);
+  // const router = useRouter();
+  // const [loading, setLoading] = useState(false);
+  // const [paymentBtn, setPaymentBtn] = useState(true);
+  // const [successfulPayment, setSuccessfulPayment] = useState(false);
+  // const [summaryCart, setSummaryCart] = useState(true);
+  // const [orderId, setOrderId] = useState("");
 
   useEffect(() => {
     const stored = localStorage.getItem("BasketItems");
@@ -44,6 +53,20 @@ export default function CheckoutPage() {
     setUserInfo(data);
   }, []);
 
+  // const onCheckout = () => {
+  //   const randomId = `${Math.floor(Math.random() * 1000000)}BOT`;
+  //   setOrderId(randomId);
+  //   setLoading(true);
+
+  //   setTimeout(() => {
+  //     setPaymentBtn(false);
+  //     setSuccessfulPayment(true);
+  //     setSummaryCart(false);
+  //     localStorage.removeItem("BasketItems");
+  //     clearLocalStorage();
+  //   }, 1000);
+  // };
+
   const totalPrice = basketItems.reduce((sum, item) => {
     const addOnsTotal =
       item.addOns?.reduce((aSum, addOn) => aSum + addOn.price, 0) ?? 0;
@@ -54,12 +77,12 @@ export default function CheckoutPage() {
   const deliveryFee = 5000;
 
   const handleUpdateUserInfo = (data: {
-    fName: string;
+    fullName: string;
     email: string;
     phoneNumber: string;
   }) => {
     const updatedData = updateUserData({
-      userName: data.fName,
+      userName: data.fullName,
       email: data.email,
       phoneNumber: data.phoneNumber,
     });
@@ -71,6 +94,14 @@ export default function CheckoutPage() {
   const handleSelectAddress = (addressIndex: number) => {
     setSelectedAddressIndex(addressIndex);
     setOnChangeAddress(false);
+  };
+
+  const handlePaymentConfirm = () => {
+    setTimeout(() => {
+      localStorage.removeItem("BasketItems");
+      clearLocalStorage();
+      setOnConfirmOrder(false);
+    }, 2000);
   };
 
   return (
@@ -379,7 +410,7 @@ Payment confirmation may take up to 2 minutes."
             maximumFractionDigits: 2,
           })}`}
           onCancel={() => setOnConfirmOrder(false)}
-          handlePaymentConfirm={() => setOnConfirmOrder(false)}
+          handlePaymentConfirm={handlePaymentConfirm}
         />
       </DrawerDialog>
     </div>

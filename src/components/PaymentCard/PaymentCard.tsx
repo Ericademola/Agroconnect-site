@@ -22,7 +22,7 @@ const PaymentCard = ({
   handlePaymentConfirm,
 }: PaymentCardProps) => {
   const [copied, setCopied] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(accountNumber?.toString() ?? "");
@@ -32,6 +32,16 @@ const PaymentCard = ({
       console.error("Failed to copy: ", err);
     }
   };
+
+  const onConfirmClick = () => {
+    setLoading(true);
+    handlePaymentConfirm();
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  };
+
   return (
     <div className="flex flex-col gap-8">
       <div>
@@ -82,10 +92,12 @@ const PaymentCard = ({
         <Button
           variant="default"
           size="lg"
-          onClick={handlePaymentConfirm}
+          onClick={onConfirmClick}
           className="flex-1"
+          loading={loading}
+          disabled={loading}
         >
-          Add New Address
+          {loading ? "Processing..." : "I’ve Sent the Money"}
         </Button>
       </div>
     </div>

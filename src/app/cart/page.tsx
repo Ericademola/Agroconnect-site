@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/field";
 import { Checkbox } from "@/components/ui/checkbox";
 import { getProductById } from "@/hooks/getProducts";
+import EmptyPage from "@/components/EmptyPage/EmptyPage";
 
 export default function CartPage() {
   const [basketItems, setBasketItems] = useState<CartItem[]>([]);
@@ -83,32 +84,15 @@ export default function CartPage() {
   return (
     <div>
       {basketItems.length === 0 ? (
-        <div className="flex flex-col items-center justify-center gap-7 py-12">
-          <Image
-            src="/assets/avatars/emptyCart.svg"
-            alt="empty cart"
-            width={100}
-            height={100}
-            className="object-contain w-[120px] h-[120px] md:w-[160px] md:h-[160px] lg:w-[180px] lg:h-[180px] mx-auto"
-          />
-          <div className="text-[#00000099] flex flex-col items-center justify-center">
-            <h3 className="text-[clamp(16px,1.5vw,24px)] font-geologica font-medium">
-              Your basket’s feeling a little light
-            </h3>
-            <p className="text-[clamp(12px,1.3vw,14px)] font-poppins">
-              No worries, we’ve got plenty of farm-fresh produce waiting for you
-            </p>
-            <Button
-              variant="default"
-              size="lg"
-              className="flex items-center gap-2 mt-3"
-              href="/shop"
-            >
-              <CartIcon className="w-5 h-5" fill="#fff" />
-              Start Shopping
-            </Button>
-          </div>
-        </div>
+        <EmptyPage
+          title="Your basket is feeling a little light"
+          subtitle="No worries, we’ve got plenty of farm-fresh produce waiting for you"
+          image="/assets/avatars/emptyCart.svg"
+          altText="empty cart"
+          buttonText=" Start Shopping"
+          buttonIcon={<CartIcon className="w-5 h-5" fill="#fff" />}
+          buttonhref="/shop"
+        />
       ) : (
         <>
           <PageTitle
