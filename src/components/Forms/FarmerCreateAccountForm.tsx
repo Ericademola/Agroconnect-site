@@ -45,7 +45,7 @@ const FarmerCreateAccountSchema = z
 type TypeFarmerCreateAccountSchema = z.infer<typeof FarmerCreateAccountSchema>;
 
 interface FarmerCreateAccountFormProps {
-  onSubmit: (data: { email: string; phoneNumber: string }) => void;
+  onSubmit: (data: { email: string }) => void;
 }
 
 const FarmerCreateAccountForm = ({
@@ -74,7 +74,6 @@ const FarmerCreateAccountForm = ({
     await new Promise((resolve) => setTimeout(resolve, 800));
     onSubmit({
       email: data.email,
-      phoneNumber: data.phoneNumber,
     });
     form.reset();
   };
@@ -294,7 +293,7 @@ const FarmerCreateAccountForm = ({
                 type="submit"
                 variant="default"
                 size="lg"
-                className="w-ful"
+                className="w-full"
                 disabled={isSubmitting || !isValid}
               >
                 {isSubmitting ? (

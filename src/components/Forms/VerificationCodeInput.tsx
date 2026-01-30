@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 interface VerificationCodeInputProps {
   onVerify: (code: string) => void;
   email?: string;
+  phoneNumber?: string;
   loading?: boolean;
 }
 

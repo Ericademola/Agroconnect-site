@@ -228,7 +228,7 @@ const MainNavBar = () => {
                 >
                   Register
                 </Button>
-                <Button href="/" variant="secondary" size="lg">
+                <Button href="/login" variant="secondary" size="lg">
                   Login
                 </Button>
               </div>

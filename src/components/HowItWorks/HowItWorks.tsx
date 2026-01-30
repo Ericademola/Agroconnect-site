@@ -43,8 +43,8 @@ const HowItWorks = () => {
             <Image
               src={"/assets/images/howFruitBasket.png"}
               alt={"A farmer with farm products"}
-              width={100}
-              height={100}
+              width={50}
+              height={50}
               className="w-full h-[100px] sm:h-[138px] md:h-[100px] ml:h-[138px] object-cover md:object-contain rounded-br-[15px]"
             />
           </div>

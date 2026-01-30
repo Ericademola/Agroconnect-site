@@ -11,8 +11,8 @@ const ResetAuthCards = ({
   cardContent,
 }: ResetAuthCardsProps) => {
   return (
-    <div className="flex flex-col items-center gap-8">
-      <div className="flex flex-col items-center gap-3">
+    <div className="flex flex-col items-center gap-12">
+      <div className="flex flex-col items-center gap-5">
         <div className="flex items-center cursor-pointer gap-[5px]">
           <Image
             width={100}
@@ -26,7 +26,7 @@ const ResetAuthCards = ({
             Agroconnect
           </p>
         </div>
-        <div className="mt-5 mb-3 flex flex-col items-center text-[#000000CC]">
+        <div className=" flex flex-col items-center text-[#000000CC]">
           <h1 className="text-[clamp(20px,2.7vw,32px)] font-medium">{title}</h1>
           <div className="text-[clamp(12px,1.4vw,14px)] flex items-center gap-1 text-center">
             <p className="">{subTitle}</p>

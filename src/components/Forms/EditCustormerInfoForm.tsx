@@ -175,7 +175,7 @@ const EditCustormerInfoForm = ({
             type="submit"
             variant="default"
             size="lg"
-            className="w-ful"
+            className="w-full"
             disabled={isSubmitting || !formState.isValid}
           >
             {isSubmitting ? (

@@ -7,13 +7,12 @@ import ResetAuthCards from "@/components/ResetAuthCards/ResetAuthCards";
 import { CloseIcon } from "@/Icons";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import VerificationCodeInput from "@/components/ResetAuthCards/VerificationCodeInput";
+import VerificationCodeInput from "@/components/Forms/VerificationCodeInput";
 import PopUpUtility from "@/components/PopUtility/PopUtility";
 import Image from "next/image";
 
-type BuyerFormData = {
+type UserFormData = {
   email: string;
-  phoneNumber: string;
 };
 
 const CreateAccountPage = () => {
@@ -27,7 +26,7 @@ const CreateAccountPage = () => {
 
   const router = useRouter();
 
-  const handleFormSubmit = ({ email }: BuyerFormData) => {
+  const handleFormSubmit = ({ email }: UserFormData) => {
     setUserEmail(email);
     setOnVerify(true);
   };

@@ -43,18 +43,20 @@ const MobileMenu = ({ close }: { close: (value: boolean) => void }) => {
 
         <div className="flex flex-col items-center gap-4">
           <Button
-            href="/"
+            href="/createAccount"
             variant="default"
             size="lg"
             className="w-full text-base"
+            onClick={() => close(false)}
           >
             Register
           </Button>
           <Button
-            href="/"
+            href="/login"
             variant="secondary"
             size="lg"
             className="w-full text-base"
+            onClick={() => close(false)}
           >
             Login
           </Button>
