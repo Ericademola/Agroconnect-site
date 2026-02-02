@@ -25,7 +25,11 @@ import { Button } from "../ui/button";
 import FullScreenModal from "../FullScreenModal/FullScreenModal";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import { CART_UPDATED_EVENT, WISHLIST_UPDATED_EVENT } from "@/lib/events";
-import { getUserData } from "@/hooks/getUserData";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import MenuItems from "../MenuItems/MenuItems";
+import { usePathname } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
+import { capitalizeFirstLetter } from "@/utils/formatText";
 
 export default function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -58,7 +62,7 @@ export default function NavBar() {
       <div
         className={`
           transition-all duration-500 ease-in-out
-          ${isScrolled ? "mt-0" : "mt-2 md:mt-4 ml:mt-6"}
+          ${isScrolled ? "mt-0" : "mt-2 md:mt-3 ml:mt-4"}
         `}
       >
         <MainNavBar />
@@ -70,9 +74,7 @@ export default function NavBar() {
 const TopNavBar = () => {
   return (
     <>
-      {/* bg-fuchsia-400 sm:bg-emerald-400 md:bg-cyan-400 ml:bg-red-400
-      lg:bg-blue-400 xl:bg-indigo-800 */}
-      <nav className="bg-[#03601A] h-[40px] sm-[50px] md:h-[60px] ml:h-[80px] flex items-center justify-center md:justify-between text-white px-4 sm:px-5 md:px-6 ml:px-8 lg:px-12">
+      <nav className="bg-[#03601A] h-[40px] sm-[45px] md:h-[55px] ml:h-[70px] flex items-center justify-center md:justify-between text-white px-4 sm:px-5 md:px-6 ml:px-8 lg:px-12">
         <div className="hidden md:flex items-center gap-4 text-[clamp(14px,1.5vw,20px)] font-poppins font-medium">
           <Link href="/" className="flex items-center gap-1">
             <HomeIcon className="w-6 h-6 lg:w-7 lg:h-7" />
@@ -113,16 +115,27 @@ const MainNavBar = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchText, setSearchText] = useState("");
   const [open, setOpen] = useState(false);
-  const [userInfo, setUserInfo] = useState(getUserData());
+  const { userInfo } = useAuth();
+  const [popoverOpen, setPopoverOpen] = useState(false);
+  const [activeProfile, setActiveProfile] = useState<string>("buyer");
+
+  const pathname = usePathname();
+  const close = () => setOpen(false);
 
   useEffect(() => {
-    const data = getUserData();
-    setUserInfo(data);
-  }, []);
+    const storedProfile = sessionStorage.getItem("activeProfile");
 
-  const close = (value: boolean) => {
-    setOpen(value);
-  };
+    if (storedProfile) {
+      setActiveProfile(storedProfile);
+    } else {
+      setActiveProfile("buyer");
+      sessionStorage.setItem("activeProfile", "buyer");
+    }
+  }, [activeProfile]);
+
+  useEffect(() => {
+    close();
+  }, [pathname]);
 
   const updateCounts = () => {
     const countsForBasket = getTotalBasketCount();
@@ -155,7 +168,7 @@ const MainNavBar = () => {
     <div className="mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12">
       <header
         //bg-gradient-to-r from-[#8FE6A2] via-[#E3BF0F4D] to-[#8FE6A2]
-        className="bg-fuchsia-400 sm:bg-emerald-400 md:bg-cyan-400 ml:bg-red-400 lg:bg-blue-400 xl:bg-indigo-800 rounded-[15px] px-2 py-3 md:p-[14px] lg:p-4 flex items-center justify-between"
+        className="bg-fuchsia-400 sm:bg-emerald-400 md:bg-cyan-400 ml:bg-red-400 lg:bg-blue-400 xl:bg-indigo-800 rounded-[15px] px-2 md:px-4 p-3 flex items-center justify-between"
       >
         <div
           className="bg-white rounded-[8px] md:rounded-[15px] md:hidden flex items-center justify-center w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] md:w-[50px] md:h-[50px] cursor-pointer"
@@ -184,7 +197,7 @@ const MainNavBar = () => {
           <SearchInput
             setSearchText={setSearchText}
             leftIcon={false}
-            className="md:w-[300px] lg:w-[450px] ml:h-[50px] lg:h-[63px] border-none pr-0"
+            className="md:w-[300px] lg:w-[450px] ml:h-[40px] lg:h-[50px] border-none pr-0"
           />
         </div>
         <div className="flex items-center gap-5">
@@ -211,12 +224,39 @@ const MainNavBar = () => {
           </div>
           <div>
             {userInfo.isLoggedIn ? (
-              <div className="flex items-center gap-2 bg-[#F5F5F5] rounded-[15px] p-3">
-                <PersonIcon className="w-5 h-5" />
-                <p className="text-[#333333] text-[clamp(16px,1.8vw,20px)]">
-                  Hi, <span>{userInfo.userName}</span>
-                </p>
-                <DownIcon className="w-3 h-3" />
+              <div className="hidden md:block ">
+                <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
+                  <PopoverTrigger>
+                    <div className="flex items-center gap-2 bg-[#F5F5F5] rounded-[15px] p-3 cursor-pointer">
+                      <PersonIcon className="md:w-6 lg:w-10 md:h-6 lg:h-10" />
+                      <div className="text-left font-geologica">
+                        <p className="text-[#333333] text-[clamp(16px,1.8vw,18px)]">
+                          Hi, <span>{userInfo.userFullName}</span>
+                        </p>
+                        <p className="text-[#03601A] text-[clamp(12px,1.3vw,14px)]">
+                          {capitalizeFirstLetter(activeProfile)} account
+                        </p>
+                      </div>
+                      <DownIcon className="w-3 h-3 ml-2" />
+                    </div>
+                  </PopoverTrigger>
+                  <PopoverContent
+                    asChild
+                    className="bg-[#F5F5F5] border-none P-0 w-fit"
+                    sideOffset={6}
+                  >
+                    <div>
+                      <MenuItems
+                        close={() => setPopoverOpen(false)}
+                        className="px-1 py-0"
+                        itemsListClassName="gap-6 text-[clamp(16px,1.5vw,18px)]"
+                        secondClassName="gap-6 mb-0"
+                        activeProfile={activeProfile}
+                        setActiveProfile={setActiveProfile}
+                      />
+                    </div>
+                  </PopoverContent>
+                </Popover>
               </div>
             ) : (
               <div className="hidden md:flex items-center gap-4">

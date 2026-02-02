@@ -79,19 +79,19 @@ export function DrawerDialog({
   let sizeClass = "";
   switch (size) {
     case "xs":
-      sizeClass = "w-fit";
+      sizeClass = `${isMobile ? "w-full" : "w-fit"}`;
       break;
     case "sm":
-      sizeClass = "sm:max-w-lg";
+      sizeClass = `${isMobile ? "w-full" : "sm:max-w-lg"}`;
       break;
     case "md":
-      sizeClass = "sm:max-w-xl";
+      sizeClass = `${isMobile ? "w-full" : "sm:max-w-xl"}`;
       break;
     case "lg":
-      sizeClass = "sm:max-w-[50rem]";
+      sizeClass = `${isMobile ? "w-full" : "sm:max-w-[50rem]"}`;
       break;
     case "xl":
-      sizeClass = "sm:max-w-[55rem]";
+      sizeClass = `${isMobile ? "w-full" : "sm:max-w-[55rem]"}`;
       break;
 
     default:

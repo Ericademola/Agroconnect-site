@@ -2,15 +2,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
-import { MoneyJarIcon, OrderIcon, UserIcon, WalletIcon } from "@/Icons";
-import { Button } from "../ui/button";
 import Categories from "../Categories/Categories";
+import MenuItems from "../MenuItems/MenuItems";
 
-const MobileMenu = ({ close }: { close: (value: boolean) => void }) => {
+const MobileMenu = ({ close }: { close: () => void }) => {
   return (
     <div className="px-6 py-4 w-full flex flex-col">
       <div className="flex flex-col gap-7 mb-8">
-        <Link href="/" onClick={() => close(false)}>
+        <Link href="/" onClick={close}>
           <div className="flex items-center cursor-pointer gap-[5px]">
             <Image
               width={100}
@@ -25,41 +24,8 @@ const MobileMenu = ({ close }: { close: (value: boolean) => void }) => {
             </p>
           </div>
         </Link>
-        <div className="flex flex-col gap-[30px]">
-          {SidebarItems.map((item) => (
-            <Link
-              href={item.route}
-              key={item.label}
-              onClick={() => close(false)}
-              className="flex items-center gap-[10px]"
-            >
-              {item.icon}
-              <p className="text-[clamp(18px,1.8vw,24px)] text-[#333333] font-geologica font-extralight">
-                {item.label}
-              </p>
-            </Link>
-          ))}
-        </div>
-
-        <div className="flex flex-col items-center gap-4">
-          <Button
-            href="/createAccount"
-            variant="default"
-            size="lg"
-            className="w-full text-base"
-            onClick={() => close(false)}
-          >
-            Register
-          </Button>
-          <Button
-            href="/login"
-            variant="secondary"
-            size="lg"
-            className="w-full text-base"
-            onClick={() => close(false)}
-          >
-            Login
-          </Button>
+        <div className="">
+          <MenuItems close={close} />
         </div>
       </div>
       <hr className="-mx-5" />
@@ -81,26 +47,3 @@ const MobileMenu = ({ close }: { close: (value: boolean) => void }) => {
 };
 
 export default MobileMenu;
-
-const SidebarItems = [
-  {
-    label: "My profile",
-    route: "/",
-    icon: <UserIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:-h-6" />,
-  },
-  {
-    label: "My Orders",
-    route: "/",
-    icon: <OrderIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:-h-6" />,
-  },
-  {
-    label: "Food Savings",
-    route: "/",
-    icon: <MoneyJarIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:-h-6" />,
-  },
-  {
-    label: "Loan & Credit",
-    route: "/",
-    icon: <WalletIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:-h-6" />,
-  },
-];

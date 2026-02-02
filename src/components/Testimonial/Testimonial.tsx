@@ -32,7 +32,7 @@ const Testimonial = () => {
                 style={{ backgroundColor: testimonial.borderColor }}
               ></span>
               <h3 className="font-medium text-[clamp(13.5px,1.6vw,18px)] text-black">
-                {testimonial.userName}, {testimonial.occupation}
+                {testimonial.userFullName}, {testimonial.occupation}
               </h3>
               <div className="flex items-start gap-5">
                 <p className="text-[clamp(10px,1.4vw,13.5px)] text-[#00000099]">
@@ -40,7 +40,7 @@ const Testimonial = () => {
                 </p>
                 <Image
                   src={testimonial.profilePicture}
-                  alt={testimonial.userName}
+                  alt={testimonial.userFullName}
                   width={100}
                   height={100}
                   className="rounded-full w-[37px] sm:w-[40px] md:w-[50px] h-auto"
@@ -59,7 +59,7 @@ export default Testimonial;
 const Testimonials = [
   {
     userId: 1,
-    userName: "David Okon",
+    userFullName: "David Okon",
     profilePicture: "/assets/images/testimonial1.png",
     occupation: "Home Cook",
     testimonialText:
@@ -68,7 +68,7 @@ const Testimonials = [
   },
   {
     userId: 2,
-    userName: "Amina Yusuf",
+    userFullName: "Amina Yusuf",
     profilePicture: "/assets/images/testimonial2.png",
     occupation: "Cassava Farmer",
     testimonialText:
@@ -77,7 +77,7 @@ const Testimonials = [
   },
   {
     userId: 3,
-    userName: "Ngozi Ude",
+    userFullName: "Ngozi Ude",
     profilePicture: "/assets/images/testimonial3.png",
     occupation: "Grocery Seller",
     testimonialText:

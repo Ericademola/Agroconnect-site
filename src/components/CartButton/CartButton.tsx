@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { CartItem, IProducts } from "@/types";
-import { getItemQuantity } from "@/hooks/getProducts";
+import { getItemQuantity, getBasketItems } from "@/hooks/getProducts";
 import { CartIcon } from "@/Icons";
 import { cn } from "@/lib/utils";
 import DecrementAndIncrementButton from "./DecrementAndIncrementButton";
@@ -26,8 +26,6 @@ export default function CartButton({
 
   const { updateCart } = useCartActions(onQuantityChange);
 
-  const existingAddOns = item.addOns || [];
-
   useEffect(() => {
     const storedQty = getItemQuantity(item.productId);
     if (storedQty > 0) {
@@ -43,18 +41,31 @@ export default function CartButton({
       setLoading(false);
       setShowQtyButtons(true);
       setQuantity(1);
-      updateCart(item, 1, existingAddOns);
+      updateCart(item, 1, []);
     }, 900);
   };
 
   const handleIncrement = () => {
     const newQty = quantity + 1;
     setQuantity(newQty);
+
+    const basketItems = getBasketItems();
+    const cartItem = basketItems.find(
+      (cartItem) => cartItem.productId === item.productId,
+    );
+    const existingAddOns = cartItem?.addOns || [];
+
     updateCart(item, newQty, existingAddOns);
   };
 
   const handleDecrement = () => {
     const newQty = quantity - 1;
+
+    const basketItems = getBasketItems();
+    const cartItem = basketItems.find(
+      (cartItem) => cartItem.productId === item.productId,
+    );
+    const existingAddOns = cartItem?.addOns || [];
 
     if (newQty <= 0) {
       setQuantity(0);

@@ -2,7 +2,7 @@ import React from "react";
 
 interface IpageTitleProps {
   title: string;
-  description: string;
+  description?: string;
 }
 
 const PageTitle = ({ title, description }: IpageTitleProps) => {

@@ -8,6 +8,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import FooterForm from "../Forms/FooterForm";
 
 export default function Footer() {
   return (
@@ -175,10 +176,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="w-full ml:w-[300px] h-full bg-[#03601A] rounded-[20px] px-5 py-8">
+        <div className="w-full ml:w-[300px] h-full bg-[#03601A] rounded-[20px] px-5 py-4 flex flex-col gap-8">
           <h3 className="text-white text-base font-poppins font-medium">
             Be the First to Know; Fresh Offers, New Products & More
           </h3>
+          <FooterForm />
         </div>
       </div>
 

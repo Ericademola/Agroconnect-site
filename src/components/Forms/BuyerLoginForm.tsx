@@ -9,7 +9,7 @@ import { z } from "zod";
 import { Spinner } from "../ui/spinner";
 import { GoogleIcon } from "@/Icons";
 import { useRouter } from "next/navigation";
-import { getUserData } from "@/hooks/getUserData";
+import { useAuth } from "@/context/AuthContext";
 
 const BuyerLoginFormSchema = z.object({
   email: z.string().trim().email({ message: "Please enter a valid email" }),
@@ -26,6 +26,7 @@ interface BuyerLoginFormProps {
 
 const BuyerLoginForm = ({ onForgotPassWord }: BuyerLoginFormProps) => {
   const router = useRouter();
+  const { login } = useAuth();
 
   const form = useForm<TypeBuyerLoginFormSchema>({
     resolver: zodResolver(BuyerLoginFormSchema),
@@ -45,8 +46,8 @@ const BuyerLoginForm = ({ onForgotPassWord }: BuyerLoginFormProps) => {
   const onSubmit = async (data: TypeBuyerLoginFormSchema) => {
     await new Promise((resolve) => setTimeout(resolve, 800));
     console.log(data);
-    const loginState = getUserData();
-    loginState.isLoggedIn = true;
+
+    login();
 
     form.reset();
     router.push("/");

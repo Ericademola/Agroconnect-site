@@ -40,6 +40,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Progress } from "@/components/ui/progress";
+import { cn } from "@/lib/utils";
 
 export default function ProductDetails() {
   const [itemDetails, setItemDetails] = useState<IProducts | null>(null);
@@ -286,7 +288,7 @@ export default function ProductDetails() {
                             <div className="flex items-start justify-between">
                               <div>
                                 <h4 className="text-[clamp(14px,1.4vw,18px)] mb-1">
-                                  {review.userName}
+                                  {review.userFullName}
                                 </h4>
                                 <p className="text-[clamp(8px,1vw,10px)]">
                                   {review.reviewDate}
@@ -302,7 +304,7 @@ export default function ProductDetails() {
                       </div>
                     </div>
                     <div className="flex flex-col gap-4 md:gap-6 lg:gap-8">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ml:gap-8 lg:gap-12">
+                      <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-3 lg:gap-6">
                         <div className="bg-[#F5F5F5] rounded-[15px] px-4 lg:px-5 py-4 text-[clamp(16px,1.8vw,24px)] flex flex-col gap-5 items-center justify-center">
                           <h3 className="font-geologica font-medium text-center">
                             Average Rating
@@ -317,7 +319,35 @@ export default function ProductDetails() {
                             {itemDetails.reviews.length} reviews
                           </p>
                         </div>
-                        <div className="border border-[#0000001A] px-4 lg:px-5 py-4 rounded-[15px]"></div>
+                        <div className="border border-[#0000001A] px-4 lg:px-5 py-4 rounded-[15px] flex flex-col justify-between">
+                          {[
+                            { star: 5, quantity: 3 },
+                            { star: 4, quantity: 2 },
+                            { star: 3, quantity: 1 },
+                            { star: 2, quantity: 0 },
+                            { star: 1, quantity: 0 },
+                          ].map((item) => (
+                            <div
+                              key={item.star}
+                              className={cn(
+                                "grid grid-cols-[auto_1fr_auto] items-center gap-3 font-poppins",
+                                item.quantity === 0
+                                  ? "text-[#75757A]"
+                                  : "text-[#000000CC]",
+                              )}
+                            >
+                              <p className="text-[clamp(12px,1.2vw,14px)] font-medium whitespace-nowrap">
+                                {item.star} star
+                              </p>
+
+                              <Progress value={item.quantity} max={5} />
+
+                              <p className="text-[clamp(10px,1vw,12px)] tabular-nums">
+                                {item.quantity}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                       <div className="border border-[#0000001A] px-4 lg:px-5 py-4 rounded-[15px]">
                         <h3 className="text-[clamp(18px,1.8vw,24px)] font-geologica font-medium mb-3 md:mb-6">

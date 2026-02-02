@@ -1,8 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-// import { clearLocalStorage, getItemQuantity } from "@/hooks/getProducts";
-// import { useRouter } from "next/navigation";
 import { CreditCardIcon } from "@/Icons";
 import { CartItem, IPaymentMethod } from "@/types";
 import { useEffect, useState } from "react";
@@ -34,12 +32,6 @@ export default function CheckoutPage() {
   const [userInfo, setUserInfo] = useState(getUserData());
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
   const [onConfirmOrder, setOnConfirmOrder] = useState(false);
-  // const router = useRouter();
-  // const [loading, setLoading] = useState(false);
-  // const [paymentBtn, setPaymentBtn] = useState(true);
-  // const [successfulPayment, setSuccessfulPayment] = useState(false);
-  // const [summaryCart, setSummaryCart] = useState(true);
-  // const [orderId, setOrderId] = useState("");
 
   useEffect(() => {
     const stored = localStorage.getItem("BasketItems");
@@ -52,20 +44,6 @@ export default function CheckoutPage() {
     const data = getUserData();
     setUserInfo(data);
   }, []);
-
-  // const onCheckout = () => {
-  //   const randomId = `${Math.floor(Math.random() * 1000000)}BOT`;
-  //   setOrderId(randomId);
-  //   setLoading(true);
-
-  //   setTimeout(() => {
-  //     setPaymentBtn(false);
-  //     setSuccessfulPayment(true);
-  //     setSummaryCart(false);
-  //     localStorage.removeItem("BasketItems");
-  //     clearLocalStorage();
-  //   }, 1000);
-  // };
 
   const totalPrice = basketItems.reduce((sum, item) => {
     const addOnsTotal =
@@ -82,7 +60,7 @@ export default function CheckoutPage() {
     phoneNumber: string;
   }) => {
     const updatedData = updateUserData({
-      userName: data.fullName,
+      userFullName: data.fullName,
       email: data.email,
       phoneNumber: data.phoneNumber,
     });
@@ -144,7 +122,7 @@ export default function CheckoutPage() {
                     Customer Information
                   </h4>
                   <p className="text-black text-[clamp(14px,1.4vw,16px)]">
-                    {userInfo.userName}
+                    {userInfo.userFullName}
                   </p>
                   <p className="text-[#000000B2] text-[clamp(12px,1.2vw,14.5px)]">
                     {userInfo.email}
@@ -167,7 +145,10 @@ export default function CheckoutPage() {
                     Delivery Address
                   </h4>
                   <p className="text-black text-[clamp(13.5px,1.4vw,16px)]">
-                    {userInfo.addresses[selectedAddressIndex].address}
+                    {
+                      userInfo.deliveryAddresses[selectedAddressIndex]
+                        .fullAddress
+                    }
                   </p>
                 </div>
                 <Button
@@ -368,7 +349,7 @@ export default function CheckoutPage() {
       >
         <EditCustormerInfoForm
           initialData={{
-            name: userInfo.userName,
+            name: userInfo.userFullName,
             email: userInfo.email,
             phonenumber: userInfo.phoneNumber,
           }}
@@ -469,14 +450,20 @@ export const DeliveryAddress = ({
     setUserInfo(data);
   }, []);
 
-  const handleConfirm = () => {
-    onSelectAddress(selectedIndex);
+  const handleAddressClick = (index: number) => {
+    setSelectedIndex(index);
+    onSelectAddress(index);
+  };
+
+  const handleAddNewAddress = () => {
+    // This will be connected to open the new address form dialog
+    console.log("Open add new address form");
   };
 
   return (
-    <div className="flex flex-col gap-12 text-[#000000CC] font-geologica font-extralight">
-      <div className="flex flex-col gap-5 md:w-[80%] lg:w-[70%]">
-        {userInfo.addresses.map((address, index) => (
+    <div className="flex flex-col text-[#000000CC] font-geologica font-extralight">
+      <div className="flex flex-col gap-5 md:w-[80%] lg:w-[70%] lg:h-[60vh] overflow-y-auto hide-scrollbar">
+        {userInfo.deliveryAddresses.map((address, index) => (
           <div
             key={index}
             className={cn(
@@ -485,7 +472,7 @@ export const DeliveryAddress = ({
                 ? "border-[#C09706]"
                 : "border-[#0000001A]",
             )}
-            onClick={() => setSelectedIndex(index)}
+            onClick={() => handleAddressClick(index)}
           >
             <div className="flex items-center justify-between gap-2 border-b border-[#0000001A] pb-2 px-7">
               <h2 className="text-[clamp(16px,1.6vw,20px)]">
@@ -497,9 +484,11 @@ export const DeliveryAddress = ({
                 </p>
               )}
             </div>
-            <p className="text-[clamp(14px,1.4vw,16px)] text-[#000000B2] px-4">
-              {address.address}
-            </p>
+            <div className="text-[clamp(14px,1.4vw,16px)] text-[#000000B2] px-4 ">
+              <p>{address.fullName}</p>
+              <p>{address.phoneNumber}</p>
+              <p>{address.fullAddress}</p>
+            </div>
           </div>
         ))}
       </div>
@@ -511,7 +500,7 @@ export const DeliveryAddress = ({
         <Button
           variant="default"
           size="lg"
-          onClick={handleConfirm}
+          onClick={handleAddNewAddress}
           className="flex-1"
         >
           Add New Address

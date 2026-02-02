@@ -8,7 +8,6 @@ export const freshPickedProducts = [
     price: 2500.54,
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
-    isWatchList: true,
     productDetailImages: [
       "/assets/images/tomatoeDetail1.png",
       "/assets/images/tomatoeDetail2.png",
@@ -25,7 +24,7 @@ export const freshPickedProducts = [
       {
         reviewId: 1,
         userId: 1,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -33,7 +32,7 @@ export const freshPickedProducts = [
       {
         reviewId: 2,
         userId: 2,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -41,7 +40,7 @@ export const freshPickedProducts = [
       {
         reviewId: 3,
         userId: 3,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -49,7 +48,7 @@ export const freshPickedProducts = [
       {
         reviewId: 4,
         userId: 4,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -57,7 +56,7 @@ export const freshPickedProducts = [
       {
         reviewId: 5,
         userId: 5,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -93,7 +92,7 @@ export const freshPickedProducts = [
     price: 2500,
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
-    isWatchList: true,
+
     productDetailImages: [
       "/assets/images/tomatoeDetail1.png",
       "/assets/images/tomatoeDetail2.png",
@@ -110,7 +109,7 @@ export const freshPickedProducts = [
       {
         reviewId: 1,
         userId: 1,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -118,7 +117,7 @@ export const freshPickedProducts = [
       {
         reviewId: 2,
         userId: 2,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -126,7 +125,7 @@ export const freshPickedProducts = [
       {
         reviewId: 3,
         userId: 3,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -134,7 +133,7 @@ export const freshPickedProducts = [
       {
         reviewId: 4,
         userId: 4,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -142,7 +141,7 @@ export const freshPickedProducts = [
       {
         reviewId: 5,
         userId: 5,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -178,7 +177,7 @@ export const freshPickedProducts = [
     price: 2500,
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
-    isWatchList: true,
+
     productDetailImages: [
       "/assets/images/tomatoeDetail1.png",
       "/assets/images/tomatoeDetail2.png",
@@ -195,7 +194,7 @@ export const freshPickedProducts = [
       {
         reviewId: 1,
         userId: 1,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -203,7 +202,7 @@ export const freshPickedProducts = [
       {
         reviewId: 2,
         userId: 2,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -211,7 +210,7 @@ export const freshPickedProducts = [
       {
         reviewId: 3,
         userId: 3,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -219,7 +218,7 @@ export const freshPickedProducts = [
       {
         reviewId: 4,
         userId: 4,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -227,7 +226,7 @@ export const freshPickedProducts = [
       {
         reviewId: 5,
         userId: 5,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -263,7 +262,7 @@ export const freshPickedProducts = [
     price: 2500,
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
-    isWatchList: true,
+
     productDetailImages: [
       "/assets/images/tomatoeDetail1.png",
       "/assets/images/tomatoeDetail2.png",
@@ -280,7 +279,7 @@ export const freshPickedProducts = [
       {
         reviewId: 1,
         userId: 1,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -288,7 +287,7 @@ export const freshPickedProducts = [
       {
         reviewId: 2,
         userId: 2,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -296,7 +295,7 @@ export const freshPickedProducts = [
       {
         reviewId: 3,
         userId: 3,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -304,7 +303,7 @@ export const freshPickedProducts = [
       {
         reviewId: 4,
         userId: 4,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -312,7 +311,7 @@ export const freshPickedProducts = [
       {
         reviewId: 5,
         userId: 5,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -348,7 +347,7 @@ export const freshPickedProducts = [
     price: 2500,
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
-    isWatchList: true,
+
     productDetailImages: [
       "/assets/images/tomatoeDetail1.png",
       "/assets/images/tomatoeDetail2.png",
@@ -365,7 +364,7 @@ export const freshPickedProducts = [
       {
         reviewId: 1,
         userId: 1,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -373,7 +372,7 @@ export const freshPickedProducts = [
       {
         reviewId: 2,
         userId: 2,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -381,7 +380,7 @@ export const freshPickedProducts = [
       {
         reviewId: 3,
         userId: 3,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -389,7 +388,7 @@ export const freshPickedProducts = [
       {
         reviewId: 4,
         userId: 4,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -397,7 +396,7 @@ export const freshPickedProducts = [
       {
         reviewId: 5,
         userId: 5,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -433,7 +432,7 @@ export const freshPickedProducts = [
     price: 2500,
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
-    isWatchList: true,
+
     productDetailImages: [
       "/assets/images/tomatoeDetail1.png",
       "/assets/images/tomatoeDetail2.png",
@@ -450,7 +449,7 @@ export const freshPickedProducts = [
       {
         reviewId: 1,
         userId: 1,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -458,7 +457,7 @@ export const freshPickedProducts = [
       {
         reviewId: 2,
         userId: 2,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -466,7 +465,7 @@ export const freshPickedProducts = [
       {
         reviewId: 3,
         userId: 3,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -474,7 +473,7 @@ export const freshPickedProducts = [
       {
         reviewId: 4,
         userId: 4,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -482,7 +481,7 @@ export const freshPickedProducts = [
       {
         reviewId: 5,
         userId: 5,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -518,7 +517,7 @@ export const freshPickedProducts = [
     price: 2500,
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
-    isWatchList: true,
+
     productDetailImages: [
       "/assets/images/tomatoeDetail1.png",
       "/assets/images/tomatoeDetail2.png",
@@ -535,7 +534,7 @@ export const freshPickedProducts = [
       {
         reviewId: 1,
         userId: 1,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -543,7 +542,7 @@ export const freshPickedProducts = [
       {
         reviewId: 2,
         userId: 2,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -551,7 +550,7 @@ export const freshPickedProducts = [
       {
         reviewId: 3,
         userId: 3,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -559,7 +558,7 @@ export const freshPickedProducts = [
       {
         reviewId: 4,
         userId: 4,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -567,7 +566,7 @@ export const freshPickedProducts = [
       {
         reviewId: 5,
         userId: 5,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -603,7 +602,7 @@ export const freshPickedProducts = [
     price: 2500,
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
-    isWatchList: true,
+
     productDetailImages: [
       "/assets/images/tomatoeDetail1.png",
       "/assets/images/tomatoeDetail2.png",
@@ -620,7 +619,7 @@ export const freshPickedProducts = [
       {
         reviewId: 1,
         userId: 1,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -628,7 +627,7 @@ export const freshPickedProducts = [
       {
         reviewId: 2,
         userId: 2,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -636,7 +635,7 @@ export const freshPickedProducts = [
       {
         reviewId: 3,
         userId: 3,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -644,7 +643,7 @@ export const freshPickedProducts = [
       {
         reviewId: 4,
         userId: 4,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -652,7 +651,7 @@ export const freshPickedProducts = [
       {
         reviewId: 5,
         userId: 5,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -691,7 +690,7 @@ export const bestDealsProducts = [
     price: 2500,
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
-    isWatchList: true,
+
     productDetailImages: [
       "/assets/images/tomatoeDetail1.png",
       "/assets/images/tomatoeDetail2.png",
@@ -708,7 +707,7 @@ export const bestDealsProducts = [
       {
         reviewId: 1,
         userId: 1,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -716,7 +715,7 @@ export const bestDealsProducts = [
       {
         reviewId: 2,
         userId: 2,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -724,7 +723,7 @@ export const bestDealsProducts = [
       {
         reviewId: 3,
         userId: 3,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -732,7 +731,7 @@ export const bestDealsProducts = [
       {
         reviewId: 4,
         userId: 4,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -740,7 +739,7 @@ export const bestDealsProducts = [
       {
         reviewId: 5,
         userId: 5,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -776,7 +775,7 @@ export const bestDealsProducts = [
     price: 2500,
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
-    isWatchList: true,
+
     productDetailImages: [
       "/assets/images/tomatoeDetail1.png",
       "/assets/images/tomatoeDetail2.png",
@@ -793,7 +792,7 @@ export const bestDealsProducts = [
       {
         reviewId: 1,
         userId: 1,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -801,7 +800,7 @@ export const bestDealsProducts = [
       {
         reviewId: 2,
         userId: 2,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -809,7 +808,7 @@ export const bestDealsProducts = [
       {
         reviewId: 3,
         userId: 3,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -817,7 +816,7 @@ export const bestDealsProducts = [
       {
         reviewId: 4,
         userId: 4,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -825,7 +824,7 @@ export const bestDealsProducts = [
       {
         reviewId: 5,
         userId: 5,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -861,7 +860,7 @@ export const bestDealsProducts = [
     price: 2500,
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
-    isWatchList: true,
+
     productDetailImages: [
       "/assets/images/tomatoeDetail1.png",
       "/assets/images/tomatoeDetail2.png",
@@ -878,7 +877,7 @@ export const bestDealsProducts = [
       {
         reviewId: 1,
         userId: 1,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -886,7 +885,7 @@ export const bestDealsProducts = [
       {
         reviewId: 2,
         userId: 2,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -894,7 +893,7 @@ export const bestDealsProducts = [
       {
         reviewId: 3,
         userId: 3,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -902,7 +901,7 @@ export const bestDealsProducts = [
       {
         reviewId: 4,
         userId: 4,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -910,7 +909,7 @@ export const bestDealsProducts = [
       {
         reviewId: 5,
         userId: 5,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -946,7 +945,7 @@ export const bestDealsProducts = [
     price: 2500,
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
-    isWatchList: true,
+
     productDetailImages: [
       "/assets/images/tomatoeDetail1.png",
       "/assets/images/tomatoeDetail2.png",
@@ -963,7 +962,7 @@ export const bestDealsProducts = [
       {
         reviewId: 1,
         userId: 1,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -971,7 +970,7 @@ export const bestDealsProducts = [
       {
         reviewId: 2,
         userId: 2,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -979,7 +978,7 @@ export const bestDealsProducts = [
       {
         reviewId: 3,
         userId: 3,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -987,7 +986,7 @@ export const bestDealsProducts = [
       {
         reviewId: 4,
         userId: 4,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -995,7 +994,7 @@ export const bestDealsProducts = [
       {
         reviewId: 5,
         userId: 5,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -1031,7 +1030,7 @@ export const bestDealsProducts = [
     price: 2500,
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
-    isWatchList: true,
+
     productDetailImages: [
       "/assets/images/tomatoeDetail1.png",
       "/assets/images/tomatoeDetail2.png",
@@ -1048,7 +1047,7 @@ export const bestDealsProducts = [
       {
         reviewId: 1,
         userId: 1,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -1056,7 +1055,7 @@ export const bestDealsProducts = [
       {
         reviewId: 2,
         userId: 2,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -1064,7 +1063,7 @@ export const bestDealsProducts = [
       {
         reviewId: 3,
         userId: 3,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -1072,7 +1071,7 @@ export const bestDealsProducts = [
       {
         reviewId: 4,
         userId: 4,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -1080,7 +1079,7 @@ export const bestDealsProducts = [
       {
         reviewId: 5,
         userId: 5,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -1116,7 +1115,7 @@ export const bestDealsProducts = [
     price: 2500,
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
-    isWatchList: true,
+
     productDetailImages: [
       "/assets/images/tomatoeDetail1.png",
       "/assets/images/tomatoeDetail2.png",
@@ -1133,7 +1132,7 @@ export const bestDealsProducts = [
       {
         reviewId: 1,
         userId: 1,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -1141,7 +1140,7 @@ export const bestDealsProducts = [
       {
         reviewId: 2,
         userId: 2,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -1149,7 +1148,7 @@ export const bestDealsProducts = [
       {
         reviewId: 3,
         userId: 3,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -1157,7 +1156,7 @@ export const bestDealsProducts = [
       {
         reviewId: 4,
         userId: 4,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -1165,7 +1164,7 @@ export const bestDealsProducts = [
       {
         reviewId: 5,
         userId: 5,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -1201,7 +1200,7 @@ export const bestDealsProducts = [
     price: 2500,
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
-    isWatchList: true,
+
     productDetailImages: [
       "/assets/images/tomatoeDetail1.png",
       "/assets/images/tomatoeDetail2.png",
@@ -1218,7 +1217,7 @@ export const bestDealsProducts = [
       {
         reviewId: 1,
         userId: 1,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -1226,7 +1225,7 @@ export const bestDealsProducts = [
       {
         reviewId: 2,
         userId: 2,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -1234,7 +1233,7 @@ export const bestDealsProducts = [
       {
         reviewId: 3,
         userId: 3,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -1242,7 +1241,7 @@ export const bestDealsProducts = [
       {
         reviewId: 4,
         userId: 4,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -1250,7 +1249,7 @@ export const bestDealsProducts = [
       {
         reviewId: 5,
         userId: 5,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -1286,7 +1285,7 @@ export const bestDealsProducts = [
     price: 2500,
     description:
       "Sourced directly from smallholder farmers in Abeokuta, Ogun State, freshly harvested and sorted for top quality.",
-    isWatchList: true,
+
     productDetailImages: [
       "/assets/images/tomatoeDetail1.png",
       "/assets/images/tomatoeDetail2.png",
@@ -1303,7 +1302,7 @@ export const bestDealsProducts = [
       {
         reviewId: 1,
         userId: 1,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -1311,7 +1310,7 @@ export const bestDealsProducts = [
       {
         reviewId: 2,
         userId: 2,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -1319,7 +1318,7 @@ export const bestDealsProducts = [
       {
         reviewId: 3,
         userId: 3,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,
@@ -1327,7 +1326,7 @@ export const bestDealsProducts = [
       {
         reviewId: 4,
         userId: 4,
-        userName: "Oluwa Tobi",
+        userFullName: "Oluwa Tobi",
         reviewDate: "5 days ago",
         reviewText: "Good as they said ",
         rate: 2,
@@ -1335,7 +1334,7 @@ export const bestDealsProducts = [
       {
         reviewId: 5,
         userId: 5,
-        userName: "Tunde Akin",
+        userFullName: "Tunde Akin",
         reviewDate: "5 days ago",
         reviewText: "Always fresh and well packed. Will definitely order again",
         rate: 4,

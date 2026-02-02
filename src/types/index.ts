@@ -8,7 +8,6 @@ export interface IProducts {
   tagText: string;
   price: number;
   description: string;
-  isWatchList: boolean;
   productDetailImages: string[];
   productDetails: string;
   bestUsedFor: string;
@@ -23,7 +22,7 @@ export interface IProducts {
 export interface IReview {
   reviewId: number;
   userId: number;
-  userName: string;
+  userFullName: string;
   reviewDate: string;
   reviewText: string;
   rate: number;
@@ -62,12 +61,31 @@ export interface IPaymentMethod {
 
 export interface IuserData {
   userId: number;
+  userFullName: string;
   userName: string;
   profilePicture: string;
   email: string;
   phoneNumber: string;
-  addresses: {
-    address: string;
-  }[];
+  country: string;
+  state: string;
+  city: string;
+  accountType: string;
   isLoggedIn: boolean;
+  dateJoined: string;
+  totalOrders: number;
+  activeOrders: number;
+  wishlistItems: number;
+  myCashback: string;
+  deliveryAddresses: deliveryAddresses[];
+}
+
+export interface deliveryAddresses {
+  fullName: string;
+  phoneNumber: string;
+  state: string;
+  city: string;
+  fullAddress: string;
+  houseNumber: string;
+  area: string;
+  addtionalInfo: string;
 }
