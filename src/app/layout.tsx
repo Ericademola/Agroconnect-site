@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import localFont from "next/font/local";
 
 import "./globals.css";
@@ -11,10 +11,10 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 const geologica = localFont({
   src: [
@@ -73,7 +73,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${raleway.variable} ${geistSans.variable} ${geistMono.variable} ${geologica.variable} ${poppins.variable} ${prompt.variable} antialiased`}
+        className={`${raleway.variable} ${geistSans.variable} ${geologica.variable} ${poppins.variable} ${prompt.variable} antialiased`}
       >
         <AuthProvider>
           <ContentWrapper>{children}</ContentWrapper>

@@ -89,7 +89,7 @@ export default function CartButton({
           disabled={loading}
         >
           <CartIcon className="w-4 h-4 sm:w-5 sm:h-5" fill="#fff" />
-          {loading ? "Loading..." : "Add to Cart"}
+          {loading ? loading : "Add to Cart"}
         </Button>
       )}
 

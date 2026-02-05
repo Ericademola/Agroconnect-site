@@ -41,7 +41,7 @@ const Sidebar = () => {
             key: "2",
             label: "My Orders",
             icon: <OrderIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
-            route: "/",
+            route: "/order",
           },
           {
             key: "3",
@@ -141,6 +141,7 @@ const Sidebar = () => {
 
   const handleTabClick = (tab: string) => {
     setActivePage(tab);
+    router.push(sidebarItems.find((item) => item.label === tab)?.route ?? "/");
   };
 
   return (
@@ -158,7 +159,7 @@ const Sidebar = () => {
             {item.icon}
             <p
               className={cn(
-                "text-[#001906] font-geologica font-light text-[clamp(14px,1.6vw,18px)]",
+                "text-[#001906] font-geologica font-light text-[clamp(14px,1.5vw,18px)]",
                 item.label === "Logout" && "text-[#E63946]",
               )}
             >

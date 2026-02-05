@@ -131,7 +131,7 @@ const MainNavBar = () => {
       setActiveProfile("buyer");
       sessionStorage.setItem("activeProfile", "buyer");
     }
-  }, [activeProfile]);
+  }, []);
 
   useEffect(() => {
     close();
@@ -222,18 +222,21 @@ const MainNavBar = () => {
               </Badge>
             </Link>
           </div>
-          <div>
+          <div className="hidden md:block">
             {userInfo.isLoggedIn ? (
-              <div className="hidden md:block ">
+              <div>
                 <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
-                  <PopoverTrigger>
-                    <div className="flex items-center gap-2 bg-[#F5F5F5] rounded-[15px] p-3 cursor-pointer">
+                  <PopoverTrigger asChild>
+                    <div className="flex items-center gap-2 bg-[#F5F5F5] rounded-[15px] py-2 px-3 lg:p-3 cursor-pointer">
                       <PersonIcon className="md:w-6 lg:w-10 md:h-6 lg:h-10" />
                       <div className="text-left font-geologica">
                         <p className="text-[#333333] text-[clamp(16px,1.8vw,18px)]">
                           Hi, <span>{userInfo.userFullName}</span>
                         </p>
-                        <p className="text-[#03601A] text-[clamp(12px,1.3vw,14px)]">
+                        <p
+                          className="text-[#03601A] text-[clamp(12px,1.3vw,14px)]"
+                          suppressHydrationWarning
+                        >
                           {capitalizeFirstLetter(activeProfile)} account
                         </p>
                       </div>
@@ -259,18 +262,21 @@ const MainNavBar = () => {
                 </Popover>
               </div>
             ) : (
-              <div className="hidden md:flex items-center gap-4">
-                <Button
-                  href="/createAccount"
-                  variant="default"
-                  size="lg"
-                  className="h-[45px] lg:h-[48px]"
-                >
-                  Register
-                </Button>
-                <Button href="/login" variant="secondary" size="lg">
-                  Login
-                </Button>
+              <div className="flex items-center gap-4">
+                <Link href={"/createAccount"} passHref>
+                  <Button
+                    variant="default"
+                    size="lg"
+                    className="h-[45px] lg:h-[48px]"
+                  >
+                    Register
+                  </Button>
+                </Link>
+                <Link href="/login" passHref>
+                  <Button variant="secondary" size="lg">
+                    Login
+                  </Button>
+                </Link>
               </div>
             )}
           </div>

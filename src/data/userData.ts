@@ -23,7 +23,7 @@ export const userData = {
       city: "Lekki",
       fullAddress: "15 Admiralty Way, Lekki Phase 1, Lagos, Nigeria",
       houseNumber: "No. 15",
-      Area: "Lekki Phase 1",
+      area: "Lekki Phase 1",
       addtionalInfo: "Next to the Lekki Bus Stop",
     },
     {

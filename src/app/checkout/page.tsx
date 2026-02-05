@@ -23,6 +23,8 @@ import EditCustormerInfoForm from "@/components/Forms/EditCustormerInfoForm";
 import { getUserData, updateUserData } from "@/hooks/getUserData";
 import PaymentCard from "@/components/PaymentCard/PaymentCard";
 import { clearLocalStorage } from "@/hooks/getProducts";
+import { Order, saveOrder } from "@/hooks/getOrders";
+import { formatDeliveryDateRange } from "@/utils/formatDateRange";
 
 export default function CheckoutPage() {
   const [basketItems, setBasketItems] = useState<CartItem[]>([]);
@@ -75,10 +77,32 @@ export default function CheckoutPage() {
   };
 
   const handlePaymentConfirm = () => {
+    const random = Math.floor(Math.random() * 100000);
+
+    const newOrder: Order = {
+      orderId: `Agro${random}`,
+      items: basketItems,
+      totalAmount: totalPrice,
+      deliveryFee: deliveryFee,
+      orderDate: new Date().toISOString(),
+      orderStatus: "DELIVERED",
+      paymentMethod: paymentMethod,
+      deliveryAddress: userInfo.deliveryAddresses[selectedAddressIndex],
+      expectedDeliveryDate: formatDeliveryDateRange(3, 2),
+      deliveryType: "Home delivery",
+    };
+
+    // Save order to localStorage
+    saveOrder(newOrder);
+
+    // Clear cart after successful order
     setTimeout(() => {
       localStorage.removeItem("BasketItems");
       clearLocalStorage();
       setOnConfirmOrder(false);
+
+      // Optional: redirect to orders page or show success message
+      // router.push('/orders');
     }, 2000);
   };
 
@@ -257,14 +281,14 @@ export default function CheckoutPage() {
                           ₦{item.price.toLocaleString()}
                         </p>
                         <p className="text-[#000000CC] text-[clamp(12px,1.2vw,14px)]">
-                          {item.addOns ? (
+                          {item.addOns?.length > 0 && (
                             <>
-                              +{" "}
-                              {`₦${item.addOns.reduce((sum, addOn) => sum + addOn.price, 0).toLocaleString()}`}{" "}
+                              + ₦
+                              {item.addOns
+                                .reduce((sum, addOn) => sum + addOn.price, 0)
+                                .toLocaleString()}{" "}
                               add on
                             </>
-                          ) : (
-                            ""
                           )}
                         </p>
                       </div>
@@ -398,7 +422,7 @@ Payment confirmation may take up to 2 minutes."
   );
 }
 
-const PaymentMethod: IPaymentMethod[] = [
+export const PaymentMethod: IPaymentMethod[] = [
   {
     methodName: "Debit/Credit Card",
     description: "Visa, Mastercard, Verve",

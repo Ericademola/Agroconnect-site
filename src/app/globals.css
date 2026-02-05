@@ -196,9 +196,9 @@ body {
 @media screen and (min-width: 768px) {
   .all-sides-shadow-xl {
     box-shadow:
-      0 15px 15px -5px rgba(0, 0, 0, 0.1),
-      0 5px 5px -5px rgba(0, 0, 0, 0.04),
-      0 -15px 15px -5px rgba(0, 0, 0, 0.03),
-      0 -5px 5px -5px rgba(0, 0, 0, 0.04);
+      0 12px 12px -5px rgba(0, 0, 0, 0.095),
+      0 3px 3px -5px rgba(0, 0, 0, 0.04),
+      0 -12px 12px -5px rgba(0, 0, 0, 0.03),
+      0 -3px 3px -5px rgba(0, 0, 0, 0.04);
   }
 }

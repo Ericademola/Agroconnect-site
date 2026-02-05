@@ -62,7 +62,7 @@ const WishListPage = () => {
                     {item.famersDetails.farmerState} State.
                   </p>
                   <p className="font-semibold text-[#1E1E1E] text-xl">
-                    ₦{item.price}
+                    ₦{item.price.toLocaleString()}
                   </p>
 
                   <div className="mt-auto grid grid-cols-[1fr_auto] items-end gap-[23px] w-full">

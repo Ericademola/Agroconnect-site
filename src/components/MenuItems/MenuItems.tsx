@@ -40,7 +40,7 @@ const MenuItems = ({
     },
     {
       label: "My Orders",
-      route: "/",
+      route: "/order",
       icon: <OrderIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
     },
     {
@@ -92,7 +92,7 @@ const MenuItems = ({
   };
 
   return (
-    <div className={cn(" py-4 w-full flex flex-col", className)}>
+    <div className={cn("py-4 w-full flex flex-col", className)}>
       <div className={cn("flex flex-col gap-7 mb-8", secondClassName)}>
         <div
           className={cn(
@@ -127,25 +127,26 @@ const MenuItems = ({
         </div>
 
         {!userInfo.isLoggedIn && (
-          <div className="flex flex-col items-center gap-4">
-            <Button
-              href="/createAccount"
-              size="lg"
-              className="w-full text-[clamp(14px,1.4vw,16px)]"
-              onClick={close}
-            >
-              Register
-            </Button>
-
-            <Button
-              href="/login"
-              variant="secondary"
-              size="lg"
-              className="w-full text-[clamp(14px,1.4vw,16px)]"
-              onClick={close}
-            >
-              Login
-            </Button>
+          <div className="flex flex-col gap-4 w-full">
+            <Link href="/createAccount" passHref>
+              <Button
+                size="lg"
+                className="w-full text-[clamp(14px,1.4vw,16px)]"
+                onClick={close}
+              >
+                Register
+              </Button>
+            </Link>
+            <Link href="/login" passHref>
+              <Button
+                variant="secondary"
+                size="lg"
+                className="w-full text-[clamp(14px,1.4vw,16px)]"
+                onClick={close}
+              >
+                Login
+              </Button>
+            </Link>
           </div>
         )}
       </div>
