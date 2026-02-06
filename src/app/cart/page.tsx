@@ -102,7 +102,7 @@ export default function CartPage() {
           <div className="mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 pt-3 md:pt-6 pb-32 flex flex-col gap-4">
             <div>
               <Breadcrumb>
-                <BreadcrumbList className="text-[#787878CC] text-sm md:text-lg font-poppins">
+                <BreadcrumbList className="text-[#787878CC]">
                   <BreadcrumbItem>
                     <BreadcrumbLink asChild>
                       <Link href="/">Home</Link>

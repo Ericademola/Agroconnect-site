@@ -1249,7 +1249,7 @@ export const PackedOrderIcon = ({ width, height, className }: IProps) => (
     <path
       d="M6 12L8 13M17 4L7 9M8.326 9.691L5.405 8.278C3.802 7.502 3 7.114 3 6.5C3 5.886 3.802 5.498 5.405 4.722L8.325 3.309C10.13 2.436 11.03 2 12 2C12.97 2 13.871 2.436 15.674 3.309L18.595 4.722C20.198 5.498 21 5.886 21 6.5C21 7.114 20.198 7.502 18.595 8.278L15.675 9.691C13.87 10.564 12.97 11 12 11C11.03 11 10.129 10.564 8.326 9.691Z"
       stroke="white"
-      stroke-width="1.5"
+      strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
     />

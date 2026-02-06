@@ -26,6 +26,7 @@ import {
   PersonIcon,
   PhoneIcon,
 } from "@/Icons";
+import OrderTrackingStepper from "@/components/OrderTrackingStepper/OrderTrackingStepper";
 
 export default function TrackOrder() {
   const params = useParams();
@@ -64,6 +65,7 @@ export default function TrackOrder() {
       date: "Sept 15, 2025",
       time: "10:45 AM",
       icon: <OrderPlacedIcon className="w-5 h-5 md:w-6 md:h-6" />,
+      status: "ORDER PLACED" as const,
     },
     {
       title: "Confirmed",
@@ -71,6 +73,7 @@ export default function TrackOrder() {
       date: "Sept 15, 2025",
       time: "11:45 AM",
       icon: <ConfirmedOrderIcon className="w-5 h-5 md:w-6 md:h-6" />,
+      status: "CONFIRMED" as const,
     },
     {
       title: "Packed",
@@ -78,13 +81,15 @@ export default function TrackOrder() {
       date: "Sept 16, 2025",
       time: "10:45 AM",
       icon: <PackedOrderIcon className="w-5 h-5 md:w-6 md:h-6" />,
+      status: "PACKED" as const,
     },
     {
       title: "Dispatched",
       description: "Driver has picked up your order",
       date: "Sept 18, 2025",
       time: "10:45 AM",
-      icon: <DispatchBusIcon className="w-5 h-5 md:w-6 md:h-6" />,
+      icon: <DispatchBusIcon className="w-5 h-5 md:w-6 md:h-6" fill="#fff" />,
+      status: "DISPATCHED" as const,
     },
     {
       title: "Delivered",
@@ -92,16 +97,17 @@ export default function TrackOrder() {
       date: "Sept 20, 2025",
       time: "10:45 AM",
       icon: <DeliveredOrderIcon className="w-5 h-5 md:w-6 md:h-6" />,
+      status: "DELIVERED" as const,
     },
   ];
 
   return (
     <>
       <PageTitle
-        title="Track Order"
+        title="My Orders"
         breadcrumb={
           <Breadcrumb>
-            <BreadcrumbList className="text-white text-sm md:text-lg font-poppins">
+            <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
                   <Link href="/">Home</Link>
@@ -115,26 +121,18 @@ export default function TrackOrder() {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href={`/order/${order.orderId}`}>Order Details</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage className="text-white/70">
-                  Track Order
-                </BreadcrumbPage>
+                <BreadcrumbPage>Track Order</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         }
       />
 
-      <div className="grid md:grid-cols-[auto_1fr] items-start md:gap-5 mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 mt-8">
+      <div className="grid md:grid-cols-[auto_1fr] items-start md:gap-5 mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 mt-6 md:mt-8">
         <div className="all-sides-shadow-xl rounded-[15px] py-8 hidden md:block">
           <Sidebar />
         </div>
-        <div className="flex flex-col gap-5 md:gap-6 lg:gap-8 font-geologica text-[#00000099] all-sides-shadow-xl rounded-[15px] px-4 md:px-4 lg:px-6 py-5 md:pt-5 md:pb-10 mb-16">
+        <div className="flex flex-col gap-5 md:gap-6 lg:gap-8 font-geologica text-[#00000099] all-sides-shadow-xl rounded-[15px] md:px-4 lg:px-6 md:py-5 md:pb-10 mb-16">
           <div>
             <h1 className="text-[clamp(16px,1.8vw,22px)] font-medium leading-tight">
               Track Order
@@ -143,31 +141,15 @@ export default function TrackOrder() {
               Order ID: {order.orderId}
             </p>
           </div>
-          <div className="rounded-[15px] border-[0.5px] border-[#0000001A] py-4 px-5 all-sides-shadow-xl font-poppins text-black flex items-center justify-between text-center">
-            {deliverySteps.map((step, index) => (
-              <div
-                key={index}
-                className="flex flex-col justify-center items-center gap-4"
-              >
-                <div className="flex flex-col items-center">
-                  <h3 className="text-[clamp(14px,1.4vw,16px)]">
-                    {step.title}
-                  </h3>
-                  <p className="text-[clamp(8px,0.8vw,10px)] font-light">
-                    {step.description}
-                  </p>
-                </div>
-                <div className="w-[50px] h-[50px] border-2 border-[#C2C2C2BD] rounded-full flex flex-col items-center justify-center bg-[#03601A]">
-                  {step.icon}
-                </div>
-                <div className=" text-[clamp(8px,0.8vw,10px)] flex flex-col items-center">
-                  <p>{step.date}</p>
-                  <p>{step.time}</p>
-                </div>
-              </div>
-            ))}
+          <div>
+            {/* Order Tracking Stepper */}
+            <OrderTrackingStepper
+              order={order}
+              steps={deliverySteps}
+              currentStepIndex={3}
+            />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-5 md:gap-10 lg:gap-20 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-5 ml:gap-10 lg:gap-20 items-start">
             <div className="rounded-[15px] border-[0.5px] border-[#0000001A] py-4 px-5 flex flex-col gap-4 all-sides-shadow-xl">
               <div className="flex items-center gap-2">
                 <DispatchBusIcon className="w-5 h-5" />
@@ -199,7 +181,7 @@ export default function TrackOrder() {
                     </p>
                   </div>
                 </div>
-                <div className="flex flex-col md:flex-row items-center gap-4 justify-between">
+                <div className="flex flex-col ml:flex-row ml:items-center gap-4 justify-between">
                   <div>
                     <h4 className="text-[clamp(10px,1.3vw,14px)] font-light text-[#00000099]">
                       Phone Number

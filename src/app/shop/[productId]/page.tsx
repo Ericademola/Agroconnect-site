@@ -104,7 +104,7 @@ export default function ProductDetails() {
         <div className="mx-4 sm:mx-8 md:mx-12 ml:mx-16 lg:mx-18 flex flex-col">
           <div className="mb-4">
             <Breadcrumb>
-              <BreadcrumbList className="text-[#787878CC] text-sm md:text-lg font-poppins">
+              <BreadcrumbList className="text-[#787878CC]">
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
                     <Button

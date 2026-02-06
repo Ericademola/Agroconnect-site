@@ -87,7 +87,7 @@ export default function OrderDetails() {
         title="My Orders"
         breadcrumb={
           <Breadcrumb>
-            <BreadcrumbList className="text-white text-sm md:text-lg font-poppins">
+            <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
                   <Link href="/">Home</Link>
@@ -101,20 +101,18 @@ export default function OrderDetails() {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage className="text-white/70">
-                  Order Details
-                </BreadcrumbPage>
+                <BreadcrumbPage>Order Details</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         }
       />
 
-      <div className="grid md:grid-cols-[auto_1fr] items-start md:gap-5 mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 mt-8">
+      <div className="grid md:grid-cols-[auto_1fr] items-start md:gap-5 mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 mt-6 md:mt-8">
         <div className="all-sides-shadow-xl rounded-[15px] py-8 hidden md:block">
           <Sidebar />
         </div>
-        <div className="flex flex-col gap-5 md:gap-6 lg:gap-8 font-geologica text-[#00000099] all-sides-shadow-xl rounded-[15px] md:px-4 lg:px-6 md:pt-5 md:pb-10 mb-16">
+        <div className="flex flex-col gap-5 md:gap-6 lg:gap-8 font-geologica text-[#00000099] all-sides-shadow-xl rounded-[15px] md:px-4 lg:px-6 md:pb-10 mb-16">
           <div className="flex items-start justify-between">
             <div>
               <h1 className="text-[clamp(16px,1.8vw,22px)] font-medium leading-tight">

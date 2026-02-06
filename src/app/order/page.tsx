@@ -69,7 +69,7 @@ const MyOrder = () => {
         breadcrumb={
           <div>
             <Breadcrumb>
-              <BreadcrumbList className="text-white text-sm md:text-lg font-poppins">
+              <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
                     <Link href="/">Home</Link>
@@ -77,16 +77,14 @@ const MyOrder = () => {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbPage className="text-white/70">
-                    My Orders
-                  </BreadcrumbPage>
+                  <BreadcrumbPage>My Orders</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         }
       />
-      <div className="grid md:grid-cols-[auto_1fr] items-start md:gap-5 md:mx-6 ml:mx-8 lg:mx-12 mt-8">
+      <div className="grid md:grid-cols-[auto_1fr] items-start md:gap-5 md:mx-6 ml:mx-8 lg:mx-12 mt-6 md:mt-8">
         <div className="all-sides-shadow-xl rounded-[15px] py-8 hidden md:block">
           <Sidebar />
         </div>

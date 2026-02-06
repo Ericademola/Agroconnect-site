@@ -47,7 +47,7 @@ const Profile = () => {
   return (
     <>
       <PageTitle title="My Profile" />
-      <div className="grid md:grid-cols-[auto_1fr] md:gap-5 mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 mt-8">
+      <div className="grid md:grid-cols-[auto_1fr] md:gap-5 mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 mt-6 md:mt-8">
         <div className="all-sides-shadow-xl rounded-[15px] py-8 hidden md:block">
           <Sidebar />
         </div>

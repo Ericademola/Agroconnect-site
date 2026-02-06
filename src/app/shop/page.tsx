@@ -82,7 +82,7 @@ const ShopPage = () => {
       <div className="mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 py-3 md:py-6 flex flex-col gap-6 md:gap-12">
         <div>
           <Breadcrumb>
-            <BreadcrumbList className="text-[#787878CC] text-sm md:text-lg font-poppins">
+            <BreadcrumbList className="text-[#787878CC]">
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
                   <Link href="/">Home</Link>
