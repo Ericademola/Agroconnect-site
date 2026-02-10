@@ -1,4 +1,3 @@
-// app/orders/[orderId]/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -109,10 +108,10 @@ export default function OrderDetails() {
       />
 
       <div className="grid md:grid-cols-[auto_1fr] items-start md:gap-5 mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 mt-6 md:mt-8">
-        <div className="all-sides-shadow-xl rounded-[15px] py-8 hidden md:block">
+        <div className="all-sides-shadow-xl rounded-2xl py-8 hidden md:block">
           <Sidebar />
         </div>
-        <div className="flex flex-col gap-5 md:gap-6 lg:gap-8 font-geologica text-[#00000099] all-sides-shadow-xl rounded-[15px] md:px-4 lg:px-6 md:pb-10 mb-16">
+        <div className="flex flex-col gap-5 md:gap-6 lg:gap-8 font-geologica text-[#00000099] all-sides-shadow-xl rounded-2xl md:px-4 lg:px-6 md:pb-10 mb-16">
           <div className="flex items-start justify-between">
             <div>
               <h1 className="text-[clamp(16px,1.8vw,22px)] font-medium leading-tight">
@@ -133,7 +132,7 @@ export default function OrderDetails() {
             )}
           </div>
           <div className="grid ml:grid-cols-[1.2fr_1.1fr] xl:grid-cols-2 gap-5">
-            <div className="rounded-[15px] border-[0.5px] border-[#0000001A] pt-4 pb-6 flex flex-col gap-4 divide-y divide-[#0000001A]">
+            <div className="rounded-2xl border-[0.5px] border-[#0000001A] pt-4 pb-6 flex flex-col gap-4 divide-y divide-[#0000001A]">
               <span className="px-5 pb-4">
                 <h2 className="font-medium text-[clamp(15px,1.6vw,20px)]">
                   Order Items
@@ -147,7 +146,7 @@ export default function OrderDetails() {
                       className="flex flex-col ml:items-center gap-5 pb-6 px-3 md:px-5"
                     >
                       <div className="grid grid-cols-[auto_1fr] gap-3">
-                        <div className="border border-[#0000001A] rounded-[15px] p-2 flex items-center justify-center">
+                        <div className="border border-[#0000001A] rounded-2xl p-2 flex items-center justify-center">
                           <Image
                             src={item.productImage}
                             alt={item.productName}
@@ -210,7 +209,7 @@ export default function OrderDetails() {
                 </div>
               </div>
             </div>
-            <div className="rounded-[15px] border-[0.5px] border-[#0000001A] py-4 flex flex-col gap-4 divide-y divide-[#0000001A]">
+            <div className="rounded-2xl border-[0.5px] border-[#0000001A] py-4 flex flex-col gap-4 divide-y divide-[#0000001A]">
               <span className="px-5 pb-4">
                 <h2 className="font-medium text-[clamp(15px,1.6vw,20px)]">
                   Payment Summary
@@ -265,7 +264,7 @@ export default function OrderDetails() {
               </div>
             </div>
           </div>
-          <div className="rounded-[15px] border-[0.5px] border-[#0000001A] py-4 flex flex-col gap-4 divide-y divide-[#0000001A] text-black">
+          <div className="rounded-2xl border-[0.5px] border-[#0000001A] py-4 flex flex-col gap-4 divide-y divide-[#0000001A] text-black">
             <span className="px-5 pb-4">
               <h2 className="font-medium text-[clamp(15px,1.6vw,20px)] text-[#00000099]">
                 Order Summary
@@ -328,7 +327,7 @@ export default function OrderDetails() {
               </div>
             </div>
           </div>
-          <div className="rounded-[15px] border-[0.5px] border-[#0000001A] py-4 flex flex-col gap-4 divide-y divide-[#0000001A] text-black">
+          <div className="rounded-2xl border-[0.5px] border-[#0000001A] py-4 flex flex-col gap-4 divide-y divide-[#0000001A] text-black">
             <span className="px-5 pb-4">
               <h2 className="font-medium text-[clamp(15px,1.6vw,20px)] text-[#00000099]">
                 Delivery Details

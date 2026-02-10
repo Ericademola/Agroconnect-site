@@ -48,20 +48,20 @@ const Profile = () => {
     <>
       <PageTitle title="My Profile" />
       <div className="grid md:grid-cols-[auto_1fr] md:gap-5 mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 mt-6 md:mt-8">
-        <div className="all-sides-shadow-xl rounded-[15px] py-8 hidden md:block">
+        <div className="all-sides-shadow-xl rounded-2xl py-8 hidden md:block">
           <Sidebar />
         </div>
-        <div className="flex flex-col gap-6 font-geologica text-[#000000CC] all-sides-shadow-xl rounded-[15px] md:px-4 lg:px-6 md:py-5">
-          <div className="bg-transparent md:bg-[#F5F5F5] rounded-[15px] md:py-5 md:px-4 grid gap-6">
-            <div className="grid grid-cols-[auto_1fr] gap-3 items-center bg-[#F5F5F5] md:bg-transparent  px-3 py-2 md:p-0 rounded-[15px]">
-              <div className="h-[110xp] w-[100px] rounded-[15px] flex items-center justify-center">
+        <div className="flex flex-col gap-6 font-geologica text-[#000000CC] all-sides-shadow-xl rounded-2xl md:px-4 lg:px-6 md:py-5">
+          <div className="bg-transparent md:bg-[#F5F5F5] rounded-2xl md:py-5 md:px-4 grid gap-6">
+            <div className="grid grid-cols-[auto_1fr] gap-3 items-center bg-[#F5F5F5] md:bg-transparent  px-3 py-2 md:p-0 rounded-2xl">
+              <div className="h-[110xp] w-[100px] rounded-2xl flex items-center justify-center">
                 {userInfo.profilePicture ? (
                   <Image
                     src={userInfo.profilePicture}
                     width={100}
                     height={100}
                     alt="profile"
-                    className="object-contain rounded-[15px] "
+                    className="object-contain rounded-2xl "
                   />
                 ) : (
                   <Image
@@ -106,7 +106,7 @@ const Profile = () => {
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="bg-white border border-[#0000001A] md:border-none rounded-[10px] md:rounded-[15px] px-1 md:px-3 py-3 md:py-4 flex flex-col gap-2 md:gap-5"
+                  className="bg-white border border-[#0000001A] md:border-none rounded-[10px] md:rounded-2xl px-1 md:px-3 py-3 md:py-4 flex flex-col gap-2 md:gap-5"
                 >
                   <h4 className="text-[clamp(10px,1.4vw,15px)] font-extralight">
                     {item.name}
@@ -116,7 +116,7 @@ const Profile = () => {
               ))}
             </div>
           </div>
-          <div className="border border-[#0000001A] rounded-[15px] py-8 px-5 grid lg:grid-cols-[2fr_1fr]">
+          <div className="border border-[#0000001A] rounded-2xl py-8 px-5 grid lg:grid-cols-[2fr_1fr]">
             <div className="flex flex-col gap-10 lg:gap-6">
               <div className="w-full grid md:grid-cols-[1fr_1.5fr] items-center justify-start gap-4">
                 {[
@@ -175,7 +175,7 @@ const Profile = () => {
                     {userInfo.deliveryAddresses.map((address, index) => (
                       <div
                         key={index}
-                        className="border border-[#0000001A] rounded-[15px] grid grid-cols-[1fr_auto] mb-4"
+                        className="border border-[#0000001A] rounded-2xl grid grid-cols-[1fr_auto] mb-4"
                       >
                         <p className="text-[clamp(14px,1.7vw,16px)] px-4 py-3 font-light">
                           {address.fullAddress}

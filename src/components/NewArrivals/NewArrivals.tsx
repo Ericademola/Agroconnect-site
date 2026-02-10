@@ -11,8 +11,8 @@ const NewArrivals = () => {
           New Arrivals
         </h2>
         <p className="text-[#00000099] text-[clamp(14px,1.8vw,20px)] font-poppins">
-          {`See what’s fresh, what’s trending, and what you’ll want to grab before
-          it’s gone`}
+          {`See what's fresh, what's trending, and what you'll want to grab before
+          it's gone`}
         </p>
       </span>
       <ArrivalCarousel />

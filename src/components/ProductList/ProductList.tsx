@@ -23,7 +23,7 @@ export const FreshPickedProducts = () => {
           See all
         </Button>
       </div>
-      <Catalogue category="fresh" sliceLimit={4} />
+      <Catalogue category="fresh" sliceLimit={4} actionType="buy" />
     </div>
   );
 };
@@ -33,13 +33,13 @@ export const BestDealsProducts = () => {
     <div className="flex flex-col gap-[30px]">
       <div className="flex items-center justify-between">
         <h2 className="text-[#000000CC] text-[clamp(16px,2.9vw,32px)] font-geologica font-semibold ">
-          Today’s Best Deals;Quality Foods at Lower Prices
+          {`Today’s Best Deals;Quality Foods at Lower Prices`}
         </h2>
         <Button variant="secondary" size="lg" href="/shop">
           See all
         </Button>
       </div>
-      <Catalogue category="deals" sliceLimit={4} />
+      <Catalogue category="deals" sliceLimit={4} actionType="buy" />
     </div>
   );
 };

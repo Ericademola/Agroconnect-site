@@ -99,7 +99,6 @@ const FooterForm = () => {
               variant="default"
               size="lg"
               className="w-full"
-              //   disabled={isSubmitting || !isValid}
             >
               {isSubmitting ? <Spinner className="h-5 w-5" /> : "Submit"}
             </Button>

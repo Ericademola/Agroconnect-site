@@ -31,11 +31,9 @@ export function useCartActions(onQuantityChange?: (items: CartItem[]) => void) {
 
   const removeFromCart = (productId: number) => {
     setItemQuantity(productId, 0);
-
     const items = getBasketItems().filter(
       (item) => item.productId !== productId,
     );
-
     sync(items);
   };
 

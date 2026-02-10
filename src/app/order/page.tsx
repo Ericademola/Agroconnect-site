@@ -85,10 +85,10 @@ const MyOrder = () => {
         }
       />
       <div className="grid md:grid-cols-[auto_1fr] items-start md:gap-5 md:mx-6 ml:mx-8 lg:mx-12 mt-6 md:mt-8">
-        <div className="all-sides-shadow-xl rounded-[15px] py-8 hidden md:block">
+        <div className="all-sides-shadow-xl rounded-2xl py-8 hidden md:block">
           <Sidebar />
         </div>
-        <div className="flex flex-col gap-6 font-geologica text-[#000000CC] all-sides-shadow-xl rounded-[15px] md:px-4 lg:px-6 md:py-5">
+        <div className="flex flex-col gap-6 font-geologica text-[#000000CC] all-sides-shadow-xl rounded-2xl md:px-4 lg:px-6 md:py-5">
           <div className="flex items-center justify-between gap-4 w-full px-4 sm:px-5 md:px-0">
             <div className="w-full md:w-[300px] lg:w-[500px]">
               <SearchInput
@@ -108,10 +108,10 @@ const MyOrder = () => {
               </div>
             </div>
           </div>
-          <div className="md:border-[1.5px] border-[#0000001A] rounded-[15px]">
+          <div className="md:border-[1.5px] border-[#0000001A] rounded-2xl">
             <Tabs defaultValue="allOrders" className="w-full gap-0">
               <div className="">
-                <TabsList className="w-full flex justify-center mx-auto px-5 md:px-4 md:gap-5 font-poppins bg-[#F5F5F5] h-[50px] md:h-[60px] rounded-[15px] md:rounded-none rounded-t-[15px]">
+                <TabsList className="w-full flex justify-center mx-auto px-5 md:px-4 md:gap-5 font-poppins bg-[#F5F5F5] h-[50px] md:h-[60px] rounded-2xl md:rounded-none md:rounded-t-[15px]">
                   <TabsTrigger
                     value="allOrders"
                     className="data-[state=active]:bg-white data-[state=active]:shadow-none data-[state=active]:border-b-0 data-[state=active]:border-none data-[state=active]:rounded-[10px] text-[#000000CC] data-[state=active]:text-[#000000CC] text-[clamp(10px,1.5vw,20px)] h-[calc(100%-10px)] md:h-[calc(100%-12px)]"
@@ -144,7 +144,7 @@ const MyOrder = () => {
                     {filteredOrders.length === 0 ? (
                       <EmptyPage
                         title="No Orders Yet"
-                        subtitle="Looks like you haven’t made any purchases yet. Start shopping and track your orders here."
+                        subtitle="Looks like you haven't made any purchases yet. Start shopping and track your orders here."
                         image="/assets/avatars/emptyOrder.svg"
                         altText="empty order"
                         buttonText=" Start Shopping"
@@ -185,7 +185,7 @@ const MyOrder = () => {
                     {activeOngoingOrders.length === 0 ? (
                       <EmptyPage
                         title="No Orders Yet"
-                        subtitle="Looks like you haven’t made any purchases yet. Start shopping and track your orders here."
+                        subtitle="Looks like you haven't made any purchases yet. Start shopping and track your orders here."
                         image="/assets/avatars/emptyOrder.svg"
                         altText="empty order"
                         buttonText=" Start Shopping"
@@ -226,7 +226,7 @@ const MyOrder = () => {
                     {deliveredOrders.length === 0 ? (
                       <EmptyPage
                         title="No Orders Yet"
-                        subtitle="Looks like you haven’t made any purchases yet. Start shopping and track your orders here."
+                        subtitle="Looks like you haven't made any purchases yet. Start shopping and track your orders here."
                         image="/assets/avatars/emptyOrder.svg"
                         altText="empty order"
                         buttonText=" Start Shopping"
@@ -267,7 +267,7 @@ const MyOrder = () => {
                     {cancelledOrders.length === 0 ? (
                       <EmptyPage
                         title="No Orders Yet"
-                        subtitle="Looks like you haven’t made any purchases yet. Start shopping and track your orders here."
+                        subtitle="Looks like you haven't made any purchases yet. Start shopping and track your orders here."
                         image="/assets/avatars/emptyOrder.svg"
                         altText="empty order"
                         buttonText=" Start Shopping"
@@ -357,9 +357,9 @@ export const OrderCard = ({
         <>
           <Link
             href={detailsPage}
-            className="px-4 py-3 grid grid-cols-[auto_1fr] gap-3 text-black font-poppins border border-[#0000001A] rounded-[15px]"
+            className="px-4 py-3 grid grid-cols-[auto_1fr] gap-3 text-black font-poppins border border-[#0000001A] rounded-2xl"
           >
-            <div className="border border-[#0000001A] rounded-[15px] p-2 flex items-center justify-center">
+            <div className="border border-[#0000001A] rounded-2xl p-2 flex items-center justify-center">
               <Image
                 src={productImage}
                 alt={productName}
@@ -397,7 +397,7 @@ export const OrderCard = ({
       ) : (
         <div className="px-4 py-5 grid grid-cols-[2.4fr_1.2fr_1fr] gap-3 lg:gap-5 text-black font-poppins divide-x divide-[#0000001A] border-t border-b border-[#0000001A] ">
           <div className="grid grid-cols-[auto_1fr] gap-3">
-            <div className="border border-[#0000001A] rounded-[15px] p-1 lg:p-2 flex items-center justify-center">
+            <div className="border border-[#0000001A] rounded-2xl p-1 lg:p-2 flex items-center justify-center">
               <Image
                 src={productImage}
                 alt={productName}

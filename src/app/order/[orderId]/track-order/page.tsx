@@ -129,10 +129,10 @@ export default function TrackOrder() {
       />
 
       <div className="grid md:grid-cols-[auto_1fr] items-start md:gap-5 mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 mt-6 md:mt-8">
-        <div className="all-sides-shadow-xl rounded-[15px] py-8 hidden md:block">
+        <div className="all-sides-shadow-xl rounded-2xl py-8 hidden md:block">
           <Sidebar />
         </div>
-        <div className="flex flex-col gap-5 md:gap-6 lg:gap-8 font-geologica text-[#00000099] all-sides-shadow-xl rounded-[15px] md:px-4 lg:px-6 md:py-5 md:pb-10 mb-16">
+        <div className="flex flex-col gap-5 md:gap-6 lg:gap-8 font-geologica text-[#00000099] all-sides-shadow-xl rounded-2xl md:px-4 lg:px-6 md:py-5 md:pb-10 mb-16">
           <div>
             <h1 className="text-[clamp(16px,1.8vw,22px)] font-medium leading-tight">
               Track Order
@@ -150,7 +150,7 @@ export default function TrackOrder() {
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-5 ml:gap-10 lg:gap-20 items-start">
-            <div className="rounded-[15px] border-[0.5px] border-[#0000001A] py-4 px-5 flex flex-col gap-4 all-sides-shadow-xl">
+            <div className="rounded-2xl border-[0.5px] border-[#0000001A] py-4 px-5 flex flex-col gap-4 all-sides-shadow-xl">
               <div className="flex items-center gap-2">
                 <DispatchBusIcon className="w-5 h-5" />
                 <h3 className="text-[clamp(16px,1.7vw,20px)] font-medium">
@@ -208,7 +208,7 @@ export default function TrackOrder() {
                 <PhoneIcon className="w-6 h-6" fill="#fff" /> Call Driver
               </Button>
             </div>
-            <div className="rounded-[15px] border-[0.5px] border-[#0000001A] py-4 px-5 flex flex-col gap-4 all-sides-shadow-xl">
+            <div className="rounded-2xl border-[0.5px] border-[#0000001A] py-4 px-5 flex flex-col gap-4 all-sides-shadow-xl">
               <div className="flex items-center gap-2">
                 <InfoIcon className="w-5 h-5" />
                 <h3 className="text-[clamp(16px,1.7vw,20px)] font-medium">

@@ -42,17 +42,24 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
+import { getSavingsCart } from "@/hooks/getSavings";
+import { SavingsCartButton } from "@/app/savings-shop/page";
 
 export default function ProductDetails() {
   const [itemDetails, setItemDetails] = useState<IProducts | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [selectedAddOns, setSelectedAddOns] = useState<IAddOns[]>([]);
 
-  const { productId } = useParams();
   const router = useRouter();
+  const params = useParams();
+
+  const paramProp = Array.isArray(params?.productId)
+    ? params?.productId[0]
+    : (params?.productId ?? "");
+  const [actionType, productId] = (paramProp || "").split("-") ?? [];
 
   useEffect(() => {
-    const id = parseInt(productId as string);
+    const id = Number(productId);
     const product = getProductById(id);
 
     if (!product) {
@@ -75,6 +82,15 @@ export default function ProductDetails() {
 
     if (cartItem && cartItem.addOns) {
       setSelectedAddOns(cartItem.addOns);
+    }
+
+    const savedItems = getSavingsCart();
+    const savedItem = savedItems.find(
+      (item) => item.productId === itemDetails.productId,
+    );
+
+    if (savedItem && savedItem.addOns) {
+      setSelectedAddOns(savedItem.addOns);
     }
   }, [itemDetails]);
 
@@ -99,7 +115,7 @@ export default function ProductDetails() {
   };
 
   return (
-    <div>
+    <div className="relative">
       {itemDetails && (
         <div className="mx-4 sm:mx-8 md:mx-12 ml:mx-16 lg:mx-18 flex flex-col">
           <div className="mb-4">
@@ -128,7 +144,7 @@ export default function ProductDetails() {
 
           <div className="grid grid-cols-1  md:grid-cols-[2fr_1.8fr] lg:grid-cols-[2fr_1.5fr] gap-5 md:gap-7 lg:gap-10">
             <div className="flex flex-col gap-3">
-              <div className="bg-[#F3F3F3] border borer-[#0000001A] rounded-[15px] flex items-center justify-center">
+              <div className="bg-[#F3F3F3] border borer-[#0000001A] rounded-2xl flex items-center justify-center">
                 <Image
                   src={itemDetails.productImage}
                   alt={itemDetails.productName}
@@ -141,7 +157,7 @@ export default function ProductDetails() {
                 {itemDetails.productDetailImages.map((image, index) => (
                   <div
                     key={index}
-                    className="bg-[#F3F3F3] border borer-[#0000001A] rounded-[15px] md:px-5 px-4 lg:px-7 py-2 md:py-[10px]"
+                    className="bg-[#F3F3F3] border borer-[#0000001A] rounded-2xl md:px-5 px-4 lg:px-7 py-2 md:py-[10px]"
                   >
                     <Image
                       src={image}
@@ -171,7 +187,7 @@ export default function ProductDetails() {
                   {itemDetails.reviews.length} reviews)
                 </div>
               </div>
-              <div className="bg-[#F5F5F5] rounded-[15px] px-4 py-5 w-full sm:w-[90%] md:w-[80%] flex flex-col gap-4">
+              <div className="bg-[#F5F5F5] rounded-2xl px-4 py-5 w-full sm:w-[90%] md:w-[80%] flex flex-col gap-4">
                 <FieldSet>
                   <FieldLegend variant="label" className="text-sm md:text-lg">
                     Preparation Option
@@ -211,6 +227,7 @@ export default function ProductDetails() {
                   quantity={quantity}
                   addOns={selectedAddOns}
                   className="w-full"
+                  actionType={actionType}
                 />
                 <WishListButton
                   item={itemDetails}
@@ -226,7 +243,7 @@ export default function ProductDetails() {
       {/* TAB SECTION */}
       {itemDetails && (
         <section className="mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12">
-          <div className="mt-8 md:mt-16 sm:border-2 border-[#0000001A] rounded-[15px] pt-5">
+          <div className="mt-8 md:mt-16 sm:border-2 border-[#0000001A] rounded-2xl pt-5">
             <Tabs defaultValue="description" className="w-full gap-0">
               <div className="sm:border-b-2 border-[#0000001A]">
                 <TabsList className="w-[90%] sm:w-[70%] md:w-[60%] ml:w-[50%] flex justify-center mx-auto gap-2 rounded-none font-poppins bg-white">
@@ -246,7 +263,7 @@ export default function ProductDetails() {
                     value="farmerInfo"
                     className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-[2px] data-[state=active]:border-[#006C2B] data-[state=active]:rounded-none text-[#75757A] data-[state=active]:text-[#006C2B] text-[clamp(12px,1.2vw,18px)] pb-2 md:pb-5"
                   >
-                    Farmer’s Info
+                    {` Farmer's Info`}
                   </TabsTrigger>
                 </TabsList>
               </div>
@@ -283,7 +300,7 @@ export default function ProductDetails() {
                         {itemDetails.reviews.map((review) => (
                           <div
                             key={review.reviewId}
-                            className="px-5 py-4 border border-[#0000001A] rounded-[15px] flex flex-col gap-3 md:gap-4 lg:gap-5"
+                            className="px-5 py-4 border border-[#0000001A] rounded-2xl flex flex-col gap-3 md:gap-4 lg:gap-5"
                           >
                             <div className="flex items-start justify-between">
                               <div>
@@ -305,7 +322,7 @@ export default function ProductDetails() {
                     </div>
                     <div className="flex flex-col gap-4 md:gap-6 lg:gap-8">
                       <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-3 lg:gap-6">
-                        <div className="bg-[#F5F5F5] rounded-[15px] px-4 lg:px-5 py-4 text-[clamp(16px,1.8vw,24px)] flex flex-col gap-5 items-center justify-center">
+                        <div className="bg-[#F5F5F5] rounded-2xl px-4 lg:px-5 py-4 text-[clamp(16px,1.8vw,24px)] flex flex-col gap-5 items-center justify-center">
                           <h3 className="font-geologica font-medium text-center">
                             Average Rating
                           </h3>
@@ -319,7 +336,7 @@ export default function ProductDetails() {
                             {itemDetails.reviews.length} reviews
                           </p>
                         </div>
-                        <div className="border border-[#0000001A] px-4 lg:px-5 py-4 rounded-[15px] flex flex-col justify-between">
+                        <div className="border border-[#0000001A] px-4 lg:px-5 py-4 rounded-2xl flex flex-col justify-between">
                           {[
                             { star: 5, quantity: 3 },
                             { star: 4, quantity: 2 },
@@ -349,7 +366,7 @@ export default function ProductDetails() {
                           ))}
                         </div>
                       </div>
-                      <div className="border border-[#0000001A] px-4 lg:px-5 py-4 rounded-[15px]">
+                      <div className="border border-[#0000001A] px-4 lg:px-5 py-4 rounded-2xl">
                         <h3 className="text-[clamp(18px,1.8vw,24px)] font-geologica font-medium mb-3 md:mb-6">
                           Submit Your Review
                         </h3>
@@ -444,8 +461,18 @@ export default function ProductDetails() {
           <h2 className="text-[#000000CC] text-[clamp(16px,2.8vw,30px)] font-geologica font-semibold text-start leading-tight w-full">
             Related Products
           </h2>
-          <Catalogue excludeId={itemDetails.productId} sliceLimit={4} />
+          <Catalogue
+            excludeId={itemDetails.productId}
+            sliceLimit={4}
+            actionType={actionType}
+          />
         </section>
+      )}
+
+      {actionType === "save" && (
+        <div className="fixed bottom-10 right-10 md:right-15">
+          <SavingsCartButton />
+        </div>
       )}
     </div>
   );

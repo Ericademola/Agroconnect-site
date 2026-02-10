@@ -66,7 +66,7 @@ const OrderTrackingStepper = ({
       : 100;
 
   return (
-    <div className="w-full rounded-[15px] border-[0.5px] border-[#0000001A] py-6 ml:py-8 px-4 ml:px-6 all-sides-shadow-xl font-poppins">
+    <div className="w-full rounded-2xl border-[0.5px] border-[#0000001A] py-6 ml:py-8 px-4 ml:px-6 all-sides-shadow-xl font-poppins">
       <div className="relative max-w-7xl mx-auto">
         {/* Desktop Progress Line */}
         <div className="absolute top-[90px] lg:top-[100px] left-[8%] right-[8%] h-[3px] bg-[#C2C2C2BD] hidden ml:block z-0">

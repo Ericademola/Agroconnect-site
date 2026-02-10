@@ -21,6 +21,7 @@ interface CatalogueProps {
   category?: ProductCategory;
   sliceLimit?: number;
   className?: string;
+  actionType: string;
 }
 
 export default function Catalogue({
@@ -28,6 +29,7 @@ export default function Catalogue({
   category = "all",
   sliceLimit,
   className,
+  actionType,
 }: CatalogueProps) {
   const [productList, setProductList] = useState<IProducts[]>([]);
 
@@ -70,10 +72,10 @@ export default function Catalogue({
       {productsToRender.map((item: IProducts) => (
         <div key={item.productId} className="flex flex-col gap-3 h-full">
           <Link
-            href={`/shop/${item.productId}`}
+            href={`/shop/${actionType}-${item.productId}`}
             className="flex flex-col gap-3"
           >
-            <div className="bg-[#F3F3F3] rounded-[15px] flex flex-col w-full h-full items-center pb-2">
+            <div className="bg-[#F3F3F3] rounded-2xl flex flex-col w-full h-full items-center pb-2">
               <Button
                 size="sm"
                 className="bg-[#8B5E3C] hover:bg-[#8B5E3C]/90 rounded-none rounded-tr-[15px] rounded-bl-[15px] text-[10px] sm:text-xs md:text-sm w-fit ml-auto px-2 md:px-4 py-3 md:py-5"
@@ -109,7 +111,7 @@ export default function Catalogue({
           </Link>
 
           <div className="mt-auto grid grid-cols-[1fr_auto] items-end gap-3 md:gap-[23px] w-full">
-            <CartButton item={item} />
+            <CartButton item={item} actionType={actionType} />
             <WishListButton item={item} />
           </div>
         </div>

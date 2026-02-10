@@ -45,7 +45,7 @@ const MenuItems = ({
     },
     {
       label: "Food Savings",
-      route: "/",
+      route: "/savings",
       icon: <MoneyJarIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
     },
     {
@@ -128,7 +128,7 @@ const MenuItems = ({
 
         {!userInfo.isLoggedIn && (
           <div className="flex flex-col gap-4 w-full">
-            <Link href="/createAccount" passHref>
+            <Link href="/create-account" passHref>
               <Button
                 size="lg"
                 className="w-full text-[clamp(14px,1.4vw,16px)]"

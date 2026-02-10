@@ -32,7 +32,6 @@ const CreateAccountPage = () => {
   };
 
   const handleVerifyCode = async (code: string) => {
-    // Simulate API call to verify code
     setLoadingVerifyBtn(true);
     await new Promise((resolve) => setTimeout(resolve, 1500));
     console.log("Verification code:", code);

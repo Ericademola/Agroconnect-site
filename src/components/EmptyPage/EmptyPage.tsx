@@ -41,7 +41,7 @@ const EmptyPage = ({
         <h3 className="text-[clamp(16px,1.5vw,24px)] font-geologica font-medium">
           {title}
         </h3>
-        <p className="text-[clamp(10px,1.3vw,14px)] font-poppins w-[90%] md:w-full">
+        <p className="text-[clamp(10px,1.3vw,14px)] font-poppins w-[90%] md:w-full text-center">
           {subtitle}
         </p>
         <Button

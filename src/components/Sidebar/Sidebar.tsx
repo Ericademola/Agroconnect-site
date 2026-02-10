@@ -47,7 +47,7 @@ const Sidebar = () => {
             key: "3",
             label: "Food Savings",
             icon: <MoneyJarIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
-            route: "/",
+            route: "/savings",
           },
           {
             key: "4",

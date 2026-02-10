@@ -168,10 +168,10 @@ const MainNavBar = () => {
     <div className="mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12">
       <header
         //bg-gradient-to-r from-[#8FE6A2] via-[#E3BF0F4D] to-[#8FE6A2]
-        className="bg-fuchsia-400 sm:bg-emerald-400 md:bg-cyan-400 ml:bg-red-400 lg:bg-blue-400 xl:bg-indigo-800 rounded-[15px] px-2 md:px-4 p-3 flex items-center justify-between"
+        className="bg-fuchsia-400 sm:bg-emerald-400 md:bg-cyan-400 ml:bg-red-400 lg:bg-blue-400 xl:bg-indigo-800 rounded-2xl px-2 md:px-4 p-3 flex items-center justify-between"
       >
         <div
-          className="bg-white rounded-[8px] md:rounded-[15px] md:hidden flex items-center justify-center w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] md:w-[50px] md:h-[50px] cursor-pointer"
+          className="bg-white rounded-[8px] md:rounded-2xl md:hidden flex items-center justify-center w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] md:w-[50px] md:h-[50px] cursor-pointer"
           onClick={() => setOpen(true)}
         >
           <HammburgerIcon className="w-4 h-4 md:w-6 md:h-6" />
@@ -227,7 +227,7 @@ const MainNavBar = () => {
               <div>
                 <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
                   <PopoverTrigger asChild>
-                    <div className="flex items-center gap-2 bg-[#F5F5F5] rounded-[15px] py-2 px-3 lg:p-3 cursor-pointer">
+                    <div className="flex items-center gap-2 bg-[#F5F5F5] rounded-2xl py-2 px-3 lg:p-3 cursor-pointer">
                       <PersonIcon className="md:w-6 lg:w-10 md:h-6 lg:h-10" />
                       <div className="text-left font-geologica">
                         <p className="text-[#333333] text-[clamp(16px,1.8vw,18px)]">
@@ -263,7 +263,7 @@ const MainNavBar = () => {
               </div>
             ) : (
               <div className="flex items-center gap-4">
-                <Link href={"/createAccount"} passHref>
+                <Link href={"/create-account"} passHref>
                   <Button
                     variant="default"
                     size="lg"

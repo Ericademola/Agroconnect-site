@@ -14,7 +14,6 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [userInfo, setUserInfo] = useState<IuserData>(getUserData());
 
-  // Sync from localStorage on mount (handles page refresh)
   useEffect(() => {
     setUserInfo(getUserData());
   }, []);

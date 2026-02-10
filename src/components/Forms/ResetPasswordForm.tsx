@@ -118,8 +118,6 @@ const ResetPasswordViaEmailForm = ({
 
 export default ResetPasswordViaEmailForm;
 
-//
-//
 // ---- RESET PASSWORD VIA PHONE NUMBER ---- //
 
 // FOR PHONE NUMBER

@@ -11,11 +11,6 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
-
 const geologica = localFont({
   src: [
     { path: "./assets/fonts/Geologica/Geologica-Light.ttf", weight: "300" },

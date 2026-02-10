@@ -10,12 +10,9 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
-import { DownIcon, FilterIcon } from "@/Icons";
+import { CartIcon, DownIcon, FilterIcon } from "@/Icons";
 import Link from "next/link";
-import React, { useState } from "react";
-import Image from "next/image";
-import Testimonial from "@/components/Testimonial/Testimonial";
+import React, { useEffect, useState } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import {
@@ -24,8 +21,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import ProductDisplay from "@/components/ProductDisplay/ProductDisplay";
+import { Badge } from "@/components/ui/badge";
+import { getTotalSavingsCartCount } from "@/hooks/getSavings";
+import { SAVINGS_UPDATED_EVENT } from "@/lib/events";
 
-const ShopPage = () => {
+const SavingsShopPage = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchText, setSearchText] = useState("");
   const [selectedFilter, setSelectedFilter] = useState<string>("Newest");
@@ -60,8 +60,8 @@ const ShopPage = () => {
   return (
     <div>
       <PageTitle
-        title="Shop"
-        description="Browse by category, season, or freshness. Everything you see is farm-sourced"
+        title="Browse products to save for"
+        description="Start saving towards "
       />
       <div className="mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 py-3 md:py-6 flex flex-col gap-6 md:gap-12">
         <div>
@@ -75,13 +75,15 @@ const ShopPage = () => {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href="/shop">Shop</Link>
+                  <Link href="/shop" className="text-[#787878]">
+                    My profile
+                  </Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbPage className="text-[#2B2B2B]">
-                  All Products
+                  Food Savings
                 </BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
@@ -89,7 +91,7 @@ const ShopPage = () => {
         </div>
         <div className="grid md:grid-cols-[1fr_2.5fr] ml:grid-cols-[1fr_2.8fr] lg:grid-cols-[1fr_4fr] gap-[10px] md:gap-[20px] lg:gap-[40px]">
           <ProductDisplay />
-          <div className="flex flex-col gap-[30px]">
+          <div className="flex flex-col gap-[30px] relative">
             <div className="flex items-center justify-between w-full">
               <div>
                 <SearchInput
@@ -137,46 +139,58 @@ const ShopPage = () => {
               </div>
             </div>
             <Catalogue
-              actionType="buy"
-              category="all"
+              actionType="save"
+              category="fresh"
               className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3"
             />
+            <div className="fixed bottom-10 right-10 md:right-15">
+              <SavingsCartButton />
+            </div>
           </div>
-        </div>
-        <div className="relative mt-10 bg-[#03601A] rounded-2xl w-full min-h-[350px] sm:min-h-[260px] md:min-h-[280px] ml:min-h-[340px] flex flex-col sm:flex-row justify-center items-center z-0">
-          <div className="absolute top-6 sm:top-1/2 left-4 sm:left-8 ml:left-12 sm:-translate-y-1/2 z-20 leading-tight w-[80%] sm:w-[55%] md:w-[50%] lg:w-[45%] text-white">
-            <h1 className="font-geologica font-bold text-[clamp(18px,2.6vw,32px)] ">
-              {`Didn't find what you're looking for?`}
-            </h1>
-            <p className="text-[clamp(12px,1.4vw,15px)] font-poppins mt-2">
-              Tell us what you need — our team will connect you to farmers
-              growing it or notify you when it becomes available
-            </p>
-            <Button
-              href="/shop"
-              variant="default"
-              size="lg"
-              className="mt-3 sm:mt-7"
-            >
-              Request a product
-            </Button>
-          </div>
-          <div className="ml-auto mt-auto sm:mt-0 w-[250px] sm:w-[300px] md:w-[350px] ml:w-[380px] lg:w-[470px] h-[auto]">
-            <Image
-              src={"/assets/avatars/shopFruitBasket.svg"}
-              alt={"A basket of fruits"}
-              width={100}
-              height={100}
-              className="object-contain w-full h-full"
-            />
-          </div>
-        </div>
-        <div className="-mx-4 sm:-mx-0">
-          <Testimonial />
         </div>
       </div>
     </div>
   );
 };
 
-export default ShopPage;
+export default SavingsShopPage;
+
+export const SavingsCartButton = () => {
+  const [basketCount, setBasketCount] = useState(0);
+
+  const updateCounts = () => {
+    const countsForSavedCarts = getTotalSavingsCartCount();
+    setBasketCount(countsForSavedCarts);
+  };
+
+  useEffect(() => {
+    updateCounts();
+
+    const handleSavingsCartUpdate = () => {
+      setBasketCount(getTotalSavingsCartCount());
+    };
+
+    window.addEventListener(SAVINGS_UPDATED_EVENT, handleSavingsCartUpdate);
+
+    return () => {
+      window.removeEventListener(
+        SAVINGS_UPDATED_EVENT,
+        handleSavingsCartUpdate,
+      );
+    };
+  }, []);
+
+  return (
+    <div className="fixed bottom-10 right-10 md:right-15">
+      <Link
+        href={"/cart/cart-savings"}
+        className="bg-[#03601A] rounded-[8px] md:rounded-[10px] lg:rounded-md flex items-center justify-center w-[45px] h-[45px] sm:w-[50px] sm:h-[50px] md:w-[55px] md:h-[55px] lg:w-[60px] lg:h-[60px] relative shadow-md"
+      >
+        <CartIcon className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" fill="#fff" />
+        <Badge className="w-5 h-5 rounded-full px-0 md:px-1 tabular-nums absolute top-[6px] right-[3px] md:right-[6px] lg:right-[8px] text-[8px] md:text-[9px] lg:text-[11px] text-white bg-[#C09706] ">
+          {basketCount}
+        </Badge>
+      </Link>
+    </div>
+  );
+};

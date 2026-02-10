@@ -40,7 +40,7 @@ export default function SearchInput({
         value={rawInput}
         onChange={handleChange}
         className={cn(
-          "h-fit w-full border border-[#c4c4c433] has-[:focus]:ring-0  text-[#333333] rounded-[15px] bg-[#FFF]",
+          "h-fit w-full border border-[#c4c4c433] has-[:focus]:ring-0  text-[#333333] rounded-2xl bg-[#FFF]",
           className,
         )}
         inputClassName="bg-[#FFF] text-sm md:text-base placeholder:text-[#00000080]"

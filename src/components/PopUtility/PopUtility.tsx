@@ -18,6 +18,8 @@ interface ISuccessErrorPopup {
   handleSecondBtnAtn?: () => void;
   loadingFirstBtnAtn?: boolean;
   loadingSecondBtnAtn?: boolean;
+  loadingLeftFlexBtnAtn?: boolean;
+  loadingRightFlexBtnAtn?: boolean;
   handleLeftFlexBtnAtn?: () => void;
   handleRightFlexBtnAtn?: () => void;
   firstVariant?:
@@ -92,6 +94,8 @@ const PopUpUtility = ({
   handleSecondBtnAtn,
   loadingFirstBtnAtn = false,
   loadingSecondBtnAtn = false,
+  loadingLeftFlexBtnAtn = false,
+  loadingRightFlexBtnAtn = false,
   handleLeftFlexBtnAtn,
   handleRightFlexBtnAtn,
   leftFlexButtonVariant = "ghost",
@@ -172,6 +176,7 @@ const PopUpUtility = ({
         {secondButtonTitle && (
           <Button
             variant={secondVariant}
+            size="lg"
             className={cn("w-full", secondBtnClassName)}
             disabled={disabledSecondBtn}
             loading={loadingSecondBtnAtn}
@@ -183,21 +188,25 @@ const PopUpUtility = ({
         )}
 
         {leftFlexButtonTitle && rightFlexButtonTitle && (
-          <div className="w-full flex justify-between gap-4">
+          <div className="w-full flex justify-between gap-4 font-geologica text-[clamp(13px,1.5vw,16px)]">
             <Button
               variant={leftFlexButtonVariant}
+              size="lg"
               className={cn("w-full", leftFlexButtonClassName)}
               disabled={disabledLeftFlexBtn}
               onClick={handleLeftFlexBtnAtn}
+              loading={loadingLeftFlexBtnAtn}
               //   loaderClassName={leftFlexBtnLoaderClassName}
             >
               {leftFlexButtonTitle}
             </Button>
             <Button
               variant={rightFlexButtonVariant}
+              size="lg"
               className={cn("w-full", rightFlexButtonClassName)}
               disabled={disabledRightFlexBtn}
               onClick={handleRightFlexBtnAtn}
+              loading={loadingRightFlexBtnAtn}
               //   loaderClassName={rightFlexBtnLoaderClassName}
             >
               {rightFlexButtonLeftIcon} {rightFlexButtonTitle}

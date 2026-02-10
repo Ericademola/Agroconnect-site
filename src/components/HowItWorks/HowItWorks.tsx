@@ -10,7 +10,7 @@ const HowItWorks = () => {
       </h2>
       <div className="font-poppins w-full grid grid-cols-1 md:grid-cols-[2fr_1fr_2fr] gap-[10px] sm:gap-3 md:gap-5 lg:gap-6">
         {/* First row - 2 cols + 1 col */}
-        <div className="flex flex-col md:col-span-2 bg-[#FBB4B5] rounded-[15px] pt-4 md:pt-[30px] pl-4 md:pl-[30px] h-[164px] sm:h-[220px] ml:h-[260px] overflow-hidden">
+        <div className="flex flex-col md:col-span-2 bg-[#FBB4B5] rounded-2xl pt-4 md:pt-[30px] pl-4 md:pl-[30px] h-[164px] sm:h-[220px] ml:h-[260px] overflow-hidden">
           <h3 className="text-black text-[clamp(18px,2.2vw,26px)] text-nowrap font-medium mb-1">
             Farmers List Their Produce
           </h3>
@@ -30,7 +30,7 @@ const HowItWorks = () => {
           </span>
         </div>
 
-        <div className="flex flex-col bg-[#B2F3F9]  rounded-[15px] pt-4 md:pt-[26px] pl-4 md:pl-[20px] h-[164px] sm:h-[220px] ml:h-[260px] overflow-hidden">
+        <div className="flex flex-col bg-[#B2F3F9]  rounded-2xl pt-4 md:pt-[26px] pl-4 md:pl-[20px] h-[164px] sm:h-[220px] ml:h-[260px] overflow-hidden">
           <span className="pr-3">
             <h3 className="text-black text-[clamp(18px,2.2vw,26px)] text-nowrap font-medium mb-1">
               You Shop with Ease
@@ -51,7 +51,7 @@ const HowItWorks = () => {
         </div>
 
         {/* Second row - 1 col + 2 cols */}
-        <div className="relative flex flex-col bg-[#E2FFC9] rounded-[15px] pt-4 md:pt-[26px] pl-4 md:pl-[20px] h-[164px] sm:h-[220px] ml:h-[260px] overflow-hidden">
+        <div className="relative flex flex-col bg-[#E2FFC9] rounded-2xl pt-4 md:pt-[26px] pl-4 md:pl-[20px] h-[164px] sm:h-[220px] ml:h-[260px] overflow-hidden">
           <h3 className="text-black text-[clamp(18px,2.2vw,26px)] text-nowrap font-medium mb-1">
             We Handle Logistics
           </h3>
@@ -71,7 +71,7 @@ const HowItWorks = () => {
           </span>
         </div>
 
-        <div className="flex flex-col md:col-span-2 bg-[#E9FFA2] rounded-[15px] pt-4 md:pt-[30px] pl-4 md:pl-[30px] h-[164px] sm:h-[220px] ml:h-[260px] overflow-hidden">
+        <div className="flex flex-col md:col-span-2 bg-[#E9FFA2] rounded-2xl pt-4 md:pt-[30px] pl-4 md:pl-[30px] h-[164px] sm:h-[220px] ml:h-[260px] overflow-hidden">
           <h3 className="text-black text-[clamp(18px,2.2vw,26px)] text-nowrap font-medium mb-1">
             Freshness Delivered
           </h3>

@@ -44,7 +44,6 @@ const LoginPage = () => {
   const handleVerifyCode = async (code: string) => {
     setLoadingVerifyBtn(true);
 
-    // Simulate API call to verify code
     await new Promise((resolve) => setTimeout(resolve, 1500));
     console.log("Verification code:", code);
 
@@ -69,7 +68,7 @@ const LoginPage = () => {
           }
           header="Login"
           text="New to Agriconnect?"
-          linkhref="/createAccount"
+          linkhref="/create-account"
           linkText="Create an Account"
         />
       </div>
@@ -155,12 +154,9 @@ const LoginPage = () => {
       >
         <ResetAuthCards
           title="Change Password"
-          subTitle={`Choose a strong password you haven’t used before.`}
+          subTitle={`Choose a strong password you haven't used before.`}
           cardContent={
-            <ChangePasswordForm
-              onSubmit={() => setChangePassword(false)}
-              // loading={loadingVerifyBtn}
-            />
+            <ChangePasswordForm onSubmit={() => setChangePassword(false)} />
           }
         />
       </DrawerDialog>

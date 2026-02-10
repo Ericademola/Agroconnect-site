@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import { ShopBagIcon } from "@/Icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { useState } from "react";
-// import Catalogue from "@/components/Catalogue/Catalogue";
 
 export default function Home() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -24,7 +23,7 @@ export default function Home() {
           <SearchInput
             setSearchText={setSearchText}
             leftIcon={false}
-            className="w-full h-[40px] md:h-[50px] border-[1.5px] border-[#0000001A] pr-0 rounded-[5px] md:rounded-[15px]"
+            className="w-full h-[40px] md:h-[50px] border-[1.5px] border-[#0000001A] pr-0 rounded-[5px] md:rounded-2xl"
           />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-[auto_2fr] gap-2 items-center">

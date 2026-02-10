@@ -72,7 +72,7 @@ const Testimonials = [
     profilePicture: "/assets/images/testimonial2.png",
     occupation: "Cassava Farmer",
     testimonialText:
-      "AgriConnect has completely changed how I sell my produce. I don’t have to wait at the market all day anymore — buyers find me directly",
+      "AgriConnect has completely changed how I sell my produce. I don't have to wait at the market all day anymore — buyers find me directly",
     borderColor: "#DDDDDD",
   },
   {
@@ -81,7 +81,7 @@ const Testimonials = [
     profilePicture: "/assets/images/testimonial3.png",
     occupation: "Grocery Seller",
     testimonialText:
-      "As a small shop owner, restocking used to be stressful. Now I just order through AgriConnect — it’s reliable and the prices are fair",
+      "As a small shop owner, restocking used to be stressful. Now I just order through AgriConnect — it's reliable and the prices are fair",
     borderColor: "#C0970680",
   },
 ];

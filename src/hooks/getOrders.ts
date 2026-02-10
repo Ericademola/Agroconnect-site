@@ -1,4 +1,3 @@
-// hooks/getOrders.ts
 import { CartItem } from "@/types";
 
 export interface Order {

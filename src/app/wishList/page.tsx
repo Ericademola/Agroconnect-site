@@ -22,7 +22,7 @@ const WishListPage = () => {
     <>
       {wishListItems.length === 0 ? (
         <EmptyPage
-          title="You haven’t saved any favourites yet"
+          title="You haven't saved any favourites yet"
           subtitle="Browse through our collection and save your favourite items to keep track of what you love"
           image="/assets/avatars/emptyWishlist.svg"
           altText="empty wishlist"
@@ -35,7 +35,7 @@ const WishListPage = () => {
             {wishListItems.map((item: IProducts) => (
               <div key={item.productId} className="flex flex-col gap-3 h-full">
                 <Link href={`/products/${item.productName}`}>
-                  <div className="bg-[#F3F3F3] rounded-[15px] flex flex-col w-full h-full items-center pb-2">
+                  <div className="bg-[#F3F3F3] rounded-2xl flex flex-col w-full h-full items-center pb-2">
                     <Button
                       size="sm"
                       className="bg-[#8B5E3C] hover:bg-[#8B5E3C]/90 rounded-none rounded-tr-[15px] rounded-bl-[15px] text-xs md:text-sm w-fit ml-auto px-4 py-5"

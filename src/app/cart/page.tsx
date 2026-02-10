@@ -86,7 +86,7 @@ export default function CartPage() {
       {basketItems.length === 0 ? (
         <EmptyPage
           title="Your basket is feeling a little light"
-          subtitle="No worries, we’ve got plenty of farm-fresh produce waiting for you"
+          subtitle="No worries, we've got plenty of farm-fresh produce waiting for you"
           image="/assets/avatars/emptyCart.svg"
           altText="empty cart"
           buttonText=" Start Shopping"
@@ -127,7 +127,7 @@ export default function CartPage() {
                   <SearchInput
                     setSearchText={setSearchText}
                     leftIcon={false}
-                    className="w-full h-[40px] md:h-[50px] border-[1.5px] border-[#0000001A] pr-0 rounded-[5px] md:rounded-[15px]"
+                    className="w-full h-[40px] md:h-[50px] border-[1.5px] border-[#0000001A] pr-0 rounded-[5px] md:rounded-2xl"
                   />
                 </div>
               </div>
@@ -136,7 +136,7 @@ export default function CartPage() {
                   <h2 className="text-black font-poppins font-medium text-base mb-1 block md:hidden">
                     Items ({basketItems.length})
                   </h2>
-                  <div className="hidden md:block overflow-hidden border border-[#00000033] rounded-[15px]">
+                  <div className="hidden md:block overflow-hidden border border-[#00000033] rounded-2xl">
                     <table className="w-full border-collapse font-poppins">
                       <thead className="sticky top-0 z-10 bg-[#F5F5F5] text-[clamp(14px,1.9vw,20px)] text-[#000000CC] text-nowrap font-geologica">
                         <tr>
@@ -167,8 +167,8 @@ export default function CartPage() {
                           >
                             <td className="py-2 px-3 lg:px-4">
                               <Link
-                                href={`/shop/${item.productId}`}
-                                className="border border-[#0000001A] rounded-[15px] p-1 inline-block"
+                                href={`/shop/buy-${item.productId}`}
+                                className="border border-[#0000001A] rounded-2xl p-1 inline-block"
                               >
                                 <Image
                                   src={item.productImage}
@@ -297,7 +297,7 @@ export default function CartPage() {
                         className="grid grid-cols-[auto_1fr] gap-3 font-poppins rounded-[12px] shadow px-3 py-4"
                       >
                         <Link
-                          href={`/shop/${item.productId}`}
+                          href={`/shop/buy-${item.productId}`}
                           className="border border-[#0000001A] rounded-[10px] p-1 inline-block"
                         >
                           <Image
@@ -430,7 +430,7 @@ export default function CartPage() {
                   </div>
                 </div>
 
-                <div className="order-1 md:order-2 overflow-hidden border border-[#00000033] rounded-[15px] md:w-1/2 md:ml-auto md:mt-14 flex flex-col gap-6 pb-4">
+                <div className="order-1 md:order-2 overflow-hidden border border-[#00000033] rounded-2xl md:w-1/2 md:ml-auto md:mt-14 flex flex-col gap-6 pb-4">
                   <table className="w-full border-collapse font-poppins">
                     <thead className="sticky top-0 z-10 bg-[#F5F5F5] text-[clamp(14px,1.6vw,24px)] text-black font-poppins">
                       <tr>

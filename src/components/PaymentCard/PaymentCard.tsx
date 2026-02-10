@@ -11,6 +11,7 @@ interface PaymentCardProps {
   accountName?: string;
   onCancel: () => void;
   handlePaymentConfirm: () => void;
+  savingsNotification?: React.ReactNode;
 }
 
 const PaymentCard = ({
@@ -20,6 +21,7 @@ const PaymentCard = ({
   accountName,
   onCancel,
   handlePaymentConfirm,
+  savingsNotification,
 }: PaymentCardProps) => {
   const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -46,7 +48,7 @@ const PaymentCard = ({
     <div className="flex flex-col gap-8">
       <div>
         <p className="font-geologica text-[clamp(14px,1.8vw,16px)] text-[#525252] mb-[10px]">
-          Amount You’re Sending{" "}
+          {`Amount You're Sending`}
           <i className="text-[clamp(10px,1.3vw,12.5px)] font-light">
             (Enter the exact amount so we can track it faster.)
           </i>
@@ -85,6 +87,7 @@ const PaymentCard = ({
           Account Name: <span className="font-semibold">{accountName}</span>
         </p>
       </div>
+      <div>{savingsNotification}</div>
       <div className="grid grid-cols-[1fr_2fr] gap-3 mt-12">
         <Button variant="secondary" size="lg" onClick={onCancel} className="">
           Cancel
@@ -97,7 +100,7 @@ const PaymentCard = ({
           loading={loading}
           disabled={loading}
         >
-          {loading ? "Processing..." : "I’ve Sent the Money"}
+          {loading ? "Processing..." : "I've Sent the Money"}
         </Button>
       </div>
     </div>

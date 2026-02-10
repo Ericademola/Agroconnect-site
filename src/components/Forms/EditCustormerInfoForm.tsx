@@ -70,11 +70,9 @@ const EditCustormerInfoForm = ({
 
     try {
       await new Promise((resolve) => setTimeout(resolve, 800));
-      console.log(data);
-
       onSubmit(data);
     } catch (error) {
-      console.error("Failed to submit review:", error);
+      console.error("Failed to edit customer info:", error);
     } finally {
       setIsSubmitting(false);
     }
