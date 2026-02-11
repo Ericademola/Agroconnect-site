@@ -118,6 +118,11 @@ const MainNavBar = () => {
   const { userInfo } = useAuth();
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [activeProfile, setActiveProfile] = useState<string>("buyer");
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const pathname = usePathname();
   const close = () => setOpen(false);
@@ -223,7 +228,13 @@ const MainNavBar = () => {
             </Link>
           </div>
           <div className="hidden md:block">
-            {userInfo.isLoggedIn ? (
+            {!isClient ? (
+              // Show a placeholder during SSR to match initial client state
+              <div className="flex items-center gap-4">
+                <div className="h-[45px] lg:h-[48px] w-32 bg-gray-200 animate-pulse rounded" />
+                <div className="h-[45px] lg:h-[48px] w-24 bg-gray-200 animate-pulse rounded" />
+              </div>
+            ) : userInfo.isLoggedIn ? (
               <div>
                 <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
                   <PopoverTrigger asChild>

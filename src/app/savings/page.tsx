@@ -28,6 +28,7 @@ import { useEffect, useState } from "react";
 import { getSavedPlans, ISavedItem } from "@/hooks/getSavings";
 import { SAVINGS_UPDATED_EVENT } from "@/lib/events";
 import PopNotification from "@/components/PopNotification/PopNotification";
+import { useRouter } from "next/navigation";
 
 const SavingsPage = () => {
   const [savedPlans, setSavedPlans] = useState<ISavedItem[]>([]);
@@ -61,6 +62,8 @@ const SavingsPage = () => {
     (sum, plan) => sum + plan.currentAmountSaved,
     0,
   );
+
+  const router = useRouter();
 
   return (
     <>
@@ -219,6 +222,7 @@ const SavingsPage = () => {
                               key={plan.savedItemId}
                               plan={plan}
                               detailsPage={`/savings/${plan.savedItemId}`}
+                              showDetailsPageBtn={true}
                             />
                           ))}
                         </div>
@@ -245,7 +249,23 @@ const SavingsPage = () => {
                           <SavedPlanCard
                             key={plan.savedItemId}
                             plan={plan}
-                            detailsPage={`/savings/${plan.savedItemId}`}
+                            detailsPage=""
+                            showDetailsPageBtn={false}
+                            paymentCompletionDate="Sept 28, 2026"
+                            cardBtn={
+                              <>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => {
+                                    router.push(`/savings/${plan.savedItemId}`);
+                                  }}
+                                  className="border-[0.5px] border-[#C09706] md:h-10 w-fit px-2 text-[clamp(13px,1.3vw,15px)] ml-4"
+                                >
+                                  Redeem
+                                </Button>
+                              </>
+                            }
                           />
                         ))}
                       </div>
@@ -271,7 +291,23 @@ const SavingsPage = () => {
                           <SavedPlanCard
                             key={plan.savedItemId}
                             plan={plan}
-                            detailsPage={`/savings/${plan.savedItemId}`}
+                            detailsPage=""
+                            showDetailsPageBtn={false}
+                            planRedeemedDate="Sept 28, 2026"
+                            cardBtn={
+                              <>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => {
+                                    router.push(`/savings/${plan.savedItemId}`);
+                                  }}
+                                  className="border-[0.5px] border-[#C09706] md:h-10 w-fit px-2 text-[clamp(13px,1.3vw,15px)] ml-4"
+                                >
+                                  View Summary
+                                </Button>
+                              </>
+                            }
                           />
                         ))}
                       </div>
@@ -292,9 +328,20 @@ export default SavingsPage;
 interface SavedPlanCardProps {
   plan: ISavedItem;
   detailsPage: string;
+  cardBtn?: React.ReactNode;
+  showDetailsPageBtn: boolean;
+  paymentCompletionDate?: string;
+  planRedeemedDate?: string;
 }
 
-export const SavedPlanCard = ({ plan, detailsPage }: SavedPlanCardProps) => {
+export const SavedPlanCard = ({
+  plan,
+  detailsPage,
+  showDetailsPageBtn,
+  cardBtn,
+  paymentCompletionDate,
+  planRedeemedDate,
+}: SavedPlanCardProps) => {
   // Calculate progress percentage
   const progressPercentage =
     plan.goalAmount > 0 ? (plan.currentAmountSaved / plan.goalAmount) * 100 : 0;
@@ -310,8 +357,8 @@ export const SavedPlanCard = ({ plan, detailsPage }: SavedPlanCardProps) => {
 
   return (
     <>
-      <div className="grid grid-cols-[auto_1fr_auto] gap-2 md:gap-4 border border-[#0000001A] bg-[#F5F5F5] shadow shadow-[#0000000D] pl-3 md:pl-5 rounded-2xl">
-        <div className="bg-white rounded-2xl p-1 lg:p-2 flex items-center justify-center my-5">
+      <div className="grid grid-cols-[auto_1fr_auto] gap-2 md:gap-3 lg:gap-4 border border-[#0000001A] bg-[#F5F5F5] shadow shadow-[#0000000D] pl-3 ml:pl-5 rounded-2xl">
+        <div className="bg-white rounded-2xl p-1 lg:p-2 flex items-center justify-center my-3 ml:my-5">
           <Image
             src={displayImage}
             alt={displayTitle}
@@ -320,31 +367,51 @@ export const SavedPlanCard = ({ plan, detailsPage }: SavedPlanCardProps) => {
             className="object-contain w-[80px] h-[80px] lg:w-[100px] lg:h-[100px]"
           />
         </div>
-        <div className="font-poppins text-black grid md:grid-cols-[1fr_auto] py-3 md:py-5 text-[clamp(10px,1.2vw,14px)] pr-2">
+        <div className="font-poppins text-black grid md:grid-cols-[1fr_auto] items-center py-3 ml:py-5 text-[clamp(10px,1.2vw,14px)] gap-1 md:gap-3">
           <div className="flex flex-col md:gap-3">
-            <h3 className="text-[clamp(14px,1.6vw,18px)]">{displayTitle}</h3>
-            <div className="flex items-center gap-3 divide-x divide-[#0000001A]">
-              <p className="font-light pr-3">{plan.paymentInterval}</p>
-              <p>Next Deposit: {plan.nextPaymentDate}</p>
+            <h3 className="text-[clamp(14px,1.5vw,18px)] line-clamp-1">
+              {displayTitle}
+            </h3>
+            <div>
+              {plan.saveStatus === "ACTIVE" && (
+                <div className="flex items-center gap-3 divide-x divide-[#0000001A]">
+                  <p className="font-light pr-3">{plan.paymentInterval}</p>
+                  <p>Next Deposit: {plan.nextPaymentDate}</p>
+                </div>
+              )}
+              {plan.saveStatus === "COMPLETED" && (
+                <p>Completed on {paymentCompletionDate}</p>
+              )}
+              {plan.saveStatus === "REDEEMED" && (
+                <p>Redeemed on {planRedeemedDate}</p>
+              )}
             </div>
           </div>
-          <div className="flex flex-row md:flex-col items-center md:items-end gap-[10px]">
-            <p className="font-medium text-[#03601A] text-[clamp(14px,1.6vw,18px)]">
-              ₦{plan.currentAmountSaved.toLocaleString()} saved
-            </p>
-            <p>out of ₦{plan.goalAmount.toLocaleString()}</p>
+          <div className="flex items-center">
+            <div
+              className={`flex md:items-end md:gap-[10px] ${plan.saveStatus === "ACTIVE" ? "flex-row md:flex-col items-center gap-2" : "flex-col items-start gap-0"}`}
+            >
+              <p className="font-medium text-[#03601A] text-[clamp(14px,1.5vw,18px)]">
+                ₦{plan.currentAmountSaved.toLocaleString()} saved
+              </p>
+              <p>out of ₦{plan.goalAmount.toLocaleString()}</p>
+            </div>
+            <div className="ml-auto">{cardBtn}</div>
           </div>
+
           <div className="flex items-center gap-2 md:col-span-2">
             <Progress value={progressPercentage} max={100} className="h-2" />
             <p>{progressPercentage.toFixed(0)}%</p>
           </div>
         </div>
-        <Link
-          href={detailsPage}
-          className="border-l border-[#0000001A] px-4 hidden md:flex items-center justify-center"
-        >
-          <RightIcon className="w-4 h-4" />
-        </Link>
+        {showDetailsPageBtn && (
+          <Link
+            href={detailsPage}
+            className="border-l border-[#0000001A] px-4 hidden md:flex items-center justify-center"
+          >
+            <RightIcon className="w-4 h-4" />
+          </Link>
+        )}
       </div>
     </>
   );

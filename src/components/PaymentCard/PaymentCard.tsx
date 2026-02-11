@@ -56,7 +56,7 @@ const PaymentCard = ({
         <Input
           readOnly
           value={amount}
-          className="bg-[#ECECEC] h-[35px] border-[#F5F5F5] has-[:focus]:ring-0"
+          className="bg-[#ECECEC] h-[40px] border-[#F5F5F5] has-[:focus]:ring-0"
         />
       </div>
       <div className="bg-[#F5F5F5] border border-[#3333331A] rounded-[10px] py-4 px-6 flex flex-col gap-3 text-[clamp(12px,1.2vw,14px)] font-raleway">

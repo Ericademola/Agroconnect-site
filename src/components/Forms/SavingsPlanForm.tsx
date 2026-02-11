@@ -84,7 +84,7 @@ const SavingsPlanForm = ({
                   <PopoverTrigger asChild>
                     <Input
                       readOnly
-                      value={productNames[0]}
+                      value={productNames[0] ?? ""}
                       rightIcon={<DownIcon className="w-4 h-4" />}
                       leftIcon={null}
                       className="has-[:focus]:ring-0 h-[45px] bg-[#ECECEC] border-[#F5F5F5]"
@@ -110,7 +110,7 @@ const SavingsPlanForm = ({
                 </FormLabel>
                 <Input
                   readOnly
-                  value={totalAmount}
+                  value={totalAmount ?? ""}
                   className="bg-[#ECECEC] h-[45px] border-[#F5F5F5] has-[:focus]:ring-0 text-[#0000004D]"
                 />
               </div>

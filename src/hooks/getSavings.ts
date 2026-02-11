@@ -108,7 +108,7 @@ export const createSavedPlan = (
   const newSavedPlan: ISavedItem = {
     savedItemId,
     items,
-    saveStatus: "ACTIVE",
+    saveStatus: "REDEEMED",
     goalAmount,
     currentAmountSaved: 0,
     balanceAmount: goalAmount,

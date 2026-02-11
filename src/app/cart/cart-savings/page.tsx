@@ -76,10 +76,6 @@ export default function CartSavingsPage() {
   >("idle");
   const [loadingAddMoneyBtn, setLoadingAddMoneyBtn] = useState(false);
   const [onAddMoney, setOnAddMoney] = useState(false);
-  const [createdPlan, setCreatedPlan] = useState<{
-    savedItemId: string;
-    goalAmount: number;
-  } | null>(null);
 
   // Load savings cart and listen for updates
   useEffect(() => {
@@ -144,12 +140,6 @@ export default function CartSavingsPage() {
       data.duration,
       data.paymentInterval,
     );
-
-    // STORE the data BEFORE clearing
-    setCreatedPlan({
-      savedItemId,
-      goalAmount: totalPrice,
-    });
 
     clearSavingsCart();
 
@@ -658,14 +648,14 @@ export default function CartSavingsPage() {
         size="md"
         title="Add to Your Savings"
         subTitle="Send your savings amount to the account details below. The payment will be automatically verified and added to your balance."
-        contentCSS="px-[30px] "
+        contentCSS="px-[30px]"
         headerClassName="mb-6"
       >
         <PaymentCard
           bankName="Zenith Bank"
           accountNumber="1234567890"
           accountName="Agriconnect Savings"
-          amount={`₦ ${createdPlan?.goalAmount.toLocaleString()}`}
+          amount={`₦0`}
           onCancel={() => setOnAddMoney(false)}
           handlePaymentConfirm={handlePaymentConfirm}
           savingsNotification={
@@ -673,9 +663,8 @@ export default function CartSavingsPage() {
               icon={<MegaPhoneIcon className="w-5 h-5" />}
               textContent={
                 <p>
-                  <span className="text-black font-medium">Earn cashback </span>
-                  by completing savings goals! Use them to buy products when you
-                  have enough.
+                  Your savings will reflect automatically within 10-15 minutes
+                  after payment confirmation.
                 </p>
               }
             />
