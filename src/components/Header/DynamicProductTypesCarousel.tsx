@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
-import { BackIcon, ForwardIcon, FilterIcon } from "@/Icons";
+import { RightArrowIcon, LeftArrowIcon } from "@/Icons";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import useEmblaCarousel from "embla-carousel-react";
-import productTypes, { IProductTypeItem } from "../../../productTypes";
+import productTypes, { IProductTypeItem } from "../../types/productTypes";
 
 export default function DynamicProductTypesCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -67,7 +67,7 @@ export default function DynamicProductTypesCarousel() {
             disabled={!canScrollPrev}
             variant="secondary"
           >
-            <BackIcon className="w-6 h-6" strokeWidth={3.5} />
+            <LeftArrowIcon className="w-6 h-6" strokeWidth={3.5} />
           </Button>
         </div>
       )}
@@ -79,12 +79,12 @@ export default function DynamicProductTypesCarousel() {
           disabled={!canScrollNext}
           variant="secondary"
         >
-          <ForwardIcon className="w-6 h-6 text-[#000]" />
+          <RightArrowIcon className="w-6 h-6 text-[#000]" />
         </Button>
 
         <DropdownMenu>
           <DropdownMenuTrigger className="flex items-center gap-2 border border-[#ddd] bg-white px-3 py-2 rounded-md text-[16px] hover:shadow-md">
-            <FilterIcon className="w-4 h-4 text-[#717171]" /> Filter
+            Filter
           </DropdownMenuTrigger>
           <DropdownMenuContent className="h-[300px] overflow-auto">
             <DropdownMenuLabel>Products</DropdownMenuLabel>
@@ -124,7 +124,7 @@ export default function DynamicProductTypesCarousel() {
                     </div>
                   </Link>
                 </div>
-              )
+              ),
             )}
           </div>
         </div>

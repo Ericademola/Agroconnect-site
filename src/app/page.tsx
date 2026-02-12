@@ -1,34 +1,55 @@
 "use client";
 
+import Categories from "@/components/Categories/Categories";
+import CategoriesCarousel from "@/components/CategoriesCarousel/CategoriesCarousel";
+import HowItWorks from "@/components/HowItWorks/HowItWorks";
+import NewArrivals from "@/components/NewArrivals/NewArrivals";
+import ProductList from "@/components/ProductList/ProductList";
+import SearchInput from "@/components/SearchInput/SearchInput";
+import Testimonial from "@/components/Testimonial/Testimonial";
+import { Button } from "@/components/ui/button";
+import { ShopBagIcon } from "@/Icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import Catalogue from "@/components/Catalogue/Catalogue";
+import { useState } from "react";
 
 export default function Home() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [searchText, setSearchText] = useState("");
+
   return (
-    <div>
-      <div className="relative bg-gradient-overlay w-full flex justify-center items-center h-[150px] sm:h-[240px] md:h-[270px] lg:h-[350px] font-sans shadow-lg z-0">
-        <div className="text-gray-950 absolute bottom-6 text-right right-4 sm:right-8 md:right-12 lg:right-20 w-[240px] sm:w-[320px] md:w-[350px] lg:w-[450px] z-50">
-          <span className="font-bold text-[0.9rem] sm:text-[1.2rem] md:text-[1.5rem] lg:text-[1.8rem]">
-            <h3>New Arrival!!</h3>
-          </span>
-          <p className="font-medium text-[0.5rem] sm:text-[0.7rem] md:text-[0.9rem] lg:text-[1.1rem]">
-            Pure Organic, Fresh and Chemical free.
-            <br />
-            <a
-              href="#catalogue"
-              className="font-bold text-[0.55rem] sm:text-[0.6rem] md:text-[0.8rem] lg:text-[1.15rem] underline underline-offset-2 cursor-pointer hover:text-blue-900"
-            >
-              Shop now
-            </a>
-            and taste the freshness.
-          </p>
+    <div className="flex flex-col gap-7">
+      <div className="mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 flex flex-col gap-3 md:gap-4">
+        <div className="flex ml:hidden mt-3 md:mt-4">
+          <SearchInput
+            setSearchText={setSearchText}
+            leftIcon={false}
+            className="w-full h-[40px] md:h-[50px] border-[1.5px] border-[#0000001A] pr-0 rounded-[5px] md:rounded-2xl"
+          />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-[auto_2fr] gap-2 items-center">
+          <div className="hidden md:block">
+            <Categories />
+          </div>
+          <div className="relative bg-[url('/heroBg.png')] bg-no-repeat bg-cover bg-center w-full min-h-[180px] sm:min-h-[260px] md:h-full rounded-[10px] md:rounded-[30px] flex justify-center items-center z-0">
+            <div className="absolute top-1/2 md:top-24 lg:top-32 left-6 -translate-y-1/2 md:-translate-y-0 z-20 leading-tight w-[85%] sm:w-[50%] md:w-[70%] ml:w-[65%] lg:w-[62%]">
+              <h1 className="font-geologica font-bold text-white text-[clamp(18px,3vw,36px)] ">
+                Connecting you to farmers for fair trade, fresh food, and
+                trusted quality
+              </h1>
+              <Button href="/shop" variant="default" size="lg" className="mt-7">
+                <ShopBagIcon className="w-5 h-5" />
+                Shop Now
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
-      <div id="catalogue" className="pt-14 md:pt-16 lg:pt-20">
-        <p className="bg-green-300 text-center py-1.5 md:py-3 mb-6 md:mb-10 font-extrabold text-xl md:text-2xl lg:text-3xl text-gray-800">
-          Shop now
-        </p>
-        <Catalogue />
+      <CategoriesCarousel />
+      <ProductList />
+      <HowItWorks />
+      <NewArrivals />
+      <div className="mx-0 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12">
+        <Testimonial />
       </div>
     </div>
   );
