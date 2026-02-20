@@ -9,11 +9,18 @@ import { Button } from "@/components/ui/button";
 import { EditIcon } from "@/Icons";
 import EditProfileForm from "@/components/Forms/EditProfileForm";
 import { DrawerDialog } from "@/components/DrawerDialog/DrawerDialog";
+import EditAddAddressForm, {
+  TypeEditAddAddressFormData,
+} from "@/components/Forms/EditAddAddressForm";
+import { getOrders, Order } from "@/hooks/getOrders";
 
 const Profile = () => {
   const [userInfo, setUserInfo] = useState(getUserData());
   const [wishlistCount, setWishlistCount] = useState(userInfo.wishlistItems);
   const [onEditForm, setOnEditForm] = useState(false);
+  const [onEditAddress, setOnEditAddress] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {
     const countsForWishList = getTotalWishlistCount();
@@ -24,6 +31,16 @@ const Profile = () => {
     const data = getUserData();
     setUserInfo(data);
   }, []);
+
+  useEffect(() => {
+    const loadOrders = getOrders();
+    setOrders(loadOrders);
+  }, []);
+
+  const handleEditAddress = (index: number) => {
+    setSelectedIndex(index);
+    setOnEditAddress(true);
+  };
 
   const handleUpdateUserInfo = (data: {
     fullName: string;
@@ -43,6 +60,44 @@ const Profile = () => {
     setUserInfo(updatedData);
     setOnEditForm(false);
   };
+
+  const handleSaveAddress = (data: TypeEditAddAddressFormData) => {
+    const updatedAddresses = [...userInfo.deliveryAddresses];
+
+    updatedAddresses[selectedIndex] = {
+      ...data,
+      isDefault: updatedAddresses[selectedIndex].isDefault || false,
+    };
+
+    const updatedData = updateUserData({
+      deliveryAddresses: updatedAddresses,
+    });
+
+    setUserInfo(updatedData);
+    setOnEditAddress(false);
+  };
+
+  const getInitialData = () => {
+    const address = userInfo.deliveryAddresses[selectedIndex];
+    return (
+      address && {
+        fullName: address.fullName,
+        phoneNumber: address.phoneNumber,
+        state: address.state,
+        city: address.city,
+        fullAddress: address.fullAddress,
+        houseNumber: address.houseNumber,
+        area: address.area,
+        addtionalInfo: address.addtionalInfo,
+      }
+    );
+  };
+
+  const totalOrders = orders.length;
+  const activeOrders = orders.filter(
+    (order) =>
+      order.orderStatus === "CONFIRMED" || order.orderStatus === "DISPATCHED",
+  ).length;
 
   return (
     <>
@@ -89,11 +144,11 @@ const Profile = () => {
               {[
                 {
                   name: "Total Orders",
-                  count: userInfo.totalOrders,
+                  count: totalOrders,
                 },
                 {
                   name: "Active Orders",
-                  count: userInfo.activeOrders,
+                  count: activeOrders,
                 },
                 {
                   name: "Wishlist Items",
@@ -180,7 +235,10 @@ const Profile = () => {
                         <p className="text-[clamp(14px,1.7vw,16px)] px-4 py-3 font-light">
                           {address.fullAddress}
                         </p>
-                        <div className="bg-[#F5F5F5] px-3 flex items-center justify-center cursor-pointer">
+                        <div
+                          className="bg-[#F5F5F5] px-3 flex items-center justify-center cursor-pointer"
+                          onClick={() => handleEditAddress(index)}
+                        >
                           <EditIcon className="w-5 h-5" />
                         </div>
                       </div>
@@ -206,6 +264,7 @@ const Profile = () => {
         </div>
       </div>
 
+      {/* Edit profile form */}
       <DrawerDialog
         open={onEditForm}
         close={() => setOnEditForm(false)}
@@ -223,6 +282,23 @@ const Profile = () => {
             userName: userInfo.userName,
           }}
           onSubmit={handleUpdateUserInfo}
+        />
+      </DrawerDialog>
+
+      {/* Edit address form */}
+      <DrawerDialog
+        open={onEditAddress}
+        close={() => {
+          setOnEditAddress(false);
+        }}
+        size="md"
+        title="Edit Address"
+        contentCSS="pt-[20px] px-[30px]"
+        max_height
+      >
+        <EditAddAddressForm
+          initialData={getInitialData()}
+          onSubmit={handleSaveAddress}
         />
       </DrawerDialog>
     </>

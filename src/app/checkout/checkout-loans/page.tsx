@@ -67,7 +67,13 @@ export default function LoanCheckoutPage() {
   const [onEditForm, setOnEditForm] = useState(false);
   const [onChangeAddress, setOnChangeAddress] = useState(false);
   const [userInfo, setUserInfo] = useState(getUserData());
-  const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
+  const [selectedAddressIndex, setSelectedAddressIndex] = useState(() => {
+    const data = getUserData();
+    const defaultIndex = data.deliveryAddresses.findIndex(
+      (address) => address.isDefault,
+    );
+    return defaultIndex !== -1 ? defaultIndex : 0;
+  });
   const [onConfirmFoodLoan, setOnConfirmFoodLoan] = useState<
     "idle" | "success" | "error"
   >("idle");
