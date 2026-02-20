@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import CartButton from "@/components/CartButton/CartButton";
 import { IAddOns, CartItem } from "@/types";
-import { CartIcon, DeleteIcon, DownIcon, MegaPhoneIcon } from "@/Icons";
+import { CartIcon, DeleteIcon, DownIcon } from "@/Icons";
 import { Button } from "@/components/ui/button";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import {
@@ -33,22 +33,23 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { getProductById } from "@/hooks/getProducts";
 import EmptyPage from "@/components/EmptyPage/EmptyPage";
-import {
-  clearSavingsCart,
-  getSavingsCart,
-  ISavingsCartItem,
-  createSavedPlan,
-} from "@/hooks/getSavings";
-import { useSavingsActions } from "@/hooks/useSavingActions";
-import { SAVINGS_UPDATED_EVENT } from "@/lib/events";
+import { LOAN_UPDATED_EVENT } from "@/lib/events";
 import { DrawerDialog } from "@/components/DrawerDialog/DrawerDialog";
-import SavingsPlanForm from "@/components/Forms/SavingsPlanForm";
 import PopUpUtility from "@/components/PopUtility/PopUtility";
-import PaymentCard from "@/components/PaymentCard/PaymentCard";
-import PopNotification from "@/components/PopNotification/PopNotification";
+// import PaymentCard from "@/components/PaymentCard/PaymentCard";
+// import PopNotification from "@/components/PopNotification/PopNotification";
+import {
+  // clearLoanCart,
+  // createLoanPlan,
+  getLoanCart,
+  getLoanedPlans,
+  ILoanCartItem,
+} from "@/hooks/getLoans";
+import { useLoanActions } from "@/hooks/useLoanActions";
+import LoanPlanForm from "@/components/Forms/LoanPlanForm";
 
-// Helper to convert savings cart items to full cart items with product details
-const convertToCartItems = (cartItems: ISavingsCartItem[]): CartItem[] => {
+// Helper to convert loan cart items to full cart items with product details
+const convertToCartItems = (cartItems: ILoanCartItem[]): CartItem[] => {
   return cartItems
     .map((cartItem) => {
       const product = getProductById(cartItem.productId);
@@ -63,7 +64,7 @@ const convertToCartItems = (cartItems: ISavingsCartItem[]): CartItem[] => {
     .filter((item): item is CartItem => item !== null);
 };
 
-export default function CartSavingsPage() {
+export default function CartLoansPage() {
   const router = useRouter();
   const [cartItemsWithDetails, setCartItemsWithDetails] = useState<CartItem[]>(
     [],
@@ -74,25 +75,32 @@ export default function CartSavingsPage() {
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
-  const [loadingAddMoneyBtn, setLoadingAddMoneyBtn] = useState(false);
-  const [onAddMoney, setOnAddMoney] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [hasActiveLoan, setHasActiveLoan] = useState(false);
 
-  // Load savings cart and listen for updates
   useEffect(() => {
-    const loadSavingsCart = () => {
-      const cart = getSavingsCart();
+    const loadLoansCart = () => {
+      const cart = getLoanCart();
       setCartItemsWithDetails(convertToCartItems(cart));
     };
 
-    loadSavingsCart();
+    loadLoansCart();
 
-    window.addEventListener(SAVINGS_UPDATED_EVENT, loadSavingsCart);
+    window.addEventListener(LOAN_UPDATED_EVENT, loadLoansCart);
     return () => {
-      window.removeEventListener(SAVINGS_UPDATED_EVENT, loadSavingsCart);
+      window.removeEventListener(LOAN_UPDATED_EVENT, loadLoansCart);
     };
   }, []);
 
-  const { removeFromSavings, updateSavingsCartItem } = useSavingsActions();
+  useEffect(() => {
+    const activeLoanPlans = getLoanedPlans();
+    const hasActive = activeLoanPlans.some(
+      (plan) => plan.loanStatus === "ACTIVE",
+    );
+    setHasActiveLoan(hasActive);
+  }, []);
+
+  const { removeFromLoans, updateLoanCartItem } = useLoanActions();
 
   const totalPrice = cartItemsWithDetails.reduce((sum, item) => {
     const productPrice = item.price || 0;
@@ -101,6 +109,9 @@ export default function CartSavingsPage() {
 
     return sum + (productPrice + addOnsTotal) * item.quantity;
   }, 0);
+
+  const interestAmount = 2500;
+  const deliveryFee = 5000;
 
   // Handle toggling addOns for a specific item
   const handleAddOnToggle = (
@@ -122,48 +133,22 @@ export default function CartSavingsPage() {
       ];
     }
 
-    updateSavingsCartItem(cartItem, cartItem.quantity, updatedAddOns);
+    updateLoanCartItem(cartItem, cartItem.quantity, updatedAddOns);
   };
 
-  const handleCreateSavingsPlan = (data: {
-    duration: string;
-    paymentInterval: string;
-  }) => {
-    // Generate unique savedItemId at submission time
-    const random = Math.floor(Math.random() * 10000);
-    const savedItemId = `saved${random}`;
-
-    // Create the saved plan with all items from the cart
-    createSavedPlan(
-      savedItemId,
-      cartItemsWithDetails,
-      data.duration,
-      data.paymentInterval,
-    );
-
-    clearSavingsCart();
-
-    setSubmitStatus("success");
-    setLoadingAddMoneyBtn(false);
-    setOnProceedWithSavings(false);
-  };
-
-  const handleLater = () => {
-    setSubmitStatus("idle");
-    router.push("/savings");
-  };
-
-  const handleAddMoney = () => {
+  const handleProceedWithLoan = () => {
     setTimeout(() => {
-      setOnAddMoney(true);
+      setOnProceedWithSavings(false);
+      setSubmitStatus("success");
+    }, 600);
+  };
+
+  const handleContinueToCheckout = () => {
+    setTimeout(() => {
       setSubmitStatus("idle");
-    }, 1000);
-  };
-
-  const handlePaymentConfirm = () => {
-    setTimeout(() => {
-      router.push("/savings");
-    }, 1000);
+      setCheckoutLoading(true);
+      router.push("/checkout/checkout-loans");
+    }, 800);
   };
 
   return (
@@ -171,19 +156,19 @@ export default function CartSavingsPage() {
       <div>
         {cartItemsWithDetails.length === 0 ? (
           <EmptyPage
-            title="Your savings basket is empty"
-            subtitle="Start saving towards your favorite food items"
+            title="Your Loan basket is empty"
+            subtitle="Add items to your basket to get started"
             image="/assets/avatars/emptyCart.svg"
             altText="empty cart"
-            buttonText="Start Shopping for Savings"
+            buttonText="Start Shopping for Food on Credit"
             buttonIcon={<CartIcon className="w-5 h-5" fill="#fff" />}
-            buttonhref="/shop/shop-savings"
+            buttonhref="/shop/shop-loans"
           />
         ) : (
           <>
             <PageTitle
-              title="Savings Cart"
-              description="Review your items before saving"
+              title="My Cart (Food on Credit)"
+              description="Review your items before checkout"
             />
             <div className="mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 pt-3 md:pt-6 pb-32 flex flex-col gap-4">
               <div>
@@ -197,7 +182,7 @@ export default function CartSavingsPage() {
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
                       <BreadcrumbPage className="text-[#2B2B2B]">
-                        Savings Cart
+                        Loan Cart
                       </BreadcrumbPage>
                     </BreadcrumbItem>
                   </BreadcrumbList>
@@ -263,7 +248,7 @@ export default function CartSavingsPage() {
                               >
                                 <td className="py-2 px-3 lg:px-4">
                                   <Link
-                                    href={`/shop/save-${item.productId}`}
+                                    href={`/shop/loan-${item.productId}`}
                                     className="border border-[#0000001A] rounded-2xl p-1 inline-block"
                                   >
                                     <Image
@@ -368,7 +353,7 @@ export default function CartSavingsPage() {
                                     variant="ghost"
                                     size="sm"
                                     onClick={() =>
-                                      removeFromSavings(item.productId)
+                                      removeFromLoans(item.productId)
                                     }
                                     className="text-[#C09706] hover:text-[#C09706]/90 text-[clamp(12px,1.4vw,14px)] hover:bg-transparent inline-flex items-center gap-1"
                                   >
@@ -398,7 +383,7 @@ export default function CartSavingsPage() {
                             className="grid grid-cols-[auto_1fr] gap-3 font-poppins rounded-[12px] shadow px-3 py-4"
                           >
                             <Link
-                              href={`/shop/save-${item.productId}`}
+                              href={`/shop/loan-${item.productId}`}
                               className="border border-[#0000001A] rounded-[10px] p-1 inline-block"
                             >
                               <Image
@@ -510,7 +495,7 @@ export default function CartSavingsPage() {
                                   variant="secondary"
                                   size="sm"
                                   onClick={() =>
-                                    removeFromSavings(item.productId)
+                                    removeFromLoans(item.productId)
                                   }
                                   className="text-[#C09706] hover:text-[#C09706]/90 text-[10px] inline-flex items-center gap-1 h-[35px]"
                                 >
@@ -550,14 +535,24 @@ export default function CartSavingsPage() {
                             })}
                           </td>
                         </tr>
+                        <tr className="border-b border-[#0000001A]">
+                          <td className="py-5 px-6">Delivery Fee</td>
+                          <td className="py-5 px-6 text-end">
+                            ₦ {""}
+                            {deliveryFee.toLocaleString()}
+                          </td>
+                        </tr>
                         <tr className="font-semibold">
                           <td className="py-5 px-6">Total:</td>
                           <td className="py-5 px-6 text-end">
                             ₦{" "}
-                            {totalPrice.toLocaleString("en-NG", {
-                              minimumFractionDigits: 2,
-                              maximumFractionDigits: 2,
-                            })}
+                            {(totalPrice + deliveryFee).toLocaleString(
+                              "en-NG",
+                              {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                              },
+                            )}
                           </td>
                         </tr>
                       </tbody>
@@ -568,13 +563,20 @@ export default function CartSavingsPage() {
                         size="sm"
                         onClick={() => setOnProceedWithSavings(true)}
                         className="py-5"
+                        disabled={hasActiveLoan}
                       >
-                        Proceed with Savings
+                        Proceed with Credit
                       </Button>
+                      {hasActiveLoan && (
+                        <p className="text-center text-[#E63946] text-[clamp(11px,1.2vw,13px)] font-poppins">
+                          You have an active loan. Please complete it before
+                          taking a new one.
+                        </p>
+                      )}
                       <Button
                         variant="secondary"
                         size="sm"
-                        href="/shop/shop-savings"
+                        href="/shop/shop-loans"
                         className="py-5"
                       >
                         Continue Shopping
@@ -593,14 +595,20 @@ export default function CartSavingsPage() {
         open={onProceedWithSavings}
         close={() => setOnProceedWithSavings(false)}
         size="md"
-        title="New Savings Plan"
-        contentCSS="px-[30px]"
+        title="Confirm Your Food Loan"
+        subTitle="You’re about to buy the selected items on credit. Please review your loan summary and repayment details before proceeding."
+        contentCSS="px-0 overflow-y-auto hide-scrollbar"
+        max_height
+        headerClassName="border-b-[1.5px] border-[#0000001A] pb-3 px-5"
       >
-        <SavingsPlanForm
-          productNames={cartItemsWithDetails.map((item) => item.productName)}
-          totalAmount={`₦${totalPrice.toLocaleString()}`}
-          onSubmit={handleCreateSavingsPlan}
-        />
+        <div className="px-5">
+          <LoanPlanForm
+            loanPlan={cartItemsWithDetails}
+            totalAmount={totalPrice + deliveryFee}
+            interestAmount={interestAmount}
+            onSubmit={handleProceedWithLoan}
+          />
+        </div>
       </DrawerDialog>
 
       {/* Success Modal */}
@@ -608,7 +616,7 @@ export default function CartSavingsPage() {
         open={submitStatus === "success"}
         close={() => setSubmitStatus("idle")}
         size="sm"
-        title="Savings Plan Created Successfully!"
+        title="Food Loan Approved"
         titleCSS="sr-only text-xs"
         contentCSS=" h-fit"
         headerClassName="border-none py-0"
@@ -616,59 +624,22 @@ export default function CartSavingsPage() {
       >
         <PopUpUtility
           className="w-fit py-5 border-none"
-          header="Savings Plan Created Successfully!"
-          desc="Your savings plan has been created. Start saving towards your goals!"
+          header="Food Loan Approved"
+          desc={`Your purchase has been completed and repayment plan starts on October 12, 2025`}
           icon={
             <Image
               width={100}
               height={100}
               src="/assets/avatars/successCheckMark.svg"
-              alt=""
+              alt="success check mark"
               className="w-[100px] md:w-[120px] ml:w-[140px] lg:w-[150px] h-auto object-cover"
             />
           }
-          leftFlexButtonTitle="Later"
-          rightFlexButtonTitle="Add Money Now"
+          buttonTitle="Continue to Checkout"
           hrClassName="hidden"
-          leftFlexButtonClassName="w-fit px-6 md:px-10"
-          leftFlexButtonVariant={"secondary"}
-          rightFlexButtonVariant={"default"}
-          rightFlexButtonClassName="w-full"
-          handleRightFlexBtnAtn={handleAddMoney}
-          handleLeftFlexBtnAtn={handleLater}
-          disabledRightFlexBtn={loadingAddMoneyBtn}
-          loadingRightFlexBtnAtn={loadingAddMoneyBtn}
-        />
-      </DrawerDialog>
-
-      {/* payment modal */}
-      <DrawerDialog
-        open={onAddMoney}
-        close={() => setOnAddMoney(false)}
-        size="md"
-        title="Add to Your Savings"
-        subTitle="Send your savings amount to the account details below. The payment will be automatically verified and added to your balance."
-        contentCSS="px-[30px]"
-        headerClassName="mb-6"
-      >
-        <PaymentCard
-          bankName="Zenith Bank"
-          accountNumber="1234567890"
-          accountName="Agriconnect Savings"
-          amount={`₦0`}
-          onCancel={() => setOnAddMoney(false)}
-          handlePaymentConfirm={handlePaymentConfirm}
-          savingsNotification={
-            <PopNotification
-              icon={<MegaPhoneIcon className="w-5 h-5" />}
-              textContent={
-                <p>
-                  Your savings will reflect automatically within 10-15 minutes
-                  after payment confirmation.
-                </p>
-              }
-            />
-          }
+          handleFirstBtnAtn={handleContinueToCheckout}
+          disabledFirstBtn={checkoutLoading}
+          loadingFirstBtnAtn={checkoutLoading}
         />
       </DrawerDialog>
     </>

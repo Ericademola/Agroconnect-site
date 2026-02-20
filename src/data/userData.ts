@@ -38,4 +38,12 @@ export const userData = {
       addtionalInfo: "Next to the Ketu Bus Stop",
     },
   ],
+  // bankDetails: null,
+  bankDetails: {
+    bankName: "First Bank",
+    accountName: "Sam Akinlolu",
+    accountNumber: "1234567890",
+    bvn: "32849537589",
+  },
+  isActiveLoan: false,
 };

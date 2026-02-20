@@ -43,7 +43,9 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { getSavingsCart } from "@/hooks/getSavings";
-import { SavingsCartButton } from "@/app/savings-shop/page";
+import { SavingsCartButton } from "@/app/shop/shop-savings/page";
+import { getLoanCart } from "@/hooks/getLoans";
+import { LoanCartButton } from "../shop-loans/page";
 
 export default function ProductDetails() {
   const [itemDetails, setItemDetails] = useState<IProducts | null>(null);
@@ -91,6 +93,15 @@ export default function ProductDetails() {
 
     if (savedItem && savedItem.addOns) {
       setSelectedAddOns(savedItem.addOns);
+    }
+
+    const loanItems = getLoanCart();
+    const loanItem = loanItems.find(
+      (item) => item.productId === itemDetails.productId,
+    );
+
+    if (loanItem && loanItem.addOns) {
+      setSelectedAddOns(loanItem.addOns);
     }
   }, [itemDetails]);
 
@@ -472,6 +483,12 @@ export default function ProductDetails() {
       {actionType === "save" && (
         <div className="fixed bottom-10 right-10 md:right-15">
           <SavingsCartButton />
+        </div>
+      )}
+
+      {actionType === "loan" && (
+        <div className="fixed bottom-10 right-10 md:right-15">
+          <LoanCartButton />
         </div>
       )}
     </div>

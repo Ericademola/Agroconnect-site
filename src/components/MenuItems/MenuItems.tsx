@@ -50,7 +50,7 @@ const MenuItems = ({
     },
     {
       label: "Loan & Credit",
-      route: "/",
+      route: "/loan",
       icon: <WalletIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
     },
     {

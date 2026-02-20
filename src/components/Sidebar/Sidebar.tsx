@@ -53,7 +53,7 @@ const Sidebar = () => {
             key: "4",
             label: "Food on Credit",
             icon: <WalletIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
-            route: "/",
+            route: "/loan",
           },
           {
             key: "5",

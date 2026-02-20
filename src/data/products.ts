@@ -340,9 +340,9 @@ export const freshPickedProducts = [
   },
   {
     productId: 10,
-    productImage: "/assets/images/tomatoe.png",
-    productName: "Fresh Tomatoes",
-    unit: "Per Basket",
+    productImage: "/assets/images/beans.png",
+    productName: "Beans",
+    unit: "10kg Bag",
     tagText: "Limited Stock",
     price: 2500,
     description:
@@ -853,9 +853,9 @@ export const bestDealsProducts = [
   },
   {
     productId: 7,
-    productImage: "/assets/images/plantain.png",
-    productName: "Fresh Ripe Plantain",
-    unit: "Per Bunch",
+    productImage: "/assets/images/beans.png",
+    productName: "Beans",
+    unit: "10kg Bag",
     tagText: "Available",
     price: 2500,
     description:

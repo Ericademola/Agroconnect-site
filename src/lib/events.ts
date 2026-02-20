@@ -1,6 +1,7 @@
 export const CART_UPDATED_EVENT = "cartUpdated";
 export const WISHLIST_UPDATED_EVENT = "wishlistUpdated";
 export const SAVINGS_UPDATED_EVENT = "savingsUpdated";
+export const LOAN_UPDATED_EVENT = "loanUpdated";
 
 export const emitCartUpdate = () => {
   window.dispatchEvent(new Event(CART_UPDATED_EVENT));
@@ -12,4 +13,8 @@ export const emitWishlistUpdate = () => {
 
 export const emitSavingsUpdate = () => {
   window.dispatchEvent(new Event(SAVINGS_UPDATED_EVENT));
+};
+
+export const emitLoanUpdate = () => {
+  window.dispatchEvent(new Event(LOAN_UPDATED_EVENT));
 };

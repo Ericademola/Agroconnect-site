@@ -136,7 +136,7 @@ export default function CheckoutPage() {
           </Breadcrumb>
         </div>
         <div className="grid md:grid-cols-[1fr_1fr] ml:grid-cols-[2.8fr_2.2fr] lg:grid-cols-[3fr_2fr] gap-5 lg:gap-8">
-          <div className="rounded-2xl shadow shadow-[#0000000D] px-3 md:px-4 lg:px-6 pt-4 md:pt-5 lg:pt-8 pb-16 md:pb-32 flex flex-col gap-6 md:gap-10">
+          <div className="rounded-2xl border-[0.5px] border-[#0000000D] shadow-xs shadow-[#0000000D] px-3 md:px-4 lg:px-6 pt-4 md:pt-5 lg:pt-8 pb-16 md:pb-32 flex flex-col gap-6 md:gap-10">
             <div className="flex flex-col gap-[14px]">
               <h3 className="font-geologica font-light text-[#000000CC] text-[clamp(14px,1.4vw,16px)]">
                 Delivery Details
@@ -245,7 +245,7 @@ export default function CheckoutPage() {
               </div>
             </div>
           </div>
-          <div className="rounded-2xl shadow shadow-[#0000000D] px-3 md:px-4 lg:px-6 pt-4 md:pt-5 lg:pt-8 pb-16 md:pb-32 flex flex-col gap-6 md:gap-10">
+          <div className="rounded-2xl border-[0.5px] border-[#0000000D] shadow-xs shadow-[#0000000D] px-3 md:px-4 lg:px-6 pt-4 md:pt-5 lg:pt-8 pb-16 md:pb-32 flex flex-col gap-6 md:gap-10">
             <div className="flex flex-col gap-[14px]">
               <h3 className="font-geologica font-light text-[#000000CC] text-[clamp(14px,1.4vw,16px)]">
                 Order Summary
@@ -256,10 +256,7 @@ export default function CheckoutPage() {
                     key={item.productId}
                     className="grid grid-cols-[auto_1fr_auto] gap-3 font-poppins rounded-[12px] shadow shadow-[#0000000D] px-3 py-4 bg-[#F5F5F5] border border-[#0000001A] "
                   >
-                    <Link
-                      href={`/shop/${item.productId}`}
-                      className="bg-white rounded-[10px] p-1 inline-block"
-                    >
+                    <div className="bg-white rounded-[10px] p-1 inline-block">
                       <Image
                         src={item.productImage}
                         alt={item.productName}
@@ -267,7 +264,7 @@ export default function CheckoutPage() {
                         height={50}
                         className="object-contain w-[50px] h-[70px]"
                       />
-                    </Link>
+                    </div>
                     <div className="flex flex-col gap-1">
                       <h3 className="text-[clamp(14px,1.4vw,16px)] text-black font-medium">
                         {item.productName} ({item.unit})

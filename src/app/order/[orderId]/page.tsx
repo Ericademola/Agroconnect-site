@@ -111,7 +111,7 @@ export default function OrderDetails() {
         <div className="all-sides-shadow-xl rounded-2xl py-8 hidden md:block">
           <Sidebar />
         </div>
-        <div className="flex flex-col gap-5 md:gap-6 lg:gap-8 font-geologica text-[#00000099] all-sides-shadow-xl rounded-2xl md:px-4 lg:px-6 md:pb-10 mb-16">
+        <div className="flex flex-col gap-5 md:gap-6 lg:gap-8 font-geologica text-[#00000099] all-sides-shadow-xl rounded-2xl md:px-4 lg:px-6 md:pt-5 md:pb-10 mb-16">
           <div className="flex items-start justify-between">
             <div>
               <h1 className="text-[clamp(16px,1.8vw,22px)] font-medium leading-tight">
@@ -284,7 +284,7 @@ export default function OrderDetails() {
                   Payment Method
                 </h4>
                 <p className="text-[clamp(12px,1.5vw,16px)]">
-                  {selectedPaymentMethod?.methodName}
+                  {selectedPaymentMethod?.methodName ?? "Food on Credit (Loan)"}
                 </p>
               </div>
               <div className="flex flex-col gap-1">

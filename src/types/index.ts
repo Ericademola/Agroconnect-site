@@ -77,6 +77,8 @@ export interface IuserData {
   wishlistItems: number;
   myCashback: string;
   deliveryAddresses: deliveryAddresses[];
+  bankDetails: bankDetails | null;
+  isActiveLoan: boolean;
 }
 
 export interface deliveryAddresses {
@@ -88,4 +90,11 @@ export interface deliveryAddresses {
   houseNumber: string;
   area: string;
   addtionalInfo: string;
+}
+
+export interface bankDetails {
+  bankName: string;
+  accountName: string;
+  accountNumber: string;
+  bvn: string;
 }

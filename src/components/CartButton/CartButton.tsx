@@ -16,20 +16,28 @@ import { useCartActions } from "@/hooks/useCartActions";
 import { usePathname } from "next/navigation";
 import { useSavingsActions } from "@/hooks/useSavingActions";
 import { useMediaQuery } from "react-responsive";
+import {
+  getLoanCart,
+  getLoanCartItemQuantity,
+  ILoanCartItem,
+} from "@/hooks/getLoans";
+import { useLoanActions } from "@/hooks/useLoanActions";
 
 interface CartButtonProps {
   item: IProducts | CartItem;
   onQuantityChange?: (items: CartItem[]) => void;
   onSaveQuantityChange?: (items: ISavingsCartItem[]) => void;
+  onLoanQuantityChange?: (items: ILoanCartItem[]) => void;
   className?: string;
   actionType?: string;
 }
 
 export default function CartButton({
   item,
-  onQuantityChange,
   className,
+  onQuantityChange,
   onSaveQuantityChange,
+  onLoanQuantityChange,
   actionType,
 }: CartButtonProps) {
   const [loading, setLoading] = useState(false);
@@ -38,20 +46,25 @@ export default function CartButton({
 
   const { updateCart } = useCartActions(onQuantityChange);
   const { updateSavingsCartItem } = useSavingsActions(onSaveQuantityChange);
+  const { updateLoanCartItem } = useLoanActions(onLoanQuantityChange);
   const pathname = usePathname();
   const isSavingsPage =
-    pathname === "/savings-shop" || pathname === "/cart/cart-savings";
+    pathname === "/shop/shop-savings" || pathname === "/cart/cart-savings";
+  const isLoanPage =
+    pathname === "/shop/shop-loans" || pathname === "/cart/cart-loans";
 
   useEffect(() => {
     const storedQty = isSavingsPage
       ? getSavingsCartItemQuantity(item.productId)
-      : getItemQuantity(item.productId);
+      : isLoanPage
+        ? getLoanCartItemQuantity(item.productId)
+        : getItemQuantity(item.productId);
 
     if (storedQty > 0) {
       setQuantity(storedQty);
       setShowQtyButtons(true);
     }
-  }, [item.productId, isSavingsPage]);
+  }, [item.productId, isSavingsPage, isLoanPage]);
 
   const handleAddToSavings = () => {
     setLoading(true);
@@ -75,6 +88,17 @@ export default function CartButton({
     }, 900);
   };
 
+  const handleAddToLoan = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+      setShowQtyButtons(true);
+      setQuantity(1);
+      updateLoanCartItem(item as IProducts, 1, []);
+    }, 900);
+  };
+
   const handleIncrement = () => {
     const newQty = quantity + 1;
     setQuantity(newQty);
@@ -86,6 +110,13 @@ export default function CartButton({
       );
       const existingAddOns = savedItem?.addOns || [];
       updateSavingsCartItem(item as IProducts, newQty, existingAddOns);
+    } else if (isLoanPage) {
+      const savedItems = getLoanCart();
+      const savedItem = savedItems.find(
+        (item) => item.productId === item.productId,
+      );
+      const existingAddOns = savedItem?.addOns || [];
+      updateLoanCartItem(item as IProducts, newQty, existingAddOns);
     } else {
       const basketItems = getBasketItems();
       const cartItem = basketItems.find((c) => c.productId === item.productId);
@@ -111,6 +142,21 @@ export default function CartButton({
       } else {
         setQuantity(newQty);
         updateSavingsCartItem(item as IProducts, newQty, existingAddOns);
+      }
+    } else if (isLoanPage) {
+      const savedItems = getLoanCart();
+      const savedItem = savedItems.find(
+        (item) => item.productId === item.productId,
+      );
+      const existingAddOns = savedItem?.addOns || [];
+
+      if (newQty <= 0) {
+        setQuantity(0);
+        setShowQtyButtons(false);
+        updateLoanCartItem(item as IProducts, 0, existingAddOns);
+      } else {
+        setQuantity(newQty);
+        updateLoanCartItem(item as IProducts, newQty, existingAddOns);
       }
     } else {
       const basketItems = getBasketItems();
@@ -147,6 +193,18 @@ export default function CartButton({
             >
               <CartIcon className="w-5 h-5 hidden sm:block" fill="#fff" />
               {loading ? (isMobile ? loading : "Adding...") : "Add to Savings"}
+            </Button>
+          ) : isLoanPage || actionType === "loan" ? (
+            <Button
+              variant="default"
+              size="sm"
+              onClick={handleAddToLoan}
+              className="flex items-center gap-2 w-full h-[35px] lg:h-[50px]"
+              loading={loading}
+              disabled={loading}
+            >
+              <CartIcon className="w-5 h-5 hidden sm:block" fill="#fff" />
+              {loading ? (isMobile ? loading : "Adding...") : "Add to Loan"}
             </Button>
           ) : (
             <Button

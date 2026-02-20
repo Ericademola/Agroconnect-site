@@ -12,7 +12,7 @@ import FooterForm from "../Forms/FooterForm";
 
 export default function Footer() {
   return (
-    <footer className="mt-4 sm:mt-10 md:mt-20 flex flex-col w-full gap-4 sm:gap-10 md:gap-20">
+    <footer className="mt-20 flex flex-col w-full gap-4 sm:gap-10 md:gap-20">
       <div className="px-4 sm:px-5 md:px-6 ml:px-8 lg:px-12 grid grid-cols-1 sm:grid-cols-2 ml:grid-cols-[1fr_1fr_auto] items-start gap-6 sm:gap-8 ml:gap-10 lg:gap-12">
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-4 lg:gap-5">
