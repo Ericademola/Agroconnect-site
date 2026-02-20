@@ -936,7 +936,7 @@ export const MakeLoanPayment = ({
           <RadioGroup
             value={paymentType}
             onValueChange={setPaymentType}
-            className="gap-3 font-geologica"
+            className="gap-3"
           >
             {PaymentAmountOptions.map((option) => {
               const isSelected = paymentType === option.optionValue;

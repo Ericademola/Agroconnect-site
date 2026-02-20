@@ -59,7 +59,7 @@ const Sidebar = () => {
             key: "5",
             label: "Delivery Address(es)",
             icon: <AddressIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
-            route: "/",
+            route: "/delivery-addresses",
           },
         ]
       : []),
@@ -121,7 +121,7 @@ const Sidebar = () => {
       key: "14",
       label: "Change Password",
       icon: <ChangePasswordIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
-      route: "/",
+      route: "/change-password",
     },
 
     {
@@ -136,7 +136,7 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     logout();
-    router.push("/");
+    router.push("/login");
   };
 
   const handleTabClick = (tab: string) => {

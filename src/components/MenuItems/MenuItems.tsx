@@ -12,6 +12,7 @@ import {
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 type MenuItemsProps = {
   close: () => void;
@@ -31,6 +32,7 @@ const MenuItems = ({
   setActiveProfile,
 }: MenuItemsProps) => {
   const { userInfo, logout } = useAuth();
+  const router = useRouter();
 
   const ItemsList = [
     {
@@ -55,7 +57,7 @@ const MenuItems = ({
     },
     {
       label: "Change Password",
-      route: "/",
+      route: "/change-password",
       authOnly: true,
       icon: <ChangePasswordIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
     },
@@ -81,6 +83,7 @@ const MenuItems = ({
   const handleLogout = () => {
     logout();
     close();
+    router.push("/login");
   };
 
   const handleSwitchProfile = () => {

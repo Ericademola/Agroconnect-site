@@ -214,7 +214,7 @@ export const completeLoanPlan = (loanPlanId: string): void => {
     plans[index].loanStatus = "COMPLETED";
     saveLoanedPlans(plans);
 
-    // ✅ Check if user still has any active loans
+    // Check if user still has any active loans
     const hasActiveLoans = plans.some((plan) => plan.loanStatus === "ACTIVE");
 
     // If no more active loans, update user data

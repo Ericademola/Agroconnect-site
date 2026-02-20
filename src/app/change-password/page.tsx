@@ -1,34 +1,47 @@
 "use client";
 
-import AuthPage from "@/components/AuthPage/AuthPage";
 import { DrawerDialog } from "@/components/DrawerDialog/DrawerDialog";
-import BuyerLoginForm from "@/components/Forms/BuyerLoginForm";
-import CreateNewPasswordForm from "@/components/Forms/CreateNewPasswordForm";
-import FarmerLoginForm from "@/components/Forms/FarmerLoginForm";
+import ChangePasswordForm from "@/components/Forms/ChangePasswordForm";
+import PageTitle from "@/components/PageTitle/PageTitle";
+import Sidebar from "@/components/Sidebar/Sidebar";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { getUserData, updateUserData } from "@/hooks/getUserData";
+import { IuserData } from "@/types";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { ResetMethod } from "../login/page";
+import { CloseIcon } from "@/Icons";
+import ResetAuthCards from "@/components/ResetAuthCards/ResetAuthCards";
 import ResetPasswordViaEmailForm, {
   ResetPasswordViaPhoneNumberForm,
 } from "@/components/Forms/ResetPasswordForm";
 import VerificationCodeInput from "@/components/Forms/VerificationCodeInput";
-import ResetAuthCards from "@/components/ResetAuthCards/ResetAuthCards";
-import { getUserData, updateUserData } from "@/hooks/getUserData";
-import { CloseIcon } from "@/Icons";
-import { IuserData } from "@/types";
-import { useEffect, useState } from "react";
+import CreateNewPasswordForm from "@/components/Forms/CreateNewPasswordForm";
 
-export type ResetMethod = "email" | "phone";
-
-const LoginPage = () => {
+const ChangePassword = () => {
+  const [userInfo, setUserInfo] = useState<IuserData | null>(null);
   const [onForgotPassWord, setOnForgotPassWord] = useState(false);
   const [resetMethod, setResetMethod] = useState<ResetMethod>("email");
   const [onVerify, setOnVerify] = useState(false);
   const [loadingVerifyBtn, setLoadingVerifyBtn] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
-  const [userInfo, setUserInfo] = useState<IuserData | null>(null);
 
   useEffect(() => {
     const data = getUserData();
     setUserInfo(data);
   }, []);
+
+  const handlePasswordUpdate = (newPassword: string) => {
+    updateUserData({ userPassword: newPassword });
+  };
 
   const handleCloseForgotPassword = () => {
     setOnForgotPassWord(false);
@@ -56,30 +69,51 @@ const LoginPage = () => {
     setChangePassword(true);
   };
 
-  const handleSaveNewPassword = (password: string) => {
-    updateUserData({ userPassword: password });
-    setChangePassword(false);
-  };
-
   return (
     <>
-      <div>
-        <AuthPage
-          buyerForm={
-            <BuyerLoginForm
-              onForgotPassWord={() => setOnForgotPassWord(true)}
-            />
-          }
-          farmerForm={
-            <FarmerLoginForm
-              onForgotPassWord={() => setOnForgotPassWord(true)}
-            />
-          }
-          header="Login"
-          text="New to Agriconnect?"
-          linkhref="/create-account"
-          linkText="Create an Account"
-        />
+      <PageTitle
+        title="Address"
+        breadcrumb={
+          <div>
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link href="/">Home</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Address</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+        }
+      />
+      <div className="grid md:grid-cols-[auto_1fr] items-start md:gap-5 md:mx-6 ml:mx-8 lg:mx-12 mt-6 md:mt-8">
+        <div className="all-sides-shadow-xl rounded-2xl py-8 hidden md:block">
+          <Sidebar />
+        </div>
+        <div className="font-geologica text-[#000000CC] all-sides-shadow-xl rounded-2xl px-8 md:pt-5 pb-10">
+          <div className="text-[#00000099] flex flex-col gap-1 mb-6">
+            <h2 className="text-[clamp(16px,2.2vw,28px)] font-medium">
+              Change Password
+            </h2>
+            <p className="text-[clamp(12px,1.4vw,16px)]">
+              {`For your security, please don't reuse old passwords.`}
+            </p>
+          </div>
+          <div className="w-full md:w-[70%] lg:w-1/2">
+            {userInfo && (
+              <ChangePasswordForm
+                onSubmit={handlePasswordUpdate}
+                initialData={{ userPassword: userInfo.userPassword }}
+                onForgotPassWord={() => setOnForgotPassWord(true)}
+              />
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Reset Password Dialog - Shows Email or Phone based on resetMethod */}
@@ -175,7 +209,7 @@ const LoginPage = () => {
           title="Change Password"
           subTitle={`Choose a strong password you haven't used before.`}
           cardContent={
-            <CreateNewPasswordForm onSubmit={handleSaveNewPassword} />
+            <CreateNewPasswordForm onSubmit={() => setChangePassword(false)} />
           }
         />
       </DrawerDialog>
@@ -183,4 +217,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default ChangePassword;

@@ -12,6 +12,7 @@ interface EmptyPageProps {
   buttonhref?: string;
   className?: string;
   isButton?: boolean;
+  btnAction?: () => void;
 }
 
 const EmptyPage = ({
@@ -24,6 +25,7 @@ const EmptyPage = ({
   buttonhref,
   className,
   isButton = true,
+  btnAction,
 }: EmptyPageProps) => {
   return (
     <div
@@ -52,6 +54,7 @@ const EmptyPage = ({
             size="lg"
             className="flex items-center gap-2 mt-3"
             href={buttonhref}
+            onClick={btnAction}
           >
             {buttonIcon}
             <span>{buttonText}</span>

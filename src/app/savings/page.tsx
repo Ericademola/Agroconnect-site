@@ -123,7 +123,7 @@ const SavingsPage = () => {
               },
             ].map((item) => (
               <div
-                key={item.lable}
+                key={item.label}
                 style={{ backgroundColor: item.containerBg }}
                 className={`flex items-center gap-2 text-[#000000CC] rounded-2xl px-2 md:px-4 py-3`}
               >
@@ -135,10 +135,10 @@ const SavingsPage = () => {
                 </div>
                 <div className="flex flex-col gap-1">
                   <h2 className="text-[clamp(9px,1.5vw,16px)] font-extralight">
-                    {item.lable}
+                    {item.label}
                   </h2>
                   <div className="text-[clamp(14px,1.8vw,20px)]">
-                    {item.lable === "Total Saved" ? (
+                    {item.label === "Total Saved" ? (
                       <p>₦ {item.digit}</p>
                     ) : (
                       <p>{item.digit}</p>

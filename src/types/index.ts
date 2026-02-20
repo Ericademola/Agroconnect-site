@@ -72,13 +72,12 @@ export interface IuserData {
   accountType: string;
   isLoggedIn: boolean;
   dateJoined: string;
-  totalOrders: number;
-  activeOrders: number;
   wishlistItems: number;
   myCashback: string;
   deliveryAddresses: deliveryAddresses[];
   bankDetails: bankDetails | null;
   isActiveLoan: boolean;
+  userPassword: string;
 }
 
 export interface deliveryAddresses {
@@ -87,9 +86,10 @@ export interface deliveryAddresses {
   state: string;
   city: string;
   fullAddress: string;
-  houseNumber: string;
+  houseNumber?: string;
   area: string;
-  addtionalInfo: string;
+  addtionalInfo?: string;
+  isDefault: boolean;
 }
 
 export interface bankDetails {
