@@ -23,11 +23,11 @@ const phoneSchema = z.string().refine(
 );
 
 const EditProfileSchema = z.object({
-  fullName: z.string().nonempty({ message: "This field is required" }),
+  fullName: z.string().nonempty({ message: "Full name is required" }),
   phoneNumber: phoneSchema,
-  state: z.string().nonempty({ message: "This field is required" }),
+  state: z.string().nonempty({ message: "Please select your state" }),
   email: z.string().trim().email({ message: "Please enter a valid email" }),
-  userName: z.string().nonempty({ message: "This field is required" }),
+  userName: z.string().nonempty({ message: "Username is required" }),
 });
 
 type TypeEditProfileFormData = z.infer<typeof EditProfileSchema>;
@@ -143,6 +143,7 @@ const EditProfileForm = ({ initialData, onSubmit }: EditProfileFormProps) => {
                     {...field}
                     placeholder="Enter your phone number"
                     type="text"
+                    maxLength={11}
                     className="bg-[#ECECEC] h-[45px]"
                     inputClassName="text-[#000000B2] bg-[#ECECEC] "
                   />

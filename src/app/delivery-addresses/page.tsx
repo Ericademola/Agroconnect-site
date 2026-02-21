@@ -25,8 +25,8 @@ import { useEffect, useState } from "react";
 const DeliveryAddresses = () => {
   const [userInfo, setUserInfo] = useState(getUserData());
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [onEditAddress, setOnEditAddress] = useState(false);
-  const [isAddingNew, setIsAddingNew] = useState(false);
+  const [isShowEditAddress, setIsShowEditAddress] = useState(false);
+  const [isShowAddNewAddress, setIsShowAddNewAddress] = useState(false);
 
   useEffect(() => {
     const data = getUserData();
@@ -47,20 +47,20 @@ const DeliveryAddresses = () => {
   };
 
   const handleAddNewAddress = () => {
-    setIsAddingNew(true);
-    setOnEditAddress(true);
+    setIsShowAddNewAddress(true);
+    setIsShowEditAddress(true);
   };
 
   const handleEditAddress = (index: number) => {
     setSelectedIndex(index);
-    setIsAddingNew(false);
-    setOnEditAddress(true);
+    setIsShowAddNewAddress(false);
+    setIsShowEditAddress(true);
   };
 
   const handleSaveAddress = (data: TypeEditAddAddressFormData) => {
     const updatedAddresses = [...userInfo.deliveryAddresses];
 
-    if (isAddingNew) {
+    if (isShowAddNewAddress) {
       // Add new address
       updatedAddresses.push({ ...data, isDefault: false });
     } else {
@@ -76,8 +76,8 @@ const DeliveryAddresses = () => {
     });
 
     setUserInfo(updatedData);
-    setOnEditAddress(false);
-    setIsAddingNew(false);
+    setIsShowEditAddress(false);
+    setIsShowAddNewAddress(false);
   };
 
   const handleDeleteAddress = (index: number) => {
@@ -106,7 +106,7 @@ const DeliveryAddresses = () => {
   };
 
   const getInitialData = () => {
-    if (isAddingNew) {
+    if (isShowAddNewAddress) {
       return {
         fullName: "",
         phoneNumber: "",
@@ -259,13 +259,13 @@ const DeliveryAddresses = () => {
       </div>
 
       <DrawerDialog
-        open={onEditAddress}
+        open={isShowEditAddress}
         close={() => {
-          setOnEditAddress(false);
-          setIsAddingNew(false);
+          setIsShowEditAddress(false);
+          setIsShowAddNewAddress(false);
         }}
         size="md"
-        title={isAddingNew ? "Add New Address" : "Edit Address"}
+        title={isShowAddNewAddress ? "Add New Address" : "Edit Address"}
         contentCSS="pt-[20px] px-[30px]"
         max_height
       >

@@ -70,12 +70,13 @@ export default function CartSavingsPage() {
   );
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchText, setSearchText] = useState("");
-  const [onProceedWithSavings, setOnProceedWithSavings] = useState(false);
+  const [isShowProceedWithSavings, setIsShowProceedWithSavings] =
+    useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
   const [loadingAddMoneyBtn, setLoadingAddMoneyBtn] = useState(false);
-  const [onAddMoney, setOnAddMoney] = useState(false);
+  const [isShowAddMoney, setIsShowAddMoney] = useState(false);
 
   // Load savings cart and listen for updates
   useEffect(() => {
@@ -145,7 +146,7 @@ export default function CartSavingsPage() {
 
     setSubmitStatus("success");
     setLoadingAddMoneyBtn(false);
-    setOnProceedWithSavings(false);
+    setIsShowProceedWithSavings(false);
   };
 
   const handleLater = () => {
@@ -155,7 +156,7 @@ export default function CartSavingsPage() {
 
   const handleAddMoney = () => {
     setTimeout(() => {
-      setOnAddMoney(true);
+      setIsShowAddMoney(true);
       setSubmitStatus("idle");
     }, 1000);
   };
@@ -566,7 +567,7 @@ export default function CartSavingsPage() {
                       <Button
                         variant="default"
                         size="sm"
-                        onClick={() => setOnProceedWithSavings(true)}
+                        onClick={() => setIsShowProceedWithSavings(true)}
                         className="py-5"
                       >
                         Proceed with Savings
@@ -590,8 +591,8 @@ export default function CartSavingsPage() {
 
       {/* Proceed with Savings Modal */}
       <DrawerDialog
-        open={onProceedWithSavings}
-        close={() => setOnProceedWithSavings(false)}
+        open={isShowProceedWithSavings}
+        close={() => setIsShowProceedWithSavings(false)}
         size="md"
         title="New Savings Plan"
         contentCSS="px-[30px]"
@@ -643,8 +644,8 @@ export default function CartSavingsPage() {
 
       {/* payment modal */}
       <DrawerDialog
-        open={onAddMoney}
-        close={() => setOnAddMoney(false)}
+        open={isShowAddMoney}
+        close={() => setIsShowAddMoney(false)}
         size="md"
         title="Add to Your Savings"
         subTitle="Send your savings amount to the account details below. The payment will be automatically verified and added to your balance."
@@ -656,7 +657,7 @@ export default function CartSavingsPage() {
           accountNumber="1234567890"
           accountName="Agriconnect Savings"
           amount={`₦0`}
-          onCancel={() => setOnAddMoney(false)}
+          onCancel={() => setIsShowAddMoney(false)}
           handlePaymentConfirm={handlePaymentConfirm}
           savingsNotification={
             <PopNotification

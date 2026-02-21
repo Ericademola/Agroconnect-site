@@ -71,7 +71,8 @@ export default function CartLoansPage() {
   );
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchText, setSearchText] = useState("");
-  const [onProceedWithSavings, setOnProceedWithSavings] = useState(false);
+  const [isShowProceedWithSavings, setIsShowProceedWithSavings] =
+    useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
@@ -138,7 +139,7 @@ export default function CartLoansPage() {
 
   const handleProceedWithLoan = () => {
     setTimeout(() => {
-      setOnProceedWithSavings(false);
+      setIsShowProceedWithSavings(false);
       setSubmitStatus("success");
     }, 600);
   };
@@ -561,7 +562,7 @@ export default function CartLoansPage() {
                       <Button
                         variant="default"
                         size="sm"
-                        onClick={() => setOnProceedWithSavings(true)}
+                        onClick={() => setIsShowProceedWithSavings(true)}
                         className="py-5"
                         disabled={hasActiveLoan}
                       >
@@ -592,8 +593,8 @@ export default function CartLoansPage() {
 
       {/* Proceed with Savings Modal */}
       <DrawerDialog
-        open={onProceedWithSavings}
-        close={() => setOnProceedWithSavings(false)}
+        open={isShowProceedWithSavings}
+        close={() => setIsShowProceedWithSavings(false)}
         size="md"
         title="Confirm Your Food Loan"
         subTitle="You’re about to buy the selected items on credit. Please review your loan summary and repayment details before proceeding."

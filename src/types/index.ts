@@ -69,7 +69,7 @@ export interface IuserData {
   country: string;
   state: string;
   city: string;
-  accountType: string;
+  accountType: string[];
   isLoggedIn: boolean;
   dateJoined: string;
   wishlistItems: number;

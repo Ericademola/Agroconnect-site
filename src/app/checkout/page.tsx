@@ -34,10 +34,10 @@ import EditAddAddressForm, {
 export default function CheckoutPage() {
   const [basketItems, setBasketItems] = useState<CartItem[]>([]);
   const [paymentMethod, setPaymentMethod] = useState("debitCreditCard");
-  const [onEditForm, setOnEditForm] = useState(false);
-  const [onChangeAddress, setOnChangeAddress] = useState(false);
+  const [isShowEditForm, setIsShowEditForm] = useState(false);
+  const [isShowChangeAddress, setIsShowChangeAddress] = useState(false);
   const [userInfo, setUserInfo] = useState(getUserData());
-  const [onConfirmOrder, setOnConfirmOrder] = useState(false);
+  const [isShowConfirmOrder, setIsShowConfirmOrder] = useState(false);
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(() => {
     const data = getUserData();
     const defaultIndex = data.deliveryAddresses.findIndex(
@@ -79,12 +79,12 @@ export default function CheckoutPage() {
     });
 
     setUserInfo(updatedData);
-    setOnEditForm(false);
+    setIsShowEditForm(false);
   };
 
   const handleSelectAddress = (addressIndex: number) => {
     setSelectedAddressIndex(addressIndex);
-    setOnChangeAddress(false);
+    setIsShowChangeAddress(false);
   };
 
   const handlePaymentConfirm = () => {
@@ -111,7 +111,7 @@ export default function CheckoutPage() {
     setTimeout(() => {
       localStorage.removeItem("BasketItems");
       clearLocalStorage();
-      setOnConfirmOrder(false);
+      setIsShowConfirmOrder(false);
 
       router.push("/order");
     }, 2000);
@@ -180,7 +180,7 @@ export default function CheckoutPage() {
                     </div>
                     <Button
                       variant="ghost"
-                      onClick={() => setOnEditForm(true)}
+                      onClick={() => setIsShowEditForm(true)}
                       className="text-[#C09706] hover:text-[#C09706]/90 hover:bg-transparent w-fit h-fit p-0 ml-auto"
                     >
                       Edit
@@ -201,7 +201,7 @@ export default function CheckoutPage() {
                     <Button
                       variant="ghost"
                       className="text-[#C09706] hover:text-[#C09706]/90 hover:bg-transparent w-fit h-fit p-0 ml-auto"
-                      onClick={() => setOnChangeAddress(true)}
+                      onClick={() => setIsShowChangeAddress(true)}
                     >
                       Change
                     </Button>
@@ -372,7 +372,7 @@ export default function CheckoutPage() {
                     variant="default"
                     size="lg"
                     className="w-full"
-                    onClick={() => setOnConfirmOrder(true)}
+                    onClick={() => setIsShowConfirmOrder(true)}
                   >
                     Confirm Order
                   </Button>
@@ -389,8 +389,8 @@ export default function CheckoutPage() {
 
           {/* Edit user info form */}
           <DrawerDialog
-            open={onEditForm}
-            close={() => setOnEditForm(false)}
+            open={isShowEditForm}
+            close={() => setIsShowEditForm(false)}
             size="md"
             title="Edit Customer Information"
             contentCSS="pt-[20px] px-[30px] h-[80vh]"
@@ -407,15 +407,15 @@ export default function CheckoutPage() {
 
           {/* Change Address modal */}
           <DrawerDialog
-            open={onChangeAddress}
-            close={() => setOnChangeAddress(false)}
+            open={isShowChangeAddress}
+            close={() => setIsShowChangeAddress(false)}
             size="md"
             title="Select Address"
             contentCSS="pt-[20px] px-[30px] "
             max_height
           >
             <DeliveryAddress
-              onCancel={() => setOnChangeAddress(false)}
+              onCancel={() => setIsShowChangeAddress(false)}
               onSelectAddress={handleSelectAddress}
               currentAddressIndex={selectedAddressIndex}
             />
@@ -423,8 +423,8 @@ export default function CheckoutPage() {
 
           {/* Confrim Payment modal */}
           <DrawerDialog
-            open={onConfirmOrder}
-            close={() => setOnConfirmOrder(false)}
+            open={isShowConfirmOrder}
+            close={() => setIsShowConfirmOrder(false)}
             size="md"
             title="We are waiting for your payment"
             subTitle="Please follow the instructions below and do not refresh or leave this page.
@@ -440,7 +440,7 @@ Payment confirmation may take up to 2 minutes."
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}`}
-              onCancel={() => setOnConfirmOrder(false)}
+              onCancel={() => setIsShowConfirmOrder(false)}
               handlePaymentConfirm={handlePaymentConfirm}
             />
           </DrawerDialog>
@@ -496,7 +496,7 @@ export const DeliveryAddress = ({
 }: DeliveryAddressProps) => {
   const [userInfo, setUserInfo] = useState(getUserData());
   const [selectedIndex, setSelectedIndex] = useState(currentAddressIndex);
-  const [onAddNewAddress, setOnAddNewAddress] = useState(false);
+  const [isShowAddNewAddress, setIsShowAddNewAddress] = useState(false);
 
   useEffect(() => {
     const data = getUserData();
@@ -517,7 +517,7 @@ export const DeliveryAddress = ({
     });
 
     setUserInfo(updatedData);
-    setOnAddNewAddress(false);
+    setIsShowAddNewAddress(false);
   };
 
   const getInitialData = () => {
@@ -574,7 +574,7 @@ export const DeliveryAddress = ({
           <Button
             variant="default"
             size="lg"
-            onClick={() => setOnAddNewAddress(true)}
+            onClick={() => setIsShowAddNewAddress(true)}
             className="flex-1"
           >
             Add New Address
@@ -584,9 +584,9 @@ export const DeliveryAddress = ({
 
       {/* Add address form */}
       <DrawerDialog
-        open={onAddNewAddress}
+        open={isShowAddNewAddress}
         close={() => {
-          setOnAddNewAddress(false);
+          setIsShowAddNewAddress(false);
         }}
         size="md"
         title="Edit Address"

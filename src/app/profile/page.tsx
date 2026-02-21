@@ -17,8 +17,8 @@ import { getOrders, Order } from "@/hooks/getOrders";
 const Profile = () => {
   const [userInfo, setUserInfo] = useState(getUserData());
   const [wishlistCount, setWishlistCount] = useState(userInfo.wishlistItems);
-  const [onEditForm, setOnEditForm] = useState(false);
-  const [onEditAddress, setOnEditAddress] = useState(false);
+  const [isShowEditForm, setIsShowEditForm] = useState(false);
+  const [isShowEditAddress, setIsShowEditAddress] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [orders, setOrders] = useState<Order[]>([]);
 
@@ -39,7 +39,7 @@ const Profile = () => {
 
   const handleEditAddress = (index: number) => {
     setSelectedIndex(index);
-    setOnEditAddress(true);
+    setIsShowEditAddress(true);
   };
 
   const handleUpdateUserInfo = (data: {
@@ -58,7 +58,7 @@ const Profile = () => {
     });
 
     setUserInfo(updatedData);
-    setOnEditForm(false);
+    setIsShowEditForm(false);
   };
 
   const handleSaveAddress = (data: TypeEditAddAddressFormData) => {
@@ -74,7 +74,7 @@ const Profile = () => {
     });
 
     setUserInfo(updatedData);
-    setOnEditAddress(false);
+    setIsShowEditAddress(false);
   };
 
   const getInitialData = () => {
@@ -214,7 +214,7 @@ const Profile = () => {
                 variant="secondary"
                 size="lg"
                 className="w-[80%] mx-auto"
-                onClick={() => setOnEditForm(true)}
+                onClick={() => setIsShowEditForm(true)}
               >
                 Edit Profile
               </Button>
@@ -266,8 +266,8 @@ const Profile = () => {
 
       {/* Edit profile form */}
       <DrawerDialog
-        open={onEditForm}
-        close={() => setOnEditForm(false)}
+        open={isShowEditForm}
+        close={() => setIsShowEditForm(false)}
         size="md"
         title="Edit Customer Information"
         contentCSS="pt-[20px] px-[30px]"
@@ -287,9 +287,9 @@ const Profile = () => {
 
       {/* Edit address form */}
       <DrawerDialog
-        open={onEditAddress}
+        open={isShowEditAddress}
         close={() => {
-          setOnEditAddress(false);
+          setIsShowEditAddress(false);
         }}
         size="md"
         title="Edit Address"

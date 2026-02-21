@@ -28,11 +28,11 @@ import CreateNewPasswordForm from "@/components/Forms/CreateNewPasswordForm";
 
 const ChangePassword = () => {
   const [userInfo, setUserInfo] = useState<IuserData | null>(null);
-  const [onForgotPassWord, setOnForgotPassWord] = useState(false);
+  const [isShowForgotPassWord, setIsShowForgotPassWord] = useState(false);
   const [resetMethod, setResetMethod] = useState<ResetMethod>("email");
-  const [onVerify, setOnVerify] = useState(false);
+  const [isShowVerify, setIsShowVerify] = useState(false);
   const [loadingVerifyBtn, setLoadingVerifyBtn] = useState(false);
-  const [changePassword, setChangePassword] = useState(false);
+  const [isShowchangePassword, setIsShowChangePassword] = useState(false);
 
   useEffect(() => {
     const data = getUserData();
@@ -44,18 +44,18 @@ const ChangePassword = () => {
   };
 
   const handleCloseForgotPassword = () => {
-    setOnForgotPassWord(false);
+    setIsShowForgotPassWord(false);
     setTimeout(() => setResetMethod("email"), 300);
   };
 
   const handleEmailFormSubmit = () => {
-    setOnForgotPassWord(false);
-    setOnVerify(true);
+    setIsShowForgotPassWord(false);
+    setIsShowVerify(true);
   };
 
   const handlePhoneFormSubmit = () => {
-    setOnForgotPassWord(false);
-    setOnVerify(true);
+    setIsShowForgotPassWord(false);
+    setIsShowVerify(true);
   };
 
   const handleVerifyCode = async (code: string) => {
@@ -65,8 +65,8 @@ const ChangePassword = () => {
     console.log("Verification code:", code);
 
     setLoadingVerifyBtn(false);
-    setOnVerify(false);
-    setChangePassword(true);
+    setIsShowVerify(false);
+    setIsShowChangePassword(true);
   };
 
   return (
@@ -109,7 +109,7 @@ const ChangePassword = () => {
               <ChangePasswordForm
                 onSubmit={handlePasswordUpdate}
                 initialData={{ userPassword: userInfo.userPassword }}
-                onForgotPassWord={() => setOnForgotPassWord(true)}
+                onForgotPassWord={() => setIsShowForgotPassWord(true)}
               />
             )}
           </div>
@@ -118,7 +118,7 @@ const ChangePassword = () => {
 
       {/* Reset Password Dialog - Shows Email or Phone based on resetMethod */}
       <DrawerDialog
-        open={onForgotPassWord}
+        open={isShowForgotPassWord}
         close={handleCloseForgotPassword}
         size="sm"
         title="Reset Password"
@@ -165,8 +165,8 @@ const ChangePassword = () => {
 
       {/* Verification Code Dialog */}
       <DrawerDialog
-        open={onVerify}
-        close={() => setOnVerify(false)}
+        open={isShowVerify}
+        close={() => setIsShowVerify(false)}
         size="md"
         title="Enter Verification Code"
         titleCSS="sr-only"
@@ -193,8 +193,8 @@ const ChangePassword = () => {
 
       {/* Change Password Dialog */}
       <DrawerDialog
-        open={changePassword}
-        close={() => setChangePassword(false)}
+        open={isShowchangePassword}
+        close={() => setIsShowChangePassword(false)}
         size="md"
         title="Change Password"
         titleCSS="sr-only"
@@ -209,7 +209,9 @@ const ChangePassword = () => {
           title="Change Password"
           subTitle={`Choose a strong password you haven't used before.`}
           cardContent={
-            <CreateNewPasswordForm onSubmit={() => setChangePassword(false)} />
+            <CreateNewPasswordForm
+              onSubmit={() => setIsShowChangePassword(false)}
+            />
           }
         />
       </DrawerDialog>

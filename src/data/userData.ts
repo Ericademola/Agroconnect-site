@@ -8,7 +8,7 @@ export const userData = {
   country: "Nigeria",
   state: "Lagos",
   city: "Lekki",
-  accountType: "Buyer",
+  accountType: ["BUYER"],
   isLoggedIn: false,
   dateJoined: "January 2026",
   wishlistItems: 0,

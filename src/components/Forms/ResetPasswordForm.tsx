@@ -63,7 +63,7 @@ const ResetPasswordViaEmailForm = ({
       <>
         <Form {...form}>
           <form
-            className="flex flex-col gap-8 px-1"
+            className="flex flex-col gap-6 md:gap-8 px-1"
             onSubmit={handleSubmit(handleFormSubmit)}
           >
             <div className="flex flex-col gap-4 text-[#525252] font-geologica">
@@ -196,7 +196,7 @@ export const ResetPasswordViaPhoneNumberForm = ({
       <>
         <Form {...form}>
           <form
-            className="flex flex-col gap-8 px-1"
+            className="flex flex-col gap-6 md:gap-8 px-1"
             onSubmit={handleSubmit(handleFormSubmit)}
           >
             <div className="flex flex-col gap-4 text-[#525252] font-geologica">

@@ -45,12 +45,12 @@ const LoanPage = () => {
   const [loanPlans, setLoanPlans] = useState<ILoanItem[]>([]);
   const [userInfo, setUserInfo] = useState<IuserData | null>(null);
   const [activeTab, setActiveTab] = useState("activeLoans");
-  const [onViewReceipt, setOnViewReceipt] = useState(false);
+  const [isShowViewReceipt, setIsShowViewReceipt] = useState(false);
   const [selectedLoanPlan, setSelectedLoanPlan] = useState<ILoanItem | null>(
     null,
   );
-  const [onMakePayment, setOnMakePayment] = useState(false);
-  const [onPaymentOverdue, setOnPaymentOverdue] = useState(false);
+  const [isShowMakePayment, setIsShowMakePayment] = useState(false);
+  const [isShowPaymentOverdue, setIsShowPaymentOverdue] = useState(false);
   const [isPaymentLoading, setIsPaymentLoading] = useState(false);
 
   useEffect(() => {
@@ -119,20 +119,20 @@ const LoanPage = () => {
     setSelectedLoanPlan(plan);
 
     if (isLoanOverdue(plan)) {
-      setOnPaymentOverdue(true);
+      setIsShowPaymentOverdue(true);
     } else {
-      setOnMakePayment(true);
+      setIsShowMakePayment(true);
     }
   };
 
   const handleViewReceipt = (plan: ILoanItem) => {
     setSelectedLoanPlan(plan);
-    setOnViewReceipt(true);
+    setIsShowViewReceipt(true);
   };
 
   const handleConfirmPayment = (amount: number) => {
     console.log("Processing payment:", amount);
-    setOnMakePayment(false);
+    setIsShowMakePayment(false);
     setSelectedLoanPlan(null);
   };
 
@@ -141,7 +141,7 @@ const LoanPage = () => {
 
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      setOnPaymentOverdue(false);
+      setIsShowPaymentOverdue(false);
       setSelectedLoanPlan(null);
     } catch (error) {
       console.error("Payment failed:", error);
@@ -624,9 +624,9 @@ const LoanPage = () => {
 
       {/* Completed loan receipt */}
       <DrawerDialog
-        open={onViewReceipt}
+        open={isShowViewReceipt}
         close={() => {
-          setOnViewReceipt(false);
+          setIsShowViewReceipt(false);
           setSelectedLoanPlan(null);
         }}
         size="md"
@@ -642,9 +642,9 @@ const LoanPage = () => {
 
       {/* Make Payment modal */}
       <DrawerDialog
-        open={onMakePayment}
+        open={isShowMakePayment}
         close={() => {
-          setOnMakePayment(false);
+          setIsShowMakePayment(false);
           setSelectedLoanPlan(null);
         }}
         size="md"
@@ -659,7 +659,7 @@ const LoanPage = () => {
             selectedLoanPlan={selectedLoanPlan}
             onConfirm={handleConfirmPayment}
             onCancel={() => {
-              setOnMakePayment(false);
+              setIsShowMakePayment(false);
               setSelectedLoanPlan(null);
             }}
           />
@@ -668,9 +668,9 @@ const LoanPage = () => {
 
       {/* Payment Overdue modal */}
       <DrawerDialog
-        open={onPaymentOverdue}
+        open={isShowPaymentOverdue}
         close={() => {
-          setOnPaymentOverdue(false);
+          setIsShowPaymentOverdue(false);
           setSelectedLoanPlan(null);
         }}
         size="md"
@@ -685,7 +685,7 @@ const LoanPage = () => {
             selectedLoanPlan={selectedLoanPlan}
             onPayNow={handlePayNow}
             onCancel={() => {
-              setOnMakePayment(false);
+              setIsShowMakePayment(false);
               setSelectedLoanPlan(null);
             }}
             paymentloading={isPaymentLoading}

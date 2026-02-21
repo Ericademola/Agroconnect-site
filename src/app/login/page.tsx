@@ -2,9 +2,7 @@
 
 import AuthPage from "@/components/AuthPage/AuthPage";
 import { DrawerDialog } from "@/components/DrawerDialog/DrawerDialog";
-import BuyerLoginForm from "@/components/Forms/BuyerLoginForm";
 import CreateNewPasswordForm from "@/components/Forms/CreateNewPasswordForm";
-import FarmerLoginForm from "@/components/Forms/FarmerLoginForm";
 import ResetPasswordViaEmailForm, {
   ResetPasswordViaPhoneNumberForm,
 } from "@/components/Forms/ResetPasswordForm";
@@ -14,35 +12,64 @@ import { getUserData, updateUserData } from "@/hooks/getUserData";
 import { CloseIcon } from "@/Icons";
 import { IuserData } from "@/types";
 import { useEffect, useState } from "react";
+import LoginForm from "@/components/Forms/LoginForm";
+import { useMediaQuery } from "react-responsive";
+import { useRouter } from "next/navigation";
 
 export type ResetMethod = "email" | "phone";
 
 const LoginPage = () => {
-  const [onForgotPassWord, setOnForgotPassWord] = useState(false);
+  const [isShowForgotPassWord, setIsShowForgotPassWord] = useState(false);
   const [resetMethod, setResetMethod] = useState<ResetMethod>("email");
-  const [onVerify, setOnVerify] = useState(false);
+  const [isShowVerify, setIsShowVerify] = useState(false);
   const [loadingVerifyBtn, setLoadingVerifyBtn] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
   const [userInfo, setUserInfo] = useState<IuserData | null>(null);
+  // const [isShowForgotPassword, setIsShowForgotPassword] = useState(false);
 
   useEffect(() => {
     const data = getUserData();
     setUserInfo(data);
   }, []);
 
+  const isMobile = useMediaQuery({
+    query: "(max-width: 640px)",
+  });
+
+  const router = useRouter();
+
+  const handleForgotPassword = () => {
+    // setIsShowForgotPassword(true);
+    if (isMobile) {
+      router.push("/reset-password");
+    } else {
+      setIsShowForgotPassWord(true);
+    }
+  };
+
+  // useEffect(() => {
+  //   if (isShowForgotPassword) {
+  //     if (isMobile) {
+  //       router.push("/reset-password");
+  //     } else {
+  //       setIsShowForgotPassWord(true);
+  //     }
+  //   }
+  // }, [isMobile, isShowForgotPassword, router]);
+
   const handleCloseForgotPassword = () => {
-    setOnForgotPassWord(false);
+    setIsShowForgotPassWord(false);
     setTimeout(() => setResetMethod("email"), 300);
   };
 
   const handleEmailFormSubmit = () => {
-    setOnForgotPassWord(false);
-    setOnVerify(true);
+    setIsShowForgotPassWord(false);
+    setIsShowVerify(true);
   };
 
   const handlePhoneFormSubmit = () => {
-    setOnForgotPassWord(false);
-    setOnVerify(true);
+    setIsShowForgotPassWord(false);
+    setIsShowVerify(true);
   };
 
   const handleVerifyCode = async (code: string) => {
@@ -52,7 +79,7 @@ const LoginPage = () => {
     console.log("Verification code:", code);
 
     setLoadingVerifyBtn(false);
-    setOnVerify(false);
+    setIsShowVerify(false);
     setChangePassword(true);
   };
 
@@ -65,16 +92,7 @@ const LoginPage = () => {
     <>
       <div>
         <AuthPage
-          buyerForm={
-            <BuyerLoginForm
-              onForgotPassWord={() => setOnForgotPassWord(true)}
-            />
-          }
-          farmerForm={
-            <FarmerLoginForm
-              onForgotPassWord={() => setOnForgotPassWord(true)}
-            />
-          }
+          form={<LoginForm onForgotPassWord={handleForgotPassword} />}
           header="Login"
           text="New to Agriconnect?"
           linkhref="/create-account"
@@ -84,7 +102,7 @@ const LoginPage = () => {
 
       {/* Reset Password Dialog - Shows Email or Phone based on resetMethod */}
       <DrawerDialog
-        open={onForgotPassWord}
+        open={isShowForgotPassWord}
         close={handleCloseForgotPassword}
         size="sm"
         title="Reset Password"
@@ -131,8 +149,8 @@ const LoginPage = () => {
 
       {/* Verification Code Dialog */}
       <DrawerDialog
-        open={onVerify}
-        close={() => setOnVerify(false)}
+        open={isShowVerify}
+        close={() => setIsShowVerify(false)}
         size="md"
         title="Enter Verification Code"
         titleCSS="sr-only"

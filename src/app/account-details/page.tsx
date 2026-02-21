@@ -25,8 +25,8 @@ import { useEffect, useState } from "react";
 const AccountDetails = () => {
   const [userInfo, setUserInfo] = useState<IuserData | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [onEditAccount, setOnEditAccount] = useState(false);
-  const [isAddingNew, setIsAddingNew] = useState(false);
+  const [isShowEditAccount, setIsShowEditAccount] = useState(false);
+  const [isShowAddNewAccount, setIsShowAddNewAccount] = useState(false);
 
   useEffect(() => {
     const data = getUserData();
@@ -48,14 +48,14 @@ const AccountDetails = () => {
   };
 
   const handleAddNewAccountDetails = () => {
-    setIsAddingNew(true);
-    setOnEditAccount(true);
+    setIsShowAddNewAccount(true);
+    setIsShowEditAccount(true);
   };
 
-  const handleEditAccount = (index: number) => {
+  const handleShowEditAccount = (index: number) => {
     setSelectedIndex(index);
-    setIsAddingNew(false);
-    setOnEditAccount(true);
+    setIsShowAddNewAccount(false);
+    setIsShowEditAccount(true);
   };
 
   const handleAddAccount = (data: TypeBankFormSchema) => {
@@ -64,7 +64,7 @@ const AccountDetails = () => {
 
     const currentDate = new Date();
 
-    if (isAddingNew) {
+    if (isShowAddNewAccount) {
       updatedAccounts.push({
         ...data,
         isPrimary: false,
@@ -81,8 +81,8 @@ const AccountDetails = () => {
 
     const updatedData = updateUserData({ bankDetails: updatedAccounts });
     setUserInfo(updatedData);
-    setOnEditAccount(false);
-    setIsAddingNew(false);
+    setIsShowEditAccount(false);
+    setIsShowAddNewAccount(false);
   };
 
   const handleDeleteAccount = (index: number) => {
@@ -112,7 +112,7 @@ const AccountDetails = () => {
   };
 
   const getInitialData = () => {
-    if (isAddingNew || !userInfo) {
+    if (isShowAddNewAccount || !userInfo) {
       return {
         bankName: "",
         accountName: "",
@@ -258,7 +258,7 @@ const AccountDetails = () => {
                         variant="secondary"
                         size="sm"
                         className="bg-[#FFFFFF] hover:bg-[#FFFFFF]/80 flex items-center gap-2 font-light text-[#000000CC] h-10 w-full"
-                        onClick={() => handleEditAccount(index)}
+                        onClick={() => handleShowEditAccount(index)}
                       >
                         <EditIcon className="w-5 h-5" />
                         Edit
@@ -282,13 +282,13 @@ const AccountDetails = () => {
       </div>
 
       <DrawerDialog
-        open={onEditAccount}
+        open={isShowEditAccount}
         close={() => {
-          setOnEditAccount(false);
-          setIsAddingNew(false);
+          setIsShowEditAccount(false);
+          setIsShowAddNewAccount(false);
         }}
         size="md"
-        title={isAddingNew ? "Add New Account" : "Edit Account"}
+        title={isShowAddNewAccount ? "Add New Account" : "Edit Account"}
         contentCSS="pt-[20px] px-[30px]"
         max_height
       >

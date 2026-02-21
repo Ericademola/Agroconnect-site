@@ -13,6 +13,7 @@ import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import { getUserData } from "@/hooks/getUserData";
 
 type MenuItemsProps = {
   close: () => void;
@@ -20,7 +21,7 @@ type MenuItemsProps = {
   itemsListClassName?: string;
   secondClassName?: string;
   activeProfile?: string;
-  setActiveProfile?: (value: "buyer" | "farmer") => void;
+  setActiveProfile?: (value: "BUYER" | "FARMER") => void;
 };
 
 const MenuItems = ({
@@ -33,6 +34,8 @@ const MenuItems = ({
 }: MenuItemsProps) => {
   const { userInfo, logout } = useAuth();
   const router = useRouter();
+
+  const updatedUserData = getUserData();
 
   const ItemsList = [
     {
@@ -61,12 +64,29 @@ const MenuItems = ({
       authOnly: true,
       icon: <ChangePasswordIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
     },
-    {
-      label: `Switch to ${activeProfile === "buyer" ? "Farmer" : "Buyer"}`,
-      route: "/",
-      authOnly: true,
-      icon: <SwitchIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
-    },
+    ...(updatedUserData.accountType.includes("FARMER")
+      ? [
+          {
+            label: `Switch to ${activeProfile === "BUYER" ? "Farmer" : "Buyer"}`,
+            route: "/",
+            authOnly: true,
+            icon: <SwitchIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
+          },
+        ]
+      : [
+          {
+            label: `Become a Farmer`,
+            route: "/create-account/become-farmer",
+            authOnly: true,
+            icon: (
+              <UserIcon
+                className="w-4 h-4 sm:w-5 sm:h-5 md:w-6"
+                stroke="#03601A"
+              />
+            ),
+          },
+        ]),
+
     {
       label: "Logout",
       route: "/",
@@ -88,7 +108,7 @@ const MenuItems = ({
 
   const handleSwitchProfile = () => {
     if (setActiveProfile) {
-      const newProfile = activeProfile === "buyer" ? "farmer" : "buyer";
+      const newProfile = activeProfile === "BUYER" ? "FARMER" : "BUYER";
       setActiveProfile(newProfile);
       sessionStorage.setItem("activeProfile", newProfile);
     }
@@ -121,6 +141,7 @@ const MenuItems = ({
                 className={cn(
                   "text-[#333333] font-geologica font-extralight",
                   item.label === "Logout" && "text-[#E63946]",
+                  item.label === "Become a Farmer" && "text-[#03601A]",
                 )}
               >
                 {item.label}

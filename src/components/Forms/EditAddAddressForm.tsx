@@ -23,13 +23,13 @@ const phoneSchema = z.string().refine(
 );
 
 const EditAddAddressSchema = z.object({
-  fullName: z.string().nonempty({ message: "This field is required" }),
+  fullName: z.string().nonempty({ message: "Full name is required" }),
   phoneNumber: phoneSchema,
-  state: z.string().nonempty({ message: "This field is required" }),
-  city: z.string().nonempty({ message: "This field is required" }),
-  fullAddress: z.string().nonempty({ message: "This field is required" }),
+  state: z.string().nonempty({ message: "Please select your state" }),
+  city: z.string().nonempty({ message: "Please select your city" }),
+  fullAddress: z.string().nonempty({ message: "Street address is required" }),
   houseNumber: z.string().optional(),
-  area: z.string().nonempty({ message: "This field is required" }),
+  area: z.string().nonempty({ message: "Neighbourhood or area is required" }),
   addtionalInfo: z.string().optional(),
 });
 

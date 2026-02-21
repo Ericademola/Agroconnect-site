@@ -33,7 +33,7 @@ export default function SavedPlanDetails() {
   const params = useParams();
   const router = useRouter();
   const [savedPlan, setSavedPlan] = useState<ISavedItem | null>(null);
-  const [onAddToSavings, setOnAddToSavings] = useState(false);
+  const [isShowAddToSavings, setIsShowAddToSavings] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState<
     "idle" | "success" | "processing" | "error"
   >("idle");
@@ -97,7 +97,7 @@ export default function SavedPlanDetails() {
   const isRedeemed = savedPlan.saveStatus === "REDEEMED";
 
   const handleAddToSavings = () => {
-    setOnAddToSavings(true);
+    setIsShowAddToSavings(true);
   };
 
   const handleRedeemed = () => {
@@ -121,7 +121,7 @@ export default function SavedPlanDetails() {
 
   const handlePaymentConfirm = () => {
     setTimeout(() => {
-      setOnAddToSavings(false);
+      setIsShowAddToSavings(false);
       setPaymentStatus("success");
     }, 1000);
   };
@@ -410,8 +410,8 @@ export default function SavedPlanDetails() {
 
       {/* payment modal */}
       <DrawerDialog
-        open={onAddToSavings}
-        close={() => setOnAddToSavings(false)}
+        open={isShowAddToSavings}
+        close={() => setIsShowAddToSavings(false)}
         size="md"
         title="Add to Your Savings"
         subTitle="Send your savings amount to the account details below. The payment will be automatically verified and added to your balance."
@@ -423,7 +423,7 @@ export default function SavedPlanDetails() {
           accountNumber="1234567890"
           accountName="Agriconnect Savings"
           amount={`₦0`}
-          onCancel={() => setOnAddToSavings(false)}
+          onCancel={() => setIsShowAddToSavings(false)}
           handlePaymentConfirm={handlePaymentConfirm}
           savingsNotification={
             <PopNotification

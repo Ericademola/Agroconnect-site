@@ -1,31 +1,22 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
 interface AuthPageProps {
-  buyerForm?: React.ReactNode;
-  farmerForm?: React.ReactNode;
+  form: React.ReactNode;
   text: string;
   linkhref: string;
-  linkText: string;
+  linkText?: string;
   header: string;
 }
 
 const AuthPage = ({
-  buyerForm,
-  farmerForm,
+  form,
   text,
   linkhref,
   header,
   linkText,
 }: AuthPageProps) => {
-  const [activeTab, setActiveTab] = useState<string>("buyer");
-
-  const handleTabClick = (tab: string) => {
-    setActiveTab(tab);
-  };
-
   return (
     <div className="grid md:grid-cols-2  gap-4">
       <div className="relative">
@@ -83,41 +74,15 @@ const AuthPage = ({
               {header}
             </h1>
             <div className="text-[clamp(12px,1.4vw,16px)] flex items-center gap-1">
-              <p className="text-[#525252]">{text} </p>
+              <p className="text-[#525252] text-center">{text} </p>
               <Link href={linkhref} className="text-[#C09706] font-medium">
                 {linkText}
               </Link>
             </div>
           </div>
-          <div className="border border-[#0000001A] rounded-[18px] px-3 py-2 text-[clamp(14px,1.6vw,18px)] flex items-center gap-4">
-            <div
-              className={`cursor-pointer ${
-                activeTab === "buyer"
-                  ? "text-[#03601A] shadow-xl shadow-[#00000024] rounded-[18px] px-3 py-2"
-                  : "text-[#333333B2]"
-              }`}
-              onClick={() => handleTabClick("buyer")}
-            >
-              As a Buyer
-            </div>
-            <div
-              className={`cursor-pointer ${
-                activeTab === "farmer"
-                  ? "text-[#03601A] shadow-xl shadow-[#00000024] rounded-[18px] px-3 py-2"
-                  : "text-[#333333B2]"
-              }`}
-              onClick={() => handleTabClick("farmer")}
-            >
-              As a Farmer
-            </div>
-          </div>
         </div>
         <div className="border-t border-[#0000001A] py-4 md:px-5 ml:px-6 lg:px-7 md:py-4 lg:py-5">
-          {activeTab === "buyer" ? (
-            <div className="w-full">{buyerForm}</div>
-          ) : (
-            <div className="w-full">{farmerForm}</div>
-          )}
+          {form}
         </div>
       </div>
     </div>

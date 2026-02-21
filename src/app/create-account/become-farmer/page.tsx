@@ -8,13 +8,14 @@ import { useRouter } from "next/navigation";
 import VerificationCodeInput from "@/components/Forms/VerificationCodeInput";
 import PopUpUtility from "@/components/PopUtility/PopUtility";
 import Image from "next/image";
-import CreateAccountForm from "@/components/Forms/CreateAccountForm";
+import BecomeFarmerForm from "@/components/Forms/BecomeFarmerForm";
+import { getUserData, updateUserData } from "@/hooks/getUserData";
 
 type UserFormData = {
   email: string;
 };
 
-const CreateAccountPage = () => {
+const BecomeFarmer = () => {
   const [isShowVerify, setIsShowVerify] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const [isVerificationStatus, setIsVerificationStatus] = useState<
@@ -35,6 +36,16 @@ const CreateAccountPage = () => {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     console.log("Verification code:", code);
 
+    // Add FARMER to accountType array
+    const currentData = getUserData();
+    const hasFarmer = currentData.accountType.includes("FARMER");
+
+    if (!hasFarmer) {
+      updateUserData({
+        accountType: [...currentData.accountType, "FARMER"],
+      });
+    }
+
     setIsShowVerify(false);
     setIsVerificationStatus("success");
   };
@@ -48,18 +59,17 @@ const CreateAccountPage = () => {
 
     await new Promise((resolve) => setTimeout(resolve, 800));
 
-    router.push("/login");
+    router.push("/");
   };
 
   return (
     <>
       <div>
         <AuthPage
-          form={<CreateAccountForm onSubmit={handleFormSubmit} />}
-          header="Create Account"
-          text="Already have an account?"
-          linkhref="/login"
-          linkText="Login"
+          form={<BecomeFarmerForm onSubmit={handleFormSubmit} />}
+          header="Become a Farmer"
+          text=" Become a our accredited supplier of farm produce."
+          linkhref=""
         />
       </div>
 
@@ -125,4 +135,4 @@ const CreateAccountPage = () => {
   );
 };
 
-export default CreateAccountPage;
+export default BecomeFarmer;

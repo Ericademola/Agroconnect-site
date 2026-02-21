@@ -64,8 +64,8 @@ const convertToCartItems = (cartItems: ILoanCartItem[]): CartItem[] => {
 export default function LoanCheckoutPage() {
   const [loanItems, setLoanItems] = useState<CartItem[]>([]);
   const [loanConfig, setLoanConfig] = useState<LoanPlanConfig | null>(null);
-  const [onEditForm, setOnEditForm] = useState(false);
-  const [onChangeAddress, setOnChangeAddress] = useState(false);
+  const [isShowEditForm, setIsShowEditForm] = useState(false);
+  const [isShowChangeAddress, setIsShowChangeAddress] = useState(false);
   const [userInfo, setUserInfo] = useState(getUserData());
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(() => {
     const data = getUserData();
@@ -74,7 +74,7 @@ export default function LoanCheckoutPage() {
     );
     return defaultIndex !== -1 ? defaultIndex : 0;
   });
-  const [onConfirmFoodLoan, setOnConfirmFoodLoan] = useState<
+  const [isShowConfirmFoodLoan, setIsShowConfirmFoodLoan] = useState<
     "idle" | "success" | "error"
   >("idle");
   const [activeLoanLoading, setActiveLoanLoading] = useState(false);
@@ -133,12 +133,12 @@ export default function LoanCheckoutPage() {
       phoneNumber: data.phoneNumber,
     });
     setUserInfo(updatedData);
-    setOnEditForm(false);
+    setIsShowEditForm(false);
   };
 
   const handleSelectAddress = (addressIndex: number) => {
     setSelectedAddressIndex(addressIndex);
-    setOnChangeAddress(false);
+    setIsShowChangeAddress(false);
   };
 
   const handleConfirmFoodLoan = async () => {
@@ -196,10 +196,10 @@ export default function LoanCheckoutPage() {
       localStorage.removeItem(LOAN_PLAN_CONFIG_KEY);
       clearLocalStorage();
 
-      setOnConfirmFoodLoan("success");
+      setIsShowConfirmFoodLoan("success");
     } catch (error) {
       console.error("Failed to confirm food loan", error);
-      setOnConfirmFoodLoan("error");
+      setIsShowConfirmFoodLoan("error");
     } finally {
       setIsConfirming(false);
     }
@@ -207,7 +207,7 @@ export default function LoanCheckoutPage() {
 
   const handleGoToActiveLoan = () => {
     setTimeout(() => {
-      setOnConfirmFoodLoan("idle");
+      setIsShowConfirmFoodLoan("idle");
       setActiveLoanLoading(true);
       router.push("/loan");
     }, 800);
@@ -215,7 +215,7 @@ export default function LoanCheckoutPage() {
 
   const handleGoToMyOrders = () => {
     setTimeout(() => {
-      setOnConfirmFoodLoan("idle");
+      setIsShowConfirmFoodLoan("idle");
       setMyOrderLoading(true);
       router.push("/order");
     }, 800);
@@ -273,7 +273,7 @@ export default function LoanCheckoutPage() {
                 </div>
                 <Button
                   variant="ghost"
-                  onClick={() => setOnEditForm(true)}
+                  onClick={() => setIsShowEditForm(true)}
                   className="text-[#C09706] hover:text-[#C09706]/90 hover:bg-transparent w-fit h-fit p-0 ml-auto"
                 >
                   Edit
@@ -294,7 +294,7 @@ export default function LoanCheckoutPage() {
                 <Button
                   variant="ghost"
                   className="text-[#C09706] hover:text-[#C09706]/90 hover:bg-transparent w-fit h-fit p-0 ml-auto"
-                  onClick={() => setOnChangeAddress(true)}
+                  onClick={() => setIsShowChangeAddress(true)}
                 >
                   Change
                 </Button>
@@ -466,8 +466,8 @@ export default function LoanCheckoutPage() {
 
       {/* Edit Customer Info */}
       <DrawerDialog
-        open={onEditForm}
-        close={() => setOnEditForm(false)}
+        open={isShowEditForm}
+        close={() => setIsShowEditForm(false)}
         size="md"
         title="Edit Customer Information"
         contentCSS="pt-[20px] px-[30px] h-[80vh]"
@@ -484,15 +484,15 @@ export default function LoanCheckoutPage() {
 
       {/* Change Address */}
       <DrawerDialog
-        open={onChangeAddress}
-        close={() => setOnChangeAddress(false)}
+        open={isShowChangeAddress}
+        close={() => setIsShowChangeAddress(false)}
         size="md"
         title="Select Address"
         contentCSS="pt-[20px] px-[30px]"
         max_height
       >
         <DeliveryAddress
-          onCancel={() => setOnChangeAddress(false)}
+          onCancel={() => setIsShowChangeAddress(false)}
           onSelectAddress={handleSelectAddress}
           currentAddressIndex={selectedAddressIndex}
         />
@@ -500,8 +500,8 @@ export default function LoanCheckoutPage() {
 
       {/* Success Modal */}
       <DrawerDialog
-        open={onConfirmFoodLoan === "success"}
-        close={() => setOnConfirmFoodLoan("idle")}
+        open={isShowConfirmFoodLoan === "success"}
+        close={() => setIsShowConfirmFoodLoan("idle")}
         size="sm"
         title="Loan Order Confirmed"
         titleCSS="sr-only text-xs"

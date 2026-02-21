@@ -305,7 +305,7 @@ export const HammburgerIcon = ({ className, width, height }: IProps) => (
   </svg>
 );
 
-export const UserIcon = ({ className, width, height }: IProps) => (
+export const UserIcon = ({ className, width, height, stroke }: IProps) => (
   <svg
     className={className}
     width={width || DEFAULT_SIZE}
@@ -316,12 +316,12 @@ export const UserIcon = ({ className, width, height }: IProps) => (
   >
     <path
       d="M10.8333 4.41667C10.8333 5.38913 10.447 6.32176 9.75939 7.00939C9.07176 7.69702 8.13913 8.08333 7.16667 8.08333C6.19421 8.08333 5.26157 7.69702 4.57394 7.00939C3.88631 6.32176 3.5 5.38913 3.5 4.41667C3.5 3.44421 3.88631 2.51157 4.57394 1.82394C5.26157 1.13631 6.19421 0.75 7.16667 0.75C8.13913 0.75 9.07176 1.13631 9.75939 1.82394C10.447 2.51157 10.8333 3.44421 10.8333 4.41667Z"
-      stroke="black"
+      stroke={stroke ?? "black"}
       strokeWidth="1.5"
     />
     <path
       d="M9 10.8335H5.33333C4.11776 10.8335 2.95197 11.3164 2.09243 12.1759C1.23289 13.0355 0.75 14.2013 0.75 15.4168C0.75 15.9031 0.943154 16.3694 1.28697 16.7132C1.63079 17.057 2.0971 17.2502 2.58333 17.2502H11.75C12.2362 17.2502 12.7025 17.057 13.0464 16.7132C13.3902 16.3694 13.5833 15.9031 13.5833 15.4168C13.5833 14.2013 13.1004 13.0355 12.2409 12.1759C11.3814 11.3164 10.2156 10.8335 9 10.8335Z"
-      stroke="black"
+      stroke={stroke ?? "black"}
       strokeWidth="1.5"
       strokeLinejoin="round"
     />

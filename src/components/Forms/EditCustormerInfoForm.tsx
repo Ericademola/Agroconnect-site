@@ -22,7 +22,7 @@ const phoneSchema = z.string().refine(
 );
 
 const EditCustormerInfoSchema = z.object({
-  fullName: z.string().nonempty({ message: "This field is required" }),
+  fullName: z.string().nonempty({ message: "Full name is required" }),
   email: z.string().trim().email({ message: "Please enter a valid email" }),
   phoneNumber: phoneSchema,
 });

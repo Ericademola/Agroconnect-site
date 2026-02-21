@@ -117,7 +117,7 @@ const MainNavBar = () => {
   const [open, setOpen] = useState(false);
   const { userInfo } = useAuth();
   const [popoverOpen, setPopoverOpen] = useState(false);
-  const [activeProfile, setActiveProfile] = useState<string>("buyer");
+  const [activeProfile, setActiveProfile] = useState<string>("BUYER");
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -133,8 +133,8 @@ const MainNavBar = () => {
     if (storedProfile) {
       setActiveProfile(storedProfile);
     } else {
-      setActiveProfile("buyer");
-      sessionStorage.setItem("activeProfile", "buyer");
+      setActiveProfile("BUYER");
+      sessionStorage.setItem("activeProfile", "BUYER");
     }
   }, []);
 

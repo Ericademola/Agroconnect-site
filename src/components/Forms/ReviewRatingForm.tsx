@@ -24,9 +24,6 @@ const reviewSchema = z.object({
 type TypeReviewFormData = z.infer<typeof reviewSchema>;
 
 const ReviewRatingForm = () => {
-  // const [submitStatus, setSubmitStatus] = useState<
-  //   "idle" | "success" | "error"
-  // >("idle");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<TypeReviewFormData>({
@@ -43,7 +40,6 @@ const ReviewRatingForm = () => {
 
   const onSubmit = async (data: TypeReviewFormData) => {
     setIsSubmitting(true);
-    // setSubmitStatus("idle");
 
     try {
       await new Promise((resolve) => setTimeout(resolve, 800));
@@ -53,18 +49,12 @@ const ReviewRatingForm = () => {
         rating: 0,
         reviewText: "",
       });
-      // setSubmitStatus("success");
     } catch (error) {
       console.error("Failed to submit review:", error);
-      // setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
     }
   };
-
-  //   const closeModal = () => {
-  //     setSubmitStatus("idle");
-  //   };
 
   return (
     <>
@@ -135,46 +125,6 @@ const ReviewRatingForm = () => {
           </Button>
         </form>
       </Form>
-
-      {/* Success Modal */}
-      {/* <DrawerDialog
-        open={submitStatus === "success"}
-        close={closeModal}
-        size="sm"
-        headerClassName="border-none py-0"
-      >
-        <PopUpUtility
-          className="w-fit py-5 border-none"
-          header="Review Submitted"
-          desc="Thank you! Your endorsement has been published in the Kinbranch Marketplace."
-          icon={<SuccessFullPopIcon className="w-[156px] h-[156px]" />}
-          buttonsectionClassName="p-0"
-          hrClassName="hidden"
-        />
-      </DrawerDialog> */}
-
-      {/* Error Modal */}
-      {/* <DrawerDialog
-        open={submitStatus === "error"}
-        close={closeModal}
-        size="sm"
-        headerClassName="border-none py-0"
-      >
-        <PopUpUtility
-          className="w-fit py-5 border-none"
-          header="Review Failed"
-          desc="Oops! Something went wrong while submitting your review. Please try again."
-          icon={
-            <SuccessFullPopIcon
-              className="w-[156px] h-[156px]"
-              fill="#F44336"
-              color="#F44336"
-            />
-          }
-          buttonsectionClassName="p-0"
-          hrClassName="hidden"
-        />
-      </DrawerDialog> */}
     </>
   );
 };

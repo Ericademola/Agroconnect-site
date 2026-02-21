@@ -14,8 +14,8 @@ const BankFormSchema = z.object({
   bvn: z.string().regex(/^\d{11}$/, {
     message: "BVN must be exactly 11 digits",
   }),
-  bankName: z.string().nonempty({ message: "This field is required" }),
-  accountName: z.string().nonempty({ message: "This field is required" }),
+  bankName: z.string().nonempty({ message: "Bank name is required" }),
+  accountName: z.string().nonempty({ message: "Account name is required" }),
   accountNumber: z.string().regex(/^\d{10}$/, {
     message: "Account number must be exactly 10 digits",
   }),

@@ -39,7 +39,7 @@ const LoanPlanForm = ({
 }: LoanPlanFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [userInfo, setUserInfo] = useState(getUserData());
-  const [onAddBankDetails, setOnAddBankDetails] = useState(false);
+  const [isShowAddBankDetails, setIsShowAddBankDetails] = useState(false);
 
   const form = useForm<TypeLoanPlanFormSchema>({
     resolver: zodResolver(LoanPlanFormSchema),
@@ -69,7 +69,7 @@ const LoanPlanForm = ({
 
   const handleFormSubmit = async (data: TypeLoanPlanFormSchema) => {
     if (!userInfo?.bankDetails) {
-      setOnAddBankDetails(true);
+      setIsShowAddBankDetails(true);
       return;
     }
 
@@ -178,7 +178,7 @@ const LoanPlanForm = ({
   const dateDetails = calculateDates();
 
   const handleAddBankDetails = () => {
-    setOnAddBankDetails(true);
+    setIsShowAddBankDetails(true);
   };
 
   const handleLoanBankFormSubmit = (data: TypeLoanBankFormSchema) => {
@@ -200,7 +200,7 @@ const LoanPlanForm = ({
     });
 
     setUserInfo(updatedUserInfo);
-    setOnAddBankDetails(false);
+    setIsShowAddBankDetails(false);
     console.log("Bank details added successfully!");
   };
 
@@ -453,8 +453,8 @@ const LoanPlanForm = ({
 
       {/* BANK FORM */}
       <DrawerDialog
-        open={onAddBankDetails}
-        close={() => setOnAddBankDetails(false)}
+        open={isShowAddBankDetails}
+        close={() => setIsShowAddBankDetails(false)}
         size="md"
         title="Link Your Bank Account"
         subTitle="Required to access Food on Credit"
@@ -462,7 +462,7 @@ const LoanPlanForm = ({
         max_height
       >
         <LoanBankForm
-          onCancel={() => setOnAddBankDetails(false)}
+          onCancel={() => setIsShowAddBankDetails(false)}
           onSubmit={handleLoanBankFormSubmit}
         />
       </DrawerDialog>
