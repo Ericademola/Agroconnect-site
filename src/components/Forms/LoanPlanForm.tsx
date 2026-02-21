@@ -14,8 +14,8 @@ import PopNotification from "../PopNotification/PopNotification";
 import { CreditCardIcon, NoticeIcon } from "@/Icons";
 import { getUserData, updateUserData } from "@/hooks/getUserData";
 import { DrawerDialog } from "../DrawerDialog/DrawerDialog";
-import BankForm, { TypeBankFormSchema } from "./BankForm";
 import { formatDate } from "@/utils/formatDate";
+import LoanBankForm, { TypeLoanBankFormSchema } from "./LoanBankForm";
 
 const LoanPlanFormSchema = z.object({
   duration: z.string(),
@@ -181,24 +181,26 @@ const LoanPlanForm = ({
     setOnAddBankDetails(true);
   };
 
-  const handleBankFormSubmit = (data: TypeBankFormSchema) => {
-    // Update bank details using the helper function
+  const handleLoanBankFormSubmit = (data: TypeLoanBankFormSchema) => {
+    const currentBankDetails = userInfo?.bankDetails ?? [];
+    const dateAdded = new Date();
+
     const updatedUserInfo = updateUserData({
-      bankDetails: {
-        bankName: data.bankName,
-        accountNumber: data.accountNumber,
-        bvn: data.bvn,
-        accountName: userInfo?.userFullName || "Sam Akinlolu",
-      },
+      bankDetails: [
+        ...currentBankDetails,
+        {
+          bankName: data.bankName,
+          accountNumber: data.accountNumber,
+          bvn: data.bvn,
+          accountName: userInfo?.userFullName ?? "",
+          isPrimary: false,
+          dateAdded: formatDate(dateAdded),
+        },
+      ],
     });
 
-    // Update local state
     setUserInfo(updatedUserInfo);
-
-    // Close the bank form dialog
     setOnAddBankDetails(false);
-
-    // Optional: Show success notification
     console.log("Bank details added successfully!");
   };
 
@@ -384,11 +386,11 @@ const LoanPlanForm = ({
                 <CreditCardIcon className="w-6 h-6" />
                 {userInfo?.bankDetails ? (
                   <p className="text-[clamp(12px,1.4vw,14px)]">
-                    {userInfo.bankDetails.bankName} ••••
-                    {userInfo.bankDetails.accountNumber?.slice(-4) ||
+                    {userInfo.bankDetails[0].bankName} ••••
+                    {userInfo.bankDetails[0].accountNumber?.slice(-4) ||
                       "****"}{" "}
                     (BVN •••
-                    {userInfo.bankDetails.bvn?.slice(-4) || "****"})
+                    {userInfo.bankDetails[0].bvn?.slice(-4) || "****"})
                   </p>
                 ) : (
                   <div className="flex items-center justify-between gap-3 w-full">
@@ -459,9 +461,9 @@ const LoanPlanForm = ({
         contentCSS="px-7"
         max_height
       >
-        <BankForm
+        <LoanBankForm
           onCancel={() => setOnAddBankDetails(false)}
-          onSubmit={handleBankFormSubmit}
+          onSubmit={handleLoanBankFormSubmit}
         />
       </DrawerDialog>
     </div>

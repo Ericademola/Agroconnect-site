@@ -203,17 +203,14 @@ const DeliveryAddresses = () => {
                   <div
                     key={index}
                     className={cn(
-                      "flex flex-col gap-4 border shadow shadow-[#0000000D] bg-[#F5F5F5] py-4 rounded-2xl cursor-pointer transition-colors",
-                      address.isDefault // Use isDefault flag instead of index
-                        ? "border-[#C09706]"
-                        : "border-[#0000001A]",
+                      "flex flex-col gap-4 border border-[#0000001A] shadow shadow-[#0000000D] bg-[#F5F5F5] py-4 rounded-2xl",
                     )}
                   >
                     <div className="flex items-center justify-between gap-2 border-b border-[#0000001A] pb-2 px-7">
                       <h2 className="text-[clamp(16px,1.6vw,20px)]">
                         Address {index + 1}
                       </h2>
-                      {address.isDefault ? ( // Check isDefault flag
+                      {address.isDefault ? (
                         <div className="bg-[#3333331A] text-[#333333] text-[clamp(12px,1.4vw,16px)] rounded-full px-3 py-1">
                           Default
                         </div>

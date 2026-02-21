@@ -39,10 +39,11 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import PopNotification from "@/components/PopNotification/PopNotification";
+import { bankDetails, IuserData } from "@/types";
 
 const LoanPage = () => {
   const [loanPlans, setLoanPlans] = useState<ILoanItem[]>([]);
-  const [userInfo, setUserInfo] = useState(getUserData());
+  const [userInfo, setUserInfo] = useState<IuserData | null>(null);
   const [activeTab, setActiveTab] = useState("activeLoans");
   const [onViewReceipt, setOnViewReceipt] = useState(false);
   const [selectedLoanPlan, setSelectedLoanPlan] = useState<ILoanItem | null>(
@@ -376,10 +377,15 @@ const LoanPage = () => {
                                       },
                                       {
                                         label: "Payment Account",
-                                        digit: `${userInfo.bankDetails?.accountNumber} (${userInfo.bankDetails?.bankName.slice(
-                                          0,
-                                          3,
-                                        )})`,
+                                        digit: (() => {
+                                          const primary =
+                                            userInfo?.bankDetails.find(
+                                              (b) => b.isPrimary,
+                                            ) ?? userInfo?.bankDetails[0];
+                                          return primary
+                                            ? `${primary.accountNumber} (${primary.bankName.slice(0, 3)})`
+                                            : "No account linked";
+                                        })(),
                                       },
                                     ].map((item) => (
                                       <div
@@ -840,7 +846,17 @@ export const MakeLoanPayment = ({
 }: MakeLoanPaymentProps) => {
   const [paymentType, setPaymentType] = useState("standard-payment");
   const [customAmount, setCustomAmount] = useState("");
-  const userInfo = getUserData();
+  const [userInfo, setUserInfo] = useState<IuserData | null>(null);
+  const [selectedBank, setSelectedBank] = useState<bankDetails | null>(null);
+  const [openBankDialog, setOpenBankDialog] = useState(false);
+
+  useEffect(() => {
+    const data = getUserData();
+    setUserInfo(data);
+    const primary =
+      data.bankDetails.find((b) => b.isPrimary) ?? data.bankDetails[0];
+    setSelectedBank(primary ?? null);
+  }, []);
 
   const PaymentAmountOptions = [
     {
@@ -1010,27 +1026,58 @@ export const MakeLoanPayment = ({
             Payment Method
           </h3>
           <div className="flex items-center justify-between border border-[#1D44B3] rounded-lg px-4 py-3 bg-[#1D44B31A]">
-            <div className="flex items-center gap-3">
-              <CreditCardIcon className="w-5 h-5 md:w-7 md:h-7" />
+            {selectedBank && (
+              <div className="flex items-center gap-3">
+                <CreditCardIcon className="w-5 h-5 md:w-7 md:h-7" />
 
-              <div className="flex flex-col gap-0.5">
-                <p className="text-[clamp(14px,1.5vw,17px)]">
-                  {userInfo.bankDetails?.bankName} ••••
-                  {userInfo.bankDetails?.accountNumber.slice(-4)}
-                </p>
-                <p className="text-[clamp(10px,1.1vw,12px)] text-[#000000B2]">
-                  Linked to BVN ••••
-                  {userInfo.bankDetails?.bvn.slice(-4)}
-                </p>
+                <div className="flex flex-col gap-0.5">
+                  <p className="text-[clamp(14px,1.5vw,17px)]">
+                    {selectedBank?.bankName} ••••
+                    {selectedBank?.accountNumber?.slice(-4)}
+                  </p>
+                  <p className="text-[clamp(10px,1.1vw,12px)] text-[#000000B2]">
+                    Linked to BVN •••• {selectedBank?.bvn?.slice(-4)}
+                  </p>
+                </div>
               </div>
+            )}
+            <div className="relative">
+              <p
+                className="text-[#1D44B3] hover:text-[#1D44B3]/80 cursor-pointer"
+                onClick={() => setOpenBankDialog(!openBankDialog)}
+              >
+                Change
+              </p>
+
+              {openBankDialog && (
+                <div className="absolute right-0 top-8 z-50 w-[300px] md:w-[400px] bg-white rounded-2xl border border-[#0000001A] shadow-lg flex flex-col gap-3 p-3 md:p-5">
+                  {userInfo?.bankDetails.map((bank, index) => (
+                    <div
+                      key={index}
+                      className={`font-geologica flex items-center gap-3 cursor-pointer hover:bg-[#F5F5F5] px-4 py-2 rounded-lg border transition-colors ${
+                        selectedBank?.accountNumber === bank.accountNumber
+                          ? "border-[#1D44B3] bg-[#1D44B31A]"
+                          : "border-[#0000001A]"
+                      }`}
+                      onClick={() => {
+                        setSelectedBank(bank);
+                        setOpenBankDialog(false);
+                      }}
+                    >
+                      <CreditCardIcon className="w-5 h-5 md:w-7 md:h-7" />
+                      <div className="flex flex-col gap-0.5">
+                        <p className="text-[clamp(14px,1.5vw,17px)]">
+                          {bank.bankName} ••••{bank.accountNumber?.slice(-4)}
+                        </p>
+                        <p className="text-[clamp(10px,1.1vw,12px)] text-[#000000B2]">
+                          Linked to BVN •••• {bank.bvn?.slice(-4)}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-[#1D44B3] hover:text-[#1D44B3]/80 h-8 px-3 hover:bg-transparent"
-            >
-              Change
-            </Button>
           </div>
         </div>
 
@@ -1079,7 +1126,7 @@ export const MakeLoanPayment = ({
 };
 
 // ============================================
-// MAKE PAYMENT COMPONENT
+// MAKE OVERDUE PAYMENT COMPONENT
 // ============================================
 
 interface OverDueLoanPaymentProps {
@@ -1095,7 +1142,19 @@ export const OverDueLoanPayment = ({
   onCancel,
   paymentloading = false,
 }: OverDueLoanPaymentProps) => {
-  const userInfo = getUserData();
+  const [userInfo, setUserInfo] = useState<IuserData | null>(null);
+  const [selectedBank, setSelectedBank] = useState<bankDetails | null>(null);
+  const [openBankDialog, setOpenBankDialog] = useState(false);
+
+  useEffect(() => {
+    const data = getUserData();
+    setUserInfo(data);
+    const primary =
+      data.bankDetails.find((b) => b.isPrimary) ?? data.bankDetails[0];
+    setSelectedBank(primary ?? null);
+  }, []);
+
+  // Calculate loan late fee
   const loanLateFee = 1000;
 
   // Calculate grace period (7 days after target date)
@@ -1232,27 +1291,58 @@ export const OverDueLoanPayment = ({
             Payment Method
           </h3>
           <div className="flex items-center justify-between border border-[#1D44B3] rounded-lg px-4 py-3 bg-[#1D44B31A]">
-            <div className="flex items-center gap-3">
-              <CreditCardIcon className="w-5 h-5 md:w-7 md:h-7" />
+            {selectedBank && (
+              <div className="flex items-center gap-3">
+                <CreditCardIcon className="w-5 h-5 md:w-7 md:h-7" />
 
-              <div className="flex flex-col gap-0.5">
-                <p className="text-[clamp(14px,1.5vw,17px)]">
-                  {userInfo.bankDetails?.bankName} ••••
-                  {userInfo.bankDetails?.accountNumber.slice(-4)}
-                </p>
-                <p className="text-[clamp(10px,1.1vw,12px)] text-[#000000B2]">
-                  Linked to BVN ••••
-                  {userInfo.bankDetails?.bvn.slice(-4)}
-                </p>
+                <div className="flex flex-col gap-0.5">
+                  <p className="text-[clamp(14px,1.5vw,17px)]">
+                    {selectedBank?.bankName} ••••
+                    {selectedBank?.accountNumber?.slice(-4)}
+                  </p>
+                  <p className="text-[clamp(10px,1.1vw,12px)] text-[#000000B2]">
+                    Linked to BVN •••• {selectedBank?.bvn?.slice(-4)}
+                  </p>
+                </div>
               </div>
+            )}
+            <div className="relative">
+              <p
+                className="text-[#1D44B3] hover:text-[#1D44B3]/80 cursor-pointer"
+                onClick={() => setOpenBankDialog(!openBankDialog)}
+              >
+                Change
+              </p>
+
+              {openBankDialog && (
+                <div className="absolute right-0 top-8 z-50 w-[300px] md:w-[400px] bg-white rounded-2xl border border-[#0000001A] shadow-lg flex flex-col gap-3 p-3 md:p-5">
+                  {userInfo?.bankDetails.map((bank, index) => (
+                    <div
+                      key={index}
+                      className={`font-geologica flex items-center gap-3 cursor-pointer hover:bg-[#F5F5F5] px-4 py-2 rounded-lg border transition-colors ${
+                        selectedBank?.accountNumber === bank.accountNumber
+                          ? "border-[#1D44B3] bg-[#1D44B31A]"
+                          : "border-[#0000001A]"
+                      }`}
+                      onClick={() => {
+                        setSelectedBank(bank);
+                        setOpenBankDialog(false);
+                      }}
+                    >
+                      <CreditCardIcon className="w-5 h-5 md:w-7 md:h-7" />
+                      <div className="flex flex-col gap-0.5">
+                        <p className="text-[clamp(14px,1.5vw,17px)]">
+                          {bank.bankName} ••••{bank.accountNumber?.slice(-4)}
+                        </p>
+                        <p className="text-[clamp(10px,1.1vw,12px)] text-[#000000B2]">
+                          Linked to BVN •••• {bank.bvn?.slice(-4)}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-[#1D44B3] hover:text-[#1D44B3]/80 h-8 px-3 hover:bg-transparent"
-            >
-              Change
-            </Button>
           </div>
         </div>
       </div>

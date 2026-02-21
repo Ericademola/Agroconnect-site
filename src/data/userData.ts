@@ -24,6 +24,7 @@ export const userData = {
       area: "Lekki Phase 1",
       addtionalInfo: "Next to the Lekki Bus Stop",
       isDefault: true,
+      dateAdded: "",
     },
     {
       fullName: "James Akinlolu",
@@ -36,15 +37,28 @@ export const userData = {
       area: "Ketu Phase 1",
       addtionalInfo: "Next to the Ketu Bus Stop",
       isDefault: false,
+      dateAdded: "",
     },
   ],
-  // bankDetails: null,
-  bankDetails: {
-    bankName: "First Bank",
-    accountName: "Sam Akinlolu",
-    accountNumber: "1234567890",
-    bvn: "32849537589",
-  },
+  // bankDetails: [],
+  bankDetails: [
+    {
+      bankName: "First Bank",
+      accountName: "Sam Akinlolu",
+      accountNumber: "1234567890",
+      bvn: "32849537589",
+      isPrimary: true,
+      dateAdded: "Mar 12, 2023",
+    },
+    {
+      bankName: "Union Bank",
+      accountName: "Sam Akinlolu",
+      accountNumber: "0987654321",
+      bvn: "58329485726",
+      isPrimary: false,
+      dateAdded: "Feb 20, 2024",
+    },
+  ],
   isActiveLoan: false,
   userPassword: "Password123",
 };

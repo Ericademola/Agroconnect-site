@@ -75,7 +75,7 @@ export interface IuserData {
   wishlistItems: number;
   myCashback: string;
   deliveryAddresses: deliveryAddresses[];
-  bankDetails: bankDetails | null;
+  bankDetails: bankDetails[];
   isActiveLoan: boolean;
   userPassword: string;
 }
@@ -97,4 +97,6 @@ export interface bankDetails {
   accountName: string;
   accountNumber: string;
   bvn: string;
+  isPrimary: boolean;
+  dateAdded: string;
 }

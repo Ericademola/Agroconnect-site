@@ -91,8 +91,6 @@ const EditAddAddressForm = ({
 
     try {
       await new Promise((resolve) => setTimeout(resolve, 800));
-      console.log(data);
-
       onSubmit(data);
     } catch (error) {
       console.error("Failed to submit review:", error);
