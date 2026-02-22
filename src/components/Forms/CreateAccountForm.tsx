@@ -22,7 +22,7 @@ const phoneSchema = z.string().refine(
   },
 );
 
-const BuyerCreateAccountSchema = z
+const CreateAccounSchema = z
   .object({
     firstName: z.string().nonempty({ message: "First name is required" }),
     lastName: z.string().nonempty({ message: "Last name is required" }),
@@ -51,15 +51,15 @@ const BuyerCreateAccountSchema = z
     message: "Passwords do not match. Please try again",
   });
 
-type TypeBuyerCreateAccountSchema = z.infer<typeof BuyerCreateAccountSchema>;
+type TypeCreateAccounSchema = z.infer<typeof CreateAccounSchema>;
 
-interface BuyerCreateAccountFormProps {
+interface CreateAccounFormProps {
   onSubmit: (data: { email: string }) => void;
 }
 
-const BuyerCreateAccountForm = ({ onSubmit }: BuyerCreateAccountFormProps) => {
-  const form = useForm<TypeBuyerCreateAccountSchema>({
-    resolver: zodResolver(BuyerCreateAccountSchema),
+const CreateAccounForm = ({ onSubmit }: CreateAccounFormProps) => {
+  const form = useForm<TypeCreateAccounSchema>({
+    resolver: zodResolver(CreateAccounSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -80,7 +80,7 @@ const BuyerCreateAccountForm = ({ onSubmit }: BuyerCreateAccountFormProps) => {
     formState: { isSubmitting, isValid },
   } = form;
 
-  const handleFormSubmit = async (data: TypeBuyerCreateAccountSchema) => {
+  const handleFormSubmit = async (data: TypeCreateAccounSchema) => {
     await new Promise((resolve) => setTimeout(resolve, 800));
     onSubmit({
       email: data.email,
@@ -455,4 +455,4 @@ const BuyerCreateAccountForm = ({ onSubmit }: BuyerCreateAccountFormProps) => {
   );
 };
 
-export default BuyerCreateAccountForm;
+export default CreateAccounForm;

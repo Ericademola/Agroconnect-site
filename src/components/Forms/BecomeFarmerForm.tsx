@@ -8,8 +8,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Spinner } from "../ui/spinner";
 import { useState } from "react";
-import { CloseIcon } from "@/Icons";
+import { CloseIcon, UploadPhotoIcon } from "@/Icons";
 import { capitalizeFirstLetter } from "@/utils/formatText";
+import Image from "next/image";
 
 // FOR PHONE NUMBER
 const phoneSchema = z.string().refine(
@@ -23,7 +24,7 @@ const phoneSchema = z.string().refine(
   },
 );
 
-const FarmerCreateAccountSchema = z.object({
+const BecomeFarmerFormSchema = z.object({
   farmName: z.string().nonempty({ message: "Farm name is required" }),
   farmAddress: z.string().nonempty({ message: "Farm address is required" }),
   farmLongitude: z
@@ -59,19 +60,22 @@ const FarmerCreateAccountSchema = z.object({
   farmProducts: z
     .array(z.string())
     .min(1, { message: "Please add at least one product your farm produces" }),
+  FarmerProfilePicture: z
+    .any()
+    .refine((file) => file instanceof File, { message: "Photo is required" }),
 });
 
-type TypeFarmerCreateAccountSchema = z.infer<typeof FarmerCreateAccountSchema>;
+type TypeBecomeFarmerFormSchema = z.infer<typeof BecomeFarmerFormSchema>;
 
-interface FarmerCreateAccountFormProps {
+interface BecomeFarmerFormProps {
   onSubmit: (data: { email: string }) => void;
 }
 
-const FarmerCreateAccountForm = ({
-  onSubmit,
-}: FarmerCreateAccountFormProps) => {
-  const form = useForm<TypeFarmerCreateAccountSchema>({
-    resolver: zodResolver(FarmerCreateAccountSchema),
+const BecomeFarmerFormForm = ({ onSubmit }: BecomeFarmerFormProps) => {
+  const [attachment, setAttachment] = useState<string>("");
+
+  const form = useForm<TypeBecomeFarmerFormSchema>({
+    resolver: zodResolver(BecomeFarmerFormSchema),
     defaultValues: {
       farmName: "",
       farmAddress: "",
@@ -80,6 +84,7 @@ const FarmerCreateAccountForm = ({
       farmProducts: [],
       farmEmail: "",
       FarmPhoneNumber: "",
+      FarmerProfilePicture: "",
     },
     mode: "onChange",
     reValidateMode: "onChange",
@@ -90,12 +95,38 @@ const FarmerCreateAccountForm = ({
     formState: { isSubmitting, isValid },
   } = form;
 
-  const handleFormSubmit = async (data: TypeFarmerCreateAccountSchema) => {
+  const handleFormSubmit = async (data: TypeBecomeFarmerFormSchema) => {
     await new Promise((resolve) => setTimeout(resolve, 800));
     onSubmit({
       email: data.farmEmail,
     });
     form.reset();
+  };
+
+  const handleFileUpload = (
+    e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLDivElement>,
+  ) => {
+    e.preventDefault();
+    let newFile: File | null = null;
+
+    if (e.type === "drop") {
+      const dragEvent = e as React.DragEvent<HTMLDivElement>;
+      newFile = dragEvent.dataTransfer.files[0] ?? null;
+    } else {
+      const changeEvent = e as React.ChangeEvent<HTMLInputElement>;
+      if (changeEvent.target.files !== null) {
+        newFile = changeEvent.target.files[0];
+      }
+    }
+
+    if (newFile) {
+      const fileUrl = URL.createObjectURL(newFile);
+      setAttachment(fileUrl);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
   };
 
   return (
@@ -161,7 +192,6 @@ const FarmerCreateAccountForm = ({
                   </div>
                 )}
               />
-
               <div className="grid ml:grid-cols-2 gap-4 ml:gap-8">
                 <FormField
                   control={form.control}
@@ -300,12 +330,84 @@ const FarmerCreateAccountForm = ({
                 )}
               />
 
-              <div className="flex flex-col gap-1">
-                <FormLabel className="text-[clamp(13px,1.2vw,14px)]">
-                  Profile Picture
-                </FormLabel>
-                <div></div>
-              </div>
+              <FormField
+                control={form.control}
+                name="FarmerProfilePicture"
+                render={({ field, fieldState }) => (
+                  <div className="flex flex-col gap-1">
+                    <FormLabel className="text-[clamp(13px,1.2vw,14px)]">
+                      Profile Picture
+                    </FormLabel>
+                    <div
+                      onDragOver={handleDragOver}
+                      onDrop={(e) => {
+                        handleFileUpload(e);
+                        const file = e.dataTransfer?.files?.[0];
+                        if (file) field.onChange(file);
+                      }}
+                      className="w-full sm:w-fit border-dashed border-[1.5px] border-[#03601A] rounded-2xl overflow-hidden"
+                    >
+                      {attachment ? (
+                        <div className="relative w-full sm:w-[350px] md:w-[300px] ml:w-[350px] h-[250px] py-5 px-5">
+                          <Image
+                            src={attachment}
+                            alt="Farm profile preview"
+                            className="w-full h-full object-cover rounded-xl"
+                            width={100}
+                            height={100}
+                          />
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            type="button"
+                            onClick={() => {
+                              setAttachment("");
+                              field.onChange("");
+                            }}
+                            className="absolute top-2 right-2 bg-black rounded-full p-2 shadow w-fit h-fit border border-[#4e4e4ea8]"
+                          >
+                            <CloseIcon
+                              className="w-[10px] h-[10px]"
+                              stroke="#fff"
+                            />
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="py-4 px-6 flex flex-col items-center justify-center gap-4">
+                          <div className="flex flex-col gap-2 items-center justify-center">
+                            <div className="flex justify-center">
+                              <UploadPhotoIcon className="w-6 h-6 md:w-8 md:h-8" />
+                            </div>
+                            <h3 className="text-[10px] md:text-xs text-[#6E6E6E] text-center">
+                              Drag and drop image file, or
+                            </h3>
+                          </div>
+                          <label className="inline-block text-center w-full border border-[#03601A] text-[14px] text-[#03601A] py-2 rounded-[6px] cursor-pointer">
+                            Upload File
+                            <Input
+                              type="file"
+                              accept="image/*"
+                              className="hidden"
+                              onChange={(e) => {
+                                handleFileUpload(e);
+                                const file = e.target.files?.[0];
+                                if (file) field.onChange(file);
+                              }}
+                            />
+                          </label>
+                        </div>
+                      )}
+                    </div>
+
+                    {fieldState.error ? (
+                      <span className="flex items-center gap-1 pt-1 text-red-500 text-xs">
+                        <ErrorIcon />
+                        {fieldState.error.message}
+                      </span>
+                    ) : null}
+                  </div>
+                )}
+              />
             </div>
 
             <Button
@@ -328,7 +430,7 @@ const FarmerCreateAccountForm = ({
   );
 };
 
-export default FarmerCreateAccountForm;
+export default BecomeFarmerFormForm;
 
 // ============================================
 // FARM PRODUCTS INPUT
