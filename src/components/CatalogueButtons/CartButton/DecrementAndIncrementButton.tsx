@@ -25,6 +25,7 @@ const DecrementAndIncrementButton = ({
       )}
     >
       <Button
+        type="button"
         onClick={onDecrement}
         variant="secondary"
         size="sm"
@@ -36,6 +37,7 @@ const DecrementAndIncrementButton = ({
       <p className="text-sm md:text-base lg:text-xl font-poppins">{quantity}</p>
 
       <Button
+        type="button"
         onClick={onIncrement}
         variant="secondary"
         size="sm"

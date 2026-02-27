@@ -17,7 +17,7 @@ const Testimonial = () => {
         <div className="flex flex-col justify-between gap-3 md:gap-6">
           {Testimonials.map((testimonial, index) => (
             <div
-              key={index}
+              key={testimonial.id}
               className={`relative flex flex-col gap-2 bg-[#FFFFFF] border-[1.5px] border-[#ECECEC] px-4 py-4 rounded-[10px] font-poppins w-full md:max-w-[430px] ${
                 index === 0
                   ? "mr-0 md:mr-auto"
@@ -58,6 +58,7 @@ export default Testimonial;
 
 const Testimonials = [
   {
+    id: 1,
     userId: 1,
     userFullName: "David Okon",
     profilePicture: "/assets/images/testimonial1.png",
@@ -67,6 +68,7 @@ const Testimonials = [
     borderColor: "#C0970680",
   },
   {
+    id: 2,
     userId: 2,
     userFullName: "Amina Yusuf",
     profilePicture: "/assets/images/testimonial2.png",
@@ -76,6 +78,7 @@ const Testimonials = [
     borderColor: "#DDDDDD",
   },
   {
+    id: 3,
     userId: 3,
     userFullName: "Ngozi Ude",
     profilePicture: "/assets/images/testimonial3.png",

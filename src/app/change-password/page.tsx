@@ -72,7 +72,7 @@ const ChangePassword = () => {
   return (
     <>
       <PageTitle
-        title="Address"
+        title="Change Password"
         breadcrumb={
           <div>
             <Breadcrumb>
@@ -84,7 +84,7 @@ const ChangePassword = () => {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Address</BreadcrumbPage>
+                  <BreadcrumbPage>Change Password</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>

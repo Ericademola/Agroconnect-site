@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Spinner } from "../ui/spinner";
+import { IuserData } from "@/types";
 
 // FOR PHONE NUMBER
 const phoneSchema = z.string().refine(
@@ -30,11 +31,7 @@ const EditCustormerInfoSchema = z.object({
 type TypeEditCustormerInfoFormData = z.infer<typeof EditCustormerInfoSchema>;
 
 interface EditCustomerInfoFormProps {
-  initialData: {
-    name: string;
-    email: string;
-    phonenumber: string;
-  };
+  initialData?: IuserData;
   onSubmit: (data: TypeEditCustormerInfoFormData) => void;
 }
 
@@ -47,9 +44,9 @@ const EditCustormerInfoForm = ({
   const form = useForm<TypeEditCustormerInfoFormData>({
     resolver: zodResolver(EditCustormerInfoSchema),
     defaultValues: {
-      fullName: initialData.name,
-      email: initialData.email,
-      phoneNumber: initialData.phonenumber,
+      fullName: initialData?.userFullName,
+      email: initialData?.email,
+      phoneNumber: initialData?.phoneNumber,
     },
     mode: "onChange",
     reValidateMode: "onChange",
@@ -59,9 +56,9 @@ const EditCustormerInfoForm = ({
 
   useEffect(() => {
     reset({
-      fullName: initialData.name,
-      email: initialData.email,
-      phoneNumber: initialData.phonenumber,
+      fullName: initialData?.userFullName,
+      email: initialData?.email,
+      phoneNumber: initialData?.phoneNumber,
     });
   }, [initialData, reset]);
 

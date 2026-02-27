@@ -39,7 +39,9 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import PopNotification from "@/components/PopNotification/PopNotification";
-import { bankDetails, IuserData } from "@/types";
+import { IBankDetails, IuserData } from "@/types";
+import StatusView from "@/components/StatusView/StatusView";
+import { formatWithAnd } from "@/utils/formatText";
 
 const LoanPage = () => {
   const [loanPlans, setLoanPlans] = useState<ILoanItem[]>([]);
@@ -71,13 +73,6 @@ const LoanPage = () => {
     const data = getUserData();
     setUserInfo(data);
   }, []);
-
-  function formatWithAnd(items: string[]) {
-    if (items.length === 0) return "";
-    if (items.length === 1) return items[0];
-    if (items.length === 2) return items.join(" & ");
-    return `${items.slice(0, -1).join(", ")} & ${items[items.length - 1]}`;
-  }
 
   // Filter loan plans by status
   const activeLoanPlanItems = loanPlans.filter(
@@ -560,8 +555,8 @@ const LoanPage = () => {
                       <div className="flex flex-col gap-2 md:gap-4 px-4 sm:px-0">
                         {allTransactions.map((transaction) => {
                           const isCompleted =
-                            transaction.status === "Completed";
-                          const isOverdue = transaction.status === "Overdue";
+                            transaction.status === "COMPLETED";
+                          const isOverdue = transaction.status === "OVERDUE";
 
                           return (
                             <div
@@ -596,17 +591,22 @@ const LoanPage = () => {
                                       },
                                     )}
                                   </p>
-                                  <p
-                                    className={`text-[clamp(10px,1.2vw,13px)] px-2 md:px-3 py-1 rounded-full ${
-                                      isCompleted
-                                        ? "bg-[#00AC471A] text-[#00AC47]"
-                                        : isOverdue
-                                          ? "bg-[#E639461A] text-[#E63946]"
-                                          : "bg-[#E4B3041A] text-[#E4B304]"
-                                    }`}
-                                  >
-                                    {transaction.status}
-                                  </p>
+                                  <StatusView
+                                    styleOption={true}
+                                    classStyleName="text-[clamp(10px,1.2vw,13px)] px-2 md:px-3 py-1 rounded-full"
+                                    status={
+                                      transaction.status === "COMPLETED"
+                                        ? "Completed"
+                                        : transaction.status === "OVERDUE"
+                                          ? "Overdue"
+                                          : transaction.status === "IN-PAYMENT"
+                                            ? "In-Payment"
+                                            : ""
+                                    }
+                                    red="Overdue"
+                                    orange="In-Payment"
+                                    green="Completed"
+                                  />
                                 </div>
                               </div>
                             </div>
@@ -847,7 +847,7 @@ export const MakeLoanPayment = ({
   const [paymentType, setPaymentType] = useState("standard-payment");
   const [customAmount, setCustomAmount] = useState("");
   const [userInfo, setUserInfo] = useState<IuserData | null>(null);
-  const [selectedBank, setSelectedBank] = useState<bankDetails | null>(null);
+  const [selectedBank, setSelectedBank] = useState<IBankDetails | null>(null);
   const [openBankDialog, setOpenBankDialog] = useState(false);
 
   useEffect(() => {
@@ -1051,9 +1051,9 @@ export const MakeLoanPayment = ({
 
               {openBankDialog && (
                 <div className="absolute right-0 top-8 z-50 w-[300px] md:w-[400px] bg-white rounded-2xl border border-[#0000001A] shadow-lg flex flex-col gap-3 p-3 md:p-5">
-                  {userInfo?.bankDetails.map((bank, index) => (
+                  {userInfo?.bankDetails.map((bank) => (
                     <div
-                      key={index}
+                      key={bank.id}
                       className={`font-geologica flex items-center gap-3 cursor-pointer hover:bg-[#F5F5F5] px-4 py-2 rounded-lg border transition-colors ${
                         selectedBank?.accountNumber === bank.accountNumber
                           ? "border-[#1D44B3] bg-[#1D44B31A]"
@@ -1143,7 +1143,7 @@ export const OverDueLoanPayment = ({
   paymentloading = false,
 }: OverDueLoanPaymentProps) => {
   const [userInfo, setUserInfo] = useState<IuserData | null>(null);
-  const [selectedBank, setSelectedBank] = useState<bankDetails | null>(null);
+  const [selectedBank, setSelectedBank] = useState<IBankDetails | null>(null);
   const [openBankDialog, setOpenBankDialog] = useState(false);
 
   useEffect(() => {
@@ -1316,9 +1316,9 @@ export const OverDueLoanPayment = ({
 
               {openBankDialog && (
                 <div className="absolute right-0 top-8 z-50 w-[300px] md:w-[400px] bg-white rounded-2xl border border-[#0000001A] shadow-lg flex flex-col gap-3 p-3 md:p-5">
-                  {userInfo?.bankDetails.map((bank, index) => (
+                  {userInfo?.bankDetails.map((bank) => (
                     <div
-                      key={index}
+                      key={bank.id}
                       className={`font-geologica flex items-center gap-3 cursor-pointer hover:bg-[#F5F5F5] px-4 py-2 rounded-lg border transition-colors ${
                         selectedBank?.accountNumber === bank.accountNumber
                           ? "border-[#1D44B3] bg-[#1D44B31A]"

@@ -189,6 +189,7 @@ const LoanPlanForm = ({
       bankDetails: [
         ...currentBankDetails,
         {
+          id: currentBankDetails.length + 1,
           bankName: data.bankName,
           accountNumber: data.accountNumber,
           bvn: data.bvn,

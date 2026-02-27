@@ -146,7 +146,7 @@ export default function TrackOrder() {
             <OrderTrackingStepper
               order={order}
               steps={deliverySteps}
-              currentStepIndex={3}
+              currentStepIndex={2}
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-5 ml:gap-10 lg:gap-20 items-start">

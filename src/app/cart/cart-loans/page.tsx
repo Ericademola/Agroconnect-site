@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import CartButton from "@/components/CartButton/CartButton";
 import { IAddOns, CartItem } from "@/types";
 import { CartIcon, DeleteIcon, DownIcon } from "@/Icons";
 import { Button } from "@/components/ui/button";
@@ -47,6 +46,7 @@ import {
 } from "@/hooks/getLoans";
 import { useLoanActions } from "@/hooks/useLoanActions";
 import LoanPlanForm from "@/components/Forms/LoanPlanForm";
+import CartButton from "@/components/CatalogueButtons/CartButton/CartButton";
 
 // Helper to convert loan cart items to full cart items with product details
 const convertToCartItems = (cartItems: ILoanCartItem[]): CartItem[] => {

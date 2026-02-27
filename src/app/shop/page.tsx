@@ -24,11 +24,14 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import ProductDisplay from "@/components/ProductDisplay/ProductDisplay";
+import { useProfile } from "@/context/ProfileContext";
 
 const ShopPage = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchText, setSearchText] = useState("");
   const [selectedFilter, setSelectedFilter] = useState<string>("Newest");
+  const { activeProfile } = useProfile();
+  const isFarmerAccount = activeProfile === "FARMER";
 
   const FilterOptions = ({ onClose }: { onClose?: () => void }) => (
     <RadioGroup
@@ -136,11 +139,19 @@ const ShopPage = () => {
                 </div>
               </div>
             </div>
-            <Catalogue
-              actionType="buy"
-              category="all"
-              className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3"
-            />
+
+            {isFarmerAccount ? (
+              <Catalogue
+                category="allFarm"
+                className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3"
+              />
+            ) : (
+              <Catalogue
+                actionType="buy"
+                category="all"
+                className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3"
+              />
+            )}
           </div>
         </div>
         <div className="relative mt-10 bg-[#03601A] rounded-2xl w-full min-h-[350px] sm:min-h-[260px] md:min-h-[280px] ml:min-h-[340px] flex flex-col sm:flex-row justify-center items-center z-0">

@@ -158,9 +158,9 @@ const MyOrder = () => {
                       <>
                         <div className=" flex flex-col gap-4">
                           {filteredOrders.map((order) =>
-                            order.items.map((item, itemIndex) => (
+                            order.items.map((item) => (
                               <OrderCard
-                                key={`${order.orderId}-${item.productId}-${itemIndex}`}
+                                key={`${order.orderId}-${item.productId}`}
                                 orderId={order.orderId}
                                 productName={item.productName}
                                 unit={item.unit}
@@ -199,9 +199,9 @@ const MyOrder = () => {
                       <>
                         <div className=" flex flex-col gap-4">
                           {activeOngoingOrders.map((order) =>
-                            order.items.map((item, itemIndex) => (
+                            order.items.map((item) => (
                               <OrderCard
-                                key={`${order.orderId}-${item.productId}-${itemIndex}`}
+                                key={`${order.orderId}-${item.productId}`}
                                 orderId={order.orderId}
                                 productName={item.productName}
                                 unit={item.unit}
@@ -240,9 +240,9 @@ const MyOrder = () => {
                       <>
                         <div className=" flex flex-col gap-4">
                           {deliveredOrders.map((order) =>
-                            order.items.map((item, itemIndex) => (
+                            order.items.map((item) => (
                               <OrderCard
-                                key={`${order.orderId}-${item.productId}-${itemIndex}`}
+                                key={`${order.orderId}-${item.productId}`}
                                 orderId={order.orderId}
                                 productName={item.productName}
                                 unit={item.unit}
@@ -281,9 +281,9 @@ const MyOrder = () => {
                       <>
                         <div className=" flex flex-col gap-4">
                           {cancelledOrders.map((order) =>
-                            order.items.map((item, itemIndex) => (
+                            order.items.map((item) => (
                               <OrderCard
-                                key={`${order.orderId}-${item.productId}-${itemIndex}`}
+                                key={`${order.orderId}-${item.productId}`}
                                 orderId={order.orderId}
                                 productName={item.productName}
                                 unit={item.unit}

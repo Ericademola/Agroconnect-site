@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { CartItem } from "@/types";
+import { CartItem, IAddresses, IuserData } from "@/types";
 import { useEffect, useState } from "react";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import {
@@ -66,14 +66,10 @@ export default function LoanCheckoutPage() {
   const [loanConfig, setLoanConfig] = useState<LoanPlanConfig | null>(null);
   const [isShowEditForm, setIsShowEditForm] = useState(false);
   const [isShowChangeAddress, setIsShowChangeAddress] = useState(false);
-  const [userInfo, setUserInfo] = useState(getUserData());
-  const [selectedAddressIndex, setSelectedAddressIndex] = useState(() => {
-    const data = getUserData();
-    const defaultIndex = data.deliveryAddresses.findIndex(
-      (address) => address.isDefault,
-    );
-    return defaultIndex !== -1 ? defaultIndex : 0;
-  });
+  const [userInfo, setUserInfo] = useState<IuserData | null>(null);
+  const [selectedAddress, setSelectedAddress] = useState<IAddresses | null>(
+    null,
+  );
   const [isShowConfirmFoodLoan, setIsShowConfirmFoodLoan] = useState<
     "idle" | "success" | "error"
   >("idle");
@@ -111,6 +107,21 @@ export default function LoanCheckoutPage() {
     setHasActiveLoan(hasActive);
   }, []);
 
+  useEffect(() => {
+    const data = getUserData();
+    setUserInfo(data);
+
+    const stored = sessionStorage.getItem("selectedCheckoutAddress");
+    if (stored) {
+      setSelectedAddress(JSON.parse(stored));
+    } else {
+      const defaultAddress =
+        data.deliveryAddresses.find((addr) => addr.isDefault) ??
+        data.deliveryAddresses[0];
+      setSelectedAddress(defaultAddress ?? null);
+    }
+  }, []);
+
   const deliveryFee = 5000;
 
   const totalItemsPrice = loanItems.reduce((sum, item) => {
@@ -136,8 +147,9 @@ export default function LoanCheckoutPage() {
     setIsShowEditForm(false);
   };
 
-  const handleSelectAddress = (addressIndex: number) => {
-    setSelectedAddressIndex(addressIndex);
+  const handleSelectAddress = (address: IAddresses) => {
+    setSelectedAddress(address);
+    sessionStorage.setItem("selectedCheckoutAddress", JSON.stringify(address));
     setIsShowChangeAddress(false);
   };
 
@@ -180,13 +192,7 @@ export default function LoanCheckoutPage() {
         paymentMethod: "Food on Credit (Loan)",
         deliveryStatus: "CONFIRMED",
         deliveryType: "Home delivery",
-        deliveryAddress: {
-          fullName: userInfo.deliveryAddresses[selectedAddressIndex].fullName,
-          phoneNumber:
-            userInfo.deliveryAddresses[selectedAddressIndex].phoneNumber,
-          fullAddress:
-            userInfo.deliveryAddresses[selectedAddressIndex].fullAddress,
-        },
+        deliveryAddress: selectedAddress,
       };
 
       saveOrder(newOrder);
@@ -262,13 +268,13 @@ export default function LoanCheckoutPage() {
                     Customer Information
                   </h4>
                   <p className="text-black text-[clamp(14px,1.4vw,16px)]">
-                    {userInfo.userFullName}
+                    {userInfo?.userFullName}
                   </p>
                   <p className="text-[#000000B2] text-[clamp(12px,1.2vw,14.5px)]">
-                    {userInfo.email}
+                    {userInfo?.email}
                   </p>
                   <p className="text-[#000000B2] text-[clamp(12px,1.2vw,14.5px)]">
-                    {userInfo.phoneNumber}
+                    {userInfo?.phoneNumber}
                   </p>
                 </div>
                 <Button
@@ -285,10 +291,7 @@ export default function LoanCheckoutPage() {
                     Delivery Address
                   </h4>
                   <p className="text-black text-[clamp(13.5px,1.4vw,16px)]">
-                    {
-                      userInfo.deliveryAddresses[selectedAddressIndex]
-                        .fullAddress
-                    }
+                    {selectedAddress?.fullAddress}
                   </p>
                 </div>
                 <Button
@@ -472,14 +475,12 @@ export default function LoanCheckoutPage() {
         title="Edit Customer Information"
         contentCSS="pt-[20px] px-[30px] h-[80vh]"
       >
-        <EditCustormerInfoForm
-          initialData={{
-            name: userInfo.userFullName,
-            email: userInfo.email,
-            phonenumber: userInfo.phoneNumber,
-          }}
-          onSubmit={handleUpdateUserInfo}
-        />
+        {userInfo && (
+          <EditCustormerInfoForm
+            initialData={userInfo}
+            onSubmit={handleUpdateUserInfo}
+          />
+        )}
       </DrawerDialog>
 
       {/* Change Address */}
@@ -494,7 +495,7 @@ export default function LoanCheckoutPage() {
         <DeliveryAddress
           onCancel={() => setIsShowChangeAddress(false)}
           onSelectAddress={handleSelectAddress}
-          currentAddressIndex={selectedAddressIndex}
+          currentAddress={selectedAddress}
         />
       </DrawerDialog>
 

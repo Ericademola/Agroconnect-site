@@ -17,27 +17,25 @@ import { Button } from "@/components/ui/button";
 import { getUserData, updateUserData } from "@/hooks/getUserData";
 import { CreditCardIcon, Delete2Icon, EditIcon } from "@/Icons";
 import { cn } from "@/lib/utils";
-import { IuserData } from "@/types";
-import { formatDate } from "@/utils/formatDate";
+import { IBankDetails, IuserData } from "@/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const AccountDetails = () => {
   const [userInfo, setUserInfo] = useState<IuserData | null>(null);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [isShowEditAccount, setIsShowEditAccount] = useState(false);
-  const [isShowAddNewAccount, setIsShowAddNewAccount] = useState(false);
+  const [isShowAccountForm, setIsShowAccountForm] = useState(false);
+  const [account, setAccount] = useState<IBankDetails>();
 
   useEffect(() => {
     const data = getUserData();
     setUserInfo(data);
   }, []);
 
-  const handleDefaultSelection = (index: number) => {
+  const handleDefaultSelection = (id: number) => {
     if (!userInfo) return;
-    const updatedAccounts = userInfo.bankDetails.map((account, i) => ({
+    const updatedAccounts = userInfo!.bankDetails.map((account) => ({
       ...account,
-      isPrimary: i === index,
+      isPrimary: account.id === id,
     }));
 
     const updatedData = updateUserData({
@@ -47,94 +45,32 @@ const AccountDetails = () => {
     setUserInfo(updatedData);
   };
 
-  const handleAddNewAccountDetails = () => {
-    setIsShowAddNewAccount(true);
-    setIsShowEditAccount(true);
-  };
-
-  const handleShowEditAccount = (index: number) => {
-    setSelectedIndex(index);
-    setIsShowAddNewAccount(false);
-    setIsShowEditAccount(true);
+  const handleAccount = (account?: IBankDetails) => {
+    setAccount(account);
+    setIsShowAccountForm(true);
   };
 
   const handleAddAccount = (data: TypeBankFormSchema) => {
-    if (!userInfo) return;
-    const updatedAccounts = [...(userInfo.bankDetails ?? [])];
+    console.log(data);
 
-    const currentDate = new Date();
-
-    if (isShowAddNewAccount) {
-      updatedAccounts.push({
-        ...data,
-        isPrimary: false,
-        dateAdded: formatDate(currentDate),
-      });
-    } else {
-      updatedAccounts[selectedIndex] = {
-        ...data,
-        isPrimary: updatedAccounts[selectedIndex].isPrimary || false,
-        dateAdded:
-          updatedAccounts[selectedIndex].dateAdded || formatDate(currentDate),
-      };
-    }
-
-    const updatedData = updateUserData({ bankDetails: updatedAccounts });
-    setUserInfo(updatedData);
-    setIsShowEditAccount(false);
-    setIsShowAddNewAccount(false);
+    setIsShowAccountForm(false);
   };
 
-  const handleDeleteAccount = (index: number) => {
+  const handleDeleteAccount = (id: number) => {
     if (!userInfo) return;
     if (userInfo.bankDetails.length === 1) {
       alert("You must have at least one bank account");
       return;
     }
 
-    const updatedAccounts = [...(userInfo.bankDetails ?? [])];
-    const wasDefault = updatedAccounts[index].isPrimary;
-    updatedAccounts.splice(index, 1);
+    const updatedAccounts = userInfo.bankDetails.filter((a) => a.id !== id);
 
-    if (wasDefault && updatedAccounts.length > 0) {
+    if (!updatedAccounts.find((a) => a.isPrimary)) {
       updatedAccounts[0].isPrimary = true;
     }
 
-    const updatedData = updateUserData({
-      bankDetails: updatedAccounts,
-    });
-
+    const updatedData = updateUserData({ bankDetails: updatedAccounts });
     setUserInfo(updatedData);
-
-    if (selectedIndex >= updatedAccounts.length) {
-      setSelectedIndex(0);
-    }
-  };
-
-  const getInitialData = () => {
-    if (isShowAddNewAccount || !userInfo) {
-      return {
-        bankName: "",
-        accountName: "",
-        accountNumber: "",
-        bvn: "",
-      };
-    }
-
-    const account = userInfo.bankDetails[selectedIndex];
-    return account
-      ? {
-          bankName: account.bankName,
-          accountName: account.accountName,
-          accountNumber: account.accountNumber,
-          bvn: account.bvn,
-        }
-      : {
-          bankName: "",
-          accountName: "",
-          accountNumber: "",
-          bvn: "",
-        };
   };
 
   return (
@@ -174,7 +110,7 @@ const AccountDetails = () => {
                 buttonText="Add Account Details"
                 buttonhref=""
                 className="py-14"
-                btnAction={handleAddNewAccountDetails}
+                btnAction={() => handleAccount(account!)}
                 subtitleClassName="md:w-[70%] lg:w-[65%]"
               />
             </div>
@@ -188,15 +124,15 @@ const AccountDetails = () => {
                   variant="default"
                   size="sm"
                   className="h-10"
-                  onClick={handleAddNewAccountDetails}
+                  onClick={() => handleAccount()}
                 >
                   Add new Account
                 </Button>
               </div>
               <div className="flex flex-col gap-6 px-4 md:px-6">
-                {userInfo.bankDetails.map((account, index) => (
+                {userInfo.bankDetails.map((account) => (
                   <div
-                    key={index}
+                    key={account.id}
                     className={cn(
                       "grid lg:grid-cols-[1.2fr_auto_0.7fr] border border-[#0000001A] shadow shadow-[#0000000D] bg-[#F5F5F5] rounded-2xl divide-y md:divide-x divide-[#0000001A]",
                     )}
@@ -217,7 +153,7 @@ const AccountDetails = () => {
                               variant="ghost"
                               size="sm"
                               className="text-[#C09706] text-[clamp(12px,1.2vw,14px)] hover:text-[#C09706]/80 font-light p-0 w-fit h-fit"
-                              onClick={() => handleDefaultSelection(index)}
+                              onClick={() => handleDefaultSelection(account.id)}
                             >
                               Set as primary
                             </Button>
@@ -258,7 +194,7 @@ const AccountDetails = () => {
                         variant="secondary"
                         size="sm"
                         className="bg-[#FFFFFF] hover:bg-[#FFFFFF]/80 flex items-center gap-2 font-light text-[#000000CC] h-10 w-full"
-                        onClick={() => handleShowEditAccount(index)}
+                        onClick={() => handleAccount(account)}
                       >
                         <EditIcon className="w-5 h-5" />
                         Edit
@@ -267,7 +203,7 @@ const AccountDetails = () => {
                         variant="secondary"
                         size="sm"
                         className="bg-[#FFFFFF] hover:bg-[#FFFFFF]/80 flex items-center gap-2 font-light text-[#E63946] h-10 w-full"
-                        onClick={() => handleDeleteAccount(index)}
+                        onClick={() => handleDeleteAccount(account.id)}
                       >
                         <Delete2Icon className="w-5 h-5" />
                         Delete
@@ -282,17 +218,16 @@ const AccountDetails = () => {
       </div>
 
       <DrawerDialog
-        open={isShowEditAccount}
+        open={isShowAccountForm}
         close={() => {
-          setIsShowEditAccount(false);
-          setIsShowAddNewAccount(false);
+          setIsShowAccountForm(false);
         }}
         size="md"
-        title={isShowAddNewAccount ? "Add New Account" : "Edit Account"}
+        title={account ? "Edit Account" : "Add New Account"}
         contentCSS="pt-[20px] px-[30px]"
         max_height
       >
-        <BankForm initialData={getInitialData()} onSubmit={handleAddAccount} />
+        <BankForm initialData={account} onSubmit={handleAddAccount} />
       </DrawerDialog>
     </>
   );

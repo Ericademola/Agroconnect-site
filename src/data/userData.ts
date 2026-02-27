@@ -8,13 +8,14 @@ export const userData = {
   country: "Nigeria",
   state: "Lagos",
   city: "Lekki",
-  accountType: ["BUYER"],
+  accountType: ["BUYER", "FARMER"],
   isLoggedIn: false,
   dateJoined: "January 2026",
   wishlistItems: 0,
   myCashback: "₦250",
   deliveryAddresses: [
     {
+      id: 1,
       fullName: "Sam Akinlolu",
       phoneNumber: "08123456789",
       state: "Lagos",
@@ -27,6 +28,7 @@ export const userData = {
       dateAdded: "",
     },
     {
+      id: 2,
       fullName: "James Akinlolu",
       phoneNumber: "08123456789",
       state: "Lagos",
@@ -43,6 +45,7 @@ export const userData = {
   // bankDetails: [],
   bankDetails: [
     {
+      id: 1,
       bankName: "First Bank",
       accountName: "Sam Akinlolu",
       accountNumber: "1234567890",
@@ -51,6 +54,7 @@ export const userData = {
       dateAdded: "Mar 12, 2023",
     },
     {
+      id: 2,
       bankName: "Union Bank",
       accountName: "Sam Akinlolu",
       accountNumber: "0987654321",
@@ -61,4 +65,28 @@ export const userData = {
   ],
   isActiveLoan: false,
   userPassword: "Password123",
+  isFarmerDetails: {
+    farmName: "Sam's Farm",
+    farmAddress: [
+      {
+        id: 4,
+        fullName: "Sam Akinlolu",
+        phoneNumber: "08123456789",
+        state: "Lagos",
+        city: "Lekki",
+        fullAddress: "Avu farmland umuokoro",
+        area: "Lekki Phase 1",
+        addtionalInfo: "Next to the Lekki Bus Stop",
+        isDefault: true,
+        dateAdded: "",
+        farmLongitude: "150",
+        farmLatitude: "40",
+      },
+    ],
+    farmEmail: "samFarm@gmail.com",
+    farmPhoneNumber: "08123456789",
+    farmProducts: ["Tomatoes", "Potatoes", "Cabbages"],
+    farmerProfilePicture: "/assets/images/farmerProfilePic.png",
+    farmType: ["POULTRY", "VEGETABLE", "FRUITS", "LIVESTOCK", "GRAINS"],
+  },
 };

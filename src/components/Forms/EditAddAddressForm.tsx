@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Spinner } from "../ui/spinner";
 import { FormSelect } from "../ui/formSelect";
+import { IAddresses } from "@/types";
 
 // FOR PHONE NUMBER
 const phoneSchema = z.string().refine(
@@ -22,50 +23,73 @@ const phoneSchema = z.string().refine(
   },
 );
 
-const EditAddAddressSchema = z.object({
-  fullName: z.string().nonempty({ message: "Full name is required" }),
-  phoneNumber: phoneSchema,
-  state: z.string().nonempty({ message: "Please select your state" }),
-  city: z.string().nonempty({ message: "Please select your city" }),
-  fullAddress: z.string().nonempty({ message: "Street address is required" }),
-  houseNumber: z.string().optional(),
-  area: z.string().nonempty({ message: "Neighbourhood or area is required" }),
-  addtionalInfo: z.string().optional(),
-});
+const EditAddAddressSchema = (type: string) =>
+  z.object({
+    fullName: z.string().nonempty({ message: "Full name is required" }),
+    phoneNumber: phoneSchema,
+    state: z.string().nonempty({ message: "Please select your state" }),
+    city: z.string().nonempty({ message: "Please select your city" }),
+    fullAddress: z.string().nonempty({ message: "Street address is required" }),
+    houseNumber: z.string().optional(),
+    area: z.string().nonempty({ message: "Neighbourhood or area is required" }),
+    addtionalInfo: z.string().optional(),
+    farmLongitude:
+      type === "farm"
+        ? z
+            .string()
+            .nonempty({ message: "Longitude is required" })
+            .refine(
+              (val) =>
+                !isNaN(parseFloat(val)) &&
+                parseFloat(val) >= -180 &&
+                parseFloat(val) <= 180,
+              { message: "Enter a valid longitude between -180 and 180" },
+            )
+        : z.string().optional(),
+    farmLatitude:
+      type === "farm"
+        ? z
+            .string()
+            .nonempty({ message: "Latitude is required" })
+            .refine(
+              (val) =>
+                !isNaN(parseFloat(val)) &&
+                parseFloat(val) >= -90 &&
+                parseFloat(val) <= 90,
+              { message: "Enter a valid latitude between -90 and 90" },
+            )
+        : z.string().optional(),
+  });
 
-export type TypeEditAddAddressFormData = z.infer<typeof EditAddAddressSchema>;
-
+export type TypeEditAddAddressFormData = z.infer<
+  ReturnType<typeof EditAddAddressSchema>
+>;
 interface EditAddAddressFormProps {
-  initialData: {
-    fullName: string;
-    phoneNumber: string;
-    state: string;
-    city: string;
-    fullAddress: string;
-    houseNumber?: string;
-    area: string;
-    addtionalInfo?: string;
-  };
+  initialData?: IAddresses;
   onSubmit: (data: TypeEditAddAddressFormData) => void;
+  type: string;
 }
 
 const EditAddAddressForm = ({
   initialData,
   onSubmit,
+  type,
 }: EditAddAddressFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<TypeEditAddAddressFormData>({
-    resolver: zodResolver(EditAddAddressSchema),
+    resolver: zodResolver(EditAddAddressSchema(type)),
     defaultValues: {
-      fullName: initialData.fullName,
-      phoneNumber: initialData.phoneNumber,
-      state: initialData.state.toLowerCase(),
-      city: initialData.city.toLowerCase(),
-      fullAddress: initialData.fullAddress,
-      houseNumber: initialData.houseNumber,
-      area: initialData.area,
-      addtionalInfo: initialData.addtionalInfo,
+      fullName: initialData?.fullName ?? "",
+      phoneNumber: initialData?.phoneNumber ?? "",
+      state: initialData?.state.toLowerCase() ?? "",
+      city: initialData?.city.toLowerCase() ?? "",
+      fullAddress: initialData?.fullAddress ?? "",
+      houseNumber: initialData?.houseNumber ?? "",
+      area: initialData?.area ?? "",
+      addtionalInfo: initialData?.addtionalInfo ?? "",
+      farmLongitude: initialData?.farmLongitude ?? "",
+      farmLatitude: initialData?.farmLatitude ?? "",
     },
     mode: "onChange",
     reValidateMode: "onChange",
@@ -75,14 +99,16 @@ const EditAddAddressForm = ({
 
   useEffect(() => {
     reset({
-      fullName: initialData.fullName,
-      phoneNumber: initialData.phoneNumber,
-      state: initialData.state.toLowerCase(),
-      city: initialData.city.toLowerCase(),
-      fullAddress: initialData.fullAddress,
-      houseNumber: initialData.houseNumber,
-      area: initialData.area,
-      addtionalInfo: initialData.addtionalInfo,
+      fullName: initialData?.fullName ?? "",
+      phoneNumber: initialData?.phoneNumber ?? "",
+      state: initialData?.state.toLowerCase() ?? "",
+      city: initialData?.city.toLowerCase() ?? "",
+      fullAddress: initialData?.fullAddress ?? "",
+      houseNumber: initialData?.houseNumber ?? "",
+      area: initialData?.area ?? "",
+      addtionalInfo: initialData?.addtionalInfo ?? "",
+      farmLongitude: initialData?.farmLongitude ?? "",
+      farmLatitude: initialData?.farmLatitude ?? "",
     });
   }, [initialData, reset]);
 
@@ -320,34 +346,37 @@ const EditAddAddressForm = ({
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="houseNumber"
-              render={({ field, fieldState }) => (
-                <div className="flex flex-col gap-1">
-                  <FormLabel className="text-[clamp(13px,1.2vw,14px)]">
-                    House Number (optional)
-                  </FormLabel>
-                  <Input
-                    hasError={fieldState.invalid}
-                    subtext={
-                      fieldState.error ? (
-                        <span className="flex items-center gap-1 pt-1 text-red-500 text-xs">
-                          <ErrorIcon />
-                          {fieldState.error.message}
-                        </span>
-                      ) : null
-                    }
-                    {...field}
-                    placeholder="Enter your house number"
-                    type="text"
-                    className="bg-[#ECECEC] h-[45px]"
-                    inputClassName="text-[#000000B2] bg-[#ECECEC] "
-                  />
-                </div>
-              )}
-            />
-
+            {type === "delivery" && (
+              <>
+                <FormField
+                  control={form.control}
+                  name="houseNumber"
+                  render={({ field, fieldState }) => (
+                    <div className="flex flex-col gap-1">
+                      <FormLabel className="text-[clamp(13px,1.2vw,14px)]">
+                        House Number (optional)
+                      </FormLabel>
+                      <Input
+                        hasError={fieldState.invalid}
+                        subtext={
+                          fieldState.error ? (
+                            <span className="flex items-center gap-1 pt-1 text-red-500 text-xs">
+                              <ErrorIcon />
+                              {fieldState.error.message}
+                            </span>
+                          ) : null
+                        }
+                        {...field}
+                        placeholder="Enter your house number"
+                        type="text"
+                        className="bg-[#ECECEC] h-[45px]"
+                        inputClassName="text-[#000000B2] bg-[#ECECEC] "
+                      />
+                    </div>
+                  )}
+                />
+              </>
+            )}
             <FormField
               control={form.control}
               name="area"
@@ -403,6 +432,65 @@ const EditAddAddressForm = ({
                 </div>
               )}
             />
+
+            {type === "farm" && (
+              <div className="grid ml:grid-cols-2 gap-4 ml:gap-8">
+                <FormField
+                  control={form.control}
+                  name="farmLongitude"
+                  render={({ field, fieldState }) => (
+                    <div className="flex flex-col gap-1">
+                      <FormLabel className="text-[clamp(13px,1.2vw,14px)]">
+                        Farm Longitude
+                      </FormLabel>
+                      <Input
+                        hasError={fieldState.invalid}
+                        subtext={
+                          fieldState.error ? (
+                            <span className="flex items-center gap-1 pt-1 text-red-500 text-xs">
+                              <ErrorIcon />
+                              {fieldState.error.message}
+                            </span>
+                          ) : null
+                        }
+                        {...field}
+                        placeholder="Enter your farm location"
+                        type="text"
+                        className="bg-[#ECECEC] h-[45px]"
+                        inputClassName="text-[#000000B2] bg-[#ECECEC] "
+                      />
+                    </div>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="farmLatitude"
+                  render={({ field, fieldState }) => (
+                    <div className="flex flex-col gap-1">
+                      <FormLabel className="text-[clamp(13px,1.2vw,14px)]">
+                        Farm Latitude
+                      </FormLabel>
+                      <Input
+                        hasError={fieldState.invalid}
+                        subtext={
+                          fieldState.error ? (
+                            <span className="flex items-center gap-1 pt-1 text-red-500 text-xs">
+                              <ErrorIcon />
+                              {fieldState.error.message}
+                            </span>
+                          ) : null
+                        }
+                        {...field}
+                        placeholder="Enter your farm location"
+                        type="text"
+                        className="bg-[#ECECEC] h-[45px]"
+                        inputClassName="text-[#000000B2] bg-[#ECECEC] "
+                      />
+                    </div>
+                  )}
+                />
+              </div>
+            )}
           </div>
 
           <Button

@@ -227,7 +227,7 @@ export const completeLoanPlan = (loanPlanId: string): void => {
 export const getLoanTransactionStatus = (plan: ILoanItem): string => {
   // If loan is completed
   if (plan.loanStatus === "COMPLETED") {
-    return "Completed";
+    return "COMPLETED";
   }
 
   // If loan is active, check if overdue
@@ -235,8 +235,8 @@ export const getLoanTransactionStatus = (plan: ILoanItem): string => {
   const today = new Date();
 
   if (today > nextPaymentDate) {
-    return "Overdue";
+    return "OVERDUE";
   }
 
-  return "In-Payment";
+  return "IN-PAYMENT";
 };

@@ -355,7 +355,7 @@ export default function OrderDetails() {
                   Delivery Address
                 </h4>
                 <p className="text-[clamp(12px,1.5vw,16px)]">
-                  {order.deliveryAddress.fullAddress}
+                  {order.deliveryAddress?.fullAddress}
                 </p>
               </div>
             </div>

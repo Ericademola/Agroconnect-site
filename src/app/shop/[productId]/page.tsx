@@ -18,12 +18,9 @@ import {
   StarIcon,
 } from "@/Icons";
 import { Button } from "@/components/ui/button";
-import WishListButton from "@/components/WishListButton/WishListButton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ReviewRatingForm from "@/components/Forms/ReviewRatingForm";
 import Rating from "@/components/Rating/Rating";
-import DecrementAndIncrementButton from "@/components/CartButton/DecrementAndIncrementButton";
-import AddToCartButton from "@/components/CartButton/AddToCartButton";
 import {
   Field,
   FieldGroup,
@@ -46,6 +43,9 @@ import { getSavingsCart } from "@/hooks/getSavings";
 import { SavingsCartButton } from "@/app/shop/shop-savings/page";
 import { getLoanCart } from "@/hooks/getLoans";
 import { LoanCartButton } from "../shop-loans/page";
+import DecrementAndIncrementButton from "@/components/CatalogueButtons/CartButton/DecrementAndIncrementButton";
+import AddToCartButton from "@/components/CatalogueButtons/CartButton/AddToCartButton";
+import WishListButton from "@/components/CatalogueButtons/WishListButton";
 
 export default function ProductDetails() {
   const [itemDetails, setItemDetails] = useState<IProducts | null>(null);

@@ -21,8 +21,8 @@ const BecomeFarmer = () => {
   const [isVerificationStatus, setIsVerificationStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
-  const [loadingLoginBtn, setLoadingLoginBtn] = useState(false);
-  const [loadingVerifyBtn, setLoadingVerifyBtn] = useState(false);
+  const [isloading, setIsLoading] = useState(false);
+  const [loadingVerifyBtn, setIsLoadingVerifyBtn] = useState(false);
 
   const router = useRouter();
 
@@ -32,7 +32,7 @@ const BecomeFarmer = () => {
   };
 
   const handleVerifyCode = async (code: string) => {
-    setLoadingVerifyBtn(true);
+    setIsLoadingVerifyBtn(true);
     await new Promise((resolve) => setTimeout(resolve, 1500));
     console.log("Verification code:", code);
 
@@ -50,12 +50,8 @@ const BecomeFarmer = () => {
     setIsVerificationStatus("success");
   };
 
-  const closeModal = () => {
-    setIsVerificationStatus("idle");
-  };
-
-  const handleLogin = async () => {
-    setLoadingLoginBtn(true);
+  const handleGoToHome = async () => {
+    setIsLoading(true);
 
     await new Promise((resolve) => setTimeout(resolve, 800));
 
@@ -103,7 +99,7 @@ const BecomeFarmer = () => {
       {/* Success Modal */}
       <DrawerDialog
         open={isVerificationStatus === "success"}
-        close={closeModal}
+        close={() => setIsVerificationStatus("idle")}
         size="sm"
         title="Account Created Successfully!"
         titleCSS="sr-only text-xs"
@@ -113,8 +109,8 @@ const BecomeFarmer = () => {
       >
         <PopUpUtility
           className="w-fit py-5 border-none"
-          header="Account Created Successfully!"
-          desc="Welcome aboard! Your account has been created. You can now start exploring and shopping with ease."
+          header="Farmer's Account Created Successfully!"
+          desc="Welcome aboard! Your account has been upgraded to include farmers account. You can now start supplying us products."
           icon={
             <Image
               width={100}
@@ -124,11 +120,11 @@ const BecomeFarmer = () => {
               className="w-[100px] md:w-[120px] ml:w-[140px] lg:w-[150px] h-auto object-cover"
             />
           }
-          buttonTitle="Continue to Login"
+          buttonTitle="Continue to Home"
           hrClassName="hidden"
-          handleFirstBtnAtn={handleLogin}
-          disabledFirstBtn={loadingLoginBtn}
-          loadingFirstBtnAtn={loadingLoginBtn}
+          handleFirstBtnAtn={handleGoToHome}
+          disabledFirstBtn={isloading}
+          loadingFirstBtnAtn={isloading}
         />
       </DrawerDialog>
     </>

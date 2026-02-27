@@ -16,27 +16,29 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
+import { useProfile } from "@/context/ProfileContext";
 import { getUserData, updateUserData } from "@/hooks/getUserData";
 import { Delete2Icon, EditIcon } from "@/Icons";
 import { cn } from "@/lib/utils";
+import { IAddresses, IuserData } from "@/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const DeliveryAddresses = () => {
-  const [userInfo, setUserInfo] = useState(getUserData());
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [isShowEditAddress, setIsShowEditAddress] = useState(false);
-  const [isShowAddNewAddress, setIsShowAddNewAddress] = useState(false);
+  const [userInfo, setUserInfo] = useState<IuserData | null>(null);
+  const [isShowAddressForm, setIsShowAddressForm] = useState(false);
+  const [addressType, setAddressType] = useState("");
+  const [address, setAddress] = useState<IAddresses>();
 
   useEffect(() => {
     const data = getUserData();
     setUserInfo(data);
   }, []);
 
-  const handleDefaultSelection = (index: number) => {
-    const updatedAddresses = userInfo.deliveryAddresses.map((address, i) => ({
+  const handleDefaultSelection = (id: number) => {
+    const updatedAddresses = userInfo?.deliveryAddresses.map((address) => ({
       ...address,
-      isDefault: i === index,
+      isDefault: address.id === id,
     }));
 
     const updatedData = updateUserData({
@@ -46,102 +48,42 @@ const DeliveryAddresses = () => {
     setUserInfo(updatedData);
   };
 
-  const handleAddNewAddress = () => {
-    setIsShowAddNewAddress(true);
-    setIsShowEditAddress(true);
-  };
-
-  const handleEditAddress = (index: number) => {
-    setSelectedIndex(index);
-    setIsShowAddNewAddress(false);
-    setIsShowEditAddress(true);
+  const handleAddress = (type: string, address?: IAddresses) => {
+    setAddressType(type);
+    setAddress(address);
+    setIsShowAddressForm(true);
   };
 
   const handleSaveAddress = (data: TypeEditAddAddressFormData) => {
-    const updatedAddresses = [...userInfo.deliveryAddresses];
-
-    if (isShowAddNewAddress) {
-      // Add new address
-      updatedAddresses.push({ ...data, isDefault: false });
-    } else {
-      // Update existing address, preserve isDefault flag
-      updatedAddresses[selectedIndex] = {
-        ...data,
-        isDefault: updatedAddresses[selectedIndex].isDefault || false,
-      };
-    }
-
-    const updatedData = updateUserData({
-      deliveryAddresses: updatedAddresses,
-    });
-
-    setUserInfo(updatedData);
-    setIsShowEditAddress(false);
-    setIsShowAddNewAddress(false);
+    console.log(data);
+    setIsShowAddressForm(false);
   };
 
-  const handleDeleteAddress = (index: number) => {
-    if (userInfo.deliveryAddresses.length === 1) {
+  const handleDeleteAddress = (id: number) => {
+    if (!userInfo || userInfo.deliveryAddresses.length === 1) {
       alert("You must have at least one delivery address");
       return;
     }
 
-    const updatedAddresses = [...userInfo.deliveryAddresses];
-    const wasDefault = updatedAddresses[index].isDefault;
-    updatedAddresses.splice(index, 1);
+    const updatedAddresses = userInfo.deliveryAddresses.filter(
+      (a) => a.id !== id,
+    );
 
-    if (wasDefault && updatedAddresses.length > 0) {
+    if (!updatedAddresses.find((a) => a.isDefault)) {
       updatedAddresses[0].isDefault = true;
     }
 
-    const updatedData = updateUserData({
-      deliveryAddresses: updatedAddresses,
-    });
-
+    const updatedData = updateUserData({ deliveryAddresses: updatedAddresses });
     setUserInfo(updatedData);
-
-    if (selectedIndex >= updatedAddresses.length) {
-      setSelectedIndex(0);
-    }
   };
 
-  const getInitialData = () => {
-    if (isShowAddNewAddress) {
-      return {
-        fullName: "",
-        phoneNumber: "",
-        state: "",
-        city: "",
-        fullAddress: "",
-        houseNumber: "",
-        area: "",
-        addtionalInfo: "",
-      };
-    }
+  const { activeProfile } = useProfile();
+  const type = activeProfile === "FARMER" ? "farm" : "delivery";
 
-    const address = userInfo.deliveryAddresses[selectedIndex];
-    return address
-      ? {
-          fullName: address.fullName,
-          phoneNumber: address.phoneNumber,
-          state: address.state,
-          city: address.city,
-          fullAddress: address.fullAddress,
-          houseNumber: address.houseNumber,
-          area: address.area,
-          addtionalInfo: address.addtionalInfo,
-        }
-      : {
-          fullName: "",
-          phoneNumber: "",
-          state: "",
-          city: "",
-          fullAddress: "",
-          houseNumber: "",
-          area: "",
-          addtionalInfo: "",
-        };
-  };
+  const addresses =
+    activeProfile === "FARMER"
+      ? userInfo?.isFarmerDetails.farmAddress
+      : userInfo?.deliveryAddresses;
 
   return (
     <>
@@ -165,12 +107,13 @@ const DeliveryAddresses = () => {
           </div>
         }
       />
-      <div className="grid md:grid-cols-[auto_1fr] items-start md:gap-5 md:mx-6 ml:mx-8 lg:mx-12 mt-6 md:mt-8">
+      <div className="grid md:grid-cols-[auto_1fr] md:gap-5 md:mx-6 ml:mx-8 lg:mx-12 mt-6 md:mt-8">
         <div className="all-sides-shadow-xl rounded-2xl py-8 hidden md:block">
           <Sidebar />
         </div>
         <div className="font-geologica text-[#000000CC] all-sides-shadow-xl rounded-2xl">
-          {userInfo.deliveryAddresses.length === 0 ? (
+          {userInfo === null ? null : userInfo.deliveryAddresses.length ===
+            0 ? (
             <div className="bg-[#F5F5F5] border border-[#0000001A] rounded-2xl flex items-center justify-center py-8 md:my-5">
               <EmptyPage
                 title="You don't have any saved delivery address yet"
@@ -180,7 +123,7 @@ const DeliveryAddresses = () => {
                 buttonText="Add New Address"
                 buttonhref=""
                 className="py-14"
-                btnAction={handleAddNewAddress}
+                btnAction={() => handleAddress(type)}
               />
             </div>
           ) : (
@@ -193,22 +136,22 @@ const DeliveryAddresses = () => {
                   variant="default"
                   size="sm"
                   className="h-10"
-                  onClick={handleAddNewAddress}
+                  onClick={() => handleAddress(type)}
                 >
                   Add new Address
                 </Button>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-x-8 lg:gap-x-12 px-4 md:px-6">
-                {userInfo.deliveryAddresses.map((address, index) => (
+              <div className="grid grid-cols-1 ml:grid-cols-2 gap-6 md:gap-x-6 lg:gap-x-12 px-4 md:px-6">
+                {addresses?.map((address) => (
                   <div
-                    key={index}
+                    key={address.id}
                     className={cn(
                       "flex flex-col gap-4 border border-[#0000001A] shadow shadow-[#0000000D] bg-[#F5F5F5] py-4 rounded-2xl",
                     )}
                   >
                     <div className="flex items-center justify-between gap-2 border-b border-[#0000001A] pb-2 px-7">
                       <h2 className="text-[clamp(16px,1.6vw,20px)]">
-                        Address {index + 1}
+                        Address {address.id}
                       </h2>
                       {address.isDefault ? (
                         <div className="bg-[#3333331A] text-[#333333] text-[clamp(12px,1.4vw,16px)] rounded-full px-3 py-1">
@@ -219,7 +162,7 @@ const DeliveryAddresses = () => {
                           variant="ghost"
                           size="sm"
                           className="text-[#C09706] text-[clamp(12px,1.4vw,16px)] hover:text-[#C09706]/80 font-light"
-                          onClick={() => handleDefaultSelection(index)}
+                          onClick={() => handleDefaultSelection(address.id)}
                         >
                           Set as default
                         </Button>
@@ -235,7 +178,7 @@ const DeliveryAddresses = () => {
                         variant="secondary"
                         size="sm"
                         className="bg-[#FFFFFF] hover:bg-[#FFFFFF]/80 flex items-center gap-2 font-light text-[#000000CC] h-10"
-                        onClick={() => handleEditAddress(index)}
+                        onClick={() => handleAddress(type, address)}
                       >
                         <EditIcon className="w-5 h-5" />
                         Edit
@@ -244,7 +187,7 @@ const DeliveryAddresses = () => {
                         variant="secondary"
                         size="sm"
                         className="bg-[#FFFFFF] hover:bg-[#FFFFFF]/80 flex items-center gap-2 font-light text-[#E63946] h-10"
-                        onClick={() => handleDeleteAddress(index)}
+                        onClick={() => handleDeleteAddress(address.id)}
                       >
                         <Delete2Icon className="w-5 h-5" />
                         Delete
@@ -259,19 +202,19 @@ const DeliveryAddresses = () => {
       </div>
 
       <DrawerDialog
-        open={isShowEditAddress}
+        open={isShowAddressForm}
         close={() => {
-          setIsShowEditAddress(false);
-          setIsShowAddNewAddress(false);
+          setIsShowAddressForm(false);
         }}
         size="md"
-        title={isShowAddNewAddress ? "Add New Address" : "Edit Address"}
+        title={address ? "Add New Address" : "Edit Address"}
         contentCSS="pt-[20px] px-[30px]"
         max_height
       >
         <EditAddAddressForm
-          initialData={getInitialData()}
+          initialData={address}
           onSubmit={handleSaveAddress}
+          type={addressType}
         />
       </DrawerDialog>
     </>

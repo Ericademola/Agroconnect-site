@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import CartButton from "@/components/CartButton/CartButton";
 import { CartItem, IAddOns } from "@/types";
 import { CartIcon, DeleteIcon, DownIcon } from "@/Icons";
 import { Button } from "@/components/ui/button";
@@ -33,6 +32,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { getProductById } from "@/hooks/getProducts";
 import EmptyPage from "@/components/EmptyPage/EmptyPage";
+import CartButton from "@/components/CatalogueButtons/CartButton/CartButton";
 
 export default function CartPage() {
   const [basketItems, setBasketItems] = useState<CartItem[]>([]);

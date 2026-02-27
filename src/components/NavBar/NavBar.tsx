@@ -30,6 +30,7 @@ import MenuItems from "../MenuItems/MenuItems";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { capitalizeFirstLetter } from "@/utils/formatText";
+import { useProfile } from "@/context/ProfileContext";
 
 export default function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -117,7 +118,6 @@ const MainNavBar = () => {
   const [open, setOpen] = useState(false);
   const { userInfo } = useAuth();
   const [popoverOpen, setPopoverOpen] = useState(false);
-  const [activeProfile, setActiveProfile] = useState<string>("BUYER");
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -126,17 +126,7 @@ const MainNavBar = () => {
 
   const pathname = usePathname();
   const close = () => setOpen(false);
-
-  useEffect(() => {
-    const storedProfile = sessionStorage.getItem("activeProfile");
-
-    if (storedProfile) {
-      setActiveProfile(storedProfile);
-    } else {
-      setActiveProfile("BUYER");
-      sessionStorage.setItem("activeProfile", "BUYER");
-    }
-  }, []);
+  const { activeProfile } = useProfile();
 
   useEffect(() => {
     close();
@@ -265,8 +255,6 @@ const MainNavBar = () => {
                         className="px-1 py-0"
                         itemsListClassName="gap-6 text-[clamp(16px,1.5vw,18px)]"
                         secondClassName="gap-6 mb-0"
-                        activeProfile={activeProfile}
-                        setActiveProfile={setActiveProfile}
                       />
                     </div>
                   </PopoverContent>

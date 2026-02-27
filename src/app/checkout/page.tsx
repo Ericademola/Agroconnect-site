@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { CartIcon, CreditCardIcon } from "@/Icons";
-import { CartItem, IPaymentMethod } from "@/types";
+import { CartItem, IAddresses, IPaymentMethod, IuserData } from "@/types";
 import { useEffect, useState } from "react";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import {
@@ -36,15 +36,11 @@ export default function CheckoutPage() {
   const [paymentMethod, setPaymentMethod] = useState("debitCreditCard");
   const [isShowEditForm, setIsShowEditForm] = useState(false);
   const [isShowChangeAddress, setIsShowChangeAddress] = useState(false);
-  const [userInfo, setUserInfo] = useState(getUserData());
+  const [userInfo, setUserInfo] = useState<IuserData | null>(null);
   const [isShowConfirmOrder, setIsShowConfirmOrder] = useState(false);
-  const [selectedAddressIndex, setSelectedAddressIndex] = useState(() => {
-    const data = getUserData();
-    const defaultIndex = data.deliveryAddresses.findIndex(
-      (address) => address.isDefault,
-    );
-    return defaultIndex !== -1 ? defaultIndex : 0;
-  });
+  const [selectedAddress, setSelectedAddress] = useState<IAddresses | null>(
+    null,
+  );
 
   useEffect(() => {
     const stored = localStorage.getItem("BasketItems");
@@ -56,6 +52,16 @@ export default function CheckoutPage() {
   useEffect(() => {
     const data = getUserData();
     setUserInfo(data);
+
+    const stored = sessionStorage.getItem("selectedCheckoutAddress");
+    if (stored) {
+      setSelectedAddress(JSON.parse(stored));
+    } else {
+      const defaultAddress =
+        data.deliveryAddresses.find((addr) => addr.isDefault) ??
+        data.deliveryAddresses[0];
+      setSelectedAddress(defaultAddress ?? null);
+    }
   }, []);
 
   const totalPrice = basketItems.reduce((sum, item) => {
@@ -67,6 +73,7 @@ export default function CheckoutPage() {
 
   const deliveryFee = 5000;
   const router = useRouter();
+
   const handleUpdateUserInfo = (data: {
     fullName: string;
     email: string;
@@ -82,8 +89,9 @@ export default function CheckoutPage() {
     setIsShowEditForm(false);
   };
 
-  const handleSelectAddress = (addressIndex: number) => {
-    setSelectedAddressIndex(addressIndex);
+  const handleSelectAddress = (address: IAddresses) => {
+    setSelectedAddress(address);
+    sessionStorage.setItem("selectedCheckoutAddress", JSON.stringify(address));
     setIsShowChangeAddress(false);
   };
 
@@ -98,7 +106,7 @@ export default function CheckoutPage() {
       orderDate: new Date().toISOString(),
       orderStatus: "CONFIRMED",
       paymentMethod: paymentMethod,
-      deliveryAddress: userInfo.deliveryAddresses[selectedAddressIndex],
+      deliveryAddress: selectedAddress,
       expectedDeliveryDate: formatDeliveryDateRange(3, 2),
       deliveryType: "Home delivery",
       deliveryStatus: "CONFIRMED",
@@ -169,13 +177,13 @@ export default function CheckoutPage() {
                         Customer Information
                       </h4>
                       <p className="text-black text-[clamp(14px,1.4vw,16px)]">
-                        {userInfo.userFullName}
+                        {userInfo?.userFullName}
                       </p>
                       <p className="text-[#000000B2] text-[clamp(12px,1.2vw,14.5px)]">
-                        {userInfo.email}
+                        {userInfo?.email}
                       </p>
                       <p className="text-[#000000B2] text-[clamp(12px,1.2vw,14.5px)]">
-                        {userInfo.phoneNumber}
+                        {userInfo?.phoneNumber}
                       </p>
                     </div>
                     <Button
@@ -192,10 +200,7 @@ export default function CheckoutPage() {
                         Delivery Address
                       </h4>
                       <p className="text-black text-[clamp(13.5px,1.4vw,16px)]">
-                        {
-                          userInfo.deliveryAddresses[selectedAddressIndex]
-                            .fullAddress
-                        }
+                        {selectedAddress?.fullAddress}
                       </p>
                     </div>
                     <Button
@@ -395,14 +400,12 @@ export default function CheckoutPage() {
             title="Edit Customer Information"
             contentCSS="pt-[20px] px-[30px] h-[80vh]"
           >
-            <EditCustormerInfoForm
-              initialData={{
-                name: userInfo.userFullName,
-                email: userInfo.email,
-                phonenumber: userInfo.phoneNumber,
-              }}
-              onSubmit={handleUpdateUserInfo}
-            />
+            {userInfo && (
+              <EditCustormerInfoForm
+                initialData={userInfo}
+                onSubmit={handleUpdateUserInfo}
+              />
+            )}
           </DrawerDialog>
 
           {/* Change Address modal */}
@@ -417,7 +420,7 @@ export default function CheckoutPage() {
             <DeliveryAddress
               onCancel={() => setIsShowChangeAddress(false)}
               onSelectAddress={handleSelectAddress}
-              currentAddressIndex={selectedAddressIndex}
+              currentAddress={selectedAddress}
             />
           </DrawerDialog>
 
@@ -485,17 +488,16 @@ export const PaymentMethod: IPaymentMethod[] = [
 
 interface DeliveryAddressProps {
   onCancel: () => void;
-  onSelectAddress: (addressIndex: number) => void;
-  currentAddressIndex: number;
+  onSelectAddress: (address: IAddresses) => void;
+  currentAddress: IAddresses | null;
 }
 
 export const DeliveryAddress = ({
   onCancel,
   onSelectAddress,
-  currentAddressIndex,
+  currentAddress,
 }: DeliveryAddressProps) => {
-  const [userInfo, setUserInfo] = useState(getUserData());
-  const [selectedIndex, setSelectedIndex] = useState(currentAddressIndex);
+  const [userInfo, setUserInfo] = useState<IuserData | null>(null);
   const [isShowAddNewAddress, setIsShowAddNewAddress] = useState(false);
 
   useEffect(() => {
@@ -503,54 +505,32 @@ export const DeliveryAddress = ({
     setUserInfo(data);
   }, []);
 
-  const handleAddressClick = (index: number) => {
-    setSelectedIndex(index);
-    onSelectAddress(index);
+  const handleAddressClick = (address: IAddresses) => {
+    onSelectAddress(address);
   };
-
   const handleAddNewAddress = (data: TypeEditAddAddressFormData) => {
-    const updatedAddresses = [...userInfo.deliveryAddresses];
-    updatedAddresses.push({ ...data, isDefault: false });
-
-    const updatedData = updateUserData({
-      deliveryAddresses: updatedAddresses,
-    });
-
-    setUserInfo(updatedData);
+    console.log(data);
     setIsShowAddNewAddress(false);
-  };
-
-  const getInitialData = () => {
-    return {
-      fullName: "",
-      phoneNumber: "",
-      state: "",
-      city: "",
-      fullAddress: "",
-      houseNumber: "",
-      area: "",
-      addtionalInfo: "",
-    };
   };
 
   return (
     <>
       <div className="flex flex-col text-[#000000CC] font-geologica font-extralight">
         <div className="flex flex-col gap-5 md:w-[80%] lg:w-[70%] lg:h-[60vh] overflow-y-auto hide-scrollbar">
-          {userInfo.deliveryAddresses.map((address, index) => (
+          {userInfo?.deliveryAddresses.map((address) => (
             <div
-              key={index}
+              key={address.id}
               className={cn(
                 "flex flex-col gap-4 border shadow shadow-[#0000000D] bg-[#F5F5F5] py-4 rounded-2xl cursor-pointer transition-colors",
-                selectedIndex === index
+                currentAddress?.id === address.id
                   ? "border-[#C09706]"
                   : "border-[#0000001A]",
               )}
-              onClick={() => handleAddressClick(index)}
+              onClick={() => handleAddressClick(address)}
             >
               <div className="flex items-center justify-between gap-2 border-b border-[#0000001A] pb-2 px-7">
                 <h2 className="text-[clamp(16px,1.6vw,20px)]">
-                  Address {index + 1}
+                  Address {address.id}
                 </h2>
                 {address.isDefault === true && (
                   <p className="bg-[#3333331A] text-[#333333] text-[clamp(12px,1.3vw,14px)] rounded-full px-3 py-1">
@@ -593,10 +573,7 @@ export const DeliveryAddress = ({
         contentCSS="pt-[20px] px-[30px]"
         max_height
       >
-        <EditAddAddressForm
-          initialData={getInitialData()}
-          onSubmit={handleAddNewAddress}
-        />
+        <EditAddAddressForm onSubmit={handleAddNewAddress} type="delivery" />
       </DrawerDialog>
     </>
   );

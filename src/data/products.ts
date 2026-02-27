@@ -1362,3 +1362,44 @@ export const bestDealsProducts = [
     ],
   },
 ];
+
+// =============================
+// PRODUCTS FOR FARMERS TO SELL
+// =============================
+
+export const productsInDemands = [
+  {
+    productId: 17,
+    productImage: "/assets/images/plantain.png",
+    productName: "Fresh Ripe Plantain",
+    unit: "Bunch",
+    tagText: "In Demand",
+    price: 3500,
+  },
+];
+
+export const specialRequests = [
+  {
+    productId: 18,
+    productImage: "/assets/images/localRice.png",
+    productName: "Local White Rice",
+    unit: "50kg Bag",
+    tagText: "In Demand",
+    price: 2100,
+  },
+];
+
+// =============================
+// PRODUCTS FOR FARMERS TO BUY
+// =============================
+
+export const byProducts = [
+  {
+    productId: 19,
+    productImage: "/assets/images/premiumCowDung.png",
+    productName: "Premium Cow Dung",
+    unit: "Fresh",
+    tagText: "50 bags Available",
+    price: 3900,
+  },
+];

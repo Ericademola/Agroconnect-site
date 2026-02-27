@@ -74,29 +74,58 @@ export interface IuserData {
   dateJoined: string;
   wishlistItems: number;
   myCashback: string;
-  deliveryAddresses: deliveryAddresses[];
-  bankDetails: bankDetails[];
+  deliveryAddresses: IAddresses[];
+  bankDetails: IBankDetails[];
   isActiveLoan: boolean;
   userPassword: string;
+  isFarmerDetails: IsFarmerDetails;
 }
 
-export interface deliveryAddresses {
+export interface IAddresses {
+  id: number;
   fullName: string;
   phoneNumber: string;
   state: string;
   city: string;
   fullAddress: string;
   houseNumber?: string;
-  area: string;
+  area?: string;
   addtionalInfo?: string;
   isDefault: boolean;
+  farmLongitude?: string;
+  farmLatitude?: string;
 }
 
-export interface bankDetails {
+export interface IBankDetails {
+  id: number;
   bankName: string;
   accountName: string;
   accountNumber: string;
   bvn: string;
   isPrimary: boolean;
   dateAdded: string;
+}
+
+export interface IFarmProducts {
+  productId: number;
+  productImage: string;
+  productName: string;
+  unit: string;
+  tagText: string;
+  price: number;
+  quantity?: number;
+}
+
+export type WatchlistItem = IFarmProducts & { quantity: number };
+
+export interface IsFarmerDetails {
+  farmName: string;
+  farmAddress: IAddresses[];
+  farmLongitude: string;
+  farmLatitude: string;
+  farmEmail: string;
+  farmPhoneNumber: string;
+  farmProducts: string[];
+  farmerProfilePicture: string;
+  farmType: string[];
 }

@@ -1,4 +1,4 @@
-import { CartItem } from "@/types";
+import { CartItem, IAddresses } from "@/types";
 
 export interface Order {
   orderId: string;
@@ -15,11 +15,7 @@ export interface Order {
     | "PACKED"
     | "DISPATCHED"
     | "DELIVERED";
-  deliveryAddress: {
-    fullName: string;
-    phoneNumber: string;
-    fullAddress: string;
-  };
+  deliveryAddress: IAddresses | null;
   deliveryType?: string;
   driverInfo?: {
     driverImage: string;

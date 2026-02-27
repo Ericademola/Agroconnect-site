@@ -14,14 +14,15 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { getUserData } from "@/hooks/getUserData";
+import { useProfile } from "@/context/ProfileContext";
 
 type MenuItemsProps = {
   close: () => void;
   className?: string;
   itemsListClassName?: string;
   secondClassName?: string;
-  activeProfile?: string;
-  setActiveProfile?: (value: "BUYER" | "FARMER") => void;
+  // activeProfile?: string;
+  // setActiveProfile?: (value: "BUYER" | "FARMER") => void;
 };
 
 const MenuItems = ({
@@ -29,12 +30,12 @@ const MenuItems = ({
   className,
   itemsListClassName,
   secondClassName,
-  activeProfile,
-  setActiveProfile,
+  // activeProfile,
+  // setActiveProfile,
 }: MenuItemsProps) => {
   const { userInfo, logout } = useAuth();
   const router = useRouter();
-
+  const { activeProfile, setActiveProfile } = useProfile();
   const updatedUserData = getUserData();
 
   const ItemsList = [
@@ -106,12 +107,17 @@ const MenuItems = ({
     router.push("/login");
   };
 
+  // const handleSwitchProfile = () => {
+  //   if (setActiveProfile) {
+  //     const newProfile = activeProfile === "BUYER" ? "FARMER" : "BUYER";
+  //     setActiveProfile(newProfile);
+  //     sessionStorage.setItem("activeProfile", newProfile);
+  //   }
+  // };
+
   const handleSwitchProfile = () => {
-    if (setActiveProfile) {
-      const newProfile = activeProfile === "BUYER" ? "FARMER" : "BUYER";
-      setActiveProfile(newProfile);
-      sessionStorage.setItem("activeProfile", newProfile);
-    }
+    const newProfile = activeProfile === "BUYER" ? "FARMER" : "BUYER";
+    setActiveProfile(newProfile);
   };
 
   return (

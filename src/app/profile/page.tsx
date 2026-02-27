@@ -13,13 +13,16 @@ import EditAddAddressForm, {
   TypeEditAddAddressFormData,
 } from "@/components/Forms/EditAddAddressForm";
 import { getOrders, Order } from "@/hooks/getOrders";
+import { joinCapitalizedItems } from "@/utils/formatText";
+import { IAddresses } from "@/types";
 
 const Profile = () => {
   const [userInfo, setUserInfo] = useState(getUserData());
   const [wishlistCount, setWishlistCount] = useState(userInfo.wishlistItems);
   const [isShowEditForm, setIsShowEditForm] = useState(false);
   const [isShowEditAddress, setIsShowEditAddress] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [addressType, setAddressType] = useState("");
+  const [address, setAddress] = useState<IAddresses>();
   const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {
@@ -37,8 +40,9 @@ const Profile = () => {
     setOrders(loadOrders);
   }, []);
 
-  const handleEditAddress = (index: number) => {
-    setSelectedIndex(index);
+  const handleEditAddress = (address: IAddresses, type: string) => {
+    setAddressType(type);
+    setAddress(address);
     setIsShowEditAddress(true);
   };
 
@@ -62,42 +66,9 @@ const Profile = () => {
   };
 
   const handleSaveAddress = (data: TypeEditAddAddressFormData) => {
-    const updatedAddresses = [...userInfo.deliveryAddresses];
-
-    updatedAddresses[selectedIndex] = {
-      ...data,
-      isDefault: updatedAddresses[selectedIndex].isDefault || false,
-    };
-
-    const updatedData = updateUserData({
-      deliveryAddresses: updatedAddresses,
-    });
-
-    setUserInfo(updatedData);
+    console.log(data);
     setIsShowEditAddress(false);
   };
-
-  const getInitialData = () => {
-    const address = userInfo.deliveryAddresses[selectedIndex];
-    return (
-      address && {
-        fullName: address.fullName,
-        phoneNumber: address.phoneNumber,
-        state: address.state,
-        city: address.city,
-        fullAddress: address.fullAddress,
-        houseNumber: address.houseNumber,
-        area: address.area,
-        addtionalInfo: address.addtionalInfo,
-      }
-    );
-  };
-
-  const totalOrders = orders.length;
-  const activeOrders = orders.filter(
-    (order) =>
-      order.orderStatus === "CONFIRMED" || order.orderStatus === "DISPATCHED",
-  ).length;
 
   return (
     <>
@@ -144,11 +115,15 @@ const Profile = () => {
               {[
                 {
                   name: "Total Orders",
-                  count: totalOrders,
+                  count: orders.length,
                 },
                 {
                   name: "Active Orders",
-                  count: activeOrders,
+                  count: orders.filter(
+                    (order) =>
+                      order.orderStatus === "CONFIRMED" ||
+                      order.orderStatus === "DISPATCHED",
+                  ).length,
                 },
                 {
                   name: "Wishlist Items",
@@ -172,7 +147,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="border border-[#0000001A] rounded-2xl py-8 px-5 grid lg:grid-cols-[2fr_1fr]">
-            <div className="flex flex-col gap-10 lg:gap-6">
+            <div className="flex flex-col gap-10 items-center mb-4">
               <div className="w-full grid md:grid-cols-[1fr_1.5fr] items-center justify-start gap-4">
                 {[
                   {
@@ -193,18 +168,36 @@ const Profile = () => {
                   },
                   {
                     label: "Account type",
-                    value: userInfo.accountType,
+                    value: joinCapitalizedItems(userInfo.accountType),
                   },
                   {
                     label: "Username",
                     value: userInfo.userName,
                   },
+                  ...(userInfo.accountType.includes("FARMER")
+                    ? [
+                        {
+                          label: "Farm Phone Number",
+                          value: userInfo.isFarmerDetails.farmPhoneNumber,
+                        },
+                        {
+                          label: "Farm Email",
+                          value: userInfo.isFarmerDetails.farmEmail,
+                        },
+                        {
+                          label: "FarmType",
+                          value: joinCapitalizedItems(
+                            userInfo.isFarmerDetails.farmType,
+                          ),
+                        },
+                      ]
+                    : []),
                 ].map((item, index) => (
                   <div key={index} className="flex flex-col gap-1">
-                    <h4 className="text-[clamp(14px,1.5vw,16px)] font-extralight">
+                    <h4 className="text-[clamp(13px,1.4vw,15px)] font-extralight">
                       {item.label}
                     </h4>
-                    <p className="text-[clamp(18px,1.7vw,20px)]">
+                    <p className="text-[clamp(16px,1.6vw,18px)]">
                       {item.value}
                     </p>
                   </div>
@@ -213,7 +206,7 @@ const Profile = () => {
               <Button
                 variant="secondary"
                 size="lg"
-                className="w-[80%] mx-auto"
+                className="w-[80%] "
                 onClick={() => setIsShowEditForm(true)}
               >
                 Edit Profile
@@ -221,43 +214,90 @@ const Profile = () => {
             </div>
 
             <div className="border-t lg:border-t-0 lg:border-l border-[#0000001A] px-5 md:px-0 lg:pl-6 lg:-my-8 pt-10 lg:pt-0 -mx-5 lg:-mx-0">
-              <h4 className="text-[clamp(18px,2.4vw,20px)] mt-4 mb-4">
-                Delivery Address(es)
-              </h4>
               <div>
-                {userInfo.deliveryAddresses ? (
-                  <>
-                    {userInfo.deliveryAddresses.map((address, index) => (
-                      <div
-                        key={index}
-                        className="border border-[#0000001A] rounded-2xl grid grid-cols-[1fr_auto] mb-4"
-                      >
-                        <p className="text-[clamp(14px,1.7vw,16px)] px-4 py-3 font-light">
-                          {address.fullAddress}
-                        </p>
+                <h4 className="text-[clamp(18px,2.4vw,20px)] mt-4 mb-4">
+                  Delivery Address(es)
+                </h4>
+                <div>
+                  {userInfo.deliveryAddresses ? (
+                    <>
+                      {userInfo.deliveryAddresses.map((address) => (
                         <div
-                          className="bg-[#F5F5F5] px-3 flex items-center justify-center cursor-pointer"
-                          onClick={() => handleEditAddress(index)}
+                          key={address.id}
+                          className="border border-[#0000001A] rounded-2xl grid grid-cols-[1fr_auto] mb-4"
                         >
-                          <EditIcon className="w-5 h-5" />
+                          <p className="text-[clamp(14px,1.7vw,16px)] px-4 py-3 font-light">
+                            {address.fullAddress}
+                          </p>
+                          <div
+                            className="bg-[#F5F5F5] px-3 flex items-center justify-center cursor-pointer"
+                            onClick={() =>
+                              handleEditAddress(address, "delivery")
+                            }
+                          >
+                            <EditIcon className="w-5 h-5" />
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </>
-                ) : (
-                  <div className="flex flex-col items-center justify-center">
-                    <Image
-                      src={"./assets/avatars/noDeliveryAddress.svg"}
-                      alt={"profile picture"}
-                      width={50}
-                      height={50}
-                      className="object-contain w-[120px] h-auto"
-                    />
-                    <p className="text-[clamp(14px,1.7vw,16px)] font-extralight">
-                      No Address yet
-                    </p>
-                  </div>
-                )}
+                      ))}
+                    </>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center">
+                      <Image
+                        src={"./assets/avatars/noDeliveryAddress.svg"}
+                        alt={"profile picture"}
+                        width={50}
+                        height={50}
+                        className="object-contain w-[120px] h-auto"
+                      />
+                      <p className="text-[clamp(14px,1.7vw,16px)] font-extralight">
+                        No Address yet
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div>
+                <h4 className="text-[clamp(18px,2.4vw,20px)] mt-4 mb-4">
+                  Farm Address
+                </h4>
+                <div>
+                  {userInfo.isFarmerDetails.farmAddress ? (
+                    <>
+                      {userInfo.isFarmerDetails.farmAddress.map((address) => (
+                        <div
+                          key={address.id}
+                          className="border border-[#0000001A] rounded-2xl grid grid-cols-[1fr_auto] mb-4"
+                        >
+                          <p className="text-[clamp(14px,1.7vw,16px)] px-4 py-3 font-light">
+                            {address.fullAddress}, {address.city},{" "}
+                            {address.state}.
+                          </p>
+                          <div
+                            className="bg-[#F5F5F5] px-3 flex items-center justify-center cursor-pointer"
+                            onClick={() => handleEditAddress(address, "farm")}
+                          >
+                            <EditIcon className="w-5 h-5" />
+                          </div>
+                        </div>
+                      ))}
+                    </>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center">
+                      <Image
+                        src={"./assets/avatars/noDeliveryAddress.svg"}
+                        alt={"profile picture"}
+                        width={50}
+                        height={50}
+                        className="object-contain w-[120px] h-auto"
+                      />
+                      <p className="text-[clamp(14px,1.7vw,16px)] font-extralight">
+                        {userInfo.accountType.includes("FARMER")
+                          ? " No Farm Address yet"
+                          : "No Address yet"}
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -297,8 +337,9 @@ const Profile = () => {
         max_height
       >
         <EditAddAddressForm
-          initialData={getInitialData()}
+          initialData={address}
           onSubmit={handleSaveAddress}
+          type={addressType}
         />
       </DrawerDialog>
     </>

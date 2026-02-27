@@ -56,11 +56,11 @@ const BecomeFarmerFormSchema = z.object({
     .trim()
     .nonempty({ message: "Farm email address is required" })
     .email({ message: "Enter a valid email address (e.g. name@email.com)" }),
-  FarmPhoneNumber: phoneSchema,
+  farmPhoneNumber: phoneSchema,
   farmProducts: z
     .array(z.string())
     .min(1, { message: "Please add at least one product your farm produces" }),
-  FarmerProfilePicture: z
+  farmerProfilePicture: z
     .any()
     .refine((file) => file instanceof File, { message: "Photo is required" }),
 });
@@ -83,8 +83,8 @@ const BecomeFarmerFormForm = ({ onSubmit }: BecomeFarmerFormProps) => {
       farmLatitude: "",
       farmProducts: [],
       farmEmail: "",
-      FarmPhoneNumber: "",
-      FarmerProfilePicture: "",
+      farmPhoneNumber: "",
+      farmerProfilePicture: "",
     },
     mode: "onChange",
     reValidateMode: "onChange",
@@ -278,7 +278,7 @@ const BecomeFarmerFormForm = ({ onSubmit }: BecomeFarmerFormProps) => {
               />
               <FormField
                 control={form.control}
-                name="FarmPhoneNumber"
+                name="farmPhoneNumber"
                 render={({ field, fieldState }) => (
                   <div className="flex flex-col gap-1">
                     <FormLabel className="text-[clamp(13px,1.2vw,14px)]">
@@ -332,7 +332,7 @@ const BecomeFarmerFormForm = ({ onSubmit }: BecomeFarmerFormProps) => {
 
               <FormField
                 control={form.control}
-                name="FarmerProfilePicture"
+                name="farmerProfilePicture"
                 render={({ field, fieldState }) => (
                   <div className="flex flex-col gap-1">
                     <FormLabel className="text-[clamp(13px,1.2vw,14px)]">
@@ -348,11 +348,11 @@ const BecomeFarmerFormForm = ({ onSubmit }: BecomeFarmerFormProps) => {
                       className="w-full sm:w-fit border-dashed border-[1.5px] border-[#03601A] rounded-2xl overflow-hidden"
                     >
                       {attachment ? (
-                        <div className="relative w-full sm:w-[350px] md:w-[300px] ml:w-[350px] h-[250px] py-5 px-5">
+                        <div className="relative w-full sm:w-[350px] md:w-[300px] ml:w-[350px] h-[250px] py-5 px-5 ">
                           <Image
                             src={attachment}
                             alt="Farm profile preview"
-                            className="w-full h-full object-cover rounded-xl"
+                            className="w-full h-full object-contain rounded-xl bg-[#d8d8d8]"
                             width={100}
                             height={100}
                           />

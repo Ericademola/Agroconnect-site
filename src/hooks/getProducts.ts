@@ -11,7 +11,7 @@ const BASKET_QUANTITY_MAP_KEY = "BasketItem";
 const WISHLIST_ITEMS_KEY = "WishlistItems";
 
 // ============================================
-// PRODUCTS FUNCTIONS
+// BUYERS PRODUCTS FUNCTIONS
 // ============================================
 
 // Store initial product lists in localStorage

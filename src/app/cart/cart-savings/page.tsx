@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import CartButton from "@/components/CartButton/CartButton";
 import { IAddOns, CartItem } from "@/types";
 import { CartIcon, DeleteIcon, DownIcon, MegaPhoneIcon } from "@/Icons";
 import { Button } from "@/components/ui/button";
@@ -46,6 +45,7 @@ import SavingsPlanForm from "@/components/Forms/SavingsPlanForm";
 import PopUpUtility from "@/components/PopUtility/PopUtility";
 import PaymentCard from "@/components/PaymentCard/PaymentCard";
 import PopNotification from "@/components/PopNotification/PopNotification";
+import CartButton from "@/components/CatalogueButtons/CartButton/CartButton";
 
 // Helper to convert savings cart items to full cart items with product details
 const convertToCartItems = (cartItems: ISavingsCartItem[]): CartItem[] => {

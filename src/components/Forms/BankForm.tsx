@@ -9,6 +9,7 @@ import { z } from "zod";
 import { Spinner } from "../ui/spinner";
 import { FormSelect } from "../ui/formSelect";
 import { useEffect, useState } from "react";
+import { IBankDetails } from "@/types";
 
 const BankFormSchema = z.object({
   bvn: z.string().regex(/^\d{11}$/, {
@@ -24,12 +25,7 @@ const BankFormSchema = z.object({
 export type TypeBankFormSchema = z.infer<typeof BankFormSchema>;
 
 interface BankFormProps {
-  initialData: {
-    bankName: string;
-    accountName: string;
-    accountNumber: string;
-    bvn: string;
-  };
+  initialData?: IBankDetails;
   onSubmit: (data: TypeBankFormSchema) => void;
 }
 
@@ -39,10 +35,10 @@ const BankForm = ({ initialData, onSubmit }: BankFormProps) => {
   const form = useForm<TypeBankFormSchema>({
     resolver: zodResolver(BankFormSchema),
     defaultValues: {
-      bvn: initialData.bvn,
-      bankName: initialData.bankName,
-      accountName: initialData.accountName,
-      accountNumber: initialData.accountNumber,
+      bvn: initialData?.bvn ?? "",
+      bankName: initialData?.bankName ?? "",
+      accountName: initialData?.accountName ?? "",
+      accountNumber: initialData?.accountNumber ?? "",
     },
     mode: "onChange",
     reValidateMode: "onChange",
@@ -52,10 +48,10 @@ const BankForm = ({ initialData, onSubmit }: BankFormProps) => {
 
   useEffect(() => {
     reset({
-      bvn: initialData.bvn,
-      bankName: initialData.bankName,
-      accountName: initialData.accountName,
-      accountNumber: initialData.accountNumber,
+      bvn: initialData?.bvn ?? "",
+      bankName: initialData?.bankName ?? "",
+      accountName: initialData?.accountName ?? "",
+      accountNumber: initialData?.accountNumber ?? "",
     });
   }, [initialData, reset]);
 
@@ -63,7 +59,6 @@ const BankForm = ({ initialData, onSubmit }: BankFormProps) => {
     setIsSubmitting(true);
 
     try {
-      // Simulate bank verification API call
       await new Promise((resolve) => setTimeout(resolve, 800));
       onSubmit(data);
     } catch (error) {

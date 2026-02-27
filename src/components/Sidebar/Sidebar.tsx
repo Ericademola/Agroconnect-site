@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   AddressIcon,
   ChangePasswordIcon,
@@ -17,16 +17,19 @@ import {
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import { useProfile } from "@/context/ProfileContext";
 
 const Sidebar = () => {
-  const [activeProfile, setActiveProfile] = useState<string>("");
+  // const [activeProfile, setActiveProfile] = useState<string>("");
 
-  useEffect(() => {
-    const storedProfile = sessionStorage.getItem("activeProfile");
-    if (storedProfile) {
-      setActiveProfile(storedProfile);
-    }
-  }, [activeProfile]);
+  const { activeProfile } = useProfile();
+
+  // useEffect(() => {
+  //   const storedProfile = sessionStorage.getItem("activeProfile");
+  //   if (storedProfile) {
+  //     setActiveProfile(storedProfile);
+  //   }
+  // }, [activeProfile]);
 
   const sidebarItems = [
     {
@@ -35,7 +38,7 @@ const Sidebar = () => {
       icon: <UserIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
       route: "/profile",
     },
-    ...(activeProfile === "buyer"
+    ...(activeProfile === "BUYER"
       ? [
           {
             key: "2",
@@ -55,24 +58,18 @@ const Sidebar = () => {
             icon: <WalletIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
             route: "/loan",
           },
-          {
-            key: "5",
-            label: "Delivery Address(es)",
-            icon: <AddressIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
-            route: "/delivery-addresses",
-          },
         ]
       : []),
-    ...(activeProfile === "farmer"
+    ...(activeProfile === "FARMER"
       ? [
           {
-            key: "6",
+            key: "5",
             label: "My Applications",
             icon: <OrderIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
             route: "/",
           },
           {
-            key: "7",
+            key: "6",
             label: "Product Watchlist",
             icon: (
               <ProductWatchListIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />
@@ -80,37 +77,37 @@ const Sidebar = () => {
             route: "/",
           },
           {
-            key: "8",
+            key: "7",
             label: "Sales History",
             icon: <SalesHistoryIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
             route: "/",
           },
           {
-            key: "9",
+            key: "8",
             label: "Vouchers / Rewards",
             icon: <VoucherIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
             route: "/",
           },
           {
-            key: "10",
+            key: "9",
             label: "By-Products Exchange",
             icon: <ExchangeIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
             route: "/",
           },
           {
-            key: "11",
+            key: "10",
             label: "By-Products Orders",
             icon: <OrderIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
             route: "/",
           },
-          {
-            key: "12",
-            label: "Farm Address(es)",
-            icon: <AddressIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
-            route: "/",
-          },
         ]
       : []),
+    {
+      key: "11",
+      label: `${activeProfile === "BUYER" ? "Delivery" : "Farm"}  Address(es)`,
+      icon: <AddressIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
+      route: "/addresses",
+    },
     {
       key: "13",
       label: "Account Details",
@@ -123,7 +120,6 @@ const Sidebar = () => {
       icon: <ChangePasswordIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
       route: "/change-password",
     },
-
     {
       label: "Logout",
       icon: <LogoutIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
