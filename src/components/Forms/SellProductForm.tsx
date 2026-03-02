@@ -15,6 +15,7 @@ import DecrementAndIncrementButton from "../CatalogueButtons/CartButton/Decremen
 import { FormSelect } from "../ui/formSelect";
 import { Textarea } from "../ui/textarea";
 import { cn } from "@/lib/utils";
+import { DatePickerForm } from "../ui/datePickerForm";
 
 // FOR PHONE NUMBER
 const phoneSchema = z.string().refine(
@@ -30,11 +31,11 @@ const phoneSchema = z.string().refine(
 
 const SellProductFormSchema = z.object({
   quantityAvailable: z.number().min(1, { message: "Please select a rating" }),
-  sellingPrice: z.string().nonempty({ message: "Selling price is required" }),
+  pricePerUnit: z.string().nonempty({ message: "Selling price is required" }),
   cropVariety: z.string().nonempty({ message: "Crop variety is required" }),
-  harvestPeriod: z.string().nonempty({ message: "Harvest period is required" }),
+  harvestPeriod: z.date({ message: "Date of harvest is required" }),
   packageMethod: z.string().nonempty({ message: "Package method is required" }),
-  deliveryTime: z.string().nonempty({ message: "Delivery time is required" }),
+  deliveryDate: z.date({ message: "Delivery date is required" }),
   description: z.string().optional(),
   emergancyContact: phoneSchema,
   deliveryMethod: z
@@ -51,11 +52,12 @@ const SellProductFormSchema = z.object({
     ),
 });
 
-type TypeSellProductFormSchema = z.infer<typeof SellProductFormSchema>;
+export type TypeSellProductFormSchema = z.infer<typeof SellProductFormSchema>;
 
 interface SellProductFormProps {
-  onSubmit: (data: TypeSellProductFormSchema) => void;
+  onSubmit: (data: TypeSellProductFormSchema & { totalValue: string }) => void;
   unit: string;
+  platformPrice: number;
   onCancel: () => void;
 }
 
@@ -63,22 +65,20 @@ const SellProductFormForm = ({
   onSubmit,
   unit,
   onCancel,
+  platformPrice,
 }: SellProductFormProps) => {
   const [quantity, setQuantity] = useState(1);
   const [attachment, setAttachment] = useState("");
-  //   const [deliveryMethod, setDeliveryMethod] = useState(
-  //     "dispatch-to-platform-office",
-  //   );
 
   const form = useForm<TypeSellProductFormSchema>({
     resolver: zodResolver(SellProductFormSchema),
     defaultValues: {
       quantityAvailable: quantity,
-      sellingPrice: "₦0",
+      pricePerUnit: "₦",
       cropVariety: "",
-      harvestPeriod: "",
+      harvestPeriod: undefined,
       packageMethod: "",
-      deliveryTime: "",
+      deliveryDate: undefined,
       description: "",
       emergancyContact: "",
       deliveryMethod: "dispatch-to-platform-office",
@@ -95,7 +95,7 @@ const SellProductFormForm = ({
 
   const handleFormSubmit = async (data: TypeSellProductFormSchema) => {
     await new Promise((resolve) => setTimeout(resolve, 800));
-    onSubmit(data);
+    onSubmit({ ...data, totalValue });
     form.reset();
   };
 
@@ -129,29 +129,11 @@ const SellProductFormForm = ({
     e.preventDefault();
   };
 
-  const DeliveryMethodOptions = [
-    {
-      optionTitle: "Dispatch to Platform Office",
-      optionValue: "dispatch-to-platform-office",
-      description: "Send to our collection center",
-    },
-    {
-      optionTitle: "Self Delivery",
-      optionValue: "self-delivery",
-      description: "You deliver to platform office",
-    },
-    {
-      optionTitle: "Platform Pickup",
-      optionValue: "platform-pickup",
-      description: "We collect from your location",
-    },
-  ];
-
-  const sellingPrice = form.watch("sellingPrice");
+  const pricePerUnit = form.watch("pricePerUnit");
   const deliveryMethod = form.watch("deliveryMethod");
 
   const totalValue = (() => {
-    const priceNum = parseFloat(sellingPrice.replace(/[^0-9.]/g, ""));
+    const priceNum = parseFloat(pricePerUnit.replace(/[^0-9.]/g, ""));
     if (!priceNum || isNaN(priceNum)) return "₦0";
     return `₦${(priceNum * quantity).toLocaleString()}`;
   })();
@@ -174,13 +156,13 @@ const SellProductFormForm = ({
                     quantity={quantity}
                     onIncrement={() => setQuantity((q) => q + 1)}
                     onDecrement={() => setQuantity((q) => Math.max(0, q - 1))}
-                    className=""
+                    btnClassName="h-[45px] w-[45px]"
                   />
                 </div>
                 <div>
                   <FormField
                     control={form.control}
-                    name="sellingPrice"
+                    name="pricePerUnit"
                     render={({ field, fieldState }) => (
                       <div className="flex flex-col gap-1">
                         <FormLabel className="text-[clamp(13px,1.2vw,14px)]">
@@ -206,7 +188,7 @@ const SellProductFormForm = ({
                     )}
                   />
                   <p className="text-[#525252B2] text-[clamp(10px,1.2vw,14px)] mt-1 font-geologica">
-                    Platform price: ₦8,500
+                    Platform price: ₦{platformPrice}
                   </p>
                 </div>
                 <FormField
@@ -244,21 +226,19 @@ const SellProductFormForm = ({
                       <FormLabel className="text-[clamp(13px,1.2vw,14px)]">
                         Harvest Period
                       </FormLabel>
-                      <Input
+                      <DatePickerForm
+                        value={field.value}
+                        onChange={field.onChange}
                         hasError={fieldState.invalid}
+                        bgclassName="bg-[#ECECEC]"
                         subtext={
                           fieldState.error ? (
-                            <span className="flex items-center gap-1 pt-1 text-red-500 text-xs">
+                            <span className="flex items-center gap-1 pt-1 text-red-500 ">
                               <ErrorIcon />
                               {fieldState.error.message}
                             </span>
                           ) : null
                         }
-                        {...field}
-                        placeholder="e.g. Nov 2025"
-                        type="text"
-                        className="bg-[#ECECEC] h-[45px]"
-                        inputClassName="text-[#000000B2] bg-[#ECECEC] "
                       />
                     </div>
                   )}
@@ -296,27 +276,25 @@ const SellProductFormForm = ({
                 />
                 <FormField
                   control={form.control}
-                  name="deliveryTime"
+                  name="deliveryDate"
                   render={({ field, fieldState }) => (
                     <div className="flex flex-col gap-1">
                       <FormLabel className="text-[clamp(13px,1.2vw,14px)]">
-                        Delivery Time
+                        Delivery Date
                       </FormLabel>
-                      <Input
+                      <DatePickerForm
+                        value={field.value}
+                        onChange={field.onChange}
                         hasError={fieldState.invalid}
+                        bgclassName="bg-[#ECECEC]"
                         subtext={
                           fieldState.error ? (
-                            <span className="flex items-center gap-1 pt-1 text-red-500 text-xs">
+                            <span className="flex items-center gap-1 pt-1 text-red-500 ">
                               <ErrorIcon />
                               {fieldState.error.message}
                             </span>
                           ) : null
                         }
-                        {...field}
-                        placeholder="e.g. 2-3 Days"
-                        type="text"
-                        className="bg-[#ECECEC] h-[45px]"
-                        inputClassName="text-[#000000B2] bg-[#ECECEC] "
                       />
                     </div>
                   )}
@@ -540,7 +518,7 @@ const SellProductFormForm = ({
             <div className="flex items-center gap-5 w-full">
               <Button
                 variant="secondary"
-                className="text-[clamp(13px,1.3vw,15px)] font-regular"
+                className="text-[clamp(13px,1.3vw,15px)] font-normal px-10"
                 onClick={onCancel}
                 type="button"
                 size="lg"
@@ -551,7 +529,7 @@ const SellProductFormForm = ({
                 type="submit"
                 variant="default"
                 size="lg"
-                className="w-full"
+                className="w-full font-normal"
                 disabled={isSubmitting || !isValid}
               >
                 {isSubmitting ? (
@@ -569,3 +547,21 @@ const SellProductFormForm = ({
 };
 
 export default SellProductFormForm;
+
+export const DeliveryMethodOptions = [
+  {
+    optionTitle: "Dispatch to Platform Office",
+    optionValue: "dispatch-to-platform-office",
+    description: "Send to our collection center",
+  },
+  {
+    optionTitle: "Self Delivery",
+    optionValue: "self-delivery",
+    description: "You deliver to platform office",
+  },
+  {
+    optionTitle: "Platform Pickup",
+    optionValue: "platform-pickup",
+    description: "We collect from your location",
+  },
+];

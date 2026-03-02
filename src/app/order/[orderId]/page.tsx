@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { getOrderById, Order } from "@/hooks/getOrders";
+import { getOrderById, IOrder } from "@/hooks/getOrders";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import {
   Breadcrumb,
@@ -22,7 +22,7 @@ import { PaymentMethod } from "@/app/checkout/page";
 export default function OrderDetails() {
   const params = useParams();
   const router = useRouter();
-  const [order, setOrder] = useState<Order | null>(null);
+  const [order, setOrder] = useState<IOrder | null>(null);
 
   useEffect(() => {
     if (params.orderId) {
@@ -42,7 +42,7 @@ export default function OrderDetails() {
     );
   }
 
-  const getStatusColor = (status: Order["orderStatus"]) => {
+  const getStatusColor = (status: IOrder["orderStatus"]) => {
     const colors = {
       CONFIRMED: "text-[#4285F4]",
       DISPATCHED: "text-[#FFBA00]",

@@ -31,7 +31,7 @@ const EditCustormerInfoSchema = z.object({
 type TypeEditCustormerInfoFormData = z.infer<typeof EditCustormerInfoSchema>;
 
 interface EditCustomerInfoFormProps {
-  initialData?: IuserData;
+  initialData: IuserData;
   onSubmit: (data: TypeEditCustormerInfoFormData) => void;
 }
 
@@ -44,9 +44,9 @@ const EditCustormerInfoForm = ({
   const form = useForm<TypeEditCustormerInfoFormData>({
     resolver: zodResolver(EditCustormerInfoSchema),
     defaultValues: {
-      fullName: initialData?.userFullName,
-      email: initialData?.email,
-      phoneNumber: initialData?.phoneNumber,
+      fullName: initialData.userFullName,
+      email: initialData.email,
+      phoneNumber: initialData.phoneNumber,
     },
     mode: "onChange",
     reValidateMode: "onChange",
@@ -56,9 +56,9 @@ const EditCustormerInfoForm = ({
 
   useEffect(() => {
     reset({
-      fullName: initialData?.userFullName,
-      email: initialData?.email,
-      phoneNumber: initialData?.phoneNumber,
+      fullName: initialData.userFullName,
+      email: initialData.email,
+      phoneNumber: initialData.phoneNumber,
     });
   }, [initialData, reset]);
 

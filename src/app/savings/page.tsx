@@ -58,11 +58,6 @@ const SavingsPage = () => {
     (plan) => plan.saveStatus === "REDEEMED",
   );
 
-  const totalAmountSaved = savedPlans.reduce(
-    (sum, plan) => sum + plan.currentAmountSaved,
-    0,
-  );
-
   const router = useRouter();
 
   return (
@@ -101,7 +96,9 @@ const SavingsPage = () => {
                 ),
                 containerBg: "#F0FDF4",
                 iconBg: "#03601A",
-                digit: totalAmountSaved.toFixed(2),
+                digit: savedPlans
+                  .reduce((sum, plan) => sum + plan.currentAmountSaved, 0)
+                  .toFixed(2),
               },
               {
                 label: "Active Plans",

@@ -18,7 +18,7 @@ import { DrawerDialog } from "@/components/DrawerDialog/DrawerDialog";
 import EditCustormerInfoForm from "@/components/Forms/EditCustormerInfoForm";
 import { getUserData, updateUserData } from "@/hooks/getUserData";
 import { clearLocalStorage, getProductById } from "@/hooks/getProducts";
-import { Order, saveOrder } from "@/hooks/getOrders";
+import { IOrder, saveOrder } from "@/hooks/getOrders";
 import { formatDeliveryDateRange } from "@/utils/formatDateRange";
 import {
   clearLoanCart,
@@ -181,7 +181,7 @@ export default function LoanCheckoutPage() {
       });
 
       // 2. Create matching order
-      const newOrder: Order = {
+      const newOrder: IOrder = {
         orderId,
         items: loanItems,
         orderStatus: "CONFIRMED",

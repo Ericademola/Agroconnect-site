@@ -1376,6 +1376,14 @@ export const productsInDemands = [
     tagText: "In Demand",
     price: 3500,
   },
+  {
+    productId: 20,
+    productImage: "/assets/images/beans.png",
+    productName: "Beans",
+    unit: "10kg Bag",
+    tagText: "In Demand",
+    price: 3500,
+  },
 ];
 
 export const specialRequests = [

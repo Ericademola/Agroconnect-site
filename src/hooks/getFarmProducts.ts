@@ -17,7 +17,7 @@ const WATCHLIST_ITEMS_KEY = "WatchlistItem";
 // ============================================
 
 // Store initial product lists in localStorage
-export const saveProducts = (
+export const saveFarmProducts = (
   inDemand: IFarmProducts[],
   special: IFarmProducts[],
   byProduct: IFarmProducts[],
@@ -37,7 +37,7 @@ export const loadProductsInDemands = (): IFarmProducts[] => {
   const stored = localStorage.getItem(LOCAL_PRODUCTS_IN_DEMANDS);
   if (stored) return JSON.parse(stored);
 
-  saveProducts(productsInDemands, specialRequests, byProducts);
+  saveFarmProducts(productsInDemands, specialRequests, byProducts);
   return productsInDemands;
 };
 
@@ -46,7 +46,7 @@ export const loadSpecialRequests = (): IFarmProducts[] => {
   const stored = localStorage.getItem(LOCAL_SPECIAL_REQUESTS);
   if (stored) return JSON.parse(stored);
 
-  saveProducts(productsInDemands, specialRequests, byProducts);
+  saveFarmProducts(productsInDemands, specialRequests, byProducts);
   return specialRequests;
 };
 
@@ -55,26 +55,26 @@ export const loadByProducts = (): IFarmProducts[] => {
   const stored = localStorage.getItem(LOCAL_BY_PRODUCTS);
   if (stored) return JSON.parse(stored);
 
-  saveProducts(productsInDemands, specialRequests, byProducts);
+  saveFarmProducts(productsInDemands, specialRequests, byProducts);
   return byProducts;
 };
 
-// Return products in demand from localStorage
 export const getProductsInDemands = (): IFarmProducts[] => {
   const stored = localStorage.getItem(LOCAL_PRODUCTS_IN_DEMANDS);
-  return stored ? JSON.parse(stored) : [];
+  if (stored) return JSON.parse(stored);
+  return loadProductsInDemands();
 };
 
-// Return special requests from localStorage
 export const getSpecialRequests = (): IFarmProducts[] => {
   const stored = localStorage.getItem(LOCAL_SPECIAL_REQUESTS);
-  return stored ? JSON.parse(stored) : [];
+  if (stored) return JSON.parse(stored);
+  return loadSpecialRequests();
 };
 
-// Return by products from localStorage
 export const getByProducts = (): IFarmProducts[] => {
   const stored = localStorage.getItem(LOCAL_BY_PRODUCTS);
-  return stored ? JSON.parse(stored) : [];
+  if (stored) return JSON.parse(stored);
+  return loadByProducts();
 };
 
 // Return all farm products from localStorage

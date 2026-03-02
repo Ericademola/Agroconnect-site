@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import React from "react";
 
 interface IPopNotificationProps {
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   textContent: React.ReactNode;
   className?: string;
   textClassName?: string;
@@ -27,7 +27,7 @@ const PopNotification = ({
       </div>
       <div
         className={cn(
-          "text-[#000000B2] text-[clamp(10px,1.4vw,16px)] font-raleway",
+          "text-[#000000B2] text-[clamp(10px,1.4vw,16px)] font-raleway flex-1",
           textClassName,
         )}
       >

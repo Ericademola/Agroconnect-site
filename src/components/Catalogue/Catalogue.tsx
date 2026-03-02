@@ -12,8 +12,6 @@ import {
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { useProfile } from "@/context/ProfileContext";
-import { CartIcon } from "@/Icons";
-import { useRouter } from "next/navigation";
 import CartButton from "../CatalogueButtons/CartButton/CartButton";
 import WishListButton from "../CatalogueButtons/WishListButton";
 import WatchListButton from "../CatalogueButtons/WatchistButton";
@@ -23,6 +21,7 @@ import {
   getByProducts,
   getAllFarmProducts,
 } from "@/hooks/getFarmProducts";
+import SellProductButton from "../CatalogueButtons/SellProductButton";
 
 type ProductCategory =
   | "all"
@@ -50,7 +49,6 @@ export default function Catalogue({
 }: CatalogueProps) {
   const [productList, setProductList] = useState<IProducts[]>([]);
   const [farmProductList, setFarmProductList] = useState<IFarmProducts[]>([]);
-  const [loading, setLoading] = useState(false);
   const { activeProfile } = useProfile();
   const isFarmerAccount = activeProfile === "FARMER";
 
@@ -100,17 +98,6 @@ export default function Catalogue({
   const farmProductsToRender = sliceLimit
     ? farmProductList.slice(0, sliceLimit)
     : farmProductList;
-
-  const router = useRouter();
-
-  const handleSellProduct = (item: IFarmProducts) => {
-    setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
-      router.push(`/sell-product/${item.productId}`);
-    }, 900);
-  };
 
   return (
     <div
@@ -167,17 +154,7 @@ export default function Catalogue({
                   </div>
                 </div>
                 <div className="flex flex-col gap-3">
-                  <Button
-                    variant="default"
-                    size="sm"
-                    onClick={() => handleSellProduct(item)}
-                    className="flex items-center gap-3 w-full h-[35px] lg:h-[50px]"
-                    loading={loading}
-                    disabled={loading}
-                  >
-                    <CartIcon className="w-5 h-5 hidden sm:block" fill="#fff" />
-                    {loading ? loading : "Sell Product"}
-                  </Button>
+                  <SellProductButton item={item} />
                   <WatchListButton item={item} />
                 </div>
               </div>

@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Spinner } from "../ui/spinner";
 import { FormSelect } from "../ui/formSelect";
+import { IuserData } from "@/types";
 
 // FOR PHONE NUMBER
 const phoneSchema = z.string().refine(
@@ -33,13 +34,7 @@ const EditProfileSchema = z.object({
 type TypeEditProfileFormData = z.infer<typeof EditProfileSchema>;
 
 interface EditProfileFormProps {
-  initialData: {
-    fullName: string;
-    phonenumber: string;
-    state: string;
-    email: string;
-    userName: string;
-  };
+  initialData: IuserData;
   onSubmit: (data: TypeEditProfileFormData) => void;
 }
 
@@ -49,9 +44,9 @@ const EditProfileForm = ({ initialData, onSubmit }: EditProfileFormProps) => {
   const form = useForm<TypeEditProfileFormData>({
     resolver: zodResolver(EditProfileSchema),
     defaultValues: {
-      fullName: initialData.fullName,
+      fullName: initialData.userFullName,
       email: initialData.email,
-      phoneNumber: initialData.phonenumber,
+      phoneNumber: initialData.phoneNumber,
       state: initialData.state,
       userName: initialData.userName,
     },
@@ -63,9 +58,9 @@ const EditProfileForm = ({ initialData, onSubmit }: EditProfileFormProps) => {
 
   useEffect(() => {
     reset({
-      fullName: initialData.fullName,
+      fullName: initialData.userFullName,
       email: initialData.email,
-      phoneNumber: initialData.phonenumber,
+      phoneNumber: initialData.phoneNumber,
       state: initialData.state,
       userName: initialData.userName,
     });

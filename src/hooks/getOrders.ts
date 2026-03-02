@@ -1,6 +1,6 @@
 import { CartItem, IAddresses } from "@/types";
 
-export interface Order {
+export interface IOrder {
   orderId: string;
   items: CartItem[];
   orderStatus: "CONFIRMED" | "DISPATCHED" | "DELIVERED" | "CANCELLED";
@@ -28,20 +28,20 @@ export interface Order {
 const ORDERS_KEY = "Orders";
 
 // Save new order to localStorage
-export const saveOrder = (order: Order): void => {
+export const saveOrder = (order: IOrder): void => {
   const orders = getOrders();
-  orders.unshift(order); // Add new order at the beginning
+  orders.unshift(order);
   localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
 };
 
 // Get all orders from localStorage
-export const getOrders = (): Order[] => {
+export const getOrders = (): IOrder[] => {
   const stored = localStorage.getItem(ORDERS_KEY);
   return stored ? JSON.parse(stored) : [];
 };
 
 // Get order by ID
-export const getOrderById = (orderId: string): Order | undefined => {
+export const getOrderById = (orderId: string): IOrder | undefined => {
   const orders = getOrders();
   return orders.find((order) => order.orderId === orderId);
 };
@@ -49,7 +49,7 @@ export const getOrderById = (orderId: string): Order | undefined => {
 // Update order status
 export const updateOrderStatus = (
   orderId: string,
-  status: Order["orderStatus"],
+  status: IOrder["orderStatus"],
 ): void => {
   const orders = getOrders();
   const orderIndex = orders.findIndex((order) => order.orderId === orderId);

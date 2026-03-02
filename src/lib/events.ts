@@ -3,6 +3,7 @@ export const WISHLIST_UPDATED_EVENT = "wishlistUpdated";
 export const SAVINGS_UPDATED_EVENT = "savingsUpdated";
 export const LOAN_UPDATED_EVENT = "loanUpdated";
 export const WATCHLIST_UPDATED_EVENT = "watchlistUpdated";
+export const APPLICATION_UPDATED_EVENT = "applicationUpdated";
 
 export const emitCartUpdate = () => {
   window.dispatchEvent(new Event(CART_UPDATED_EVENT));
@@ -22,4 +23,8 @@ export const emitLoanUpdate = () => {
 
 export const emitWatchlistUpdate = () => {
   window.dispatchEvent(new Event(WATCHLIST_UPDATED_EVENT));
+};
+
+export const emitApplicationUpdate = () => {
+  window.dispatchEvent(new Event(APPLICATION_UPDATED_EVENT));
 };

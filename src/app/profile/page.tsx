@@ -12,7 +12,7 @@ import { DrawerDialog } from "@/components/DrawerDialog/DrawerDialog";
 import EditAddAddressForm, {
   TypeEditAddAddressFormData,
 } from "@/components/Forms/EditAddAddressForm";
-import { getOrders, Order } from "@/hooks/getOrders";
+import { getOrders, IOrder } from "@/hooks/getOrders";
 import { joinCapitalizedItems } from "@/utils/formatText";
 import { IAddresses } from "@/types";
 
@@ -23,7 +23,7 @@ const Profile = () => {
   const [isShowEditAddress, setIsShowEditAddress] = useState(false);
   const [addressType, setAddressType] = useState("");
   const [address, setAddress] = useState<IAddresses>();
-  const [orders, setOrders] = useState<Order[]>([]);
+  const [orders, setOrders] = useState<IOrder[]>([]);
 
   useEffect(() => {
     const countsForWishList = getTotalWishlistCount();
@@ -313,16 +313,12 @@ const Profile = () => {
         contentCSS="pt-[20px] px-[30px]"
         max_height
       >
-        <EditProfileForm
-          initialData={{
-            fullName: userInfo.userFullName,
-            email: userInfo.email,
-            phonenumber: userInfo.phoneNumber,
-            state: userInfo.state,
-            userName: userInfo.userName,
-          }}
-          onSubmit={handleUpdateUserInfo}
-        />
+        {userInfo && (
+          <EditProfileForm
+            initialData={userInfo}
+            onSubmit={handleUpdateUserInfo}
+          />
+        )}
       </DrawerDialog>
 
       {/* Edit address form */}

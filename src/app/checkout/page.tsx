@@ -23,7 +23,7 @@ import EditCustormerInfoForm from "@/components/Forms/EditCustormerInfoForm";
 import { getUserData, updateUserData } from "@/hooks/getUserData";
 import PaymentCard from "@/components/PaymentCard/PaymentCard";
 import { clearLocalStorage } from "@/hooks/getProducts";
-import { Order, saveOrder } from "@/hooks/getOrders";
+import { IOrder, saveOrder } from "@/hooks/getOrders";
 import { formatDeliveryDateRange } from "@/utils/formatDateRange";
 import { useRouter } from "next/navigation";
 import EmptyPage from "@/components/EmptyPage/EmptyPage";
@@ -98,7 +98,7 @@ export default function CheckoutPage() {
   const handlePaymentConfirm = () => {
     const random = Math.floor(Math.random() * 100000);
 
-    const newOrder: Order = {
+    const newOrder: IOrder = {
       orderId: `Agro${random}`,
       items: basketItems,
       totalAmount: totalPrice,

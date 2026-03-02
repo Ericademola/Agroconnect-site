@@ -13,7 +13,10 @@ export default function StoryBook() {
         <>
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-2">
             {Object.entries(icons).map(([key, icon]) => (
-              <div key={key} className="flex space-x-2 items-center border p-2">
+              <div
+                key={key}
+                className="flex space-x-2 items-center border p-2 bg-blue-500"
+              >
                 {icon({ className: "h-6 w-6" })}
                 <span> {key}</span>
               </div>

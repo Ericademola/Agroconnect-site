@@ -1,5 +1,6 @@
 type StatusProps = {
   status: string;
+  icon?: React.ReactNode;
   text?: string;
   grey?: string;
   red?: string;
@@ -15,6 +16,7 @@ type StatusProps = {
   disable?: boolean;
   classText?: string;
   classStyleName?: string;
+  purple?: string;
 };
 
 const colors = {
@@ -28,10 +30,11 @@ const colors = {
   greenPlain: "text-[#16A34A] font-normal text-[14px]",
   orangePlain: "text-[#D97706] font-normal text-[14px]",
   black: "text-white bg-blavk font-semibold text-[12px]",
+  purple: "text-[#8A38F5] bg-[#8A38F51A] font-semibold text-[12px]",
 };
 const StatusView = ({
   status,
-  // text,
+  icon,
   classText,
   grey,
   orange,
@@ -43,6 +46,7 @@ const StatusView = ({
   greenPlain,
   redPlain,
   orangePlain,
+  purple,
   styleOption = false,
   disable = false,
   classStyleName = "leading-[13px] flex justify-center items-center rounded-[20px] py-1 px-4",
@@ -79,6 +83,9 @@ const StatusView = ({
     case `${black}`:
       colorString = colors.black;
       break;
+    case `${purple}`:
+      colorString = colors.purple;
+      break;
     default:
       colorString = "";
   }
@@ -89,6 +96,7 @@ const StatusView = ({
       }`}
     >
       <div className={`${classStyleName} ${colorString} ${classText}`}>
+        <span>{icon}</span>
         {status}
       </div>
     </div>

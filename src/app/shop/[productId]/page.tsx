@@ -46,6 +46,7 @@ import { LoanCartButton } from "../shop-loans/page";
 import DecrementAndIncrementButton from "@/components/CatalogueButtons/CartButton/DecrementAndIncrementButton";
 import AddToCartButton from "@/components/CatalogueButtons/CartButton/AddToCartButton";
 import WishListButton from "@/components/CatalogueButtons/WishListButton";
+import { useGoBack } from "@/hooks/useGoBack";
 
 export default function ProductDetails() {
   const [itemDetails, setItemDetails] = useState<IProducts | null>(null);
@@ -105,14 +106,6 @@ export default function ProductDetails() {
     }
   }, [itemDetails]);
 
-  const goBack = () => {
-    if (window.history.length > 1) {
-      window.history.back();
-    } else {
-      router.push("/");
-    }
-  };
-
   const handleAddOnToggle = (option: { title: string; price: number }) => {
     setSelectedAddOns((prev) => {
       const exists = prev.find((addOn) => addOn.title === option.title);
@@ -124,6 +117,8 @@ export default function ProductDetails() {
       return [...prev, { title: option.title, price: option.price }];
     });
   };
+
+  const goBack = useGoBack();
 
   return (
     <div className="relative">

@@ -61,16 +61,18 @@ export const getProducts = (): IProducts[] => {
   return [...fresh, ...deals];
 };
 
-// Return fresh picked products from localStorage
+// Return fresh picked products
 export const getFreshPickedProducts = (): IProducts[] => {
   const stored = localStorage.getItem(LOCAL_FRESH_PICKED_KEY);
-  return stored ? JSON.parse(stored) : [];
+  if (stored) return JSON.parse(stored);
+  return loadFreshPickedProducts();
 };
 
-// Return best deals products from localStorage
+// Return best deals products
 export const getBestDealsProducts = (): IProducts[] => {
   const stored = localStorage.getItem(LOCAL_BEST_DEALS_KEY);
-  return stored ? JSON.parse(stored) : [];
+  if (stored) return JSON.parse(stored);
+  return loadBestDealsProducts();
 };
 
 // Find product by ID (searches across all products)

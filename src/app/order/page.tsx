@@ -16,15 +16,15 @@ import SearchInput from "@/components/SearchInput/SearchInput";
 import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { getOrders, Order } from "@/hooks/getOrders";
+import { getOrders, IOrder } from "@/hooks/getOrders";
 import EmptyPage from "@/components/EmptyPage/EmptyPage";
 import { CartIcon } from "@/Icons";
 import { capitalizeFirstLetter } from "@/utils/formatText";
 import { useMediaQuery } from "react-responsive";
 const MyOrder = () => {
   const [searchText, setSearchText] = useState("");
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
+  const [orders, setOrders] = useState<IOrder[]>([]);
+  const [filteredOrders, setFilteredOrders] = useState<IOrder[]>([]);
 
   useEffect(() => {
     const loadedOrders = getOrders();
@@ -321,7 +321,7 @@ export interface OrderCardProps {
   price: number;
   farmName: string;
   productImage: string;
-  orderStatus: Order["orderStatus"];
+  orderStatus: IOrder["orderStatus"];
   expectedDeliveryDate: string;
   detailsPage: string;
 }
@@ -337,7 +337,7 @@ export const OrderCard = ({
   expectedDeliveryDate,
   detailsPage,
 }: OrderCardProps) => {
-  const getStatusColor = (status: Order["orderStatus"]) => {
+  const getStatusColor = (status: IOrder["orderStatus"]) => {
     const colors = {
       CONFIRMED: "text-[#4285F4]",
       DISPATCHED: "text-[#FFBA00]",

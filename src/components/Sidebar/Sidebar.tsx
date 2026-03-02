@@ -66,7 +66,7 @@ const Sidebar = () => {
             key: "5",
             label: "My Applications",
             icon: <OrderIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />,
-            route: "/",
+            route: "/application",
           },
           {
             key: "6",
