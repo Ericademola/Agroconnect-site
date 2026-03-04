@@ -120,11 +120,8 @@ export default function Catalogue({
             {farmProductsToRender.map((item: IFarmProducts) => (
               <div key={item.productId} className="flex flex-col gap-3 h-full">
                 <div className="flex flex-col gap-3">
-                  <div className="bg-[#F3F3F3] rounded-2xl flex flex-col w-full h-full items-center pb-3 px-1">
-                    <Button
-                      size="sm"
-                      className="bg-[#8B5E3C] hover:bg-[#8B5E3C]/90 rounded-none rounded-tr-[15px] rounded-bl-[15px] text-[10px] sm:text-xs md:text-sm w-fit ml-auto px-2 md:px-4 py-3 md:py-5"
-                    >
+                  <div className="bg-[#F3F3F3] rounded-[8px] md:rounded-2xl flex flex-col w-full h-full items-center pb-3 gap-2">
+                    <Button className="bg-[#8B5E3C] rounded-none rounded-tr-[8px] md:rounded-tr-2xl rounded-bl-[8px] md:rounded-bl-2xl text-[clamp(10px,1.2vw,14px)] w-fit ml-auto px-2 md:px-4 py-3 md:py-5">
                       {item.tagText}
                     </Button>
                     <Image
@@ -132,7 +129,7 @@ export default function Catalogue({
                       alt={item.productName}
                       width={100}
                       height={100}
-                      className="w-[180px] h-[150px] md:w-[250px] md:h-[220px] object-contain"
+                      className="w-[85%] h-[150px] md:h-[220px] object-contain"
                     />
                   </div>
                   <div className="flex flex-col gap-[8px] font-poppins">
@@ -176,11 +173,8 @@ export default function Catalogue({
                   href={`/shop/${actionType}-${item.productId}`}
                   className="flex flex-col gap-3"
                 >
-                  <div className="bg-[#F3F3F3] rounded-2xl flex flex-col w-full h-full items-center pb-2">
-                    <Button
-                      size="sm"
-                      className="bg-[#8B5E3C] hover:bg-[#8B5E3C]/90 rounded-none rounded-tr-[15px] rounded-bl-[15px] text-[10px] sm:text-xs md:text-sm w-fit ml-auto px-2 md:px-4 py-3 md:py-5"
-                    >
+                  <div className="bg-[#F3F3F3] rounded-[8px] md:rounded-2xl flex flex-col w-full h-full items-center pb-3 gap-2">
+                    <Button className="bg-[#8B5E3C] rounded-none rounded-tr-[8px] md:rounded-tr-2xl rounded-bl-[8px] md:rounded-bl-2xl text-[clamp(10px,1.2vw,14px)] w-fit ml-auto px-2 md:px-4 py-3 md:py-5">
                       {item.tagText}
                     </Button>
                     <Image
@@ -188,7 +182,7 @@ export default function Catalogue({
                       alt={item.productName}
                       width={100}
                       height={100}
-                      className="w-[180px] h-[150px] md:w-[250px] md:h-[220px] object-contain"
+                      className="w-[85%] h-[150px] md:h-[220px] object-contain"
                     />
                   </div>
                   <div className="flex flex-col gap-[8px] font-poppins">
