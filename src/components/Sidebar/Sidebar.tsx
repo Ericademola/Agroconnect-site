@@ -74,7 +74,7 @@ const Sidebar = () => {
             icon: (
               <ProductWatchListIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6" />
             ),
-            route: "/",
+            route: "/watch-list",
           },
           {
             key: "7",

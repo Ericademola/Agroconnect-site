@@ -46,7 +46,7 @@ const SellProduct = () => {
     const newApplication: IApplication = {
       applicationId: `APP${random}`,
       item: selectedProduct!,
-      applicationStatus: "REJECTED",
+      applicationStatus: "PENDING",
       totalValue: data.totalValue,
       quantityAvailable: data.quantityAvailable,
       cropVariety: data.cropVariety,

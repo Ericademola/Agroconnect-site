@@ -22,7 +22,7 @@ const SellProductButton = ({ item }: { item: IFarmProducts }) => {
       variant="default"
       size="sm"
       onClick={handleClick}
-      className="flex items-center gap-3 w-full h-[35px] lg:h-[50px]"
+      className="flex items-center gap-3 w-full h-[40px] lg:h-[50px]"
       loading={loading}
       disabled={loading}
     >

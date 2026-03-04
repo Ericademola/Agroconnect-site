@@ -4,13 +4,13 @@ import {
   specialRequests,
 } from "@/data/products";
 import { emitWatchlistUpdate } from "@/lib/events";
-import { IFarmProducts, WatchlistItem } from "@/types";
+import { IByProducts, IFarmProducts, IWatchlistItem } from "@/types";
 
 const LOCAL_ALL_FARM_PRODUCTS_KEY = "AllFarmProducts";
 const LOCAL_PRODUCTS_IN_DEMANDS = "ProductsInDemands";
 const LOCAL_SPECIAL_REQUESTS = "SpecialRequests";
 const LOCAL_BY_PRODUCTS = "ByProducts";
-const WATCHLIST_ITEMS_KEY = "WatchlistItem";
+const WATCHLIST_ITEMS_KEY = "WatchlistItems";
 
 // ============================================
 // FARM PRODUCTS FUNCTIONS
@@ -20,7 +20,7 @@ const WATCHLIST_ITEMS_KEY = "WatchlistItem";
 export const saveFarmProducts = (
   inDemand: IFarmProducts[],
   special: IFarmProducts[],
-  byProduct: IFarmProducts[],
+  byProduct: IByProducts[],
 ): void => {
   localStorage.setItem(LOCAL_PRODUCTS_IN_DEMANDS, JSON.stringify(inDemand));
   localStorage.setItem(LOCAL_SPECIAL_REQUESTS, JSON.stringify(special));
@@ -51,7 +51,7 @@ export const loadSpecialRequests = (): IFarmProducts[] => {
 };
 
 // Load by products from localStorage or default list
-export const loadByProducts = (): IFarmProducts[] => {
+export const loadByProducts = (): IByProducts[] => {
   const stored = localStorage.getItem(LOCAL_BY_PRODUCTS);
   if (stored) return JSON.parse(stored);
 
@@ -71,7 +71,7 @@ export const getSpecialRequests = (): IFarmProducts[] => {
   return loadSpecialRequests();
 };
 
-export const getByProducts = (): IFarmProducts[] => {
+export const getByProducts = (): IByProducts[] => {
   const stored = localStorage.getItem(LOCAL_BY_PRODUCTS);
   if (stored) return JSON.parse(stored);
   return loadByProducts();
@@ -94,7 +94,7 @@ export const getFarmProductById = (id: number): IFarmProducts | undefined => {
 };
 
 // Find By-product by ID (searches across all products)
-export const getByProductById = (id: number): IFarmProducts | undefined => {
+export const getByProductById = (id: number): IByProducts | undefined => {
   return getByProducts().find((item) => item.productId === id);
 };
 
@@ -103,7 +103,7 @@ export const getByProductById = (id: number): IFarmProducts | undefined => {
 // ============================================
 
 // Get current items in watchlist
-export const getWatchlistItems = (): WatchlistItem[] => {
+export const getWatchlistItems = (): IWatchlistItem[] => {
   const stored = localStorage.getItem(WATCHLIST_ITEMS_KEY);
   const parsed = stored ? JSON.parse(stored) : [];
   return parsed.map((item: IFarmProducts) => ({
@@ -113,7 +113,7 @@ export const getWatchlistItems = (): WatchlistItem[] => {
 };
 
 // Add or update watchlist items
-export const setWatchlistItems = (items: WatchlistItem[]): void => {
+export const setWatchlistItems = (items: IWatchlistItem[]): void => {
   localStorage.setItem(WATCHLIST_ITEMS_KEY, JSON.stringify(items));
   emitWatchlistUpdate();
 };
@@ -130,7 +130,11 @@ export const addToWatchlist = (product: IFarmProducts): void => {
   const exists = items.find((item) => item.productId === product.productId);
 
   if (!exists) {
-    const watchlistItem: WatchlistItem = { ...product, quantity: 1 };
+    const watchlistItem: IWatchlistItem = {
+      ...product,
+      quantity: 1,
+      dateAdded: new Date().toISOString(),
+    };
     items.push(watchlistItem);
     setWatchlistItems(items);
   }
@@ -141,6 +145,13 @@ export const removeFromWatchlist = (id: number): void => {
   const items = getWatchlistItems();
   const filtered = items.filter((item) => item.productId !== id);
   setWatchlistItems(filtered);
+};
+
+//  Get watchlist item by ID
+export const getWatchlistItemById = (
+  id: number,
+): IWatchlistItem | undefined => {
+  return getWatchlistItems().find((item) => item.productId === id);
 };
 
 // Get total watchlist count

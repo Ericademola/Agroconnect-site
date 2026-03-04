@@ -113,10 +113,22 @@ export interface IFarmProducts {
   unit: string;
   tagText: string;
   price: number;
+  demandLevel: string;
+  supplyStatus: string;
+  priceRate: string;
+  priceRateType: string;
+  marketTrend: string;
+  season: string;
+  sellersCount: number;
+  delivery: string;
+  marketFocast: string;
   quantity?: number;
 }
 
-export type WatchlistItem = IFarmProducts & { quantity: number };
+export interface IWatchlistItem extends IFarmProducts {
+  quantity: number;
+  dateAdded: string;
+}
 
 export interface IsFarmerDetails {
   farmName: string;
@@ -128,4 +140,14 @@ export interface IsFarmerDetails {
   farmProducts: string[];
   farmerProfilePicture: string;
   farmType: string[];
+}
+
+export interface IByProducts {
+  productId: number;
+  productImage: string;
+  productName: string;
+  unit: string;
+  tagText: string;
+  price: number;
+  quantity?: number;
 }

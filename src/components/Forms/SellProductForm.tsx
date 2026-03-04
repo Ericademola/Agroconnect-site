@@ -267,6 +267,7 @@ const SellProductFormForm = ({
                           { label: "Bag", value: "bag" },
                           { label: "Basket", value: "basket" },
                           { label: "Box", value: "box" },
+                          { label: "Liter", value: "liter" },
                         ]}
                         placeholder="Select a package method"
                         bgclassName="bg-[#ECECEC] h-[45px]"

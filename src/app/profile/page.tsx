@@ -146,8 +146,8 @@ const Profile = () => {
               ))}
             </div>
           </div>
-          <div className="border border-[#0000001A] rounded-2xl py-8 px-5 grid lg:grid-cols-[2fr_1fr]">
-            <div className="flex flex-col gap-10 items-center mb-4">
+          <div className="border border-[#0000001A] divide-y lg:divide-y-0 lg:divide-x divide-[#0000001A] rounded-2xl grid lg:grid-cols-[2fr_1.1fr]">
+            <div className="flex flex-col gap-10 items-center px-3 md:px-5 py-4 md:py-6">
               <div className="w-full grid md:grid-cols-[1fr_1.5fr] items-center justify-start gap-4">
                 {[
                   {
@@ -213,9 +213,9 @@ const Profile = () => {
               </Button>
             </div>
 
-            <div className="border-t lg:border-t-0 lg:border-l border-[#0000001A] px-5 md:px-0 lg:pl-6 lg:-my-8 pt-10 lg:pt-0 -mx-5 lg:-mx-0">
+            <div className="flex flex-col gap-5 px-3 md:px-5 py-4 md:py-6">
               <div>
-                <h4 className="text-[clamp(18px,2.4vw,20px)] mt-4 mb-4">
+                <h4 className="text-[clamp(18px,2.4vw,20px)] mb-4">
                   Delivery Address(es)
                 </h4>
                 <div>
@@ -230,7 +230,7 @@ const Profile = () => {
                             {address.fullAddress}
                           </p>
                           <div
-                            className="bg-[#F5F5F5] px-3 flex items-center justify-center cursor-pointer"
+                            className="bg-[#F5F5F5] px-3 flex items-center justify-center cursor-pointer rounded-r-2xl"
                             onClick={() =>
                               handleEditAddress(address, "delivery")
                             }
@@ -257,7 +257,7 @@ const Profile = () => {
                 </div>
               </div>
               <div>
-                <h4 className="text-[clamp(18px,2.4vw,20px)] mt-4 mb-4">
+                <h4 className="text-[clamp(18px,2.4vw,20px)] mb-4">
                   Farm Address
                 </h4>
                 <div>
@@ -273,7 +273,7 @@ const Profile = () => {
                             {address.state}.
                           </p>
                           <div
-                            className="bg-[#F5F5F5] px-3 flex items-center justify-center cursor-pointer"
+                            className="bg-[#F5F5F5] px-3 flex items-center justify-center cursor-pointer rounded-r-2xl"
                             onClick={() => handleEditAddress(address, "farm")}
                           >
                             <EditIcon className="w-5 h-5" />

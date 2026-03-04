@@ -20,17 +20,17 @@ type StatusProps = {
 };
 
 const colors = {
-  grey: "text-gray-600 bg-[#EFF1F3] font-semibold text-[12px]",
-  orange: "text-[#E4B304] bg-[#E4B3041A] font-semibold text-[12px]",
-  red: "text-[#E63946] bg-[#E639461A] font-semibold text-[12px]",
-  blue: "text-[#205FBE] bg-[#E2EEFF] font-semibold text-[12px]",
-  teal: "text-[#00B2A9] bg-[#E0F8F6] font-semibold text-[12px]",
-  redPlain: "text-[#F24236] font-normal text-[14px]",
-  green: "text-[#00AC47] bg-[#00AC471A] font-semibold text-[12px]",
-  greenPlain: "text-[#16A34A] font-normal text-[14px]",
-  orangePlain: "text-[#D97706] font-normal text-[14px]",
-  black: "text-white bg-blavk font-semibold text-[12px]",
-  purple: "text-[#8A38F5] bg-[#8A38F51A] font-semibold text-[12px]",
+  grey: "text-gray-600 bg-[#EFF1F3]",
+  orange: "text-[#E4B304] bg-[#E4B3041A] ",
+  red: "text-[#E63946] bg-[#E639461A]",
+  blue: "text-[#205FBE] bg-[#E2EEFF]",
+  teal: "text-[#00B2A9] bg-[#E0F8F6]",
+  redPlain: "text-[#F24236]",
+  green: "text-[#00AC47] bg-[#00AC471A]",
+  greenPlain: "text-[#16A34A] ",
+  orangePlain: "text-[#D97706]",
+  black: "text-white bg-blavk",
+  purple: "text-[#8A38F5] bg-[#8A38F51A]",
 };
 const StatusView = ({
   status,
@@ -95,7 +95,9 @@ const StatusView = ({
         disable ? "opacity-30" : "opacity-100"
       }`}
     >
-      <div className={`${classStyleName} ${colorString} ${classText}`}>
+      <div
+        className={`text-[clamp(10px,1.2vw,14px)] font-normal font-poppins ${classStyleName} ${colorString} ${classText}`}
+      >
         <span>{icon}</span>
         {status}
       </div>

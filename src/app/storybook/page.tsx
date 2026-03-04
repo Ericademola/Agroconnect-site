@@ -112,7 +112,8 @@ export default function StoryBook() {
           ))}
         </ul>
       </div>
-      <div className="lg:ml-[344px] py-10">
+      {/* <div className="lg:ml-[344px] py-10"> */}
+      <div className="py-10">
         {sections.map((section) => (
           <section
             key={section.name}

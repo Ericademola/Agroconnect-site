@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { IFarmProducts, IProducts } from "@/types";
+import { IByProducts, IFarmProducts, IProducts } from "@/types";
 import {
   loadProducts,
   loadFreshPickedProducts,
@@ -49,6 +49,7 @@ export default function Catalogue({
 }: CatalogueProps) {
   const [productList, setProductList] = useState<IProducts[]>([]);
   const [farmProductList, setFarmProductList] = useState<IFarmProducts[]>([]);
+  const [byProductList, setByProductList] = useState<IByProducts[]>([]);
   const { activeProfile } = useProfile();
   const isFarmerAccount = activeProfile === "FARMER";
 
@@ -82,13 +83,20 @@ export default function Catalogue({
       loadedProducts = getProductsInDemands();
     } else if (category === "special") {
       loadedProducts = getSpecialRequests();
-    } else if (category === "byProducts") {
-      loadedProducts = getByProducts();
     } else if (category === "allFarm") {
       loadedProducts = getAllFarmProducts();
     }
 
     setFarmProductList(loadedProducts);
+  }, [category]);
+
+  useEffect(() => {
+    let loadedProducts: IByProducts[] = [];
+    if (category === "byProducts") {
+      loadedProducts = getByProducts();
+    }
+
+    setByProductList(loadedProducts);
   }, [category]);
 
   const productsToRender = sliceLimit
@@ -112,7 +120,7 @@ export default function Catalogue({
             {farmProductsToRender.map((item: IFarmProducts) => (
               <div key={item.productId} className="flex flex-col gap-3 h-full">
                 <div className="flex flex-col gap-3">
-                  <div className="bg-[#F3F3F3] rounded-2xl flex flex-col w-full h-full items-center pb-3">
+                  <div className="bg-[#F3F3F3] rounded-2xl flex flex-col w-full h-full items-center pb-3 px-1">
                     <Button
                       size="sm"
                       className="bg-[#8B5E3C] hover:bg-[#8B5E3C]/90 rounded-none rounded-tr-[15px] rounded-bl-[15px] text-[10px] sm:text-xs md:text-sm w-fit ml-auto px-2 md:px-4 py-3 md:py-5"
@@ -153,7 +161,7 @@ export default function Catalogue({
                     </p>
                   </div>
                 </div>
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-3 mt-auto">
                   <SellProductButton item={item} />
                   <WatchListButton item={item} />
                 </div>
