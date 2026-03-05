@@ -29,7 +29,7 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const ApplicationDetails = () => {
+const ApplicationItemDetails = () => {
   const params = useParams();
   const router = useRouter();
   const [application, setApplication] = useState<IApplication | null>(null);
@@ -80,7 +80,7 @@ const ApplicationDetails = () => {
         <div className="all-sides-shadow-xl rounded-2xl py-8 hidden md:block">
           <Sidebar />
         </div>
-        <div className="flex flex-col gap-4 md:gap-7 px-4 md:px-6 md:py-5 font-geologica all-sides-shadow-xl">
+        <div className="flex flex-col gap-4 md:gap-7 px-4 md:px-6 md:py-5 font-geologica text-[#000000CC] all-sides-shadow-xl">
           <div className="flex items-start md:gap-4 pb-2 border-b border-[#0000001A]">
             <Button
               variant="ghost"
@@ -89,7 +89,7 @@ const ApplicationDetails = () => {
             >
               <LeftIcon className="w-4 h-4 md:w-5 md:h-5" />
             </Button>
-            <div className=" text-[#000000CC] flex flex-col gap-1 text-center md:text-start w-full">
+            <div className="flex flex-col gap-1 text-center md:text-start w-full">
               <h1 className="text-[clamp(20px,2.8vw,30px)] font-medium leading-tight">
                 Application Details
               </h1>
@@ -183,7 +183,7 @@ const ApplicationDetails = () => {
 
             {/* Product Information */}
             <div className="flex flex-col gap-[10px]">
-              <h2 className="text-[clamp(14px,1.6vw,18px)] text-[#000000CC] font-geologica">
+              <h2 className="text-[clamp(14px,1.6vw,18px)]">
                 Product Information
               </h2>
               <div className="bg-[#F5F5F5] rounded-2xl border border-[#0000001A] shadow-md shadow-[#0000000D] p-4 md:p-5 divide-y divide-[#0000001A] flex flex-col gap-4 font-poppins  text-black">
@@ -230,10 +230,8 @@ const ApplicationDetails = () => {
             </div>
 
             {/* Order Details */}
-            <div className="flex flex-col gap-[10px] font-geologica">
-              <h2 className="text-[clamp(14px,1.6vw,18px)] text-[#000000CC]">
-                Order Details
-              </h2>
+            <div className="flex flex-col gap-[10px]">
+              <h2 className="text-[clamp(14px,1.6vw,18px)]">Order Details</h2>
               <div className="bg-[#F5F5F5] rounded-2xl border border-[#0000001A] shadow-md shadow-[#0000000D] p-4 md:p-5 flex flex-col gap-4 text-black">
                 <div className="grid grid-cols-2 md:grid-cols-3">
                   {[
@@ -268,8 +266,8 @@ const ApplicationDetails = () => {
             </div>
 
             {/* Delivery Information */}
-            <div className="flex flex-col gap-[10px] font-geologica">
-              <h2 className="text-[clamp(14px,1.6vw,18px)] text-[#000000CC]">
+            <div className="flex flex-col gap-[10px]">
+              <h2 className="text-[clamp(14px,1.6vw,18px)]">
                 Delivery Information
               </h2>
               <div className="bg-[#F5F5F5] rounded-2xl border border-[#0000001A] shadow-md shadow-[#0000000D] p-4 md:p-5 text-black">
@@ -361,8 +359,8 @@ const ApplicationDetails = () => {
             </>
 
             {/* Application Timeline */}
-            <div className="flex flex-col gap-[10px] font-geologica">
-              <h2 className="text-[clamp(14px,1.6vw,18px)] text-[#000000CC]">
+            <div className="flex flex-col gap-[10px]">
+              <h2 className="text-[clamp(14px,1.6vw,18px)]">
                 Application Timeline
               </h2>
               <div className="bg-[#F5F5F5] rounded-2xl border border-[#0000001A] shadow-md shadow-[#0000000D] p-4 md:p-5 text-black">
@@ -427,10 +425,7 @@ const ApplicationDetails = () => {
                         ]
                       : []),
                   ].map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center gap-[10px] text-[#000000CC]"
-                    >
+                    <div key={index} className="flex items-center gap-[10px]">
                       <span
                         style={{ backgroundColor: item.iconBg }}
                         className={`p-2 md:p-3 rounded-[10px] md:rounded-[12px] flex items-center justify-center`}
@@ -470,4 +465,4 @@ const ApplicationDetails = () => {
   );
 };
 
-export default ApplicationDetails;
+export default ApplicationItemDetails;
