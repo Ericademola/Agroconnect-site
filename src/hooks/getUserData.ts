@@ -36,3 +36,10 @@ export const updateUserData = (updates: Partial<IuserData>): IuserData => {
   saveUserData(updatedData);
   return updatedData;
 };
+
+// Clear user data on logout
+export const clearUserData = (): void => {
+  if (typeof window !== "undefined") {
+    localStorage.removeItem(LOACL_USER_DATA_KEY);
+  }
+};

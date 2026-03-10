@@ -13,7 +13,7 @@ const PageTitle = ({ title, description, breadcrumb }: IpageTitleProps) => {
         <h2 className="text-[clamp(18px,2.9vw,30px)] font-semibold font-geologica">
           {title}
         </h2>
-        <p className="text-[clamp(12px,1.7vw,16px)] font-poppins mt-1">
+        <p className="text-[clamp(11px,1.5vw,16px)] font-poppins mt-1">
           {description}
         </p>
         <div>{breadcrumb}</div>

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { getOrderById, Order } from "@/hooks/getOrders";
+import { getOrderById, IOrder } from "@/hooks/getOrders";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import {
   Breadcrumb,
@@ -31,7 +31,7 @@ import OrderTrackingStepper from "@/components/OrderTrackingStepper/OrderTrackin
 export default function TrackOrder() {
   const params = useParams();
   const router = useRouter();
-  const [order, setOrder] = useState<Order | null>(null);
+  const [order, setOrder] = useState<IOrder | null>(null);
 
   useEffect(() => {
     if (params.orderId) {
@@ -146,7 +146,7 @@ export default function TrackOrder() {
             <OrderTrackingStepper
               order={order}
               steps={deliverySteps}
-              currentStepIndex={3}
+              currentStepIndex={2}
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-5 ml:gap-10 lg:gap-20 items-start">

@@ -1,5 +1,4 @@
 import { FilledHeartIcon, HeartIcon } from "@/Icons";
-import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 import { IProducts } from "@/types";
 import {
@@ -8,6 +7,7 @@ import {
   removeFromWishlist,
 } from "@/hooks/getProducts";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 interface WishListButtonProps {
   item: IProducts;

@@ -58,11 +58,6 @@ const SavingsPage = () => {
     (plan) => plan.saveStatus === "REDEEMED",
   );
 
-  const totalAmountSaved = savedPlans.reduce(
-    (sum, plan) => sum + plan.currentAmountSaved,
-    0,
-  );
-
   const router = useRouter();
 
   return (
@@ -95,16 +90,18 @@ const SavingsPage = () => {
           <div className="grid grid-cols-3 items-center gap-2 md:gap-5 px-4 lg:px-6">
             {[
               {
-                lable: "Total Saved",
+                label: "Total Saved",
                 icon: (
                   <PiggyIcon className="w-3 md:w-5 lg:w-6 h-3 md:h-5 lg:h-6" />
                 ),
                 containerBg: "#F0FDF4",
                 iconBg: "#03601A",
-                digit: totalAmountSaved.toFixed(2),
+                digit: savedPlans
+                  .reduce((sum, plan) => sum + plan.currentAmountSaved, 0)
+                  .toFixed(2),
               },
               {
-                lable: "Active Plans",
+                label: "Active Plans",
                 icon: (
                   <HourGlassIcon className="w-3 md:w-5 lg:w-6 h-3 md:h-5 lg:h-6" />
                 ),
@@ -113,7 +110,7 @@ const SavingsPage = () => {
                 digit: activePlanItems.length,
               },
               {
-                lable: "Completed",
+                label: "Completed",
                 icon: (
                   <CompletedSavingsIcon className="w-3 md:w-5 lg:w-6 h-3 md:h-5 lg:h-6" />
                 ),
@@ -123,7 +120,7 @@ const SavingsPage = () => {
               },
             ].map((item) => (
               <div
-                key={item.lable}
+                key={item.label}
                 style={{ backgroundColor: item.containerBg }}
                 className={`flex items-center gap-2 text-[#000000CC] rounded-2xl px-2 md:px-4 py-3`}
               >
@@ -135,10 +132,10 @@ const SavingsPage = () => {
                 </div>
                 <div className="flex flex-col gap-1">
                   <h2 className="text-[clamp(9px,1.5vw,16px)] font-extralight">
-                    {item.lable}
+                    {item.label}
                   </h2>
                   <div className="text-[clamp(14px,1.8vw,20px)]">
-                    {item.lable === "Total Saved" ? (
+                    {item.label === "Total Saved" ? (
                       <p>₦ {item.digit}</p>
                     ) : (
                       <p>{item.digit}</p>
@@ -149,7 +146,7 @@ const SavingsPage = () => {
             ))}
           </div>
           <div className="flex flex-col">
-            <Link href={"/savings-shop"}>
+            <Link href={"/shop/shop-savings"}>
               <Button
                 size="lg"
                 className="ml-auto md:hidden flex items-center justify-center gap-1 h-9 lg:h-10 font-normal text-[clamp(10px,1.5vw,16px)] mb-3 mr-4 lg:mr-6"
@@ -178,7 +175,7 @@ const SavingsPage = () => {
                   >
                     Redeemed Items
                   </TabsTrigger>
-                  <Link href={"/savings-shop"}>
+                  <Link href={"/shop/shop-savings"}>
                     <Button
                       size="lg"
                       className="hidden md:flex items-center justify-center gap-1 h-9 lg:h-10 font-normal text-[clamp(10px,1.5vw,16px)]"
@@ -199,7 +196,7 @@ const SavingsPage = () => {
                         altText="empty savings"
                         buttonText="Start a Food Saving Plan"
                         buttonIcon={null}
-                        buttonhref="/savings-shop"
+                        buttonhref="/shop/shop-savings"
                         className="py-14"
                       />
                     ) : (

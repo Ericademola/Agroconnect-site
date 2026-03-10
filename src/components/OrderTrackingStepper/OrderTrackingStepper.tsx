@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Order } from "@/hooks/getOrders";
+import { IOrder } from "@/hooks/getOrders";
 
 interface DeliveryStep {
   title: string;
@@ -9,11 +9,11 @@ interface DeliveryStep {
   date: string;
   time: string;
   icon: React.ReactNode;
-  status: Order["deliveryStatus"];
+  status: IOrder["deliveryStatus"];
 }
 
 interface OrderTrackingStepperProps {
-  order: Order;
+  order: IOrder;
   steps: DeliveryStep[];
   currentStepIndex?: number;
 }
@@ -24,7 +24,7 @@ const OrderTrackingStepper = ({
   currentStepIndex: overrideStepIndex,
 }: OrderTrackingStepperProps) => {
   const getCurrentStepIndex = () => {
-    const statusMap: Record<NonNullable<Order["deliveryStatus"]>, number> = {
+    const statusMap: Record<NonNullable<IOrder["deliveryStatus"]>, number> = {
       "ORDER PLACED": 0,
       CONFIRMED: 1,
       PACKED: 2,

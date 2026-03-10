@@ -41,7 +41,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             ref={setRef}
             onInput={handleInput}
             className={cn(
-              "flex w-full h-auto font-merriweathersans text-[13px] resize-none rounded-[10px] placeholder-shown:text-[#828994] placeholder:text-sm placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-y-auto hide-scrollbar",
+              "flex w-full h-auto font-geologica text-[13px] resize-none rounded-[10px] placeholder-shown:text-[#828994] placeholder:text-sm placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-y-auto hide-scrollbar",
               textareaClassName,
             )}
             {...props}

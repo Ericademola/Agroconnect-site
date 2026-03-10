@@ -69,23 +69,85 @@ export interface IuserData {
   country: string;
   state: string;
   city: string;
-  accountType: string;
+  accountType: string[];
   isLoggedIn: boolean;
   dateJoined: string;
-  totalOrders: number;
-  activeOrders: number;
   wishlistItems: number;
   myCashback: string;
-  deliveryAddresses: deliveryAddresses[];
+  deliveryAddresses: IAddresses[];
+  bankDetails: IBankDetails[];
+  isActiveLoan: boolean;
+  userPassword: string;
+  isFarmerDetails: IsFarmerDetails;
 }
 
-export interface deliveryAddresses {
+export interface IAddresses {
+  id: number;
   fullName: string;
   phoneNumber: string;
   state: string;
   city: string;
   fullAddress: string;
-  houseNumber: string;
-  area: string;
-  addtionalInfo: string;
+  houseNumber?: string;
+  area?: string;
+  addtionalInfo?: string;
+  isDefault: boolean;
+  farmLongitude?: string;
+  farmLatitude?: string;
+}
+
+export interface IBankDetails {
+  id: number;
+  bankName: string;
+  accountName: string;
+  accountNumber: string;
+  bvn: string;
+  isPrimary: boolean;
+  dateAdded: string;
+}
+
+export interface IFarmProducts {
+  productId: number;
+  productImage: string;
+  productName: string;
+  unit: string;
+  tagText: string;
+  price: number;
+  demandLevel: string;
+  supplyStatus: string;
+  priceRate: string;
+  priceRateType: string;
+  marketTrend: string;
+  season: string;
+  sellersCount: number;
+  delivery: string;
+  marketFocast: string;
+  quantity?: number;
+}
+
+export interface IWatchlistItem extends IFarmProducts {
+  quantity: number;
+  dateAdded: string;
+}
+
+export interface IsFarmerDetails {
+  farmName: string;
+  farmAddress: IAddresses[];
+  farmLongitude: string;
+  farmLatitude: string;
+  farmEmail: string;
+  farmPhoneNumber: string;
+  farmProducts: string[];
+  farmerProfilePicture: string;
+  farmType: string[];
+}
+
+export interface IByProducts {
+  productId: number;
+  productImage: string;
+  productName: string;
+  unit: string;
+  tagText: string;
+  price: number;
+  quantity?: number;
 }

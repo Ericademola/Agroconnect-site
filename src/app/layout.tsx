@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import ContentWrapper from "@/components/ContentWrapper";
 import { AuthProvider } from "@/context/AuthContext";
+import { ProfileProvider } from "@/context/ProfileContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -71,7 +72,9 @@ export default function RootLayout({
         className={`${raleway.variable} ${geistSans.variable} ${geologica.variable} ${poppins.variable} ${prompt.variable} antialiased`}
       >
         <AuthProvider>
-          <ContentWrapper>{children}</ContentWrapper>
+          <ProfileProvider>
+            <ContentWrapper>{children}</ContentWrapper>
+          </ProfileProvider>
         </AuthProvider>
       </body>
     </html>

@@ -4,9 +4,9 @@ import { IProducts, WishlistItem } from "@/types";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import CartButton from "@/components/CartButton/CartButton";
-import WishListButton from "@/components/WishListButton/WishListButton";
 import EmptyPage from "@/components/EmptyPage/EmptyPage";
+import CartButton from "@/components/CatalogueButtons/CartButton/CartButton";
+import WishListButton from "@/components/CatalogueButtons/WishListButton";
 
 const WishListPage = () => {
   const [wishListItems, setWishListItems] = useState<WishlistItem[]>([]);

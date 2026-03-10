@@ -24,11 +24,14 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import ProductDisplay from "@/components/ProductDisplay/ProductDisplay";
+import { useProfile } from "@/context/ProfileContext";
 
 const ShopPage = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchText, setSearchText] = useState("");
   const [selectedFilter, setSelectedFilter] = useState<string>("Newest");
+  const { activeProfile } = useProfile();
+  const isFarmerAccount = activeProfile === "FARMER";
 
   const FilterOptions = ({ onClose }: { onClose?: () => void }) => (
     <RadioGroup
@@ -66,7 +69,7 @@ const ShopPage = () => {
       <div className="mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 py-3 md:py-6 flex flex-col gap-6 md:gap-12">
         <div>
           <Breadcrumb>
-            <BreadcrumbList className="text-[#787878CC]">
+            <BreadcrumbList className="text-[#787878CC] text-[clamp(12px,1.6vw,18px)]">
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
                   <Link href="/">Home</Link>
@@ -90,7 +93,7 @@ const ShopPage = () => {
         <div className="grid md:grid-cols-[1fr_2.5fr] ml:grid-cols-[1fr_2.8fr] lg:grid-cols-[1fr_4fr] gap-[10px] md:gap-[20px] lg:gap-[40px]">
           <ProductDisplay />
           <div className="flex flex-col gap-[30px]">
-            <div className="flex items-center justify-between w-full">
+            <div className="flex items-center justify-between gap-2 w-full">
               <div>
                 <SearchInput
                   setSearchText={setSearchText}
@@ -99,6 +102,7 @@ const ShopPage = () => {
                   placeholder="Search for rice, yam, palm oil…"
                 />
               </div>
+
               <div className="ml-auto font-poppins text-[#00000080] text-[13px] sm:text-sm ml:text-base">
                 <div className="hidden md:flex items-center justify-between gap-2">
                   <p>Sort by</p>
@@ -136,11 +140,19 @@ const ShopPage = () => {
                 </div>
               </div>
             </div>
-            <Catalogue
-              actionType="buy"
-              category="all"
-              className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3"
-            />
+
+            {isFarmerAccount ? (
+              <Catalogue
+                category="allFarm"
+                className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3"
+              />
+            ) : (
+              <Catalogue
+                actionType="buy"
+                category="all"
+                className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3"
+              />
+            )}
           </div>
         </div>
         <div className="relative mt-10 bg-[#03601A] rounded-2xl w-full min-h-[350px] sm:min-h-[260px] md:min-h-[280px] ml:min-h-[340px] flex flex-col sm:flex-row justify-center items-center z-0">

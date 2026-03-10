@@ -18,12 +18,9 @@ import {
   StarIcon,
 } from "@/Icons";
 import { Button } from "@/components/ui/button";
-import WishListButton from "@/components/WishListButton/WishListButton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ReviewRatingForm from "@/components/Forms/ReviewRatingForm";
 import Rating from "@/components/Rating/Rating";
-import DecrementAndIncrementButton from "@/components/CartButton/DecrementAndIncrementButton";
-import AddToCartButton from "@/components/CartButton/AddToCartButton";
 import {
   Field,
   FieldGroup,
@@ -43,7 +40,13 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { getSavingsCart } from "@/hooks/getSavings";
-import { SavingsCartButton } from "@/app/savings-shop/page";
+import { SavingsCartButton } from "@/app/shop/shop-savings/page";
+import { getLoanCart } from "@/hooks/getLoans";
+import { LoanCartButton } from "../shop-loans/page";
+import DecrementAndIncrementButton from "@/components/CatalogueButtons/CartButton/DecrementAndIncrementButton";
+import AddToCartButton from "@/components/CatalogueButtons/CartButton/AddToCartButton";
+import WishListButton from "@/components/CatalogueButtons/WishListButton";
+import { useGoBack } from "@/hooks/useGoBack";
 
 export default function ProductDetails() {
   const [itemDetails, setItemDetails] = useState<IProducts | null>(null);
@@ -92,15 +95,16 @@ export default function ProductDetails() {
     if (savedItem && savedItem.addOns) {
       setSelectedAddOns(savedItem.addOns);
     }
-  }, [itemDetails]);
 
-  const goBack = () => {
-    if (window.history.length > 1) {
-      window.history.back();
-    } else {
-      router.push("/");
+    const loanItems = getLoanCart();
+    const loanItem = loanItems.find(
+      (item) => item.productId === itemDetails.productId,
+    );
+
+    if (loanItem && loanItem.addOns) {
+      setSelectedAddOns(loanItem.addOns);
     }
-  };
+  }, [itemDetails]);
 
   const handleAddOnToggle = (option: { title: string; price: number }) => {
     setSelectedAddOns((prev) => {
@@ -114,13 +118,15 @@ export default function ProductDetails() {
     });
   };
 
+  const goBack = useGoBack();
+
   return (
     <div className="relative">
       {itemDetails && (
         <div className="mx-4 sm:mx-8 md:mx-12 ml:mx-16 lg:mx-18 flex flex-col">
           <div className="mb-4">
             <Breadcrumb>
-              <BreadcrumbList className="text-[#787878CC]">
+              <BreadcrumbList className="text-[#787878CC] text-[clamp(13px,1.6vw,18px)]">
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
                     <Button
@@ -472,6 +478,12 @@ export default function ProductDetails() {
       {actionType === "save" && (
         <div className="fixed bottom-10 right-10 md:right-15">
           <SavingsCartButton />
+        </div>
+      )}
+
+      {actionType === "loan" && (
+        <div className="fixed bottom-10 right-10 md:right-15">
+          <LoanCartButton />
         </div>
       )}
     </div>

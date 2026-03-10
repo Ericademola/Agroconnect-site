@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { getOrderById, Order } from "@/hooks/getOrders";
+import { getOrderById, IOrder } from "@/hooks/getOrders";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import {
   Breadcrumb,
@@ -22,7 +22,7 @@ import { PaymentMethod } from "@/app/checkout/page";
 export default function OrderDetails() {
   const params = useParams();
   const router = useRouter();
-  const [order, setOrder] = useState<Order | null>(null);
+  const [order, setOrder] = useState<IOrder | null>(null);
 
   useEffect(() => {
     if (params.orderId) {
@@ -42,7 +42,7 @@ export default function OrderDetails() {
     );
   }
 
-  const getStatusColor = (status: Order["orderStatus"]) => {
+  const getStatusColor = (status: IOrder["orderStatus"]) => {
     const colors = {
       CONFIRMED: "text-[#4285F4]",
       DISPATCHED: "text-[#FFBA00]",
@@ -111,7 +111,7 @@ export default function OrderDetails() {
         <div className="all-sides-shadow-xl rounded-2xl py-8 hidden md:block">
           <Sidebar />
         </div>
-        <div className="flex flex-col gap-5 md:gap-6 lg:gap-8 font-geologica text-[#00000099] all-sides-shadow-xl rounded-2xl md:px-4 lg:px-6 md:pb-10 mb-16">
+        <div className="flex flex-col gap-5 md:gap-6 lg:gap-8 font-geologica text-[#00000099] all-sides-shadow-xl rounded-2xl md:px-4 lg:px-6 md:pt-5 md:pb-10 mb-16">
           <div className="flex items-start justify-between">
             <div>
               <h1 className="text-[clamp(16px,1.8vw,22px)] font-medium leading-tight">
@@ -284,7 +284,7 @@ export default function OrderDetails() {
                   Payment Method
                 </h4>
                 <p className="text-[clamp(12px,1.5vw,16px)]">
-                  {selectedPaymentMethod?.methodName}
+                  {selectedPaymentMethod?.methodName ?? "Food on Credit (Loan)"}
                 </p>
               </div>
               <div className="flex flex-col gap-1">
@@ -355,7 +355,7 @@ export default function OrderDetails() {
                   Delivery Address
                 </h4>
                 <p className="text-[clamp(12px,1.5vw,16px)]">
-                  {order.deliveryAddress.fullAddress}
+                  {order.deliveryAddress?.fullAddress}
                 </p>
               </div>
             </div>

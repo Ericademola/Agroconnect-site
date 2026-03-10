@@ -1,8 +1,6 @@
 "use client";
 import AuthPage from "@/components/AuthPage/AuthPage";
 import { DrawerDialog } from "@/components/DrawerDialog/DrawerDialog";
-import BuyerCreateAccountForm from "@/components/Forms/BuyerCreateAccountForm";
-import FarmerCreateAccountForm from "@/components/Forms/FarmerCreateAccountForm";
 import ResetAuthCards from "@/components/ResetAuthCards/ResetAuthCards";
 import { CloseIcon } from "@/Icons";
 import { useState } from "react";
@@ -10,15 +8,16 @@ import { useRouter } from "next/navigation";
 import VerificationCodeInput from "@/components/Forms/VerificationCodeInput";
 import PopUpUtility from "@/components/PopUtility/PopUtility";
 import Image from "next/image";
+import CreateAccountForm from "@/components/Forms/CreateAccountForm";
 
 type UserFormData = {
   email: string;
 };
 
 const CreateAccountPage = () => {
-  const [onVerify, setOnVerify] = useState(false);
+  const [isShowVerify, setIsShowVerify] = useState(false);
   const [userEmail, setUserEmail] = useState("");
-  const [verificationStatus, setVerificationStatus] = useState<
+  const [isVerificationStatus, setIsVerificationStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
   const [loadingLoginBtn, setLoadingLoginBtn] = useState(false);
@@ -28,7 +27,7 @@ const CreateAccountPage = () => {
 
   const handleFormSubmit = ({ email }: UserFormData) => {
     setUserEmail(email);
-    setOnVerify(true);
+    setIsShowVerify(true);
   };
 
   const handleVerifyCode = async (code: string) => {
@@ -36,12 +35,12 @@ const CreateAccountPage = () => {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     console.log("Verification code:", code);
 
-    setOnVerify(false);
-    setVerificationStatus("success");
+    setIsShowVerify(false);
+    setIsVerificationStatus("success");
   };
 
   const closeModal = () => {
-    setVerificationStatus("idle");
+    setIsVerificationStatus("idle");
   };
 
   const handleLogin = async () => {
@@ -56,8 +55,7 @@ const CreateAccountPage = () => {
     <>
       <div>
         <AuthPage
-          buyerForm={<BuyerCreateAccountForm onSubmit={handleFormSubmit} />}
-          farmerForm={<FarmerCreateAccountForm onSubmit={handleFormSubmit} />}
+          form={<CreateAccountForm onSubmit={handleFormSubmit} />}
           header="Create Account"
           text="Already have an account?"
           linkhref="/login"
@@ -67,8 +65,8 @@ const CreateAccountPage = () => {
 
       {/* Verification Code Dialog */}
       <DrawerDialog
-        open={onVerify}
-        close={() => setOnVerify(false)}
+        open={isShowVerify}
+        close={() => setIsShowVerify(false)}
         size="md"
         title="Enter Verification Code"
         titleCSS="sr-only"
@@ -94,7 +92,7 @@ const CreateAccountPage = () => {
 
       {/* Success Modal */}
       <DrawerDialog
-        open={verificationStatus === "success"}
+        open={isVerificationStatus === "success"}
         close={closeModal}
         size="sm"
         title="Account Created Successfully!"

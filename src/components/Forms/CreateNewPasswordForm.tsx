@@ -7,31 +7,37 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Spinner } from "../ui/spinner";
-import { GoogleIcon } from "@/Icons";
-import { useRouter } from "next/navigation";
-import { getUserData } from "@/hooks/getUserData";
 
-const FarmerLoginFormSchema = z.object({
-  email: z.string().trim().email({ message: "Please enter a valid email" }),
-  password: z.string().refine((val) => /^(?=.*[A-Z])(?=.*\d).{8,}$/.test(val), {
-    message: "Min. 8 characters, 1 uppercase, 1 number",
-  }),
-});
+const CreateNewPasswordFormSchema = z
+  .object({
+    password: z
+      .string()
+      .refine((val) => /^(?=.*[A-Z])(?=.*\d).{8,}$/.test(val), {
+        message: "Min. 8 characters, 1 uppercase, 1 number",
+      }),
+    confirmPassword: z
+      .string()
+      .nonempty({ message: "Please confirm password" }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Passwords must match",
+  });
 
-type TypeFarmerLoginFormSchema = z.infer<typeof FarmerLoginFormSchema>;
+type TypeCreateNewPasswordFormSchema = z.infer<
+  typeof CreateNewPasswordFormSchema
+>;
 
-interface FarmerLoginFormProps {
-  onForgotPassWord?: () => void;
+interface CreateNewPasswordFormProps {
+  onSubmit: (password: string) => void;
 }
 
-const FarmerLoginForm = ({ onForgotPassWord }: FarmerLoginFormProps) => {
-  const router = useRouter();
-
-  const form = useForm<TypeFarmerLoginFormSchema>({
-    resolver: zodResolver(FarmerLoginFormSchema),
+const CreateNewPasswordForm = ({ onSubmit }: CreateNewPasswordFormProps) => {
+  const form = useForm<TypeCreateNewPasswordFormSchema>({
+    resolver: zodResolver(CreateNewPasswordFormSchema),
     defaultValues: {
-      email: "",
       password: "",
+      confirmPassword: "",
     },
     mode: "onChange",
     reValidateMode: "onChange",
@@ -42,14 +48,10 @@ const FarmerLoginForm = ({ onForgotPassWord }: FarmerLoginFormProps) => {
     formState: { isSubmitting, isValid },
   } = form;
 
-  const onSubmit = async (data: TypeFarmerLoginFormSchema) => {
+  const handleFormSubmit = async (data: TypeCreateNewPasswordFormSchema) => {
     await new Promise((resolve) => setTimeout(resolve, 800));
-    console.log(data);
-    const loginState = getUserData();
-    loginState.isLoggedIn = true;
-
+    onSubmit(data.password);
     form.reset();
-    router.push("/");
   };
 
   return (
@@ -58,36 +60,9 @@ const FarmerLoginForm = ({ onForgotPassWord }: FarmerLoginFormProps) => {
         <Form {...form}>
           <form
             className="flex flex-col gap-8 px-1"
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(handleFormSubmit)}
           >
             <div className="flex flex-col gap-4 text-[#525252] font-geologica">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field, fieldState }) => (
-                  <div className="flex flex-col gap-1">
-                    <FormLabel className="text-[clamp(13px,1.2vw,14px)]">
-                      Email
-                    </FormLabel>
-                    <Input
-                      hasError={fieldState.invalid}
-                      subtext={
-                        fieldState.error ? (
-                          <span className="flex items-center gap-1 pt-1 text-red-500 text-xs">
-                            <ErrorIcon />
-                            {fieldState.error.message}
-                          </span>
-                        ) : null
-                      }
-                      {...field}
-                      placeholder="Enter your email"
-                      type="email"
-                      className="bg-[#ECECEC] h-[45px]"
-                      inputClassName="text-[#000000B2] bg-[#ECECEC] "
-                    />
-                  </div>
-                )}
-              />
               <FormField
                 control={form.control}
                 name="password"
@@ -115,16 +90,35 @@ const FarmerLoginForm = ({ onForgotPassWord }: FarmerLoginFormProps) => {
                   </div>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field, fieldState }) => (
+                  <div className="flex flex-col gap-1">
+                    <FormLabel className="text-[clamp(13px,1.2vw,14px)]">
+                      Confirm Password
+                    </FormLabel>
+                    <Input
+                      hasError={fieldState.invalid}
+                      subtext={
+                        fieldState.error ? (
+                          <span className="flex items-center gap-1 pt-1 text-red-500 text-xs">
+                            <ErrorIcon />
+                            {fieldState.error.message}
+                          </span>
+                        ) : null
+                      }
+                      {...field}
+                      placeholder="Confirm your password"
+                      type="password"
+                      className="bg-[#ECECEC] h-[45px]"
+                      inputClassName="text-[#000000B2] bg-[#ECECEC] "
+                    />
+                  </div>
+                )}
+              />
             </div>
-            <div className="flex flex-col gap-4 w-full">
-              <Button
-                variant="link"
-                className="text-[#C09706] text-[clamp(14px,1.4vw,16px)] font-regular"
-                onClick={onForgotPassWord}
-                type="button"
-              >
-                Forgot your Password?
-              </Button>
+            <div>
               <Button
                 type="submit"
                 variant="default"
@@ -132,22 +126,11 @@ const FarmerLoginForm = ({ onForgotPassWord }: FarmerLoginFormProps) => {
                 className="w-full"
                 disabled={isSubmitting || !isValid}
               >
-                {isSubmitting ? <Spinner className="h-5 w-5" /> : "Login"}
-              </Button>
-              <div className="flex items-center gap-2 font-geologica ">
-                <span className="bg-[#EFEDED] flex-1 h-[2px]"></span>
-                <p className="text-[#BBBBBB] text-[clamp(12px,1.3vw,14px)] font-bold">
-                  OR
-                </p>
-                <span className="bg-[#EFEDED] flex-1 h-[2px]"></span>
-              </div>
-              <Button
-                variant="outline"
-                size="lg"
-                className="flex items-center gap-2 text-black"
-              >
-                <GoogleIcon className="w-4 h-4" />
-                Continue with Google
+                {isSubmitting ? (
+                  <Spinner className="h-5 w-5" />
+                ) : (
+                  "Save New Password"
+                )}
               </Button>
             </div>
           </form>
@@ -157,4 +140,4 @@ const FarmerLoginForm = ({ onForgotPassWord }: FarmerLoginFormProps) => {
   );
 };
 
-export default FarmerLoginForm;
+export default CreateNewPasswordForm;

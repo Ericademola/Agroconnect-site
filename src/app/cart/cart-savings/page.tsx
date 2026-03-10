@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import CartButton from "@/components/CartButton/CartButton";
 import { IAddOns, CartItem } from "@/types";
 import { CartIcon, DeleteIcon, DownIcon, MegaPhoneIcon } from "@/Icons";
 import { Button } from "@/components/ui/button";
@@ -46,6 +45,7 @@ import SavingsPlanForm from "@/components/Forms/SavingsPlanForm";
 import PopUpUtility from "@/components/PopUtility/PopUtility";
 import PaymentCard from "@/components/PaymentCard/PaymentCard";
 import PopNotification from "@/components/PopNotification/PopNotification";
+import CartButton from "@/components/CatalogueButtons/CartButton/CartButton";
 
 // Helper to convert savings cart items to full cart items with product details
 const convertToCartItems = (cartItems: ISavingsCartItem[]): CartItem[] => {
@@ -70,12 +70,13 @@ export default function CartSavingsPage() {
   );
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchText, setSearchText] = useState("");
-  const [onProceedWithSavings, setOnProceedWithSavings] = useState(false);
+  const [isShowProceedWithSavings, setIsShowProceedWithSavings] =
+    useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
   const [loadingAddMoneyBtn, setLoadingAddMoneyBtn] = useState(false);
-  const [onAddMoney, setOnAddMoney] = useState(false);
+  const [isShowAddMoney, setIsShowAddMoney] = useState(false);
 
   // Load savings cart and listen for updates
   useEffect(() => {
@@ -145,7 +146,7 @@ export default function CartSavingsPage() {
 
     setSubmitStatus("success");
     setLoadingAddMoneyBtn(false);
-    setOnProceedWithSavings(false);
+    setIsShowProceedWithSavings(false);
   };
 
   const handleLater = () => {
@@ -155,7 +156,7 @@ export default function CartSavingsPage() {
 
   const handleAddMoney = () => {
     setTimeout(() => {
-      setOnAddMoney(true);
+      setIsShowAddMoney(true);
       setSubmitStatus("idle");
     }, 1000);
   };
@@ -177,7 +178,7 @@ export default function CartSavingsPage() {
             altText="empty cart"
             buttonText="Start Shopping for Savings"
             buttonIcon={<CartIcon className="w-5 h-5" fill="#fff" />}
-            buttonhref="/savings-shop"
+            buttonhref="/shop/shop-savings"
           />
         ) : (
           <>
@@ -188,7 +189,7 @@ export default function CartSavingsPage() {
             <div className="mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 pt-3 md:pt-6 pb-32 flex flex-col gap-4">
               <div>
                 <Breadcrumb>
-                  <BreadcrumbList className="text-[#787878CC]">
+                  <BreadcrumbList className="text-[#787878CC] text-[clamp(12px,1.6vw,18px)]">
                     <BreadcrumbItem>
                       <BreadcrumbLink asChild>
                         <Link href="/">Home</Link>
@@ -551,7 +552,7 @@ export default function CartSavingsPage() {
                           </td>
                         </tr>
                         <tr className="font-semibold">
-                          <td className="py-5 px-6">Total Goal:</td>
+                          <td className="py-5 px-6">Total:</td>
                           <td className="py-5 px-6 text-end">
                             ₦{" "}
                             {totalPrice.toLocaleString("en-NG", {
@@ -566,7 +567,7 @@ export default function CartSavingsPage() {
                       <Button
                         variant="default"
                         size="sm"
-                        onClick={() => setOnProceedWithSavings(true)}
+                        onClick={() => setIsShowProceedWithSavings(true)}
                         className="py-5"
                       >
                         Proceed with Savings
@@ -574,7 +575,7 @@ export default function CartSavingsPage() {
                       <Button
                         variant="secondary"
                         size="sm"
-                        href="/savings-shop"
+                        href="/shop/shop-savings"
                         className="py-5"
                       >
                         Continue Shopping
@@ -590,8 +591,8 @@ export default function CartSavingsPage() {
 
       {/* Proceed with Savings Modal */}
       <DrawerDialog
-        open={onProceedWithSavings}
-        close={() => setOnProceedWithSavings(false)}
+        open={isShowProceedWithSavings}
+        close={() => setIsShowProceedWithSavings(false)}
         size="md"
         title="New Savings Plan"
         contentCSS="px-[30px]"
@@ -643,8 +644,8 @@ export default function CartSavingsPage() {
 
       {/* payment modal */}
       <DrawerDialog
-        open={onAddMoney}
-        close={() => setOnAddMoney(false)}
+        open={isShowAddMoney}
+        close={() => setIsShowAddMoney(false)}
         size="md"
         title="Add to Your Savings"
         subTitle="Send your savings amount to the account details below. The payment will be automatically verified and added to your balance."
@@ -656,7 +657,7 @@ export default function CartSavingsPage() {
           accountNumber="1234567890"
           accountName="Agriconnect Savings"
           amount={`₦0`}
-          onCancel={() => setOnAddMoney(false)}
+          onCancel={() => setIsShowAddMoney(false)}
           handlePaymentConfirm={handlePaymentConfirm}
           savingsNotification={
             <PopNotification

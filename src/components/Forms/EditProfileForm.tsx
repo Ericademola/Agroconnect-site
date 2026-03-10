@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Spinner } from "../ui/spinner";
 import { FormSelect } from "../ui/formSelect";
+import { IuserData } from "@/types";
 
 // FOR PHONE NUMBER
 const phoneSchema = z.string().refine(
@@ -23,23 +24,17 @@ const phoneSchema = z.string().refine(
 );
 
 const EditProfileSchema = z.object({
-  fullName: z.string().nonempty({ message: "This field is required" }),
+  fullName: z.string().nonempty({ message: "Full name is required" }),
   phoneNumber: phoneSchema,
-  state: z.string().nonempty({ message: "This field is required" }),
+  state: z.string().nonempty({ message: "Please select your state" }),
   email: z.string().trim().email({ message: "Please enter a valid email" }),
-  userName: z.string().nonempty({ message: "This field is required" }),
+  userName: z.string().nonempty({ message: "Username is required" }),
 });
 
 type TypeEditProfileFormData = z.infer<typeof EditProfileSchema>;
 
 interface EditProfileFormProps {
-  initialData: {
-    fullName: string;
-    phonenumber: string;
-    state: string;
-    email: string;
-    userName: string;
-  };
+  initialData: IuserData;
   onSubmit: (data: TypeEditProfileFormData) => void;
 }
 
@@ -49,9 +44,9 @@ const EditProfileForm = ({ initialData, onSubmit }: EditProfileFormProps) => {
   const form = useForm<TypeEditProfileFormData>({
     resolver: zodResolver(EditProfileSchema),
     defaultValues: {
-      fullName: initialData.fullName,
+      fullName: initialData.userFullName,
       email: initialData.email,
-      phoneNumber: initialData.phonenumber,
+      phoneNumber: initialData.phoneNumber,
       state: initialData.state,
       userName: initialData.userName,
     },
@@ -63,9 +58,9 @@ const EditProfileForm = ({ initialData, onSubmit }: EditProfileFormProps) => {
 
   useEffect(() => {
     reset({
-      fullName: initialData.fullName,
+      fullName: initialData.userFullName,
       email: initialData.email,
-      phoneNumber: initialData.phonenumber,
+      phoneNumber: initialData.phoneNumber,
       state: initialData.state,
       userName: initialData.userName,
     });
@@ -143,6 +138,7 @@ const EditProfileForm = ({ initialData, onSubmit }: EditProfileFormProps) => {
                     {...field}
                     placeholder="Enter your phone number"
                     type="text"
+                    maxLength={11}
                     className="bg-[#ECECEC] h-[45px]"
                     inputClassName="text-[#000000B2] bg-[#ECECEC] "
                   />

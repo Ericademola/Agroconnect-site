@@ -8,25 +8,34 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Spinner } from "../ui/spinner";
 
-const ResetPasswordViaEmailFormSchema = z.object({
-  email: z.string().trim().email({ message: "Please enter a valid email" }),
-});
+const ResetPasswordViaEmailFormSchema = (storedEmail: string) =>
+  z.object({
+    email: z
+      .string()
+      .trim()
+      .email({ message: "Please enter a valid email" })
+      .refine((val) => val === storedEmail, {
+        message: "Enter a your email address",
+      }),
+  });
 
 type TypeResetPasswordViaEmailFormSchema = z.infer<
-  typeof ResetPasswordViaEmailFormSchema
+  ReturnType<typeof ResetPasswordViaEmailFormSchema>
 >;
 
 interface ResetPasswordViaEmailFormProps {
   onPhoneNumberReset?: () => void;
-  onSubmit?: (data: TypeResetPasswordViaEmailFormSchema) => void;
+  initialData: { email: string };
+  onSubmit: (email: string) => void;
 }
 
 const ResetPasswordViaEmailForm = ({
   onPhoneNumberReset,
   onSubmit,
+  initialData,
 }: ResetPasswordViaEmailFormProps) => {
   const form = useForm<TypeResetPasswordViaEmailFormSchema>({
-    resolver: zodResolver(ResetPasswordViaEmailFormSchema),
+    resolver: zodResolver(ResetPasswordViaEmailFormSchema(initialData.email)),
     defaultValues: {
       email: "",
     },
@@ -44,7 +53,7 @@ const ResetPasswordViaEmailForm = ({
   ) => {
     await new Promise((resolve) => setTimeout(resolve, 800));
     if (onSubmit) {
-      onSubmit(data);
+      onSubmit(data.email);
     }
     form.reset();
   };
@@ -54,7 +63,7 @@ const ResetPasswordViaEmailForm = ({
       <>
         <Form {...form}>
           <form
-            className="flex flex-col gap-8 px-1"
+            className="flex flex-col gap-6 md:gap-8 px-1"
             onSubmit={handleSubmit(handleFormSubmit)}
           >
             <div className="flex flex-col gap-4 text-[#525252] font-geologica">
@@ -118,7 +127,9 @@ const ResetPasswordViaEmailForm = ({
 
 export default ResetPasswordViaEmailForm;
 
-// ---- RESET PASSWORD VIA PHONE NUMBER ---- //
+// ============================================
+// RESET PASSWORD VIA PHONE NUMBER
+// ============================================
 
 // FOR PHONE NUMBER
 const phoneSchema = z.string().refine(
@@ -132,25 +143,32 @@ const phoneSchema = z.string().refine(
   },
 );
 
-const ResetPasswordViaPhoneNumberFormSchema = z.object({
-  phoneNumber: phoneSchema,
-});
+const ResetPasswordViaPhoneNumberFormSchema = (storedPhone: string) =>
+  z.object({
+    phoneNumber: phoneSchema.refine((val) => val === storedPhone, {
+      message: "Phone number is incorrect",
+    }),
+  });
 
 type TypeResetPasswordViaPhoneNumberFormSchema = z.infer<
-  typeof ResetPasswordViaPhoneNumberFormSchema
+  ReturnType<typeof ResetPasswordViaPhoneNumberFormSchema>
 >;
 
 interface ResetPasswordViaPhoneNumberFormProps {
   onEmailReset?: () => void;
-  onSubmit?: (data: TypeResetPasswordViaPhoneNumberFormSchema) => void;
+  onSubmit: (phoneNumber: string) => void;
+  initialData: { phoneNumber: string };
 }
 
 export const ResetPasswordViaPhoneNumberForm = ({
   onEmailReset,
   onSubmit,
+  initialData,
 }: ResetPasswordViaPhoneNumberFormProps) => {
   const form = useForm<TypeResetPasswordViaPhoneNumberFormSchema>({
-    resolver: zodResolver(ResetPasswordViaPhoneNumberFormSchema),
+    resolver: zodResolver(
+      ResetPasswordViaPhoneNumberFormSchema(initialData.phoneNumber),
+    ),
     defaultValues: {
       phoneNumber: "",
     },
@@ -168,7 +186,7 @@ export const ResetPasswordViaPhoneNumberForm = ({
   ) => {
     await new Promise((resolve) => setTimeout(resolve, 800));
     if (onSubmit) {
-      onSubmit(data);
+      onSubmit(data.phoneNumber);
     }
     form.reset();
   };
@@ -178,7 +196,7 @@ export const ResetPasswordViaPhoneNumberForm = ({
       <>
         <Form {...form}>
           <form
-            className="flex flex-col gap-8 px-1"
+            className="flex flex-col gap-6 md:gap-8 px-1"
             onSubmit={handleSubmit(handleFormSubmit)}
           >
             <div className="flex flex-col gap-4 text-[#525252] font-geologica">

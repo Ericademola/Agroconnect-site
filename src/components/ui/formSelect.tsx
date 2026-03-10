@@ -48,7 +48,7 @@ export function FormSelect({
       <Select value={value} onValueChange={onChange}>
         <SelectTrigger
           className={cn(
-            "w-full border font-merriweathersans px-3 py-6 rounded-sm focus:ring-1 focus:ring-[#8FE6A2]",
+            "w-full border font-geologica px-3 py-6 rounded-sm focus:ring-1 focus:ring-[#8FE6A2]",
             hasError
               ? "border-red-500 focus:ring-red-500"
               : "border-[#0000001A]",

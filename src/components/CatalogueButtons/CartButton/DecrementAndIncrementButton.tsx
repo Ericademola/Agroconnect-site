@@ -9,6 +9,7 @@ interface DecrementAndIncrementButtonProps {
   onIncrement: () => void;
   onDecrement: () => void;
   className?: string;
+  btnClassName?: string;
 }
 
 const DecrementAndIncrementButton = ({
@@ -16,6 +17,7 @@ const DecrementAndIncrementButton = ({
   onIncrement,
   onDecrement,
   className,
+  btnClassName,
 }: DecrementAndIncrementButtonProps) => {
   return (
     <div
@@ -25,10 +27,14 @@ const DecrementAndIncrementButton = ({
       )}
     >
       <Button
+        type="button"
         onClick={onDecrement}
         variant="secondary"
         size="sm"
-        className="w-[35px] h-[35px] lg:w-[50px] lg:h-[50px] px-0"
+        className={cn(
+          "w-[35px] h-[35px] lg:w-[50px] lg:h-[50px] px-0",
+          btnClassName,
+        )}
       >
         <MinusIcon className="w-[14px] h-[14px] md:w-4 md:h-4 lg:w-5 lg:h-5" />
       </Button>
@@ -36,10 +42,14 @@ const DecrementAndIncrementButton = ({
       <p className="text-sm md:text-base lg:text-xl font-poppins">{quantity}</p>
 
       <Button
+        type="button"
         onClick={onIncrement}
         variant="secondary"
         size="sm"
-        className="w-[35px] h-[35px] lg:w-[50px] lg:h-[50px] px-0"
+        className={cn(
+          "w-[35px] h-[35px] lg:w-[50px] lg:h-[50px] px-0",
+          btnClassName,
+        )}
       >
         <PlusIcon className="w-[14px] h-[14px] md:w-4 md:h-4 lg:w-5 lg:h-5" />
       </Button>

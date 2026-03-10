@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { getUserData, updateUserData } from "@/hooks/getUserData";
 import { IuserData } from "@/types";
+import { useRouter } from "next/navigation";
 
 interface AuthContextType {
   userInfo: IuserData;
@@ -23,9 +24,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUserInfo(updated);
   };
 
+  const router = useRouter();
+
   const logout = () => {
     const updated = updateUserData({ isLoggedIn: false });
     setUserInfo(updated);
+    router.push("/login");
   };
 
   return (

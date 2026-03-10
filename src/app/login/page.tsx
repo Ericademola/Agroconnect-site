@@ -2,43 +2,74 @@
 
 import AuthPage from "@/components/AuthPage/AuthPage";
 import { DrawerDialog } from "@/components/DrawerDialog/DrawerDialog";
-import BuyerLoginForm from "@/components/Forms/BuyerLoginForm";
-import ChangePasswordForm from "@/components/Forms/ChangePasswordForm";
-import FarmerLoginForm from "@/components/Forms/FarmerLoginForm";
+import CreateNewPasswordForm from "@/components/Forms/CreateNewPasswordForm";
 import ResetPasswordViaEmailForm, {
   ResetPasswordViaPhoneNumberForm,
 } from "@/components/Forms/ResetPasswordForm";
 import VerificationCodeInput from "@/components/Forms/VerificationCodeInput";
 import ResetAuthCards from "@/components/ResetAuthCards/ResetAuthCards";
+import { getUserData, updateUserData } from "@/hooks/getUserData";
 import { CloseIcon } from "@/Icons";
-import { useState } from "react";
+import { IuserData } from "@/types";
+import { useEffect, useState } from "react";
+import LoginForm from "@/components/Forms/LoginForm";
+import { useMediaQuery } from "react-responsive";
+import { useRouter } from "next/navigation";
 
-type ResetMethod = "email" | "phone";
+export type ResetMethod = "email" | "phone";
 
 const LoginPage = () => {
-  const [onForgotPassWord, setOnForgotPassWord] = useState(false);
+  const [isShowForgotPassWord, setIsShowForgotPassWord] = useState(false);
   const [resetMethod, setResetMethod] = useState<ResetMethod>("email");
-  const [onVerify, setOnVerify] = useState(false);
+  const [isShowVerify, setIsShowVerify] = useState(false);
   const [loadingVerifyBtn, setLoadingVerifyBtn] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
-  const [userPhoneNumber, setUserPhoneNumber] = useState("");
   const [changePassword, setChangePassword] = useState(false);
+  const [userInfo, setUserInfo] = useState<IuserData | null>(null);
+  // const [isShowForgotPassword, setIsShowForgotPassword] = useState(false);
+
+  useEffect(() => {
+    const data = getUserData();
+    setUserInfo(data);
+  }, []);
+
+  const isMobile = useMediaQuery({
+    query: "(max-width: 640px)",
+  });
+
+  const router = useRouter();
+
+  const handleForgotPassword = () => {
+    // setIsShowForgotPassword(true);
+    if (isMobile) {
+      router.push("/reset-password");
+    } else {
+      setIsShowForgotPassWord(true);
+    }
+  };
+
+  // useEffect(() => {
+  //   if (isShowForgotPassword) {
+  //     if (isMobile) {
+  //       router.push("/reset-password");
+  //     } else {
+  //       setIsShowForgotPassWord(true);
+  //     }
+  //   }
+  // }, [isMobile, isShowForgotPassword, router]);
 
   const handleCloseForgotPassword = () => {
-    setOnForgotPassWord(false);
+    setIsShowForgotPassWord(false);
     setTimeout(() => setResetMethod("email"), 300);
   };
 
-  const handleEmailFormSubmit = (data: { email: string }) => {
-    setUserEmail(data.email);
-    setOnForgotPassWord(false);
-    setOnVerify(true);
+  const handleEmailFormSubmit = () => {
+    setIsShowForgotPassWord(false);
+    setIsShowVerify(true);
   };
 
-  const handlePhoneFormSubmit = (data: { phoneNumber: string }) => {
-    setUserPhoneNumber(data.phoneNumber);
-    setOnForgotPassWord(false);
-    setOnVerify(true);
+  const handlePhoneFormSubmit = () => {
+    setIsShowForgotPassWord(false);
+    setIsShowVerify(true);
   };
 
   const handleVerifyCode = async (code: string) => {
@@ -48,24 +79,20 @@ const LoginPage = () => {
     console.log("Verification code:", code);
 
     setLoadingVerifyBtn(false);
-    setOnVerify(false);
+    setIsShowVerify(false);
     setChangePassword(true);
+  };
+
+  const handleSaveNewPassword = (password: string) => {
+    updateUserData({ userPassword: password });
+    setChangePassword(false);
   };
 
   return (
     <>
       <div>
         <AuthPage
-          buyerForm={
-            <BuyerLoginForm
-              onForgotPassWord={() => setOnForgotPassWord(true)}
-            />
-          }
-          farmerForm={
-            <FarmerLoginForm
-              onForgotPassWord={() => setOnForgotPassWord(true)}
-            />
-          }
+          form={<LoginForm onForgotPassWord={handleForgotPassword} />}
           header="Login"
           text="New to Agriconnect?"
           linkhref="/create-account"
@@ -75,7 +102,7 @@ const LoginPage = () => {
 
       {/* Reset Password Dialog - Shows Email or Phone based on resetMethod */}
       <DrawerDialog
-        open={onForgotPassWord}
+        open={isShowForgotPassWord}
         close={handleCloseForgotPassword}
         size="sm"
         title="Reset Password"
@@ -96,15 +123,25 @@ const LoginPage = () => {
           }
           cardContent={
             resetMethod === "email" ? (
-              <ResetPasswordViaEmailForm
-                onPhoneNumberReset={() => setResetMethod("phone")}
-                onSubmit={handleEmailFormSubmit}
-              />
+              <>
+                {userInfo && (
+                  <ResetPasswordViaEmailForm
+                    onPhoneNumberReset={() => setResetMethod("phone")}
+                    onSubmit={handleEmailFormSubmit}
+                    initialData={{ email: userInfo.email }}
+                  />
+                )}
+              </>
             ) : (
-              <ResetPasswordViaPhoneNumberForm
-                onEmailReset={() => setResetMethod("email")}
-                onSubmit={handlePhoneFormSubmit}
-              />
+              <>
+                {userInfo && (
+                  <ResetPasswordViaPhoneNumberForm
+                    onEmailReset={() => setResetMethod("email")}
+                    onSubmit={handlePhoneFormSubmit}
+                    initialData={{ phoneNumber: userInfo.phoneNumber }}
+                  />
+                )}
+              </>
             )
           }
         />
@@ -112,8 +149,8 @@ const LoginPage = () => {
 
       {/* Verification Code Dialog */}
       <DrawerDialog
-        open={onVerify}
-        close={() => setOnVerify(false)}
+        open={isShowVerify}
+        close={() => setIsShowVerify(false)}
         size="md"
         title="Enter Verification Code"
         titleCSS="sr-only"
@@ -126,12 +163,12 @@ const LoginPage = () => {
       >
         <ResetAuthCards
           title="Enter Verification Code"
-          subTitle={`We sent a 6-digit code to ${resetMethod === "email" ? userEmail : userPhoneNumber}. Enter it below to continue`}
+          subTitle={`We sent a 6-digit code to ${resetMethod === "email" ? userInfo?.email : userInfo?.phoneNumber}. Enter it below to continue`}
           cardContent={
             <VerificationCodeInput
               onVerify={handleVerifyCode}
-              phoneNumber={userPhoneNumber}
-              email={userEmail}
+              phoneNumber={userInfo?.phoneNumber}
+              email={userInfo?.email}
               loading={loadingVerifyBtn}
             />
           }
@@ -156,7 +193,7 @@ const LoginPage = () => {
           title="Change Password"
           subTitle={`Choose a strong password you haven't used before.`}
           cardContent={
-            <ChangePasswordForm onSubmit={() => setChangePassword(false)} />
+            <CreateNewPasswordForm onSubmit={handleSaveNewPassword} />
           }
         />
       </DrawerDialog>

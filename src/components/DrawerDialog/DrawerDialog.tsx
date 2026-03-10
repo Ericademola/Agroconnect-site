@@ -148,8 +148,8 @@ export function DrawerDialog({
               </DialogHeader>
             )}
             <ScrollArea
-              className={`${
-                title || subTitle ? "" : !noTitleMargin && "sm:mt-[30px]"
+              className={`overflow-y-auto hide-scrollbar ${
+                title || subTitle ? "" : !noTitleMargin && "sm:mt-[30px] "
               }`}
             >
               {children}

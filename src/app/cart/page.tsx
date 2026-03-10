@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import CartButton from "@/components/CartButton/CartButton";
 import { CartItem, IAddOns } from "@/types";
 import { CartIcon, DeleteIcon, DownIcon } from "@/Icons";
 import { Button } from "@/components/ui/button";
@@ -33,6 +32,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { getProductById } from "@/hooks/getProducts";
 import EmptyPage from "@/components/EmptyPage/EmptyPage";
+import CartButton from "@/components/CatalogueButtons/CartButton/CartButton";
 
 export default function CartPage() {
   const [basketItems, setBasketItems] = useState<CartItem[]>([]);
@@ -102,7 +102,7 @@ export default function CartPage() {
           <div className="mx-4 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12 pt-3 md:pt-6 pb-32 flex flex-col gap-4">
             <div>
               <Breadcrumb>
-                <BreadcrumbList className="text-[#787878CC]">
+                <BreadcrumbList className="text-[#787878CC] text-[clamp(12px,1.6vw,18px)]">
                   <BreadcrumbItem>
                     <BreadcrumbLink asChild>
                       <Link href="/">Home</Link>

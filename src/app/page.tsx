@@ -8,6 +8,7 @@ import ProductList from "@/components/ProductList/ProductList";
 import SearchInput from "@/components/SearchInput/SearchInput";
 import Testimonial from "@/components/Testimonial/Testimonial";
 import { Button } from "@/components/ui/button";
+import { useProfile } from "@/context/ProfileContext";
 import { ShopBagIcon } from "@/Icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { useState } from "react";
@@ -15,6 +16,8 @@ import { useState } from "react";
 export default function Home() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchText, setSearchText] = useState("");
+  const { activeProfile } = useProfile();
+  const isBuyerAccount = activeProfile === "BUYER";
 
   return (
     <div className="flex flex-col gap-7">
@@ -47,7 +50,7 @@ export default function Home() {
       <CategoriesCarousel />
       <ProductList />
       <HowItWorks />
-      <NewArrivals />
+      {isBuyerAccount && <NewArrivals />}
       <div className="mx-0 sm:mx-5 md:mx-6 ml:mx-8 lg:mx-12">
         <Testimonial />
       </div>

@@ -7,10 +7,13 @@ interface EmptyPageProps {
   altText: string;
   title: string;
   subtitle: string;
-  buttonText: string;
+  buttonText?: string;
   buttonIcon?: React.ReactNode;
-  buttonhref: string;
+  buttonhref?: string;
   className?: string;
+  isButton?: boolean;
+  btnAction?: () => void;
+  subtitleClassName?: string;
 }
 
 const EmptyPage = ({
@@ -22,6 +25,9 @@ const EmptyPage = ({
   buttonIcon,
   buttonhref,
   className,
+  isButton = true,
+  btnAction,
+  subtitleClassName,
 }: EmptyPageProps) => {
   return (
     <div
@@ -41,19 +47,26 @@ const EmptyPage = ({
         <h3 className="text-[clamp(16px,1.5vw,24px)] font-geologica font-medium">
           {title}
         </h3>
-        <p className="text-[clamp(10px,1.3vw,14px)] font-poppins w-[90%] md:w-full text-center">
+        <p
+          className={cn(
+            "text-[clamp(10px,1.3vw,14px)] font-poppins w-[90%] md:w-full text-center",
+            subtitleClassName,
+          )}
+        >
           {subtitle}
         </p>
-        <Button
-          variant="default"
-          size="lg"
-          className="flex items-center gap-2 mt-3"
-          href={buttonhref}
-        >
-          {buttonIcon}
-
-          <span>{buttonText}</span>
-        </Button>
+        {isButton && (
+          <Button
+            variant="default"
+            size="lg"
+            className="flex items-center gap-2 mt-3"
+            href={buttonhref}
+            onClick={btnAction}
+          >
+            {buttonIcon}
+            <span>{buttonText}</span>
+          </Button>
+        )}
       </div>
     </div>
   );
