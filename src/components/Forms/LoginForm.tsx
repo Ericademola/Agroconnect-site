@@ -11,25 +11,25 @@ import { GoogleIcon } from "@/Icons";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
-const BuyerLoginFormSchema = z.object({
+const LoginFormSchema = z.object({
   email: z.string().trim().email({ message: "Please enter a valid email" }),
   password: z.string().refine((val) => /^(?=.*[A-Z])(?=.*\d).{8,}$/.test(val), {
     message: "Min. 8 characters, 1 uppercase, 1 number",
   }),
 });
 
-type TypeBuyerLoginFormSchema = z.infer<typeof BuyerLoginFormSchema>;
+type TypeLoginFormSchema = z.infer<typeof LoginFormSchema>;
 
-interface BuyerLoginFormProps {
+interface LoginFormProps {
   onForgotPassWord?: () => void;
 }
 
-const BuyerLoginForm = ({ onForgotPassWord }: BuyerLoginFormProps) => {
+const LoginForm = ({ onForgotPassWord }: LoginFormProps) => {
   const router = useRouter();
   const { login } = useAuth();
 
-  const form = useForm<TypeBuyerLoginFormSchema>({
-    resolver: zodResolver(BuyerLoginFormSchema),
+  const form = useForm<TypeLoginFormSchema>({
+    resolver: zodResolver(LoginFormSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -43,7 +43,7 @@ const BuyerLoginForm = ({ onForgotPassWord }: BuyerLoginFormProps) => {
     formState: { isSubmitting, isValid },
   } = form;
 
-  const onSubmit = async (data: TypeBuyerLoginFormSchema) => {
+  const onSubmit = async (data: TypeLoginFormSchema) => {
     await new Promise((resolve) => setTimeout(resolve, 800));
     console.log(data);
 
@@ -158,4 +158,4 @@ const BuyerLoginForm = ({ onForgotPassWord }: BuyerLoginFormProps) => {
   );
 };
 
-export default BuyerLoginForm;
+export default LoginForm;
